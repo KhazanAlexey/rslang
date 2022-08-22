@@ -38,7 +38,15 @@ module.exports = {
       },
       {
           test: /\.(css|scss)$/,
-          use: ["style-loader", "css-loader", "sass-loader"],
+          use: ["style-loader",             {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              modules: {
+                localIdentName: '[name]__[local]',
+              },
+            },
+          }, "sass-loader"],
       },
       {
           test: /\.(jpg|jpeg|png|gif|mp3|woff(2)?|ttf|eot)$/,
