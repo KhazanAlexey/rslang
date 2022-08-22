@@ -1,0 +1,19 @@
+.gamesWrapper {
+  width: 100%;
+  display: flex;
+
+  .game {
+    height: 100px;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid red;
+    margin-right: 10px;
+  }
+
+  //.test {
+  //  border: 1px solid black;
+  //  background-image: url('../../assets/test/logo.svg');
+  //}
+}
