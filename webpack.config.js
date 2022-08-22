@@ -16,9 +16,12 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
   },
   devServer: {
-    static: './',
-    // contentBase: path.join(__dirname, "src"),
+    port: 3000,
+    open: true,
     historyApiFallback: true,
+    // static: './',
+    // contentBase: path.join(__dirname, "src"),
+    // historyApiFallback: true,
   },
   module: {
     rules: [
@@ -38,8 +41,17 @@ module.exports = {
           use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
-          test: /\.(jpg|jpeg|png|gif|mp3|svg|woff(2)?|ttf|eot)$/,
+          test: /\.(jpg|jpeg|png|gif|mp3|woff(2)?|ttf|eot)$/,
           use: ["file-loader"]
+      },
+      {
+        test: /\.svg$/i,
+        type: 'asset',
+      },
+      {
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        use: ['@svgr/webpack', 'url-loader'],
       },
     ],
   },
