@@ -1,6 +1,16 @@
 .header {
+  display: flex;
   color: red;
+
+  .headerItem {
+    padding: 10px;
+    border: 1px solid red;
+    margin-right: 10px;
+    list-style: none;
+  }
   .test {
+    width: 200px;
     border: 1px solid black;
+    background-image: url('../../assets/test/logo.svg');
   }
 }

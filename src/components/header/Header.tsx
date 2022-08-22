@@ -1,13 +1,21 @@
 import React from 'react'
-// @ts-ignore
+import { Link } from 'react-router-dom'
 import styles from './Header.module.scss'
 
 const Header: React.FC<any> = () => {
   return (
-    <div className={styles.header}>
-      Header
-      <div className={styles.test}>s</div>
-    </div>
+    <ul className={styles.header}>
+      <Link to='/' onClick={() => null}>
+        <li className={styles.headerItem}>Главная</li>
+      </Link>
+      <Link to='/textbook' onClick={() => null}>
+        <li className={styles.headerItem}>Учебник</li>
+      </Link>
+      <Link to='/games' onClick={() => null}>
+        <li className={styles.headerItem}>Games</li>
+      </Link>
+      <div className={styles.test}>SVG_TEST_BACKGROUDIMAGE</div>
+    </ul>
   )
 }
 
