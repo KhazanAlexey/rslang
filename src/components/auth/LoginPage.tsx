@@ -1,12 +1,11 @@
-import React from 'react';
+import React from 'react'
 
-const LoginPage: React.FC<any> = () => {
+export interface PropsType {
+  children?: React.ReactNode | React.ReactNode[]
+}
 
-  return (
-      <div>
-        Login PAge
-      </div>
-  );
-};
+const LoginPage: React.FC<PropsType> = () => {
+  return <div>Login PAge</div>
+}
 
-export default LoginPage;
+export default LoginPage

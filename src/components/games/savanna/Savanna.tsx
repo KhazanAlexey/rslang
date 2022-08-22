@@ -1,16 +1,7 @@
-import React from 'react';
-
-
-
+import React from 'react'
 
 const Savanna: React.FC<any> = () => {
+  return <div>SAvanna</div>
+}
 
-
-  return (
-      <div>
-        SAvanna
-      </div>
-  );
-};
-
-export default Savanna;
+export default Savanna

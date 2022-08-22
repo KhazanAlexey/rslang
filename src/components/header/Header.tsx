@@ -1,16 +1,14 @@
-import React from 'react';
-import styles from './Header.module.css';
-
-
+import React from 'react'
+// @ts-ignore
+import styles from './Header.module.scss'
 
 const Header: React.FC<any> = () => {
+  return (
+    <div className={styles.header}>
+      Header
+      <div className={styles.test}>s</div>
+    </div>
+  )
+}
 
-
-    return (
-        <div className={styles.header}>
-            Header
-        </div>
-    );
-};
-
-export default Header;
+export default Header
