@@ -52,10 +52,10 @@ module.exports = {
           test: /\.(jpg|jpeg|png|gif|mp3|woff(2)?|ttf|eot)$/,
           use: ["file-loader"]
       },
-      {
-        test: /\.svg$/i,
-        type: 'asset',
-      },
+      // {
+      //   test: /\.svg$/i,
+      //   type: 'asset',
+      // },
       {
         test: /\.svg$/i,
         issuer: /\.[jt]sx?$/,

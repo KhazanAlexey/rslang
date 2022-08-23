@@ -2,6 +2,7 @@ import React from 'react'
 import { clsx } from '../../../utils/clsx'
 import { stlx } from '../../../utils/stlx'
 import styles from './styles/iconButton.module.scss'
+import logo from '../../../assets/loader/loader.svg'
 
 type Props = {
   icon: any
@@ -9,7 +10,7 @@ type Props = {
   disabled?: boolean
   enableDefaultHoverClasses?: boolean
   classes?: string
-  style?: string
+  style?: Object
   width?: string
   height?: string
   title?: string
@@ -32,8 +33,9 @@ const IconButton = (props: Props) => {
     containerClasses = '',
   } = props
 
-  const isSvgString = typeof icon === 'string' && !!icon && icon?.startsWith('<svg')
+  const isSvgString = typeof icon === 'string' && !!icon
   console.log('isSvg', isSvgString)
+  console.log('icon', icon)
   return (
     <span
       className={clsx({
@@ -49,19 +51,18 @@ const IconButton = (props: Props) => {
           [styles.disabled]: disabled,
           [styles.defaultHover]: enableDefaultHoverClasses,
         })}
-        style={stlx({
-          [`background-Image: url(${icon})`]: typeof icon === 'string' && !!icon && !isSvgString,
-          [width as string]: true,
-          [height as string]: !!height,
-          [style]: !!style,
-        })}
+        style={{
+          ...style,
+          backgroundImage: `url("${icon}")`,
+          width: `${width}`,
+          height: `${height}`,
+        }}
         role={onClick ? 'button' : undefined}
         // @ts-ignore
         onClick={disabled ? () => null : onClick}
         title={title}
-        // Causes the page to break
-        // {...(isSvgString ? { dangerouslySetInnerHTML: { __html: icon } } : {})}
       >
+        <span />
         {typeof icon === 'function' && icon()}
       </span>
     </span>

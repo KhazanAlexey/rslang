@@ -7,7 +7,7 @@ function App2() {
   return (
     <div className='App'>
       <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo2' />
+        {/*<img src={logo} className='App-logo' alt='logo2' />*/}
         <Counter />
         <p>
           Edit <code>src/App2.tsx</code> and save to reload.
