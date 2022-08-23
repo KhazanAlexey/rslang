@@ -10,5 +10,4 @@ export class StringHelper {
   /**
    * @description parses text to json, if it fails, returns null
    */
-
 }
