@@ -4,6 +4,7 @@ import Button from '../common/button/Button'
 import Loader from '../common/loader/Loader'
 import IconButton from '../common/icon-button/IconButton'
 import iconTest from '../../assets/test/logo.svg'
+import te from '../../assets/test/ArrowUp.svg'
 import { clsx } from '../../utils/clsx'
 import { stlx } from '../../utils/stlx'
 
@@ -27,7 +28,8 @@ const MainPage: React.FC<any> = () => {
     >
       <Button classes={styles.exampleButton} text={'buttonForTest'} onClick={buttonHandler} />
       <Loader />
-      <IconButton icon={iconTest} />
+      <IconButton width='50px' height='50px' icon={te} />
+      <IconButton icon={iconTest} height={'height: 12px'} width={'width: 12px'} disabled={false} />
       MainPage
     </div>
   )
