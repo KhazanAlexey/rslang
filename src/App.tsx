@@ -12,6 +12,7 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
+
       <section className={styles.contentWrapper}>
         <Routes>
           <Route path='/' element={<MainPage />} />
