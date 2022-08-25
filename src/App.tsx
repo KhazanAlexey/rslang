@@ -14,6 +14,8 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
+      
+      <div className={styles.wrapper}>
 
       <section className={styles.contentWrapper}>
         <Routes>
@@ -25,6 +27,8 @@ function App() {
           <Route path='/registration' element={<RegistrationPage />} />
         </Routes>
       </section>
+      
+      </div>
 
       <Footer />
     </BrowserRouter>
