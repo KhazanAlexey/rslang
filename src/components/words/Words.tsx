@@ -1,5 +1,22 @@
 import React from 'react'
 import { wordsAPI } from '../../services/WordsService'
+interface PropsType {
+  word: string
+  wordTranslate: string
+}
+
+const Word: React.FC<PropsType> = (props) => {
+  const { word, wordTranslate } = props
+
+  return (
+    <>
+      <div style={{ width: '100px', height: '50px', border: '1px solid red' }}>
+        <span>{word}</span>
+        <span>{wordTranslate}</span>
+      </div>
+    </>
+  )
+}
 
 const Words: React.FC<any> = () => {
   const {
@@ -12,15 +29,7 @@ const Words: React.FC<any> = () => {
 
   return (
     <>
-      {words &&
-        words.map((word) => (
-          <div key={word.id}>
-            {word.word}
-            {word.id}
-            {word.wordTranslate}
-            {word.group}
-          </div>
-        ))}
+      {words && words.map((word) => <Word word={word.word} wordTranslate={word.wordTranslate} />)}
       {errorWords && <div>error</div>}
       {isLoadingWords && <div>loading</div>}
     </>

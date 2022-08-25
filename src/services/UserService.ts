@@ -13,7 +13,7 @@ export const userAPI = createApi({
   endpoints: (build) => ({
     createUser: build.mutation<IUser, IUser>({
       query: ({ name, password, email }) => ({
-        url: `/users`,
+        url: '/users',
         method: 'POST',
         body: {
           name: name,

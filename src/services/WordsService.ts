@@ -13,7 +13,7 @@ export const wordsAPI = createApi({
   endpoints: (build) => ({
     fetchWords: build.query<IWord[], IPageParams>({
       query: ({ group = 1, page = 1 }) => ({
-        url: `/words`,
+        url: '/words',
         params: {
           group: group,
           page: page,

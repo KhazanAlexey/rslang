@@ -5,7 +5,6 @@ export interface PropsType {
 }
 
 const RegistrationPage: React.FC<PropsType> = () => {
-
   return (
     <>
       <div>Registration Form</div>
