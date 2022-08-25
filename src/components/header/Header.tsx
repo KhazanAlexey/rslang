@@ -14,6 +14,9 @@ const Header: React.FC<any> = () => {
       <Link to='/games' onClick={() => null}>
         <li className={styles.headerItem}>Games</li>
       </Link>
+      <Link to='/login' onClick={() => null}>
+        <li className={styles.headerItem}>Login</li>
+      </Link>
       <div className={styles.test}>SVG_TEST_BACKGROUDIMAGE</div>
     </ul>
   )
