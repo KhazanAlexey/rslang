@@ -1,8 +1,6 @@
 import React from 'react'
 import { clsx } from '../../../utils/clsx'
-import { stlx } from '../../../utils/stlx'
 import styles from './styles/iconButton.module.scss'
-import logo from '../../../assets/loader/loader.svg'
 
 type Props = {
   icon: any
@@ -34,8 +32,7 @@ const IconButton = (props: Props) => {
   } = props
 
   const isSvgString = typeof icon === 'string' && !!icon
-  console.log('isSvg', isSvgString)
-  console.log('icon', icon)
+
   return (
     <span
       className={clsx({
