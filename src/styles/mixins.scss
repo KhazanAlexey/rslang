@@ -18,4 +18,57 @@
   @return $result;
 }
 
-// TODO: Variables
+//========================================================================================================================================================
+// VARIABLES
+
+
+/* Mediaqueries */
+$pc: em(1380);
+$tablet: em(991.98);
+$mobile: em(767.98);
+$mobileSmall: em(479.98);
+
+
+/* Colors */
+
+// Default
+$mainTitleColor: var(--orange-color); // Цвет для ярких/главных заголовков h1
+$mainHeaderColor: var(--blue-color); // Цвет для заголовков h2
+$mainTextColor: var(--dark-blue-color); // Цвет основного текста и h3-h6
+$lightTextColor: var(--white-color); // Цвет текста для случаев, когда есть цветной фон
+
+$mainBgColor: var(--white-color); // Основной фоновый цвет
+
+$mainLinkColor: var(--blue-color); // Цвет ссылок
+$mainNavColor: var(--dark-blue-color); // Цвет ссылок меню
+
+$placeholderColor: var(--grey-color); // Цвет плейсхолдеров форм
+
+$brightButtonBgColor: var(--orange-color); // Цвет фона ярких кнопок
+$mainButtonBgColor: var(--blue-color); // Цвет фона основных кнопок
+
+// Hover
+$hoverLinkColor: var(--orange-color); // Цвет ссылок (при наведении)
+$hoverNavColor: var(--blue-color); // Цвет ссылок меню (при наведении)
+$hoverBrightButtonBgColor: var(--blue-color); // Цвет фона ярких кнопок (при наведении)
+$hoverButtonBgColor: var(--orange-color); // Цвет фона основных кнопок (при наведении)
+
+// Active
+$activeLinkColor: var(--orange-color); 
+$activeNavColor: var(--orange-color); 
+$activeBrightButtonBgColor: var(--blue-color);
+$activeButtonBgColor: var(--orange-color);
+
+// Disabled
+$disableLinkColor: var(--grey-color);
+$disableButtonBgColor: var(--grey-color);
+
+// Additional (цвета для других элементов без привязки к назначению)
+$mainColor: var(--dark-blue-color);
+$lightColor: var(--blue-color);
+$brightColor: var(--orange-color);
+
+
+/* Transitions */
+$transitionText: color .2s;
+$transitionBtn: background .3s;

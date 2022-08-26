@@ -10,6 +10,8 @@ import styles from './App.module.scss'
 import TextBookPage from './components/textbookPage/TextbookPage'
 import RegistrationPage from './components/auth/RegistrationPage'
 
+globalThis.globalStyles = styles;
+
 function App() {
   return (
     <BrowserRouter>

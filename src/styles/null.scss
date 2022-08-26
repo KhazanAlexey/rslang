@@ -38,9 +38,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-input,
-button,
-textarea {
+* {
   font-family: $fontFamily;
   font-size: inherit;
 }

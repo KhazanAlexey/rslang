@@ -11,15 +11,11 @@ $minWidth: 320;
 // Ширина полотна (макета)
 $maxWidth: 1920;
 // Ширина ограничивающего контейнера
-$maxWidthContainer: 1170;
+$maxWidthContainer: 1380;
 // Отступ у контейнера
 $containerPadding: 15;
 $containerWidth: $maxWidthContainer + $containerPadding;
-// Mediaqueries
-$pc: em($containerWidth);
-$tablet: em(991.98);
-$mobile: em(767.98);
-$mobileSmall: em(479.98);
+
 
 @import './styles/null.scss';
 
@@ -28,6 +24,9 @@ $mobileSmall: em(479.98);
   margin: 0 auto;
   max-width: rem($maxWidthContainer);
   padding: 0 rem($containerPadding);
+  @media (max-width:$mobile){
+    padding: 0 rem(10);
+  }
 }
 
 .wrapper {
