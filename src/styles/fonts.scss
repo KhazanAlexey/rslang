@@ -1,6 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap');
 
 /* Icons font */
+
+@font-face {
+  font-family: 'icons';
+  src:
+    url('assets/fonts/icons.woff?vxu4yn') format('woff'),
+    url('assets/fonts/icons.ttf?vxu4yn') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
 %ic {
   font-family: "icons";
   font-style: normal;
@@ -12,9 +23,34 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-[class*="_icon-"] {
+//[class*="_icon-"] {
+[class^="_icon-"], [class*=" _icon-"] {
   &:before {
     @extend %ic;
     display: block;
   }
+}
+
+[class*="_icon-arrow"]:before {
+  content: "\e900";
+}
+
+[class*="_icon-bookmark"]:before {
+  content: "\e901";
+}
+
+[class*="_icon-logo"]:before {
+  content: "\e902";
+}
+
+[class*="_icon-settings"]:before {
+  content: "\e903";
+}
+
+[class*="_icon-star"]:before {
+  content: "\e904";
+}
+
+[class*="_icon-user"]:before {
+  content: "\e905";
 }

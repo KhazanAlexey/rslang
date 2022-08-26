@@ -49,7 +49,7 @@ module.exports = {
           }, "sass-loader"],
       },
       {
-          test: /\.(jpg|jpeg|png|gif|mp3|woff(2)?|ttf|eot)$/,
+          test: /\.(jpg|jpeg|png|gif|mp3)$/,
           use: ["file-loader"]
       },
       // {
