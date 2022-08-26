@@ -5,6 +5,7 @@ export interface IUser {
   password: string
 }
 export interface IUserResp {
+  name?: string
   email: string
   password: string
 }
