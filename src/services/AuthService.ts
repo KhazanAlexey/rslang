@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 import { IAuth } from 'src/models/IAuth'
-import { RootState } from 'src/store/store'
-import { IUser, IUserResp } from '../models/IUser'
+import { IUserResp } from '../models/IUser'
 
 interface IPageParams {
   group?: number
@@ -13,9 +12,10 @@ export const authApi = createApi({
     baseUrl: 'http://localhost:27017',
     prepareHeaders: (headers, { getState }) => {
       // By default, if we have a token in the store, let's use that for authenticated requests
-      const token = (getState() as RootState).auth.token
+      // const token = (getState() as RootState).auth.token
+      const token = localStorage.getItem('token')
       if (token) {
-        headers.set('authorization', `Bearer ${token}`)
+        headers.set('Authorization', token)
       }
       return headers
     },

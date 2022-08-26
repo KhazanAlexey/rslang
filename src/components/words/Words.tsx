@@ -1,5 +1,6 @@
 import React from 'react'
 import { wordsAPI } from '../../services/WordsService'
+
 interface PropsType {
   word: string
   wordTranslate: string

@@ -1,7 +1,5 @@
 import React from 'react'
-import { authApi } from '../../services/AuthService'
 import Button from '../common/button/Button'
-import { useAppSelector } from '../../hooks/redux'
 import { userAPI } from '../../services/UserService'
 
 export interface PropsType {
@@ -9,10 +7,14 @@ export interface PropsType {
 }
 
 const RegistrationPage: React.FC<PropsType> = () => {
-  const [createUser,{isLoading,error,isSuccess}]=userAPI.useCreateUserMutation()
+  const [createUser, { isLoading, error, isSuccess }] = userAPI.useCreateUserMutation()
   const registerHandler = async () => {
     try {
-      const createdUser=await createUser({ email: 'emaawqik@mail.ru', password: '123456789qwe' }).unwrap()
+      const createdUser = await createUser({
+        email: 'alik@mail.ru',
+        name: 'alex',
+        password: '123456789qwe',
+      }).unwrap()
       console.log(createdUser)
     } catch (e) {
       console.log(e)
@@ -22,7 +24,7 @@ const RegistrationPage: React.FC<PropsType> = () => {
     <>
       <div>Registration Form</div>
       <form>{JSON.stringify(error)}</form>
-      {isSuccess&&<div>REgistration success</div>}
+      {isSuccess && <div>REgistration success</div>}
       {isLoading && <div>loading</div>}
       <Button text='Register' onClick={registerHandler} />
     </>

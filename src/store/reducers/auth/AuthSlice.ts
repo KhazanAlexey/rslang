@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from 'src/store/store'
 import { IWord } from '../../../models/IWord'
-import { wordsAPI } from '../../../services/WordsService'
 import { authApi } from '../../../services/AuthService'
 
 interface UserState {
@@ -32,12 +31,12 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addMatcher(authApi.endpoints.login.matchFulfilled, (state, { payload }) => {
-
+      // localStorageSet([],payload)
       state.token = payload.token
-      state.userId = payload.userId
-      state.message = payload.message
-      state.refreshToken = payload.refreshToken
-      state.name = payload.name
+      // state.userId = payload.userId
+      // state.message = payload.message
+      // state.refreshToken = payload.refreshToken
+      // state.name = payload.name
     })
   },
 })
