@@ -13,7 +13,7 @@ type Props = {
   title?: string
 }
 
-const Button = (props: Props) => {
+const ButtonCustom = (props: Props) => {
   const {
     onClick,
     disabled = false,
@@ -44,4 +44,4 @@ const Button = (props: Props) => {
   )
 }
 
-export default Button
+export default ButtonCustom
