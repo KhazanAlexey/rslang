@@ -9,6 +9,7 @@ import GamesPage from './components/gamesPage/GamesPage'
 import styles from './App.module.scss'
 import TextBookPage from './components/textbookPage/TextbookPage'
 import RegistrationPage from './components/auth/RegistrationPage'
+import StatPage from './components/statPage/StatPage'
 
 globalThis.globalStyles = styles;
 
@@ -27,6 +28,7 @@ function App() {
           <Route path='/games/savanna' element={<Savanna />} />
           <Route path='/textbook' element={<TextBookPage />} />
           <Route path='/registration' element={<RegistrationPage />} />
+          <Route path='/stat' element={<StatPage />} />
         </Routes>
       </section>
       
