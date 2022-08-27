@@ -8,7 +8,7 @@ type PropsType = {
 }
 
 export function SplashComponent ({ auth }:PropsType) {
-
+ 
   return (
     <section className={styles.mainSection}>
       <div className={globalThis.globalStyles.container}>
