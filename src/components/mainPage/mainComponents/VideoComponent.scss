@@ -1,0 +1,29 @@
+// @use "sass:math";
+@import '../../../styles/mixins.scss';
+
+
+.videoSection {
+  overflow: hidden;
+
+  &Wrapper {
+    height: rem(500);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .videoContainer {
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    position: relative;
+    height: 0;
+
+    & iframe {
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+    }
+  }
+}

@@ -1,0 +1,186 @@
+@use "sass:math";
+@import '../../../styles/mixins.scss';
+
+.mainSection {
+  position: relative;
+
+  &Bg {
+    position: absolute;
+    z-index: -1;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0;
+  }
+
+  &Wrapper {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @media (max-width:$mobile) {
+      align-items: flex-start;
+    }
+  }
+
+
+  .introText {
+    margin: rem(182) 0 rem(120) rem(120);
+    max-width: rem(530);
+    height: rem(425);
+
+    @media (max-width:$mobile) {
+      margin: rem(24) 0;
+      min-width: rem(240);
+    }
+
+    .introTextHeader {
+      font-family: 'Jost';
+      font-size: rem(42);
+      font-weight: 700;
+      color: $mainTitleColor;
+
+      @media (max-width:$mobile) {
+        font-size: rem(24);
+        line-height: rem(30);
+      }
+    }
+
+    .introTextSubheader {
+      font-family: 'Jost';
+      font-size: rem(30);
+      line-height: rem(43);
+      margin: rem(24) 0;
+      color: $mainColor;
+      font-weight: 700;
+
+      @media (max-width:$mobile) {
+        font-size: rem(20);
+        margin: rem(12) 0;
+        line-height: rem(28);
+        padding-right: rem(45);
+      }
+    }
+
+    .introTextContent {
+      font-size: rem(18);
+      line-height: rem(24);
+      width: rem(315);
+      color: $mainTextColor;
+      margin: rem(24) 0;
+
+      @media (max-width:$mobile) {
+        font-size: rem(14);
+        line-height: rem(18);
+        padding-right: rem(45);
+        width: auto;
+      }
+
+      .introTextQuote {
+        color: $placeholderColor;
+        font-size: rem(14);
+        line-height: 120%;
+        margin-top: rem(3);
+
+        @media (max-width:$mobile) {
+          display: none;
+        }
+      }
+    }
+
+    .introActions {
+      display: flex;
+      align-items: center;
+      padding-top: rem(48);
+      gap: rem(20);
+
+      @media (max-width:$mobile) {
+        padding-top: rem(10);
+      }
+
+      &Go {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 26px;
+        color: $lightTextColor;
+        padding: rem(9) rem(30);
+        background: $hoverButtonBgColor;
+        border-radius: rem(44);
+        transition: $transitionBtn;
+
+        &:hover {
+          background: $mainButtonBgColor;
+        }
+      }
+
+      &More {
+        color: $mainTextColor;
+        transition: $transitionText;
+
+        &:hover {
+          color: $hoverLinkColor;
+        }
+
+        @media (max-width:$mobile) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .introDecoration {
+    position: relative;
+    height: rem(560);
+    width: rem(563);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    @media (max-width:$mobile) {
+      height: auto;
+    }
+
+    &Text {
+      position: absolute;
+      right: 0;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: rem(12);
+      z-index: -1;
+
+      &Line {
+        font-family: 'Jost';
+        font-size: rem(80);
+        font-weight: 700;
+        color: $mainHeaderColor;
+        text-transform: uppercase;
+        line-height: rem(54);
+
+        @media (max-width:$mobile) {
+          display: none;
+        }
+      }
+    }
+
+    &Dog {
+      max-width: rem(368);
+      max-height: rem(520);
+      margin-top: 11vh;
+      margin-right: 14vw;
+
+      @media (max-width:$mobile) {
+        margin: rem(47) 0 0 rem(-50);
+        width: rem(230);
+        height: rem(325);
+      }
+
+      img {
+        width: 100%;
+        min-width: rem(230);
+      }
+    }
+  }
+}
