@@ -47,6 +47,20 @@
     transition: all .3s;
   }
 
+  .detailSound {
+    font-size: rem(30);
+    margin-left: rem(6);
+    color: $mainButtonBgColor;
+    padding: rem(7);
+    background: rgba(255, 255, 255, 0);
+    border-radius: rem(44);
+    transition: all .3s;
+    &.soundOn {
+      color: $mainBgColor;
+      background: $mainButtonBgColor;
+    }
+  }
+
   .detailTranscription {
     font-weight: 700;
     font-size: rem(24);
@@ -195,6 +209,14 @@
     }
     .detailLine, .detailItem::after {
       background: #AFAC56;
+    }
+
+    .detailSound {
+      color: $mainColor;
+      &.soundOn {
+        color: $mainBgColor;
+        background: $mainColor;
+      }
     }
   }
   &.detailHard {

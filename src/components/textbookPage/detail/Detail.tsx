@@ -8,15 +8,23 @@ const Detail: React.FC<any> = (props) => {
     exampleEn, exampleRu } = props;
   const { complete, hard } = props;
 
+  // TODO: сделать логику добавления в сложные
   const [isHard, setIsHard] = useState(hard);
-  const [isComplete, setIsComplete] = useState(complete);
   const hardHandler = () => {
     if (isHard === true) setIsHard(false)
     else setIsHard(true)
   }
+  // TODO: сделать логику добавления в изученные
+  const [isComplete, setIsComplete] = useState(complete);
   const completeHandler = () => {
     if (isComplete === true) setIsComplete(false)
     else setIsComplete(true)
+  }
+  // TODO: сделать управление озвучкой слова
+  const [soundOn, setSoundOn] = useState(false);
+  const soundHandler = () => {
+    if (soundOn === true) setSoundOn(false)
+    else setSoundOn(true)
   }
 
   return (
@@ -27,10 +35,11 @@ const Detail: React.FC<any> = (props) => {
     })}>
       <div className={styles.detailMain}>
         <h3 className={styles.detailTitle}>{wordEn}</h3>
-        <span className={clsx({
+        <button className={clsx({
           [styles.detailSound]: true,
-          ['_icon-sound']: true
-        })}></span>
+          ['_icon-sound']: true,
+          [styles.soundOn]: soundOn
+        })} onClick={soundHandler}></button>
         <span className={styles.detailTranscription}>{transcription}</span>
         <p className={styles.detailTranslate}>{wordRu}</p>
         <hr className={styles.detailLine} />
