@@ -8,7 +8,7 @@ type PropsType = {
 }
 
 export function SplashComponent ({ auth }:PropsType) {
-
+ 
   return (
     <section className={styles.mainSection}>
       <div className={globalThis.globalStyles.container}>
@@ -25,10 +25,10 @@ export function SplashComponent ({ auth }:PropsType) {
             </h2>
             <p className={styles.introTextContent}>
             Ты не успеешь заметить, как выучишь почти 4000 английских слов, занимаясь всего по 20 минут* в день
+            </p>
             <blockquote className={styles.introTextQuote}>
             * - минимально рекомендуемая норма времени ежедневного обучения в Enggo
             </blockquote>
-            </p>
             <div className={styles.introActions}>
               <button className={styles.introActionsGo}>EngGo!</button>
               <Link to='/textbook' className={clsx({

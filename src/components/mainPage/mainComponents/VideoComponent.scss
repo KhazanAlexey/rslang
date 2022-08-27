@@ -3,7 +3,7 @@
 
 
 .videoSection {
-  overflow: hidden;
+
 
   &Wrapper {
     height: rem(500);
@@ -18,7 +18,7 @@
     position: relative;
     height: 0;
 
-    & iframe {
+    iframe {
       left: 0;
       top: 0;
       height: 100%;

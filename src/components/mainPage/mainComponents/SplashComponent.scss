@@ -68,7 +68,7 @@
       line-height: rem(24);
       width: rem(315);
       color: $mainTextColor;
-      margin: rem(24) 0;
+      margin: rem(24) 0 0;
 
       @media (max-width:$mobile) {
         font-size: rem(14);
@@ -76,16 +76,17 @@
         padding-right: rem(45);
         width: auto;
       }
+    }
 
-      .introTextQuote {
-        color: $placeholderColor;
-        font-size: rem(14);
-        line-height: 120%;
-        margin-top: rem(3);
+    .introTextQuote {
+      color: $placeholderColor;
+      font-size: rem(14);
+      line-height: 120%;
+      margin: rem(3) 0 rem(24);
+      width: rem(315);
 
-        @media (max-width:$mobile) {
-          display: none;
-        }
+      @media (max-width:$mobile) {
+        display: none;
       }
     }
 

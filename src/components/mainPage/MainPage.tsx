@@ -16,7 +16,7 @@ const MainPage: React.FC<any> = () => {
     <>
     <SplashComponent auth={isAuth} />
     <LegendComponent  auth={isAuth} />
-    <VideoComponent />
+    {/* <VideoComponent /> */}
     </>
   )
 }
