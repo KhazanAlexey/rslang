@@ -46,7 +46,7 @@ export const authSlice = createSlice({
     builder.addMatcher(userAPI.endpoints.fetchUser.matchFulfilled, (state, { payload }) => {
       state.email = payload.email
       state.isAuth = true
-      state.name = payload.name
+      state.name = payload.name || ''
     })
 
     builder.addMatcher(userAPI.endpoints.fetchUser.matchRejected, (state, { payload }) => {
