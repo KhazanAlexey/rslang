@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './LegendComponent.scss'
 import { clsx } from '../../../utils/clsx'
-import { Link } from 'react-router-dom'
 
 type PropsType = {
   auth: boolean

@@ -19,7 +19,6 @@ function App() {
       <Header />
 
       <div className={styles.wrapper}>
-        <section className={styles.contentWrapper}>
           <Routes>
             <Route path='/' element={<MainPage />} />
             <Route path='/login' element={<LoginPage />} />
@@ -29,7 +28,6 @@ function App() {
             <Route path='/registration' element={<RegistrationPage />} />
             <Route path='/stat' element={<StatPage />} />
           </Routes>
-        </section>
       </div>
       
       <Footer />
