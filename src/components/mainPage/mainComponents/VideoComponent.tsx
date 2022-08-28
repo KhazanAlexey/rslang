@@ -4,20 +4,11 @@ import { clsx } from '../../../utils/clsx'
 
 const videoId = 'cFWpwtkto1s'
 const YoutubeEmbed = (embedId) => (
-  <div className={styles.videoContainer}>
-    <iframe
-      width="853"
-      height="480"
-      src={`https://www.youtube.com/embed/${embedId}`}
-      frameBorder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowFullScreen
-      title="Embedded youtube"
-    />
-  </div>
+  // https://www.npmjs.com/package/react-player
+  <div></div>
 )
 
-export function VideoComponent () {
+const VideoComponent: React.FC<any> = () => {
   return (
     <section className={styles.videoSection}>
       <div className={globalThis.globalStyles.container}>
@@ -37,3 +28,4 @@ export function VideoComponent () {
   )
 }
 
+export default VideoComponent
