@@ -7,7 +7,7 @@ type PropsType = {
   auth: boolean
 }
 
-export function SplashComponent ({ auth }:PropsType) {
+const SplashComponent : React.FC<any> = ({ auth }:PropsType) => {
  
   return (
     <section className={styles.mainSection}>
@@ -58,3 +58,5 @@ export function SplashComponent ({ auth }:PropsType) {
     </section>
   )
 }
+
+export default SplashComponent

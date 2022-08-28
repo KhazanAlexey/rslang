@@ -7,7 +7,7 @@ type PropsType = {
   auth: boolean
 }
 
-export function LegendComponent ({auth}: PropsType) {
+const LegendComponent: React.FC<any> = ({auth}: PropsType) => {
 
   return (
     <section className={styles.legendSection}>
@@ -30,3 +30,5 @@ export function LegendComponent ({auth}: PropsType) {
     </section>
   )
 }
+
+export default LegendComponent

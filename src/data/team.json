@@ -1,0 +1,29 @@
+[
+  {
+    "id": 0,
+    "image": "https://avatars.githubusercontent.com/u/64707536?v=4",
+    "name": "Алексей Хазан",
+    "role": "developer | team-leader",
+    "github": "https://github.com/KhazanAlexey",
+    "about": "В React знает больше всех из команды.",
+    "description": "Сделал архитектуру и основные механики Reat-Redux-Toolkit"
+  },
+  {
+    "id": 1,
+    "image": "https://avatars.githubusercontent.com/u/67546640?v=4",
+    "name": "Александр Баженов",
+    "role": "developer | designer",
+    "github": "https://github.com/alexbazhen",
+    "about": "Создает макеты, верстает, а скоро будет еще и сам разрабатывать Frontend",
+    "description": "Разработал дизайн, внедрил персонажа, разработал структуру верстки."
+  },
+  {
+    "id": 2,
+    "image": "https://avatars.githubusercontent.com/u/13944932?v=4",
+    "name": "Федор Григорьев",
+    "role": "developer | coder",
+    "github": "https://github.com/tedgregory",
+    "about": "В прошлом писал на PHP и верстал несложные сайты, а сейчас старается освоить современные технологии и начать карьеру веб-разработчика",
+    "description": "Всё приходится подхватывать на ходу, первое знакомство с React, сверстал главную страницу и т.д."
+  }
+]
