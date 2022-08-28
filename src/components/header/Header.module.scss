@@ -1,10 +1,10 @@
-@use "sass:math";
+@use 'sass:math';
 @import '../../styles/mixins.scss';
 
 .header {
   height: rem(93);
   padding: rem(14) 0;
-  @media (max-width:$mobile){
+  @media (max-width: $mobile) {
     padding: rem(12) 0;
     height: rem(74);
   }
@@ -16,20 +16,20 @@
   }
 
   .headerLogo {
-    font-size: rem(65); 
+    font-size: rem(65);
     color: $lightColor;
     transition: $transitionText;
     &:hover {
       color: $brightColor;
     }
-    @media (max-width:$mobile){
+    @media (max-width: $mobile) {
       font-size: rem(50);
     }
   }
 
   .headerNav {
     display: block;
-    @media (max-width:$mobile) {
+    @media (max-width: $mobile) {
       display: none;
     }
   }
@@ -38,7 +38,7 @@
     display: flex;
     gap: rem(84);
     padding-top: rem(4);
-    @media (max-width:$tablet) {
+    @media (max-width: $tablet) {
       gap: rem(42);
     }
   }
@@ -61,17 +61,18 @@
   .headerAuth {
     display: flex;
     gap: rem(24);
-    @media (max-width:$tablet){
+    align-items: center;
+    @media (max-width: $tablet) {
       gap: rem(18);
     }
-    @media (max-width:$mobile){
+    @media (max-width: $mobile) {
       display: none;
     }
   }
 
   .headerUser {
     display: none;
-    @media (max-width:$mobile){
+    @media (max-width: $mobile) {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -114,10 +115,10 @@
     align-items: center;
     font-weight: 500;
     font-size: rem(18);
-    line-height: math.div(26 , 18);
+    line-height: math.div(26, 18);
     text-align: right;
     color: $mainNavColor;
-    transition: all .3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     &::before {
       width: rem(48);
       height: rem(48);
@@ -128,7 +129,7 @@
       border-radius: 100%;
       color: $lightTextColor;
       font-size: rem(30);
-      transition: all .3s ease-in-out;
+      transition: all 0.3s ease-in-out;
     }
     &:hover {
       &::before {
@@ -136,7 +137,7 @@
         background: $brightButtonBgColor;
       }
     }
-    @media (max-width:$mobile){
+    @media (max-width: $mobile) {
       display: none;
     }
   }
@@ -145,7 +146,7 @@
     display: none;
     height: rem(44);
     padding-left: rem(18);
-    >span {
+    > span {
       display: block;
       position: relative;
       gap: rem(6);
@@ -153,7 +154,8 @@
       height: rem(3);
       margin: rem(6) 0;
       background: $lightColor;
-      &::before, &::after {
+      &::before,
+      &::after {
         content: '';
         position: absolute;
         display: flex;
@@ -168,7 +170,7 @@
         top: rem(9);
       }
     }
-    @media (max-width:$mobile){
+    @media (max-width: $mobile) {
       display: flex;
       justify-content: center;
       align-items: center;

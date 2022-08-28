@@ -11,27 +11,25 @@ import TextBookPage from './components/textbookPage/TextbookPage'
 import RegistrationPage from './components/auth/RegistrationPage'
 import StatPage from './components/statPage/StatPage'
 
-globalThis.globalStyles = styles;
+globalThis.globalStyles = styles
 
 function App() {
   return (
     <BrowserRouter>
       <Header />
-      
-      <div className={styles.wrapper}>
 
-      <section className={styles.contentWrapper}>
-        <Routes>
-          <Route path='/' element={<MainPage />} />
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/games' element={<GamesPage />} />
-          <Route path='/games/savanna' element={<Savanna />} />
-          <Route path='/textbook' element={<TextBookPage />} />
-          <Route path='/registration' element={<RegistrationPage />} />
-          <Route path='/stat' element={<StatPage />} />
-        </Routes>
-      </section>
-      
+      <div className={styles.wrapper}>
+        <section className={styles.contentWrapper}>
+          <Routes>
+            <Route path='/' element={<MainPage />} />
+            <Route path='/login' element={<LoginPage />} />
+            <Route path='/games' element={<GamesPage />} />
+            <Route path='/games/savanna' element={<Savanna />} />
+            <Route path='/textbook' element={<TextBookPage />} />
+            <Route path='/registration' element={<RegistrationPage />} />
+            <Route path='/stat' element={<StatPage />} />
+          </Routes>
+        </section>
       </div>
 
       <Footer />

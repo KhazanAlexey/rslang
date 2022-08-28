@@ -8,17 +8,9 @@ interface IPageParams {
 }
 
 export const authApi = createApi({
+  reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:27017',
-    prepareHeaders: (headers, { getState }) => {
-      // By default, if we have a token in the store, let's use that for authenticated requests
-      // const token = (getState() as RootState).auth.token
-      const token = localStorage.getItem('token')
-      if (token) {
-        headers.set('Authorization', token)
-      }
-      return headers
-    },
   }),
   endpoints: (builder) => ({
     login: builder.mutation<IAuth, IUserResp>({

@@ -1,7 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { CaseReducer, createSlice } from '@reduxjs/toolkit'
 import { RootState } from 'src/store/store'
 import { IWord } from '../../../models/IWord'
 import { authApi } from '../../../services/AuthService'
+import { localStorageSet } from '../../../utils/localStoradre'
+import { userAPI } from '../../../services/UserService'
 
 interface UserState {
   words: IWord[]
@@ -10,37 +12,49 @@ interface UserState {
 }
 
 const initialState: AuthState = {
+  isAuth: false,
   message: '',
-  token: '',
-  refreshToken: '',
-  userId: '',
   name: '',
+  email: '',
 }
 
 type AuthState = {
+  isAuth: boolean
   message: string
-  token: string
-  refreshToken: string
-  userId: string
   name: string
+  email: string
 }
 
-const authSlice = createSlice({
+export const logOut: CaseReducer<AuthState> = (state, action) => {
+  return initialState
+}
+
+export const authSlice = createSlice({
   name: 'auth',
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    logOut,
+  },
   extraReducers: (builder) => {
     builder.addMatcher(authApi.endpoints.login.matchFulfilled, (state, { payload }) => {
-      // localStorageSet([],payload)
-      state.token = payload.token
-      // state.userId = payload.userId
-      // state.message = payload.message
-      // state.refreshToken = payload.refreshToken
-      // state.name = payload.name
+      localStorageSet(['refreshToken', 'userId', 'token'], payload)
+      state.isAuth = true
+      state.name = payload.name
+      state.message = payload.message
+    })
+
+    builder.addMatcher(userAPI.endpoints.fetchUser.matchFulfilled, (state, { payload }) => {
+      state.email = payload.email
+      state.isAuth = true
+      state.name = payload.name
+    })
+
+    builder.addMatcher(userAPI.endpoints.fetchUser.matchRejected, (state, { payload }) => {
+      return initialState
     })
   },
 })
 
-export default authSlice.reducer
-
 export const selectCurrentUser = (state: RootState) => state.auth.name
+
+export default authSlice.reducer
