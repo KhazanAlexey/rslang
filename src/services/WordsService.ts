@@ -12,7 +12,7 @@ export const wordsAPI = createApi({
   tagTypes: ['Words'],
   endpoints: (build) => ({
     fetchWords: build.query<IWord[], IPageParams>({
-      query: ({ group = 1, page = 1 }) => ({
+      query: ({ group = 0, page = 0 }) => ({
         url: '/words',
         params: {
           group: group,

@@ -3,24 +3,22 @@ import styles from './MainPage.module.scss'
 
 // import { stlx } from '../../utils/stlx'
 import { Link } from 'react-router-dom'
-import SplashComponent from './mainComponents/SplashComponent';
-import LegendComponent from './mainComponents/LegendComponent';
-import VideoComponent from './mainComponents/VideoComponent';
-import TeamComponent from './mainComponents/TeamComponent';
+import SplashComponent from './mainComponents/SplashComponent'
+import LegendComponent from './mainComponents/LegendComponent'
+import VideoComponent from './mainComponents/VideoComponent'
+import TeamComponent from './mainComponents/TeamComponent'
 // import wave from '../../assets/svg/wave.svg'
 // import enggo from '../../assets/svg/enggo.svg'
 
-const MainPage: React.FC<any> = () => {
-  const isAuth = false;
+export const MainPage: React.FC<any> = () => {
+  const isAuth = false
 
   return (
     <>
-    <SplashComponent auth={isAuth} />
-    <LegendComponent  auth={isAuth} />
-    {/* <VideoComponent /> */}
-    <TeamComponent />
+      <SplashComponent auth={isAuth} />
+      <LegendComponent auth={isAuth} />
+      {/* <VideoComponent /> */}
+      <TeamComponent />
     </>
   )
 }
-
-export default MainPage

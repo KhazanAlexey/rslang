@@ -25,7 +25,7 @@ const Words: React.FC<any> = () => {
     isLoading: isLoadingWords,
     error: errorWords,
     refetch,
-  } = wordsAPI.useFetchWordsQuery({})
+  } = wordsAPI.useFetchWordsQuery({ group: 0, page: 0 })
   // const { data: word, isLoading, error } = wordsAPI.useFetchWordByIdQuery('5e9f5ee35eb9e72bc21af4b8')
 
   return (

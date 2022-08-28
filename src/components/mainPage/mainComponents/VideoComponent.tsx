@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import styles from './VideoComponent.scss'
 import { clsx } from '../../../utils/clsx'
 
@@ -12,14 +12,14 @@ const VideoComponent: React.FC<any> = () => {
   return (
     <section className={styles.videoSection}>
       <div className={globalThis.globalStyles.container}>
-        <div className={clsx({[styles.videoSectionWrapper]: true})}>
+        <div className={clsx({ [styles.videoSectionWrapper]: true })}>
           <div className={styles.videoContainer}>
             <iframe
               src={`https://www.youtube.com/embed/${videoId}`}
-              frameBorder="0"
-              allow="autoplay; encrypted-media"
+              frameBorder='0'
+              allow='autoplay; encrypted-media'
               allowFullScreen
-              title="video"
+              title='video'
             />{' '}
           </div>
         </div>
