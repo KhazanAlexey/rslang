@@ -8,7 +8,7 @@ interface IPageParams {
 
 export const wordsAPI = createApi({
   reducerPath: 'wordsAPI',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:27017' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://rs-lang-193.herokuapp.com/' }),
   tagTypes: ['Words'],
   endpoints: (build) => ({
     fetchWords: build.query<IWord[], IPageParams>({
