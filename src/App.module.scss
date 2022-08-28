@@ -1,4 +1,4 @@
-@use "sass:math";
+@use 'sass:math';
 @import './styles/root.scss';
 @import './styles/fonts.scss';
 @import './styles/mixins.scss';
@@ -16,7 +16,6 @@ $maxWidthContainer: 1380;
 $containerPadding: 15;
 $containerWidth: $maxWidthContainer + $containerPadding;
 
-
 @import './styles/null.scss';
 
 .container {
@@ -24,7 +23,7 @@ $containerWidth: $maxWidthContainer + $containerPadding;
   margin: 0 auto;
   max-width: rem($maxWidthContainer);
   padding: 0 rem($containerPadding);
-  @media (max-width:$mobile){
+  @media (max-width: $mobile) {
     padding: 0 rem(10);
   }
 }
@@ -34,7 +33,7 @@ $containerWidth: $maxWidthContainer + $containerPadding;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  >main {
+  > main {
     flex: 1 1 auto;
   }
 }

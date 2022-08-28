@@ -11,11 +11,9 @@ export const userAPI = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:27017',
     prepareHeaders: (headers, { getState }) => {
-      // By default, if we have a token in the store, let's use that for authenticated requests
-      // const token = (getState() as RootState).auth.token
       const token = localStorage.getItem('token')
       if (token) {
-        headers.set('Authorization', token)
+        headers.set('Authorization', `Bearer ${token}`)
       }
       return headers
     },

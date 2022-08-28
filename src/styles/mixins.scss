@@ -1,4 +1,4 @@
-@use "sass:math";
+@use 'sass:math';
 
 //Percent
 @function percent($px, $from) {
@@ -8,26 +8,24 @@
 
 //REM
 @function rem($px) {
-  $result: math.div($px, 16)+rem;
+  $result: math.div($px, 16) + rem;
   @return $result;
 }
 
 //EM
 @function em($px, $current: 16) {
-  $result: math.div($px, $current)+em;
+  $result: math.div($px, $current) + em;
   @return $result;
 }
 
 //========================================================================================================================================================
 // VARIABLES
 
-
 /* Mediaqueries */
 $pc: em(1380);
 $tablet: em(991.98);
 $mobile: em(767.98);
 $mobileSmall: em(479.98);
-
 
 /* Colors */
 
@@ -54,8 +52,8 @@ $hoverBrightButtonBgColor: var(--blue-color); // Цвет фона ярких к
 $hoverButtonBgColor: var(--orange-color); // Цвет фона основных кнопок (при наведении)
 
 // Active
-$activeLinkColor: var(--orange-color); 
-$activeNavColor: var(--orange-color); 
+$activeLinkColor: var(--orange-color);
+$activeNavColor: var(--orange-color);
 $activeBrightButtonBgColor: var(--blue-color);
 $activeButtonBgColor: var(--orange-color);
 
@@ -68,7 +66,6 @@ $mainColor: var(--dark-blue-color);
 $lightColor: var(--blue-color);
 $brightColor: var(--orange-color);
 
-
 /* Transitions */
-$transitionText: color .2s;
-$transitionBtn: background .3s;
+$transitionText: color 0.2s;
+$transitionBtn: background 0.3s;
