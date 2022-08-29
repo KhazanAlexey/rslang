@@ -15,7 +15,7 @@ export const MainPage: React.FC<any> = () => {
 
   return (
     <>
-      <SplashComponent auth={isAuth} />
+      <SplashComponent />
       <LegendComponent auth={isAuth} />
       {/* <VideoComponent /> */}
       <TeamComponent />

@@ -2,40 +2,58 @@ import React from 'react'
 import styles from './SplashComponent.scss'
 import { clsx } from '../../../utils/clsx'
 import { Link } from 'react-router-dom'
+import { useAppSelector } from 'src/hooks/redux'
+import { isatty } from 'tty'
 
-type PropsType = {
-  auth: boolean
-}
-
-const SplashComponent: React.FC<any> = ({ auth }: PropsType) => {
+const SplashComponent: React.FC<any> = () => {
+  const { isAuth, name: userName } = useAppSelector((state) => state.auth)
   return (
     <section className={styles.mainSection}>
       <div className={globalThis.globalStyles.container}>
         <div className={clsx({ [styles.mainSectionWrapper]: true })}>
           <div className={styles.introText}>
-            <h1 className={styles.introTextHeader}>Устал откладывать английский на&nbsp;потом?</h1>
-            <h2 className={styles.introTextSubheader}>Попробуй поучить слова с Enggo!</h2>
-            <p className={styles.introTextContent}>
-              Ты не успеешь заметить, как выучишь почти 4000 английских слов, занимаясь всего по 20
-              минут* в день
-            </p>
-            <blockquote className={styles.introTextQuote}>
-              * - минимально рекомендуемая норма времени ежедневного обучения в Enggo
-            </blockquote>
+            {!isAuth ? (
+              <>
+                <h1 className={styles.introTextHeader}>
+                  Устал откладывать английский на&nbsp;потом?
+                </h1>
+                <h2 className={styles.introTextSubheader}>Попробуй поучить слова с Enggo!</h2>
+                <p className={styles.introTextContent}>
+                  Ты не успеешь заметить, как выучишь почти 4000 английских слов, занимаясь всего по
+                  20 минут* в день
+                </p>
+                <blockquote className={styles.introTextQuote}>
+                  * - минимально рекомендуемая норма времени ежедневного обучения в Enggo
+                </blockquote>
+              </>
+            ) : (
+              <>
+                <h1 className={styles.introTextHeader}>Давно не виделись, {userName}!</h1>
+                <h2 className={styles.introTextSubheader}>Продолжим учиться?</h2>
+                <p className={styles.introTextContent}>
+                  Кстати, не забывай проверять
+                  <Link to='/stats' onClick={() => null}>
+                    {' '}
+                    статистику
+                  </Link>
+                  , чтобы наглядно анализировать свои результаты!
+                </p>
+              </>
+            )}
+
             <div className={styles.introActions}>
               <button className={styles.introActionsGo}>Gooo!</button>
               <Link
                 to='/textbook'
                 className={clsx({
                   [styles.introActionsMore]: true,
-                  ['_icon-arrow']: true
+                  ['_icon-arrow']: true,
                 })}
                 onClick={() => null}
               >
                 Узнать больше об Enggo
               </Link>
             </div>
-            {auth && <h1 className={styles.introTextHeader}>For authorized</h1>}
           </div>
           <div className={styles.introDecoration}>
             <div className={styles.introDecorationDog}>
