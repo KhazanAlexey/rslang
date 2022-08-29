@@ -26,15 +26,16 @@ const SplashComponent: React.FC<any> = ({ auth }: PropsType) => {
               * - минимально рекомендуемая норма времени ежедневного обучения в Enggo
             </blockquote>
             <div className={styles.introActions}>
-              <button className={styles.introActionsGo}>EngGo!</button>
+              <button className={styles.introActionsGo}>Gooo!</button>
               <Link
                 to='/textbook'
                 className={clsx({
                   [styles.introActionsMore]: true,
+                  ['_icon-arrow']: true
                 })}
                 onClick={() => null}
               >
-                Узнать больше об EngGo
+                Узнать больше об Enggo
               </Link>
             </div>
             {auth && <h1 className={styles.introTextHeader}>For authorized</h1>}

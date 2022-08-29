@@ -115,8 +115,15 @@
       }
 
       &More {
-        color: $mainTextColor;
+        display: inline-flex;
+        gap: rem(9);
+        flex-direction: row-reverse;
+        color: $mainLinkColor;
         transition: $transitionText;
+
+        &::before {
+          transform: rotate(180deg);
+        }
 
         &:hover {
           color: $hoverLinkColor;
