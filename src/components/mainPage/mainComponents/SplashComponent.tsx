@@ -11,13 +11,10 @@ const SplashComponent: React.FC<any> = ({ auth }: PropsType) => {
   return (
     <section className={styles.mainSection}>
       <div className={globalThis.globalStyles.container}>
-        <div className={styles.mainSectionBg}>
-          <img src='./assets/svg/wave.svg' alt='' />
-        </div>
         <div className={clsx({ [styles.mainSectionWrapper]: true })}>
           <div className={styles.introText}>
-            <h1 className={styles.introTextHeader}>Устал откладывать английский на потом?</h1>
-            <h2 className={styles.introTextSubheader}>Попробуй учить слова с Enggo!</h2>
+            <h1 className={styles.introTextHeader}>Устал откладывать английский на&nbsp;потом?</h1>
+            <h2 className={styles.introTextSubheader}>Попробуй поучить слова с Enggo!</h2>
             <p className={styles.introTextContent}>
               Ты не успеешь заметить, как выучишь почти 4000 английских слов, занимаясь всего по 20
               минут* в день
@@ -41,14 +38,17 @@ const SplashComponent: React.FC<any> = ({ auth }: PropsType) => {
             {auth && <h1 className={styles.introTextHeader}>For authorized</h1>}
           </div>
           <div className={styles.introDecoration}>
-            <div className={styles.introDecorationText}>
-              <span className={styles.introDecorationTextLine}>#ENGLISH</span>
-              <span className={styles.introDecorationTextLine}>&amp;LOVE</span>
-            </div>
             <div className={styles.introDecorationDog}>
-              <img src='./assets/svg/enggo.svg' alt='ENGGO' />
+              <img src='./assets/svg/enggo.svg' alt='The dog Enggo' />
+              <div className={styles.introDecorationText}>
+                <span className={styles.introDecorationTextLine}>#ENGLISH</span>
+                <span className={styles.introDecorationTextLine}>&amp;LOVE</span>
+              </div>
             </div>
           </div>
+        </div>
+        <div className={styles.mainSectionBg}>
+          <img src='./assets/svg/wave.svg' alt='' />
         </div>
       </div>
     </section>
