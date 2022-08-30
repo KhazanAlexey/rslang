@@ -6,74 +6,99 @@
 
   &Bg {
     position: absolute;
+    width: rem(2560);
+    height: rem(189);
     z-index: -1;
-    bottom: 0;
+    bottom: rem(-36);
     left: 50%;
     transform: translateX(-50%);
     font-size: 0;
   }
 
   &Wrapper {
-    padding: 0;
+    padding: rem(182) rem(117) rem(154);
     display: flex;
     align-items: center;
     justify-content: space-between;
 
+    @media (max-width: em(1260)){
+      padding-left: rem(60);
+      padding-bottom: rem(120);
+      padding-top: rem(90);
+    }
+
+    @media (max-width: em(920)){
+      padding-left: 0;
+    }
+
     @media (max-width: $mobile) {
-      align-items: flex-start;
+      padding-right: rem(90);
+    }
+    @media (max-width:$mobileSmall){
+      align-items: center;
+      padding: rem(42) 0 rem(87);
     }
   }
 
   .introText {
-    margin: rem(182) 0 rem(120) rem(120);
     max-width: rem(530);
-    height: rem(425);
 
     @media (max-width: $mobile) {
-      margin: rem(24) 0;
-      min-width: rem(240);
+      width: calc(100% - rem(70));
     }
 
     .introTextHeader {
       font-family: 'Jost';
       font-size: rem(42);
+      line-height: math.div(54 , 42);
       font-weight: 700;
       color: $mainTitleColor;
 
       @media (max-width: $mobile) {
+        font-size: rem(30);
+      }
+      @media (max-width:$mobileSmall){
         font-size: rem(24);
-        line-height: rem(30);
+        padding-right: 4vw;
       }
     }
 
     .introTextSubheader {
       font-family: 'Jost';
       font-size: rem(30);
-      line-height: rem(43);
-      margin: rem(24) 0;
+      line-height: math.div(43 , 30);
+      margin-top: rem(24);
       color: $mainColor;
       font-weight: 700;
 
       @media (max-width: $mobile) {
+        font-size: rem(24);
+      }
+
+      @media (max-width:$mobileSmall){
+        margin-top: rem(12);
         font-size: rem(20);
-        margin: rem(12) 0;
-        line-height: rem(28);
-        padding-right: rem(45);
+        line-height: math.div(28 , 20);
+        padding-right: rem(20);
+        padding-right: 16vw;
       }
     }
 
     .introTextContent {
       font-size: rem(18);
-      line-height: rem(24);
-      width: rem(315);
+      line-height: math.div(24 , 18);
+      max-width: rem(315);
       color: $mainTextColor;
-      margin: rem(24) 0 0;
+      margin-top: rem(48);
 
       @media (max-width: $mobile) {
+        font-size: rem(16);
+      }
+      @media (max-width:$mobileSmall){
         font-size: rem(14);
-        line-height: rem(18);
-        padding-right: rem(45);
-        width: auto;
+        line-height: math.div(18 , 14);
+        margin-top: rem(24);
+        padding-right: 15vw;
       }
     }
 
@@ -92,11 +117,11 @@
     .introActions {
       display: flex;
       align-items: center;
-      padding-top: rem(48);
+      margin-top: rem(48);
       gap: rem(20);
 
-      @media (max-width: $mobile) {
-        padding-top: rem(10);
+      @media (max-width:$mobileSmall){
+        margin-top: rem(30);
       }
 
       &Go {
@@ -115,8 +140,15 @@
       }
 
       &More {
-        color: $mainTextColor;
+        display: inline-flex;
+        gap: rem(9);
+        flex-direction: row-reverse;
+        color: $mainLinkColor;
         transition: $transitionText;
+
+        &::before {
+          transform: rotate(180deg);
+        }
 
         &:hover {
           color: $hoverLinkColor;
@@ -131,25 +163,58 @@
 
   .introDecoration {
     position: relative;
-    height: rem(560);
-    width: rem(563);
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
+    width: rem(466);
+
+    @media (max-width: em(920)){
+      width: rem(300);
+    }
+
+    @media (max-width:$mobile){
+      width: rem(70);
+    }
 
     @media (max-width: $mobile) {
       height: auto;
     }
 
+    &Dog {
+      position: absolute;
+      top: rem(28);
+      transform: translateY(-50%);
+      width: rem(368);
+      height: rem(520);
+      left: 0;
+
+      @media (max-width:$mobile){
+        width: rem(300);
+        height: rem(424);
+      }
+
+      @media (max-width:$mobileSmall){
+        width: rem(230);
+        height: rem(325);
+        left: rem(-54);
+      }
+
+      img {
+        width: 100%;
+        min-width: rem(230);
+      }
+    }
+
     &Text {
       position: absolute;
-      right: 0;
-      top: 0;
+      top: rem(-29);
+      left: rem(170);
       display: flex;
       flex-direction: column;
       align-items: flex-end;
       gap: rem(12);
       z-index: -1;
+
+      @media (max-width: em(1200)){
+        display: none;
+      }
 
       &Line {
         font-family: 'Jost';
@@ -162,24 +227,6 @@
         @media (max-width: $mobile) {
           display: none;
         }
-      }
-    }
-
-    &Dog {
-      max-width: rem(368);
-      max-height: rem(520);
-      margin-top: 11vh;
-      margin-right: 14vw;
-
-      @media (max-width: $mobile) {
-        margin: rem(47) 0 0 rem(-50);
-        width: rem(230);
-        height: rem(325);
-      }
-
-      img {
-        width: 100%;
-        min-width: rem(230);
       }
     }
   }
