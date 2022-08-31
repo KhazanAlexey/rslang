@@ -1,11 +1,13 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { wordsAPI } from '../services/WordsService'
 import { userAPI } from '../services/UserService'
-import authReducer from './reducers/auth/AuthSlice'
+import  { audioCallSlice } from './reducers/audioCall/audioCallSlice'
 import { authApi } from '../services/AuthService'
+import { authSlice } from './reducers/auth/AuthSlice'
 
 const rootReducer = combineReducers({
-  auth: authReducer,
+  auth: authSlice.reducer,
+  audioCall: audioCallSlice.reducer,
   [wordsAPI.reducerPath]: wordsAPI.reducer,
   [userAPI.reducerPath]: userAPI.reducer,
   [authApi.reducerPath]: authApi.reducer,

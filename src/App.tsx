@@ -9,7 +9,7 @@ import styles from './App.module.scss'
 import TextBookPage from './components/textbookPage/TextbookPage'
 import RegistrationPage from './components/auth/RegistrationPage'
 import StatPage from './components/statPage/StatPage'
-import AudioCall from './components/games/savanna/AudioCall'
+import AudioCall from './components/games/audioCall/AudioCall'
 
 globalThis.globalStyles = styles
 

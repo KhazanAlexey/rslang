@@ -3,14 +3,17 @@ import GamesStartScreen from '../GamesStartScreen'
 import styles from './AudioCall.module.scss'
 import { GameState, Levels } from '../../../models/IAudioCall'
 import AudioCallGame from './AudioCallGame'
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
+import { useDispatch } from 'react-redux'
+import { audioCallSlice } from '../../../store/reducers/audioCall/audioCallSlice'
 
 const AudioCall: React.FC<any> = () => {
-  const [level, setLevel] = useState<Levels>()
-  const [activeScreen, setActiveScreen] = useState<GameState>(GameState.StartScreen)
+  const dispatch = useAppDispatch()
+  const { level, activeScreen } = useAppSelector(state => state.audioCall)
 
   const startGameHandler = (level: Levels) => {
-    setLevel(level)
-    setActiveScreen(GameState.Game)
+    dispatch(audioCallSlice.actions.setLevel(level))
+    dispatch(audioCallSlice.actions.setActiveScreen(GameState.Game))
   }
 
   return (
@@ -26,6 +29,7 @@ const AudioCall: React.FC<any> = () => {
           />
         )}
         {GameState.Game === activeScreen && <AudioCallGame level={level} />}
+        {GameState.Answer === activeScreen}
       </div>
     </>
   )
