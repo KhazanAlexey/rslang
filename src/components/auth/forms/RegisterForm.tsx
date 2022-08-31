@@ -9,7 +9,7 @@ import { userAPI } from '../../../services/UserService'
 import { IUserForm } from '../../../models/IUser'
 import { localStorageRemove } from 'src/utils/localStoradre'
 import { authApi } from '../../../services/AuthService'
-import { authSlice } from 'src/store/reducers/auth/AuthSlice'
+import { authSlice } from 'src/store/reducers/auth/authSlice'
 
 export const RegisterForm = () => {
   const navigate = useNavigate()

@@ -5,7 +5,7 @@ import { clsx } from '../../utils/clsx'
 import { Levels } from 'src/models/IAudioCall'
 
 const GamesStartScreen: React.FC<any> = ({ header, text, setDifficultyLevel }) => {
-  const [level, setLevel] = useState<Levels | null>(null)
+  const [level, setLevel] = useState<Levels>(0)
   const id = useId()
   const wordsGroup = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2']
 
@@ -27,7 +27,7 @@ const GamesStartScreen: React.FC<any> = ({ header, text, setDifficultyLevel }) =
             </div>
           ))}
         </div>
-        <Button text='start' disabled={!level} onClick={() => setDifficultyLevel(level)} />
+        <Button text='start' onClick={() => setDifficultyLevel(level)} />
       </div>
     </>
   )

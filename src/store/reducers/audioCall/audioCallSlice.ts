@@ -1,11 +1,6 @@
 import { CaseReducer, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { RootState } from 'src/store/store'
 import { IWord } from '../../../models/IWord'
-import { authApi } from '../../../services/AuthService'
-import { localStorageSet } from '../../../utils/localStoradre'
-import { userAPI } from '../../../services/UserService'
 import { GameState, Levels } from '../../../models/IAudioCall'
-
 
 const initialState: AudioCallState = {
   level: 0,
@@ -34,9 +29,8 @@ const setCorrectAnswers: CaseReducer<AudioCallState, PayloadAction<IWord>> = (st
 }
 
 const setWrongAnswers: CaseReducer<AudioCallState, PayloadAction<IWord>> = (state, action) => {
-state.wrongAnswers.push(action.payload)
+  state.wrongAnswers.push(action.payload)
 }
-
 
 export const audioCallSlice = createSlice({
   name: 'audioCall',
@@ -47,6 +41,4 @@ export const audioCallSlice = createSlice({
     setCorrectAnswers,
     setWrongAnswers,
   },
-
 })
-
