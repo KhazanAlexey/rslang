@@ -20,6 +20,8 @@
   }
   &.active {
     color: $mainTextColor;
+    cursor: default;
+    pointer-events: none;
   }
   &:nth-child(1) {
     &:hover {

@@ -8,17 +8,17 @@ const Pagination: React.FC<any> = (props) => {
   const { page, setPage } = props;
 
   const prevPage = () => {
-    if (page >= 0) setPage(page - 1);
+    if (page > 1) setPage(page - 1);
   }
 
   const nextPage = () => {
-    setPage(page + 1);
+    if (page < 20) setPage(page + 1);
   }
 
   return (
     <div className={styles.bookPagination}>
       <button className={styles.paginationPrev} onClick={prevPage}>Назад</button>
-      {/* <ul className={styles.paginationList}>
+      <ul className={styles.paginationList}>
         <li className={styles.paginationItem}>
           <button>1</button>
         </li>
@@ -34,40 +34,32 @@ const Pagination: React.FC<any> = (props) => {
         <li className={styles.paginationItem}>
           <button>5</button>
         </li>
-      </ul> */}
+      </ul> 
       <button className={styles.paginationNext} onClick={nextPage}>Далее</button>
     </div>
   )
 }
 
-const BookSubpage: React.FC<any> = () => {
-  const [ activePage, setActivePage ] = useState(0); // Отсюда отслеживаем активную страницу
+const BookSubpage: React.FC<any> = (props) => {
+  const { activeLvl, setActiveLvl, levels } = props;
+  const [ activePage, setActivePage ] = useState(1); // Отсюда отслеживаем активную страницу
 
-  const activeLvl = 'Easy+';
+  // const activeLvl = 'Easy+';
   return (
     <section className={styles.book}>
       <section>
         <div className={globalThis.globalStyles.container}>
           <h2 className={globalThis.globalStyles.sectionTitle}>Сложность</h2>
-          <Levels />
+          <Levels activeLvl={activeLvl} setActiveLvl={setActiveLvl} levels={levels} />
         </div>
       </section>
       <section className={styles.bookSection}>
         <div className={globalThis.globalStyles.container}>
-          <h2 className={globalThis.globalStyles.sectionTitle}>Все слова {activeLvl}</h2>
+          <h2 className={globalThis.globalStyles.sectionTitle}>Все слова {levels[activeLvl - 1].title}</h2>
           <div className={styles.bookWrapper}>
             <div>
-              {/* Тут просто наглядный вывод номера страницы, это удалим,
-              как ререндер начнет работать */}
               {activePage}
-
-              {/* --- !!!Этот компонент должен ререндериться при смене
-              активной страницы (группа пока по дефол ту нулевая) --- */}
-              {/*<Words settings={{ page: activePage, lvl: 0 }} />*/}
-              <Words page= {activePage}  lvl={ 0 } />
-
-              {/* Здесь передаем в комп.пагинации изначально активную страницу
-              и управление ею*/}
+              <Words page={activePage - 1}  lvl={activeLvl - 1} />
               <Pagination page={activePage} setPage={setActivePage} />
             </div>
             <Detail
