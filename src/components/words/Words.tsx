@@ -1,5 +1,6 @@
 import React from 'react'
 import { wordsAPI } from '../../services/WordsService'
+import styles from './Words.module.scss'
 
 interface PropsType {
   word: string
@@ -11,29 +12,32 @@ const Word: React.FC<PropsType> = (props) => {
 
   return (
     <>
-      <div style={{ width: '100px', height: '50px', border: '1px solid red' }}>
-        <span>{word}</span>
-        <span>{wordTranslate}</span>
-      </div>
+      <li className={styles.word}>
+        <button className={styles.wordButton}>
+          <p className={styles.wordWord}>{word}</p>
+          <p className={styles.wordTranslate}>{wordTranslate}</p>
+        </button>
+      </li>
     </>
   )
 }
 
-const Words: React.FC<any> = () => {
+const Words: React.FC<any> = (settings: any) => {
+  const { page, lvl } = settings;
   const {
     data: words,
     isLoading: isLoadingWords,
     error: errorWords,
     refetch,
-  } = wordsAPI.useFetchWordsQuery({ group: 0, page: 0 })
+  } = wordsAPI.useFetchWordsQuery({ group: lvl, page: page })
   // const { data: word, isLoading, error } = wordsAPI.useFetchWordByIdQuery('5e9f5ee35eb9e72bc21af4b8')
 
   return (
-    <>
+    <ul className={styles.words}>
       {words && words.map((word) => <Word word={word.word} wordTranslate={word.wordTranslate} />)}
-      {errorWords && <div>error</div>}
-      {isLoadingWords && <div>loading</div>}
-    </>
+      {errorWords && <li>Error</li>}
+      {isLoadingWords && <li>Loading</li>}
+    </ul>
   )
 }
 

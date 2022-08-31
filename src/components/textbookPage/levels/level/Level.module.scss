@@ -1,0 +1,105 @@
+@use "sass:math";
+@import '../../../../styles/mixins.scss';
+
+.level {
+  border-radius: rem(4);
+  overflow: hidden;
+  transition: all .2s;
+  background: #E6E6E6;
+  color: #878787;
+  width: rem(213);
+  @media (max-width:$mobile) {
+    width: calc(33% - rem(12));
+  }
+  
+  @media (max-width:$mobileSmall) {
+    width: calc(50% - rem(6));
+  }
+  &:hover {
+    color: $mainTextColor;
+  }
+  &.active {
+    color: $mainTextColor;
+  }
+  &:nth-child(1) {
+    &:hover {
+      background: #AFE2FF;
+    }
+    &.active {
+      background: #AFE2FF;
+    }
+  }
+  &:nth-child(2) {
+    &:hover {
+      background: #AFFFB3;
+    }
+    &.active {
+      background: #AFFFB3;
+    }
+  }
+  &:nth-child(3) {
+    &:hover {
+      background: #FFF2AF;
+    }
+    &.active {
+      background: #FFF2AF;
+    }
+  }
+  &:nth-child(4) {
+    &:hover {
+      background: #FFCCAF;
+    }
+    &.active {
+      background: #FFCCAF;
+    }
+  }
+  &:nth-child(5) {
+    &:hover {
+      background: #EAAFFF;
+    }
+    &.active {
+      background: #EAAFFF;
+    }
+  }
+  &:nth-child(6) {
+    &:hover {
+      background: #BAAFFF;
+    }
+    &.active {
+      background: #BAAFFF;
+    }
+  }
+  .levelButton {
+    padding: rem(9) rem(18);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+
+  .levelTitle {
+    font-weight: 700;
+    font-size: rem(20);
+    line-height: math.div(24 , 20);
+  }
+
+  .levelDescr {
+    margin-top: rem(6);
+    font-weight: 300;
+    font-size: rem(16);
+    line-height: math.div(23 , 16);
+  }
+
+  .levelLvl {
+    position: absolute;
+    font-weight: 700;
+    font-size: rem(54);
+    line-height: math.div(54 , 54);
+    text-align: right;
+    right: rem(3);
+    bottom: rem(-8);
+    color: $mainBgColor;
+    z-index: -1;
+  }
+}

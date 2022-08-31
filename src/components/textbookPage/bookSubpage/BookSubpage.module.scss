@@ -1,0 +1,15 @@
+@use 'sass:math';
+@import '../../../styles/mixins.scss';
+
+.book {
+  //margin-top: rem(36);
+  &Section {
+    margin-top: rem(36);
+  }
+  &Wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: rem(24);
+  }
+}

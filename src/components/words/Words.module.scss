@@ -1,0 +1,40 @@
+@use 'sass:math';
+@import '../../styles/mixins.scss';
+
+.words {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: rem(912);
+  column-gap: rem(20);
+  row-gap: rem(36);
+}
+
+.word {
+  &Button {
+    display: flex;
+    flex-direction: column;
+    width: rem(213);
+    height: rem(99);
+    padding: rem(12) rem(36) rem(12) rem(18);
+    background: #FFFFFF;
+    border-radius: rem(4);
+    transition: all .2s;
+    &:hover {
+      background: #AFFFB2;
+    }
+  }
+  &Word {
+    font-weight: 700;
+    font-size: rem(20);
+    line-height: math.div(24 , 20);
+    color: #005E7C;
+    text-transform: capitalize;
+  }
+  &Translate {
+    margin-top: rem(9);
+    font-weight: 300;
+    font-size: rem(18);
+    line-height: math.div(21 , 18);
+    text-align: left;
+  }
+}
