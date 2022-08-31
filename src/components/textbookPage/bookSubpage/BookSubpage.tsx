@@ -50,27 +50,28 @@ const BookSubpage: React.FC<any> = () => {
         <div className={globalThis.globalStyles.container}>
           <h2 className={globalThis.globalStyles.sectionTitle}>Сложность</h2>
           <Levels />
-        </div>  
+        </div>
       </section>
-      <section className={styles.bookSection}>  
+      <section className={styles.bookSection}>
         <div className={globalThis.globalStyles.container}>
           <h2 className={globalThis.globalStyles.sectionTitle}>Все слова {activeLvl}</h2>
           <div className={styles.bookWrapper}>
             <div>
-              {/* Тут просто наглядный вывод номера страницы, это удалим, 
+              {/* Тут просто наглядный вывод номера страницы, это удалим,
               как ререндер начнет работать */}
               {activePage}
 
-              {/* --- !!!Этот компонент должен ререндериться при смене 
-              активной страницы (группа пока по дефолту нулевая) --- */}
-              <Words settings={{ page: activePage, lvl: 0 }} />
+              {/* --- !!!Этот компонент должен ререндериться при смене
+              активной страницы (группа пока по дефол ту нулевая) --- */}
+              {/*<Words settings={{ page: activePage, lvl: 0 }} />*/}
+              <Words page= {activePage}  lvl={ 0 } />
 
-              {/* Здесь передаем в комп.пагинации изначально активную страницу 
+              {/* Здесь передаем в комп.пагинации изначально активную страницу
               и управление ею*/}
-              <Pagination page={activePage} setPage={setActivePage} /> 
+              <Pagination page={activePage} setPage={setActivePage} />
             </div>
-            <Detail 
-              wordEn='reusable' 
+            <Detail
+              wordEn='reusable'
               wordRu='многоразового использования'
               transcription='[riúzəbl]'
               image=''

@@ -22,8 +22,8 @@ const Word: React.FC<PropsType> = (props) => {
   )
 }
 
-const Words: React.FC<any> = (settings: any) => {
-  const { page, lvl } = settings;
+const Words: React.FC<any> = (props) => {
+  const { page, lvl } = props;
   const {
     data: words,
     isLoading: isLoadingWords,
@@ -31,7 +31,7 @@ const Words: React.FC<any> = (settings: any) => {
     refetch,
   } = wordsAPI.useFetchWordsQuery({ group: lvl, page: page })
   // const { data: word, isLoading, error } = wordsAPI.useFetchWordByIdQuery('5e9f5ee35eb9e72bc21af4b8')
-
+console.log(words)
   return (
     <ul className={styles.words}>
       {words && words.map((word) => <Word word={word.word} wordTranslate={word.wordTranslate} />)}

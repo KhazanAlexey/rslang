@@ -10,7 +10,7 @@ interface IPageParams {
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:27017',
+    baseUrl: 'https://rs-lang-193.herokuapp.com/',
   }),
   endpoints: (builder) => ({
     login: builder.mutation<IAuth, IUserResp>({
