@@ -1,5 +1,4 @@
 import { CaseReducer, createSlice } from '@reduxjs/toolkit'
-import { RootState } from 'src/store/store'
 import { IWord } from '../../../models/IWord'
 import { authApi } from '../../../services/AuthService'
 import { localStorageSet } from '../../../utils/localStoradre'
@@ -54,7 +53,3 @@ export const authSlice = createSlice({
     })
   },
 })
-
-export const selectCurrentUser = (state: RootState) => state.auth.name
-
-export default authSlice.reducer

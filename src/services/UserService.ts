@@ -9,7 +9,7 @@ interface IPageParams {
 export const userAPI = createApi({
   reducerPath: 'userAPI',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:27017',
+    baseUrl: 'https://rs-lang-193.herokuapp.com/',
     prepareHeaders: (headers, { getState }) => {
       const token = localStorage.getItem('token')
       if (token) {

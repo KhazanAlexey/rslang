@@ -2,17 +2,17 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 import { IWord } from '../models/IWord'
 
 interface IPageParams {
-  group?: number
+  group?: number | null
   page?: number
 }
 
 export const wordsAPI = createApi({
   reducerPath: 'wordsAPI',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:27017' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://rs-lang-193.herokuapp.com/' }),
   tagTypes: ['Words'],
   endpoints: (build) => ({
     fetchWords: build.query<IWord[], IPageParams>({
-      query: ({ group = 0, page = 0 }) => ({
+      query: ({ group, page }) => ({
         url: '/words',
         params: {
           group: group,

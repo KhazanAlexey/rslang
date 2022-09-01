@@ -3,7 +3,6 @@ import styles from './SplashComponent.scss'
 import { clsx } from '../../../utils/clsx'
 import { Link } from 'react-router-dom'
 import { useAppSelector } from 'src/hooks/redux'
-import { isatty } from 'tty'
 
 const SplashComponent: React.FC<any> = () => {
   const { isAuth, name: userName } = useAppSelector((state) => state.auth)

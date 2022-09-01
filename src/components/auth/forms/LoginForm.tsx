@@ -6,8 +6,8 @@ import { localStorageRemove } from '../../../utils/localStoradre'
 import { authApi } from 'src/services/AuthService'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from 'src/hooks/redux'
-import { authSlice } from 'src/store/reducers/auth/AuthSlice'
 import { validateLogin } from './formValidator'
+import { authSlice } from '../../../store/reducers/auth/authSlice'
 
 export const LoginForm = () => {
   const navigate = useNavigate()

@@ -21,20 +21,20 @@
     align-items: center;
     justify-content: space-between;
 
-    @media (max-width: em(1260)){
+    @media (max-width: em(1260)) {
       padding-left: rem(60);
       padding-bottom: rem(120);
       padding-top: rem(90);
     }
 
-    @media (max-width: em(920)){
+    @media (max-width: em(920)) {
       padding-left: 0;
     }
 
     @media (max-width: $mobile) {
       padding-right: rem(90);
     }
-    @media (max-width:$mobileSmall){
+    @media (max-width: $mobileSmall) {
       align-items: center;
       padding: rem(42) 0 rem(87);
     }
@@ -50,14 +50,14 @@
     .introTextHeader {
       font-family: 'Jost';
       font-size: rem(42);
-      line-height: math.div(54 , 42);
+      line-height: math.div(54, 42);
       font-weight: 700;
       color: $mainTitleColor;
 
       @media (max-width: $mobile) {
         font-size: rem(30);
       }
-      @media (max-width:$mobileSmall){
+      @media (max-width: $mobileSmall) {
         font-size: rem(24);
         padding-right: 4vw;
       }
@@ -66,7 +66,7 @@
     .introTextSubheader {
       font-family: 'Jost';
       font-size: rem(30);
-      line-height: math.div(43 , 30);
+      line-height: math.div(43, 30);
       margin-top: rem(24);
       color: $mainColor;
       font-weight: 700;
@@ -75,10 +75,10 @@
         font-size: rem(24);
       }
 
-      @media (max-width:$mobileSmall){
+      @media (max-width: $mobileSmall) {
         margin-top: rem(12);
         font-size: rem(20);
-        line-height: math.div(28 , 20);
+        line-height: math.div(28, 20);
         padding-right: rem(20);
         padding-right: 16vw;
       }
@@ -86,7 +86,7 @@
 
     .introTextContent {
       font-size: rem(18);
-      line-height: math.div(24 , 18);
+      line-height: math.div(24, 18);
       max-width: rem(315);
       color: $mainTextColor;
       margin-top: rem(48);
@@ -94,9 +94,9 @@
       @media (max-width: $mobile) {
         font-size: rem(16);
       }
-      @media (max-width:$mobileSmall){
+      @media (max-width: $mobileSmall) {
         font-size: rem(14);
-        line-height: math.div(18 , 14);
+        line-height: math.div(18, 14);
         margin-top: rem(24);
         padding-right: 15vw;
       }
@@ -120,7 +120,7 @@
       margin-top: rem(48);
       gap: rem(20);
 
-      @media (max-width:$mobileSmall){
+      @media (max-width: $mobileSmall) {
         margin-top: rem(30);
       }
 
@@ -165,11 +165,11 @@
     position: relative;
     width: rem(466);
 
-    @media (max-width: em(920)){
+    @media (max-width: em(920)) {
       width: rem(300);
     }
 
-    @media (max-width:$mobile){
+    @media (max-width: $mobile) {
       width: rem(70);
     }
 
@@ -185,12 +185,12 @@
       height: rem(520);
       left: 0;
 
-      @media (max-width:$mobile){
+      @media (max-width: $mobile) {
         width: rem(300);
         height: rem(424);
       }
 
-      @media (max-width:$mobileSmall){
+      @media (max-width: $mobileSmall) {
         width: rem(230);
         height: rem(325);
         left: rem(-54);
@@ -212,7 +212,7 @@
       gap: rem(12);
       z-index: -1;
 
-      @media (max-width: em(1200)){
+      @media (max-width: em(1200)) {
         display: none;
       }
 
