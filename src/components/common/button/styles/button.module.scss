@@ -1,4 +1,6 @@
-@import '../../../common/button/styles/button.vars.module';
+// @use 'sass:math';
+@import './button.vars.module';
+// @import '../../../../styles/mixins.scss';
 
 .button {
   display: inline-flex;
@@ -6,10 +8,11 @@
   align-items: center;
   height: 22px;
   min-width: 20px;
+  padding: 5px 10px;
   //min-height: 20px;
-  border-radius: 2px;
+  border-radius: 10px;
   color: $buttonTextColor;
-  border: none;
+  border: 1px solid $buttonTextColor;
   background-color: #ffffff;
   font-size: 13px;
   font-style: normal;
@@ -29,7 +32,8 @@
   &.defaultHover {
     &:hover:not(.disabled) {
       cursor: pointer;
-      background-color: #5f580c;
+      background-color: $buttonTextColor;
+      color: #fff;
     }
   }
 }

@@ -11,14 +11,14 @@ const GamesStartScreen: React.FC<any> = ({ header, text, setDifficultyLevel }) =
 
   return (
     <>
-      <div>
-        <header>{header}</header>
-        <p>{text}</p>
-        <div className={styles.startScreenWrapper}>
+      <div className={styles.gameStart}>
+        <h2 className={styles.gameStartHeader}>{header}</h2>
+        <p className={styles.gameStartDesc}>{text}</p>
+        <div className={styles.gameStartLevels}>
           {wordsGroup.map((word, index) => (
             <div
               key={`${id}-${index}`}
-              className={clsx({ [styles.activeLevel]: index === level })}
+              className={clsx({ [styles.activeLevel]: index === level, [styles.level]: true })}
               onClick={() => {
                 setLevel(Levels[word])
               }}

@@ -2,6 +2,7 @@ import React, { useId } from 'react'
 import { IWord } from '../../../models/IWord'
 import { clsx } from '../../../utils/clsx'
 import styles from './AudioCallGame.module.scss'
+import Button from '../../common/button/Button'
 
 type Props = {
   answerVariants: IWord[]
@@ -20,28 +21,31 @@ export const AnswerComponent: React.FC<Props> = ({
 
 
   return (
-    <>
-      {wordToGuess && <div>{wordToGuess.word}</div>}
+    <div className={styles.answer}>
+      {wordToGuess && <h3 className={styles.answerWordTitle}>{wordToGuess.word}</h3>}
       {wordToGuess && (
-        <img
-          src={`https://rs-lang-193.herokuapp.com/${wordToGuess.image}`}
-          alt={wordToGuess.word}
-        />
+        <div className={styles.answerImage}>
+          <img
+            src={`https://rs-lang-193.herokuapp.com/${wordToGuess.image}`}
+            alt={wordToGuess.word}
+          />
+        </div>
       )}
-      <div>
+      <div className={styles.answerOptions}>
         {answerVariants.map((ans, index) => (
           <button
             key={`${id}-${index}`}
             className={clsx({
               [styles.activeVariant]: selectedAnswer?.id == ans.id,
               [styles.correctVariant]: wordToGuess?.id == ans.id,
+              [styles.answerVariant]: true
             })}
           >
             {ans.wordTranslate}
           </button>
         ))}
       </div>
-      <button onClick={nextWordHandler}>NExT question</button>
-    </>
+      <Button text='NExT question' onClick={nextWordHandler}></Button>
+    </div>
   )
 }

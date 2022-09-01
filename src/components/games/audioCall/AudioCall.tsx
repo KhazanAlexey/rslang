@@ -142,10 +142,11 @@ const AudioCall: React.FC<any> = () => {
 
 
   return (
-    <>
-      <div className={styles.gamesWrapper}>
-        <header>Audi call</header>
-        {isLoadingWords && <div>loading.....</div>}
+    <section className={styles.audioCall}>
+      <div className={globalThis.globalStyles.container}>
+      <div className={styles.audioCallWrapper}>
+        <h1 className={styles.audioCallHeader}>Audio call</h1>
+        {isLoadingWords && <div className={styles.loading}>loading.....</div>}
         {GameState.StartScreen === activeScreen && (
           <GamesStartScreen
             header='Аудиовызов'
@@ -175,7 +176,9 @@ const AudioCall: React.FC<any> = () => {
         )}
         {activeScreen == GameState.GameOver && <GamesOverScreen />}
       </div>
-    </>
+      </div>
+      </section>
+
   )
 }
 

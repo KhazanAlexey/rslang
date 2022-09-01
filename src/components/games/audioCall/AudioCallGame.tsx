@@ -18,15 +18,18 @@ const AudioCallGame: React.FC<any> = ({
   return (
     <>
       {wordToGuess && (
-        <div>
+        <div className={styles.audioCallScreen}>
           <Player url={`https://rs-lang-193.herokuapp.com/${wordToGuess.audio}`} />
-          <div> {wordToGuess.word}</div>
+          <div className={styles.currentWord}> {wordToGuess.word}</div>
 
-          <div>
+          <div className={styles.answerOptions}>
             {answerVariants.map((ans, index) => (
               <button
                 key={`${id}-${index}`}
-                className={clsx({ [styles.activeVariant]: selectedAnswer?.id == ans.id })}
+                className={clsx({ 
+                  [styles.activeVariant]: selectedAnswer?.id == ans.id, 
+                  [styles.answerVariant]: true 
+                })}
                 onClick={() => answerSelectHandler(ans)}
               >
                 {ans.wordTranslate}

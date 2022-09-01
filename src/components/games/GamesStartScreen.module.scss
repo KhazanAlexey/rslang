@@ -1,10 +1,37 @@
-.startScreenWrapper {
+@use 'sass:math';
+@import '../../styles/mixins.scss';
+
+
+.gameStart {
+  padding: rem(20);
   display: flex;
-  .activeLevel {
-    background-color: #fa9b27;
+  flex-direction: column;
+  align-items: center;
+
+  &Levels {
+    display: flex;
+    gap: rem(10);
+    margin-bottom: rem(20);
+
+    .level {
+      cursor: pointer;
+      border-radius: rem(10);
+      padding: rem(5);
+      border: 1px solid $disableLinkColor;
+    }
+
+    .activeLevel {
+      background-color: $activeButtonBgColor;
+    }
   }
-  //.test {
-  //  border: 1px solid black;
-  //  background-image: url('../../assets/test/logo.svg');
-  //}
+
+  &Header {
+    font-size: rem(30);
+  }
+
+  &Desc {
+    padding: rem(10);
+    background-color: $mainBgColor;
+  }
+
 }
