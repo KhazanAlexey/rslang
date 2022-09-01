@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from 'react'
+import { wordsAPI } from 'src/services/WordsService';
 import { clsx } from 'src/utils/clsx';
 import styles from './Detail.module.scss'
+import { IWord } from '../../../models/IWord'
 
 const Detail: React.FC<any> = (props) => {
-  const { wordEn, wordRu, transcription, 
-    image, sound, valueEn, valueRu, 
-    exampleEn, exampleRu } = props;
+  const { id } = props;
+  const {
+    data: wordData,
+    isLoading: isLoadingWordData,
+    error: errorWordData,
+    refetch
+  } = wordsAPI.useFetchWordByIdQuery(id);
+  console.log(wordData);
+  // const { wordEn, wordRu, transcription, 
+  //  image, sound, valueEn, valueRu, 
+  //  exampleEn, exampleRu } = props;
   const { complete, hard } = props;
 
   // TODO: сделать логику добавления в сложные
@@ -34,32 +44,33 @@ const Detail: React.FC<any> = (props) => {
       [styles.detailHard]: isHard
     })}>
       <div className={styles.detailMain}>
-        <h3 className={styles.detailTitle}>{wordEn}</h3>
+        <h3 className={styles.detailTitle}>{wordData && wordData.word}</h3>
         <button className={clsx({
           [styles.detailSound]: true,
           ['_icon-sound']: true,
           [styles.soundOn]: soundOn
         })} onClick={soundHandler}></button>
-        <span className={styles.detailTranscription}>{transcription}</span>
-        <p className={styles.detailTranslate}>{wordRu}</p>
+        {wordData && <audio src={`https://rs-lang-193.herokuapp.com/${wordData.audio}`}></audio>}        
+        <span className={styles.detailTranscription}>{wordData && wordData.transcription}</span>
+        <p className={styles.detailTranslate}>{wordData && wordData.wordTranslate}</p>
         <hr className={styles.detailLine} />
       </div>
       <div className={styles.detailMore}>
         <ul className={styles.detailList}>
           <li className={styles.detailItem}>
             <h4 className={styles.detailSubtitle}>Значение слова</h4>
-            <p className={styles.detailText}>{valueEn}</p>
-            <p className={styles.detailText}>{valueRu}</p>
+            {wordData && <p className={styles.detailText} dangerouslySetInnerHTML={{__html: wordData.textMeaning}}></p>}
+            <p className={styles.detailText}>{wordData && wordData.textMeaningTranslate}</p>
           </li>
           <li className={styles.detailItem}>
             <h4 className={styles.detailSubtitle}>Пример использования</h4>
-            <p className={styles.detailText}>{exampleEn}</p>
-            <p className={styles.detailText}>{exampleRu}</p>
+            {wordData && <p className={styles.detailText} dangerouslySetInnerHTML={{__html: wordData.textExample}}></p>}
+            <p className={styles.detailText}>{wordData && wordData.textExampleTranslate}</p>
           </li>
         </ul>
       </div>
       <div className={styles.detailImage}>
-        <img src={image ?? 'assets/img/no-image.svg'} alt={wordEn} />
+        <img src={wordData && `https://rs-lang-193.herokuapp.com/${wordData.image}`} alt={wordData && wordData.word} />
       </div>
       <div className={styles.detailControl}>
         <button className={clsx({

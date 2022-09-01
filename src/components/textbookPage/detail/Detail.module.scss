@@ -3,6 +3,7 @@
 
 .detail {
   width: rem(447);
+  flex-shrink: 0;
   padding: rem(238) rem(24) rem(24);
   //background: linear-gradient(201.29deg, #F6ED00 0%, #FFFA86 45.31%, #F2E900 100%);
   transition: all .3s ease-in-out;
@@ -41,8 +42,8 @@
   .detailTitle {
     text-transform: capitalize;
     font-weight: 700;
-    font-size: rem(30);
-    line-height: math.div(44 , 30);
+    font-size: rem(27);
+    line-height: math.div(44 , 27);
     color: $mainTitleColor;
     transition: all .3s;
   }
@@ -63,12 +64,13 @@
 
   .detailTranscription {
     font-weight: 700;
-    font-size: rem(24);
-    line-height: math.div(44 , 24);
+    font-size: rem(18);
+    line-height: math.div(44 , 18);
     margin-left: auto;
   }
 
   .detailTranslate {
+    width: 100%;
     margin-top: rem(3);
     font-weight: 400;
     font-size: rem(21);
@@ -132,11 +134,21 @@
 
   .detailImage {
     position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: rem(220);
     background: rgb(139, 0, 151);
     top: 0;
     left: 0;
+    overflow: hidden;
+    &>img {
+      position: absolute;
+      width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+    }
   }
 
   .detailControl {

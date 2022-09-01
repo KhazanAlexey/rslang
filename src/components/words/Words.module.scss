@@ -4,12 +4,12 @@
 .words {
   display: flex;
   flex-wrap: wrap;
-  max-width: rem(912);
   column-gap: rem(20);
   row-gap: rem(36);
 }
 
 .word {
+  border-radius: rem(4);
   &Button {
     display: flex;
     flex-direction: column;
@@ -19,8 +19,11 @@
     background: #FFFFFF;
     border-radius: rem(4);
     transition: all .2s;
+    &Active {
+      background: #FFFFFF00;
+    }
     &:hover {
-      background: #AFFFB2;
+      background: #FFFFFF00;
     }
   }
   &Word {

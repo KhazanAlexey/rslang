@@ -4,7 +4,7 @@ import styles from './Levels.module.scss'
 
 
 const Levels: React.FC<any> = (props) => {
-  const { activeLvl, setActiveLvl, levels } = props;
+  const { activeLvl, setActiveLvl, activePage, setActivePage, levels } = props;
   /* const levels = [
     {id: 1, title: 'Easy', descr: 'До 600 слов', lvl: 'A1', bg: '#AFE2FF'},
     {id: 2, title: 'Easy+', descr: 'До 1200 слов', lvl: 'A2', bg: '#AFFFB3'},
@@ -19,9 +19,12 @@ const Levels: React.FC<any> = (props) => {
       id={level.id}
       title={level.title} 
       descr={level.descr} 
-      lvl={level.lvl} 
+      lvl={level.lvl}
+      bg={level.bg}
       activeLvl={activeLvl} 
-      setActiveLvl={setActiveLvl} />
+      setActiveLvl={setActiveLvl}
+      activePage={activePage}
+      setActivePage={setActivePage} />
   );
 
   return (

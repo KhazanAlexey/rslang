@@ -3,6 +3,7 @@
 
 .book {
   //margin-top: rem(36);
+  padding-bottom: rem(90);
   &Section {
     margin-top: rem(36);
   }
@@ -11,5 +12,76 @@
     justify-content: space-between;
     align-items: flex-start;
     margin-top: rem(24);
+  }
+  &Words {
+    max-width: rem(912);
+  }
+}
+
+.pagination {
+  margin-top: rem(33);
+  display: flex;
+  justify-content: center;
+  gap: rem(30);
+  &List {
+    display: flex;
+    gap: rem(12);
+  }
+  &Item {
+
+  }
+  &Btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: rem(44);
+    height: rem(44);
+    background: #FFFFFF;
+    border-radius: rem(44);
+    box-shadow: inset 0px 0px rem(4) rgba(0, 0, 0, 0.25);
+    font-weight: 400;
+    font-size: rem(21);
+    line-height: 1;
+    text-align: center;
+    color: $lightColor;
+    &Active {
+      background: $mainButtonBgColor;
+      color: $mainBgColor;
+      box-shadow: inset 0px 0px rem(4) rgba(0, 0, 0, 0);
+    }
+  }
+  &Prev, &Next {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: rem(18);
+    line-height: math.div(26 , 18);
+    gap: rem(9);
+    background: $mainButtonBgColor;
+    border-radius: rem(44);
+    color: $mainBgColor;
+    transition: $transitionBtn;
+    &::before {
+      font-size: rem(16);
+    }
+    &:hover {
+      background: $hoverButtonBgColor;
+    }
+  }
+  &Prev {
+    padding: rem(9) rem(24) rem(9) rem(18);
+  }
+  &Next {
+    flex-direction: row-reverse;
+    padding: rem(9) rem(18) rem(9) rem(24);
+    &::before {
+      transform: rotate(180deg);
+    }
+  }
+  &Disable {
+    background: $disableButtonBgColor;
+    pointer-events: none;
+    cursor: default;
   }
 }

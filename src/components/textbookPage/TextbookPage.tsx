@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom'
 
 const TextBookPage: React.FC<any> = () => {
   const [ activeLvl, setActiveLvl ] = useState(1);
+  const [ activePage, setActivePage ] = useState(1);
   const levels = [
     {id: 1, title: 'Easy', descr: 'До 600 слов', lvl: 'A1', bg: '#AFE2FF'},
     {id: 2, title: 'Easy+', descr: 'До 1200 слов', lvl: 'A2', bg: '#AFFFB3'},
@@ -96,7 +97,12 @@ const TextBookPage: React.FC<any> = () => {
       </section>
 
       {subpage == 'book' && 
-        <BookSubpage activeLvl={activeLvl} setActiveLvl={setActiveLvl} levels={levels} />
+        <BookSubpage 
+          activeLvl={activeLvl} 
+          setActiveLvl={setActiveLvl} 
+          levels={levels}
+          activePage={activePage}
+          setActivePage={setActivePage} />
       }
       {subpage == 'hard' && 
         <HardSubpage />
@@ -104,31 +110,6 @@ const TextBookPage: React.FC<any> = () => {
       {subpage == 'complete' && 
         <CompleteSubpage />
       }
-
-      {/* <section>
-        <div className={globalThis.globalStyles.container}>
-          <h2 className={globalThis.globalStyles.sectionTitle}>Сложность</h2>
-          <Levels />
-        </div>  
-      </section>
-      <section className=''>  
-        <div className={globalThis.globalStyles.container}>
-          <Detail 
-              wordEn='reusable' 
-              wordRu='многоразового использования'
-              transcription='[riúzəbl]'
-              image=''
-              sound=''
-              valueEn='An object that is reusable can be utilized over and over again.'
-              valueRu='Объект, который можно использовать повторно, можно использовать снова и снова'
-              exampleEn='Saburo keeps his empty jelly jars because they are reusable for storing sewing supplies.'
-              exampleRu='Сабуро хранит свои пустые желейные банки, потому что их можно использовать для хранения швейных принадлежностей'
-              complete={false}
-              hard={false} />
-        </div>
-        <h1>Учебник</h1>
-        <Words />
-      </section>*/}
       <section></section>
     </div>
   )
