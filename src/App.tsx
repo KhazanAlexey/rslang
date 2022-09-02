@@ -10,6 +10,7 @@ import TextBookPage from './components/textbookPage/TextbookPage'
 import RegistrationPage from './components/auth/RegistrationPage'
 import StatPage from './components/statPage/StatPage'
 import AudioCall from './components/games/audioCall/AudioCall'
+import Sprint from './components/games/sprint/Sprint'
 
 globalThis.globalStyles = styles
 
@@ -24,6 +25,7 @@ export function App() {
           <Route path='/login' element={<LoginPage />} />
           <Route path='/games' element={<GamesPage />} />
           <Route path='/games/audiocall' element={<AudioCall />} />
+          <Route path='/games/sprint' element={<Sprint />} />
           <Route path='/textbook' element={<TextBookPage />} />
           <Route path='/registration' element={<RegistrationPage />} />
           <Route path='/stat' element={<StatPage />} />

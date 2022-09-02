@@ -1,10 +1,9 @@
-import React, { useId } from 'react'
+import React, { useEffect, useId, useState } from 'react'
 import Button from '../../common/button/Button'
 import { clsx } from '../../../utils/clsx'
 import styles from './AudioCallGame.module.scss'
-import Player from './PlaySound'
 
-const AudioCallGame: React.FC<any> = ({
+const SprintGame: React.FC<any> = ({
   answerVariants,
   wordToGuess,
   selectedAnswer,
@@ -12,13 +11,14 @@ const AudioCallGame: React.FC<any> = ({
   answerHandler,
   skipAnswerHandler,
 }) => {
+  const [audioSrc, setAudioSrc] = useState()
   const id = useId()
+  console.log(wordToGuess && wordToGuess.audio)
 
   return (
     <>
       {wordToGuess && (
         <div className={styles.audioCallScreen}>
-          <Player url={`https://rs-lang-193.herokuapp.com/${wordToGuess.audio}`} />
           <div className={styles.currentWord}> {wordToGuess.word}</div>
 
           <div className={styles.answerOptions}>
@@ -47,4 +47,4 @@ const AudioCallGame: React.FC<any> = ({
   )
 }
 
-export default AudioCallGame
+export default SprintGame
