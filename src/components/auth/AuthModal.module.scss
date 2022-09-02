@@ -1,0 +1,31 @@
+@use 'sass:math';
+@import '../../styles/mixins.scss';
+
+.auth {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 94, 124, 0.5);
+  backdrop-filter: blur(6px);
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: all .5s;
+  &Open {
+    opacity: 1;
+    pointer-events: all;
+  }
+  &>div {
+    height: 100%;
+  }
+  &Wrapper {
+    width: rem(340);
+    background: $mainBgColor;
+    box-shadow: -4px 0px 4px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    margin-left: auto;
+    padding: rem(24) rem(20);
+  }
+}
