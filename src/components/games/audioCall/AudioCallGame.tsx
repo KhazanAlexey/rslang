@@ -1,4 +1,4 @@
-import React, { useId } from 'react'
+import React, { useEffect, useId, useState } from 'react'
 import Button from '../../common/button/Button'
 import { clsx } from '../../../utils/clsx'
 import styles from './AudioCallGame.module.scss'
@@ -12,8 +12,12 @@ const AudioCallGame: React.FC<any> = ({
   answerHandler,
   skipAnswerHandler,
 }) => {
+  const [audioSrc, setAudioSrc] = useState()
   const id = useId()
-
+  console.log(wordToGuess && wordToGuess.audio)
+  useEffect(() => {
+    if (wordToGuess) setAudioSrc(wordToGuess.audio)
+  }, [wordToGuess])
 
   return (
     <>
@@ -26,9 +30,9 @@ const AudioCallGame: React.FC<any> = ({
             {answerVariants.map((ans, index) => (
               <button
                 key={`${id}-${index}`}
-                className={clsx({ 
-                  [styles.activeVariant]: selectedAnswer?.id == ans.id, 
-                  [styles.answerVariant]: true 
+                className={clsx({
+                  [styles.activeVariant]: selectedAnswer?.id == ans.id,
+                  [styles.answerVariant]: true,
                 })}
                 onClick={() => answerSelectHandler(ans)}
               >

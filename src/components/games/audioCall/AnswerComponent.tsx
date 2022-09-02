@@ -19,7 +19,6 @@ export const AnswerComponent: React.FC<Props> = ({
 }) => {
   const id = useId()
 
-
   return (
     <div className={styles.answer}>
       {wordToGuess && <h3 className={styles.answerWordTitle}>{wordToGuess.word}</h3>}
@@ -38,7 +37,7 @@ export const AnswerComponent: React.FC<Props> = ({
             className={clsx({
               [styles.activeVariant]: selectedAnswer?.id == ans.id,
               [styles.correctVariant]: wordToGuess?.id == ans.id,
-              [styles.answerVariant]: true
+              [styles.answerVariant]: true,
             })}
           >
             {ans.wordTranslate}

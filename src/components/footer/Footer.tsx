@@ -26,34 +26,48 @@ const Footer: React.FC<any> = () => {
                 className={clsx({
                   ['_icon-github']: true,
                 })}
-              > Aliaxei Khazan </Link>
+              >
+                {' '}
+                Aliaxei Khazan{' '}
+              </Link>
               <Link
                 to='https://github.com/alexbazhen'
                 className={clsx({
                   ['_icon-github']: true,
                 })}
-              > Aleksandr Bazhenov </Link>
+              >
+                {' '}
+                Aleksandr Bazhenov{' '}
+              </Link>
               <Link
                 to='https://github.com/tedgregory'
                 className={clsx({
                   ['_icon-github']: true,
                 })}
-              > Fedor Grigoryev </Link>
+              >
+                {' '}
+                Fedor Grigoryev{' '}
+              </Link>
             </div>
           </div>
           <div className={styles.footerThird}>
-                <div> #THIRD </div>
+            <div> #THIRD </div>
           </div>
         </div>
         <div className={styles.footerBottom}>
-          Created in 2022 within the <Link to='https://rs.school' 
+          Created in 2022 within the{' '}
+          <Link
+            to='https://rs.school'
             className={clsx({
               ['_icon-rs']: true,
               [styles.footerBottomLink]: true,
-            })}>RS School
-          </Link> JS-Frontend course JSFE2022Q1.
+            })}
+          >
+            RS School
+          </Link>{' '}
+          JS-Frontend course JSFE2022Q1.
           <div className={styles.footerBottomBalloon}>
-              <img src='./assets/svg/balloon.svg' alt='❤️️' />
+            <img src='./assets/svg/balloon.svg' alt='❤️️' />
           </div>
         </div>
       </div>

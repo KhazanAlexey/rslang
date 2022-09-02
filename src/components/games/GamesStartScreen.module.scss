@@ -1,7 +1,6 @@
 @use 'sass:math';
 @import '../../styles/mixins.scss';
 
-
 .gameStart {
   padding: rem(20);
   display: flex;
@@ -33,5 +32,4 @@
     padding: rem(10);
     background-color: $mainBgColor;
   }
-
 }

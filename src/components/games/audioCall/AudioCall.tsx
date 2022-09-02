@@ -113,7 +113,6 @@ const AudioCall: React.FC<any> = () => {
     setWordToGuess(wordsForGame[currentWordIndex])
   }, [currentWordIndex, wordsForGame])
 
-
   useEffect(() => {
     if (wordToGuess) {
       const shuffledArray = shuffle([...wordsForGame]).filter((word) => word.id !== wordToGuess.id)
@@ -140,45 +139,43 @@ const AudioCall: React.FC<any> = () => {
     return () => window.removeEventListener('keypress', handleKeyPress)
   })
 
-
   return (
     <section className={styles.audioCall}>
       <div className={globalThis.globalStyles.container}>
-      <div className={styles.audioCallWrapper}>
-        <h1 className={styles.audioCallHeader}>Audio call</h1>
-        {isLoadingWords && <div className={styles.loading}>loading.....</div>}
-        {GameState.StartScreen === activeScreen && (
-          <GamesStartScreen
-            header='Аудиовызов'
-            text='Тренировка Аудиовызов улучшает твое восприятие речи на слух.'
-            setDifficultyLevel={startGameHandler}
-          />
-        )}
-        {GameState.Game === activeScreen && (
-          <AudioCallGame
-            skipAnswerHandler={skipAnswerHandler}
-            answerHandler={answerHandler}
-            answerVariants={answerVariants}
-            setAnswerVariants={setAnswerVariants}
-            selectedAnswer={selectedAnswer}
-            wordToGuess={wordToGuess}
-            answerSelectHandler={answerSelectHandler}
-          />
-        )}
+        <div className={styles.audioCallWrapper}>
+          <h1 className={styles.audioCallHeader}>Audio call</h1>
+          {isLoadingWords && <div className={styles.loading}>loading.....</div>}
+          {GameState.StartScreen === activeScreen && (
+            <GamesStartScreen
+              header='Аудиовызов'
+              text='Тренировка Аудиовызов улучшает твое восприятие речи на слух.'
+              setDifficultyLevel={startGameHandler}
+            />
+          )}
+          {GameState.Game === activeScreen && (
+            <AudioCallGame
+              skipAnswerHandler={skipAnswerHandler}
+              answerHandler={answerHandler}
+              answerVariants={answerVariants}
+              setAnswerVariants={setAnswerVariants}
+              selectedAnswer={selectedAnswer}
+              wordToGuess={wordToGuess}
+              answerSelectHandler={answerSelectHandler}
+            />
+          )}
 
-        {activeScreen == GameState.Answer && (
-          <AnswerComponent
-            answerVariants={answerVariants}
-            selectedAnswer={selectedAnswer}
-            wordToGuess={wordToGuess}
-            nextWordHandler={nextWordHandler}
-          />
-        )}
-        {activeScreen == GameState.GameOver && <GamesOverScreen />}
+          {activeScreen == GameState.Answer && (
+            <AnswerComponent
+              answerVariants={answerVariants}
+              selectedAnswer={selectedAnswer}
+              wordToGuess={wordToGuess}
+              nextWordHandler={nextWordHandler}
+            />
+          )}
+          {activeScreen == GameState.GameOver && <GamesOverScreen />}
+        </div>
       </div>
-      </div>
-      </section>
-
+    </section>
   )
 }
 
