@@ -16,9 +16,10 @@ globalThis.globalStyles = styles
 export function App() {
   return (
     <BrowserRouter>
-      <Header />
 
       <div className={styles.wrapper}>
+        <Header />
+
         <Routes>
           <Route path='/' element={<MainPage />} />
           <Route path='/login' element={<LoginPage />} />
@@ -28,9 +29,10 @@ export function App() {
           <Route path='/registration' element={<RegistrationPage />} />
           <Route path='/stat' element={<StatPage />} />
         </Routes>
+        
+        <Footer />
       </div>
-
-      <Footer />
+      
     </BrowserRouter>
   )
 }
