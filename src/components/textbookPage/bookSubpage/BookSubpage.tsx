@@ -45,7 +45,7 @@ const Pagination: React.FC<any> = (props) => {
         ['_icon-arrow']: true,
         [styles.paginationPrev]: true,
         [styles.paginationDisable]: page === 1
-      })} onClick={prevPage}>Назад</button>
+      })} onClick={prevPage}><span>Назад</span></button>
       <ul className={styles.paginationList}>
         {pageList}
       </ul> 
@@ -53,7 +53,7 @@ const Pagination: React.FC<any> = (props) => {
         ['_icon-arrow']: true,
         [styles.paginationNext]: true,
         [styles.paginationDisable]: page === 20
-      })} onClick={nextPage}>Далее</button>
+      })} onClick={nextPage}><span>Далее</span></button>
     </div>
   )
 }

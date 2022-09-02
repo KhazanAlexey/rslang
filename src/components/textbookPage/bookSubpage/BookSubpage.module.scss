@@ -12,6 +12,9 @@
     justify-content: space-between;
     align-items: flex-start;
     margin-top: rem(24);
+    @media (max-width:$tablet){
+      flex-direction: column-reverse;
+    }
   }
   &Words {
     max-width: rem(912);
@@ -23,12 +26,35 @@
   display: flex;
   justify-content: center;
   gap: rem(30);
+  align-items: center;
+  @media (max-width: em(1060)){
+    gap: rem(18);
+  }
+  @media (max-width:$mobileSmall){
+    gap: rem(6);
+  }
   &List {
     display: flex;
     gap: rem(12);
+    @media (max-width:$mobileSmall){
+      gap: 0;
+    }
   }
   &Item {
-
+    @media (max-width:$mobileSmall){
+      &:first-child {
+        &>button {
+          border-top-left-radius: rem(24);
+          border-bottom-left-radius: rem(24);
+        }
+      }
+      &:last-child {
+        &>button {
+          border-top-right-radius: rem(24);
+          border-bottom-right-radius: rem(24);
+        }
+      }
+    }
   }
   &Btn {
     display: flex;
@@ -49,6 +75,11 @@
       color: $mainBgColor;
       box-shadow: inset 0px 0px rem(4) rgba(0, 0, 0, 0);
     }
+    @media (max-width:$mobileSmall){
+      width: rem(40);
+      height: rem(40);
+      border-radius: 0;
+    }
   }
   &Prev, &Next {
     display: inline-flex;
@@ -67,6 +98,18 @@
     }
     &:hover {
       background: $hoverButtonBgColor;
+    }
+    @media (max-width: em(1080)){
+      width: rem(44);
+      height: rem(44);
+      padding: unset !important;
+      &>span {
+        display: none;
+      }
+    }
+    @media (max-width: em(350)){
+      width: rem(40);
+      height: rem(40);
     }
   }
   &Prev {

@@ -42,6 +42,9 @@
     &:hover {
       background: #e6e6e600;
     }
+    @media (max-width: em(500)){
+      padding: rem(6) rem(12);
+    }
   }
 
   .levelTitle {

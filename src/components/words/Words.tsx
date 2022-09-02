@@ -44,7 +44,7 @@ const Words: React.FC<any> = (props) => {
     refetch,
   } = wordsAPI.useFetchWordsQuery({ group: lvl, page: page })
   // const { data: word, isLoading, error } = wordsAPI.useFetchWordByIdQuery('5e9f5ee35eb9e72bc21af4b8')
-
+  // console.log(words)
   // TODO: Сделать при обновлении страницы или уровня, выбор первой карточки
   return (
     <ul className={styles.words}>

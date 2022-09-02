@@ -11,6 +11,17 @@
   overflow: hidden;
   position: relative;
   z-index: 2;
+  @media (max-width:$tablet){
+    width: 100%;
+    padding: rem(24) calc(50% + rem(24)) rem(24) rem(24);
+  }
+  @media (max-width: em(640)){
+    //max-width: rem(600);
+    padding: rem(246) rem(18) rem(18);
+  }
+  @media (max-width:$mobileSmall){
+    padding-top: rem(212);
+  }
   &::before, &::after {
     content: '';
     position: absolute;
@@ -46,6 +57,9 @@
     line-height: math.div(44 , 27);
     color: $mainTitleColor;
     transition: all .3s;
+    @media (max-width: em(640)){
+      font-size: rem(24);
+    }
   }
 
   .detailSound {
@@ -67,6 +81,9 @@
     font-size: rem(18);
     line-height: math.div(44 , 18);
     margin-left: auto;
+    @media (max-width: em(640)){
+      font-size: rem(16);
+    }
   }
 
   .detailTranslate {
@@ -75,6 +92,10 @@
     font-weight: 400;
     font-size: rem(21);
     line-height: math.div(30 , 21);
+    @media (max-width: em(640)){
+      font-size: rem(18);
+      margin-top: rem(0);
+    }
   }
 
   .detailLine {
@@ -92,7 +113,6 @@
   .detailMore {
     max-height: rem(360);
     overflow-y: auto;
-    
   }
 
   .detailItem {
@@ -117,6 +137,9 @@
     color: $mainHeaderColor;
     margin-top: rem(9);
     transition: all .3s;
+    @media (max-width: em(640)){
+      font-size: rem(18);
+    }
   }
 
   .detailText {
@@ -129,6 +152,10 @@
     }
     >b, strong {
       font-weight: 700;
+    }
+    @media (max-width: em(640)){
+      font-size: rem(16);
+      margin-top: rem(3);
     }
   }
 
@@ -148,6 +175,19 @@
       width: 100%;
       min-height: 100%;
       object-fit: cover;
+    }
+    @media (max-width:$tablet){
+      width: 50%;
+      left: 50%;
+      height: 100%;
+    }
+    @media (max-width: em(640)){
+      height: rem(236);
+      left: 0;
+      width: 100%;
+    }
+    @media (max-width:$mobileSmall){
+      height: rem(200);
     }
   }
 
