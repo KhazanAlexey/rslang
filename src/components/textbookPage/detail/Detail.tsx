@@ -5,7 +5,7 @@ import styles from './Detail.module.scss'
 import { IWord } from '../../../models/IWord'
 
 const Detail: React.FC<any> = (props) => {
-  const { id } = props;
+  const { id, hardWords, setHardWords } = props;
   const {
     data: wordData,
     isLoading: isLoadingWordData,
@@ -13,16 +13,25 @@ const Detail: React.FC<any> = (props) => {
     refetch
   } = wordsAPI.useFetchWordByIdQuery(id);
   console.log(wordData);
-  // const { wordEn, wordRu, transcription, 
-  //  image, sound, valueEn, valueRu, 
-  //  exampleEn, exampleRu } = props;
   const { complete, hard } = props;
 
   // TODO: сделать логику добавления в сложные
   const [isHard, setIsHard] = useState(hard);
   const hardHandler = () => {
-    if (isHard === true) setIsHard(false)
-    else setIsHard(true)
+    // if (isHard === true) setIsHard(false)
+    // else setIsHard(true)
+    if (isHard === true) {
+      setIsHard(false);
+      setHardWords(hardWords.filter((word) => word.id !== id));
+    } else {
+      setIsHard(true);
+      const newHardWord = {
+        id: id,
+        word: wordData ? wordData.word : '',
+        wordTranslate: wordData ? wordData.wordTranslate : ''
+      };
+      setHardWords([...hardWords, newHardWord]);
+    }
   }
   // TODO: сделать логику добавления в изученные
   const [isComplete, setIsComplete] = useState(complete);

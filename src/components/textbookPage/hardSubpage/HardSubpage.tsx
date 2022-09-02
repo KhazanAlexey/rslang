@@ -3,7 +3,10 @@ import Words from 'src/components/words/Words'
 import Detail from '../detail/Detail'
 import styles from './HardSubpage.module.scss'
 
-const HardSubpage: React.FC<any> = () => {
+const HardSubpage: React.FC<any> = (props) => {
+  const { hardWords, setHardWords } = props;
+
+
   return (
     <section className=''>
       <section>

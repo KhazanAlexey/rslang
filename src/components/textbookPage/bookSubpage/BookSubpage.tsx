@@ -59,7 +59,7 @@ const Pagination: React.FC<any> = (props) => {
 }
 
 const BookSubpage: React.FC<any> = (props) => {
-  const { activeLvl, setActiveLvl, activePage, setActivePage, levels } = props;
+  const { activeLvl, setActiveLvl, activePage, setActivePage, levels, hardWords, setHardWords } = props;
 
   const [ wordDetail, setWordDetail ] = useState('');
 
@@ -93,7 +93,9 @@ const BookSubpage: React.FC<any> = (props) => {
             <Detail
               id={wordDetail}
               complete={false}
-              hard={false} />
+              hard={false}
+              hardWords={hardWords}
+              setHardWords={setHardWords} />
           </div>
         </div>
       </section>

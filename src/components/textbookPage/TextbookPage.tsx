@@ -21,6 +21,10 @@ const TextBookPage: React.FC<any> = () => {
     {id: 6, title: 'Hard+', descr: 'До 3600 слов', lvl: 'C2', bg: '#BAAFFF'},
   ];
 
+  // TODO: Привязать сложные и изученные слова к глобальным
+  const [ hardWords, setHardWords ] = useState([]);
+  const [ completeWords, setCompleteWords ] = useState([]);
+
 
   const [ subpage, setSubpage ] = useState('book');
   const menuItems = ['Учебник', 'Сложные слова', 'Изученные'];
@@ -102,10 +106,12 @@ const TextBookPage: React.FC<any> = () => {
           setActiveLvl={setActiveLvl} 
           levels={levels}
           activePage={activePage}
-          setActivePage={setActivePage} />
+          setActivePage={setActivePage}
+          hardWords={hardWords}
+          setHardWords={setHardWords} />
       }
       {subpage == 'hard' && 
-        <HardSubpage />
+        <HardSubpage hardWords={hardWords} setHardWords={setHardWords} />
       }
       {subpage == 'complete' && 
         <CompleteSubpage />
