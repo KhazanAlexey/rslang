@@ -10,6 +10,7 @@ import { IUserForm } from '../../../models/IUser'
 import { localStorageRemove } from 'src/utils/localStoradre'
 import { authApi } from '../../../services/AuthService'
 import { authSlice } from 'src/store/reducers/auth/authSlice'
+import styles from './Form.module.scss'
 
 export const RegisterForm = () => {
   const navigate = useNavigate()
@@ -20,7 +21,7 @@ export const RegisterForm = () => {
   const [createUser, { isLoading }] = userAPI.useCreateUserMutation()
   const [login] = authApi.useLoginMutation()
 
-  const buttonText = isLoading ? 'Loading.........' : 'Submit'
+  const buttonText = isLoading ? 'Создаем аккаунт...' : 'Поехали учиться!'
 
   const registerHandler = async ({ email, name, password }) => {
     localStorageRemove(['name', 'refreshToken', 'userId', 'token', 'message'])
@@ -55,48 +56,64 @@ export const RegisterForm = () => {
   })
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <label htmlFor='email'>Email Address</label>
-      <input
-        id='name'
-        name='name'
-        type='text'
-        onChange={formik.handleChange}
-        value={formik.values.name}
-      />
+    <form className={styles.form} onSubmit={formik.handleSubmit}>
+      <div className={styles.formGroup}>
+        <input
+          className={styles.formInput}
+          placeholder='Введи своё имя'
+          id='name'
+          name='name'
+          type='text'
+          onChange={formik.handleChange}
+          value={formik.values.name}
+        />
+        <label className={styles.formLabel} htmlFor='name'>Как тебя зовут?</label>
+        {formik.errors.name ? <p className={styles.formError}>{formik.errors.name}</p> : null}
+      </div>
 
-      {formik.errors.email ? <div>{formik.errors.email}</div> : null}
-      <label htmlFor='email'>Email Address</label>
-      <input
-        id='email'
-        name='email'
-        type='email'
-        onChange={formik.handleChange}
-        value={formik.values.email}
-      />
-      {formik.errors.email ? <div>{formik.errors.email}</div> : null}
+      <div className={styles.formGroup}>
+        <input
+          className={styles.formInput}
+          placeholder='Введи свой E-mail'
+          id='email'
+          name='email'
+          type='email'
+          onChange={formik.handleChange}
+          value={formik.values.email}
+        />
+        <label className={styles.formLabel} htmlFor='email'>Адрес для писем от Enggo</label>
+        {formik.errors.email ? <p className={styles.formError}>{formik.errors.email}</p> : null}
+      </div>
 
-      <label htmlFor='password'>password</label>
-      <input
-        id='password'
-        name='password'
-        type='password'
-        onChange={formik.handleChange}
-        value={formik.values.password}
-      />
-      {formik.errors.password ? <div>{formik.errors.password}</div> : null}
+      <div className={styles.formGroup}>
+        <input
+          className={styles.formInput}
+          placeholder='Введи надежный пароль'
+          id='password'
+          name='password'
+          type='password'
+          onChange={formik.handleChange}
+          value={formik.values.password}
+        />
+        <label className={styles.formLabel} htmlFor='password'>Придумай себе пароль</label>
+        {formik.errors.password ? <p className={styles.formError}>{formik.errors.password}</p> : null}
+      </div>
 
-      <label htmlFor='passwordConfirm'>passwordConfirm</label>
-      <input
-        id='passwordConfirm'
-        name='passwordConfirm'
-        type='password'
-        onChange={formik.handleChange}
-        value={formik.values.passwordConfirm}
-      />
-      {formik.errors.passwordConfirm ? <div>{formik.errors.passwordConfirm}</div> : null}
+      <div className={styles.formGroup}>
+        <input
+          className={styles.formInput}
+          placeholder='Чтобы точно его не забыть'
+          id='passwordConfirm'
+          name='passwordConfirm'
+          type='password'
+          onChange={formik.handleChange}
+          value={formik.values.passwordConfirm}
+        />
+        <label className={styles.formLabel} htmlFor='passwordConfirm'>Повтори пароль</label>
+        {formik.errors.passwordConfirm ? <p className={styles.formError}>{formik.errors.passwordConfirm}</p> : null}
+      </div>
 
-      <button disabled={isLoading} type='submit'>
+      <button className={styles.formSubmit} disabled={isLoading} type='submit'>
         {buttonText}
       </button>
       {error && <div>{error}</div>}
