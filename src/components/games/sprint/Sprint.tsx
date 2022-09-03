@@ -3,23 +3,25 @@ import GamesStartScreen from '../GamesStartScreen'
 import styles from './Sprint.module.scss'
 import { GameState, Levels } from '../../../models/IAudioCall'
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
-import { audioCallSlice } from '../../../store/reducers/audioCall/audioCallSlice'
 import { IWord } from '../../../models/IWord'
 import { wordsAPI } from '../../../services/WordsService'
 import randomInteger from '../../../utils/random'
 import { shuffle } from '../../../utils/suffle'
 import GamesOverScreen from '../GamesOverScreen'
 import SprintGame from './SprintGame'
+import { sprintSlice } from '../../../store/reducers/sprint/sprintSlice'
 
 const Sprint: React.FC<any> = () => {
   const dispatch = useAppDispatch()
+  const [score, setScore] = useState<number>(0)
   const [level, setLevel] = useState<Levels>()
   const [wordsForGame, setWordsForGame] = useState<IWord[]>([])
-  const [answerVariants, setAnswerVariants] = useState<IWord[]>([])
+  const [answerVariant, setAnswerVariant] = useState<IWord>()
+
   const [wordToGuess, setWordToGuess] = useState<IWord | null>(null)
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
-  const [selectedAnswer, setSelectedAnswer] = useState<IWord | null>(null)
-  const { activeScreen } = useAppSelector((state) => state.audioCall)
+  const [selectedAnswer, setSelectedAnswer] = useState<boolean | null>()
+  const { activeScreen } = useAppSelector((state) => state.sprint)
 
   const [page, setPage] = useState<number>()
   const [additionalPage, setAdditionalPage] = useState<number>()
@@ -43,57 +45,45 @@ const Sprint: React.FC<any> = () => {
     },
   )
 
-  const answerHandler = (selectedAnswer: IWord) => {
-    console.log(selectedAnswer)
-
-    answerSelectHandler(selectedAnswer)
-
-    if (wordToGuess?.id === selectedAnswer.id) {
-      dispatch(audioCallSlice.actions.setCorrectAnswers(selectedAnswer))
-      // setCurrentWordIndex(currentWordIndex + 1)
-    } else {
-      dispatch(audioCallSlice.actions.setWrongAnswers(selectedAnswer))
+  const answerHandler = (isRight: boolean) => {
+    setSelectedAnswer(isRight)
+    if (isRight) {
+      if (wordToGuess?.id === answerVariant?.id) {
+        wordToGuess && dispatch(sprintSlice.actions.setCorrectAnswers(wordToGuess))
+        setScore(score + 10)
+      } else wordToGuess && dispatch(sprintSlice.actions.setWrongAnswers(wordToGuess))
     }
-    dispatch(audioCallSlice.actions.setActiveScreen(GameState.Answer))
-  }
-
-  const answerSelectHandler = (ans: IWord | null) => {
-    setSelectedAnswer(ans)
-  }
-
-  const skipAnswerHandler = () => {
-    if (wordToGuess) {
-      dispatch(audioCallSlice.actions.setWrongAnswers(wordToGuess))
+    if (!isRight) {
+      if (wordToGuess?.id === answerVariant?.id) {
+        wordToGuess && dispatch(sprintSlice.actions.setWrongAnswers(wordToGuess))
+      } else {
+        wordToGuess && dispatch(sprintSlice.actions.setCorrectAnswers(wordToGuess))
+        setScore(score + 10)
+      }
     }
-    dispatch(audioCallSlice.actions.setActiveScreen(GameState.Answer))
+    setCurrentWordIndex(currentWordIndex + 1)
   }
-
-  const nextWordHandler = () => {
-    if (currentWordIndex == 7) {
-      dispatch(audioCallSlice.actions.setActiveScreen(GameState.GameOver))
-    } else {
-      setCurrentWordIndex(currentWordIndex + 1)
-      answerSelectHandler(null)
-      dispatch(audioCallSlice.actions.setActiveScreen(GameState.Game))
-    }
-  }
+  useEffect(() => {
+    const tim = setTimeout(() => {
+      setSelectedAnswer(null)
+    }, 500)
+    return () => clearTimeout(tim)
+  }, [selectedAnswer])
 
   const startGameHandler = (level: Levels) => {
-    console.log('level', level)
     setLevel(level)
-
-    dispatch(audioCallSlice.actions.setActiveScreen(GameState.Game))
+    dispatch(sprintSlice.actions.setActiveScreen(GameState.Game))
     setSkip(false)
   }
 
   useEffect(() => {
     if (words && additionalWords) {
-      setWordsForGame([...words, ...additionalWords].slice(0, 8))
+      setWordsForGame([...words, ...additionalWords])
     }
   }, [words, additionalWords])
 
   useEffect(() => {
-    dispatch(audioCallSlice.actions.setActiveScreen(GameState.StartScreen))
+    dispatch(sprintSlice.actions.setActiveScreen(GameState.StartScreen))
     let random = randomInteger(0, 21)
     let randomAdd = randomInteger(0, 21)
 
@@ -117,27 +107,21 @@ const Sprint: React.FC<any> = () => {
       const shuffledArray = shuffle([...wordsForGame]).filter((word) => word.id !== wordToGuess.id)
       const wrongAnswers = shuffledArray.slice(0, 4)
       const variantsToAnswer = shuffle([wordToGuess, ...wrongAnswers])
-      setAnswerVariants(variantsToAnswer)
+      setAnswerVariant(variantsToAnswer[0])
     }
   }, [currentWordIndex, wordToGuess])
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
+      console.log(event.key)
       if (event.repeat) return
-      if (event.key === '1') answerHandler(answerVariants[0])
-      if (event.key === '2') answerHandler(answerVariants[1])
-      if (event.key === '3') answerHandler(answerVariants[2])
-      if (event.key === '4') answerHandler(answerVariants[3])
-      if (event.key === '5') answerHandler(answerVariants[4])
-      if (event.key === ' ') {
-        if (activeScreen === GameState.Game) skipAnswerHandler()
-        if (activeScreen == GameState.Answer) nextWordHandler()
-      }
+      if (event.key === 'ArrowLeft') answerHandler(true)
+      if (event.key === 'ArrowRight') answerHandler(false)
     }
-    window.addEventListener<'keypress'>('keypress', handleKeyPress)
-    return () => window.removeEventListener('keypress', handleKeyPress)
+    window.addEventListener<'keyup'>('keyup', handleKeyPress)
+    return () => window.removeEventListener('keyup', handleKeyPress)
   })
-
+  console.log(answerVariant)
   return (
     <section className={styles.audioCall}>
       <div className={globalThis.globalStyles.container}>
@@ -146,20 +130,18 @@ const Sprint: React.FC<any> = () => {
           {isLoadingWords && <div className={styles.loading}>loading.....</div>}
           {GameState.StartScreen === activeScreen && (
             <GamesStartScreen
-              header='Аудиовызов'
-              text='Тренировка Аудиовызов улучшает твое восприятие речи на слух.'
+              header='Спринт'
+              text='Тренировка Спринт!.'
               setDifficultyLevel={startGameHandler}
             />
           )}
           {GameState.Game === activeScreen && (
             <SprintGame
-              skipAnswerHandler={skipAnswerHandler}
+              score={score}
               answerHandler={answerHandler}
-              answerVariants={answerVariants}
-              setAnswerVariants={setAnswerVariants}
+              answerVariant={answerVariant}
               selectedAnswer={selectedAnswer}
               wordToGuess={wordToGuess}
-              answerSelectHandler={answerSelectHandler}
             />
           )}
 

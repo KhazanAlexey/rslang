@@ -4,7 +4,7 @@ import { useAppSelector } from '../../hooks/redux'
 import { useNavigate } from 'react-router-dom'
 
 const GamesOverScreen: React.FC<any> = () => {
-  const { wrongAnswers, correctAnswers } = useAppSelector((state) => state.audioCall)
+  const { wrongAnswers, correctAnswers } = useAppSelector((state) => state.sprint)
   const navigate = useNavigate()
   const id = useId()
   const exitGameHandler = () => {

@@ -4,10 +4,12 @@ import { userAPI } from '../services/UserService'
 import { audioCallSlice } from './reducers/audioCall/audioCallSlice'
 import { authApi } from '../services/AuthService'
 import { authSlice } from './reducers/auth/authSlice'
+import { sprintSlice } from './reducers/sprint/sprintSlice'
 
 const rootReducer = combineReducers({
   audioCall: audioCallSlice.reducer,
   auth: authSlice.reducer,
+  sprint: sprintSlice.reducer,
   [wordsAPI.reducerPath]: wordsAPI.reducer,
   [userAPI.reducerPath]: userAPI.reducer,
   [authApi.reducerPath]: authApi.reducer,
