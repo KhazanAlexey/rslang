@@ -1,14 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { clsx } from 'src/utils/clsx'
 import styles from './Header.module.scss'
 import { userAPI } from '../../services/UserService'
 import { useAppSelector } from '../../hooks/redux'
+import AuthModal from '../auth/AuthModal'
 
 const Header: React.FC<any> = () => {
+  const [ isAuthModal, setIsAuthModal ] = useState('');
   const { isAuth, name: userName } = useAppSelector((state) => state.auth)
   const id = localStorage.getItem('userId') || ''
   const { data, error, isLoading } = userAPI.useFetchUserQuery(id)
+
+
 
   return (
     <header className={styles.header}>
@@ -59,12 +63,12 @@ const Header: React.FC<any> = () => {
           </nav>
           {!isAuth ? (
             <div className={styles.headerAuth}>
-              <NavLink to={'/login'} className={styles.authLogin}>
+              <button className={styles.authLogin} onClick={() => setIsAuthModal('login')}>
                 Вход
-              </NavLink>
-              <NavLink to={'/registration'} className={styles.authRegister}>
+              </button>
+              <button className={styles.authRegister} onClick={() => setIsAuthModal('register')}>
                 Регистрация
-              </NavLink>
+              </button>
             </div>
           ) : (
             <button
@@ -72,6 +76,7 @@ const Header: React.FC<any> = () => {
                 [styles.headerUsername]: true,
                 ['_icon-settings']: true,
               })}
+              onClick={() => setIsAuthModal('settings')}
             >
               {userName}
             </button>
@@ -82,10 +87,12 @@ const Header: React.FC<any> = () => {
               ['_icon-user']: !isAuth,
               ['_icon-settings']: isAuth,
             })}
+            onClick={() => isAuth ? setIsAuthModal('settings') : setIsAuthModal('login')}
           ></button>
           <button className={styles.headerBurger}>
             <span></span>
           </button>
+          <AuthModal isAuthModal={isAuthModal} setIsAuthModal={setIsAuthModal} />
         </div>
       </div>
     </header>

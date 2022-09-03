@@ -10,7 +10,7 @@ import { validateLogin } from './formValidator'
 import { authSlice } from '../../../store/reducers/auth/authSlice'
 import styles from './Form.module.scss'
 
-export const LoginForm = (props) => {
+export const SettingsForm = (props) => {
   const { setIsAuthModal } = props;
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -20,7 +20,6 @@ export const LoginForm = (props) => {
   const loginHandler = async ({ email, password }) => {
     try {
       await login({ email: email, password: password }).unwrap()
-      setIsAuthModal('');
       // navigate('/')
     } catch (e: any) {
       localStorageRemove(['name', 'refreshToken', 'userId', 'token', 'message'])
@@ -29,7 +28,7 @@ export const LoginForm = (props) => {
       console.log(e)
     }
   }
-  const buttonText = isLoading ? 'Секунду...' : 'Войти в аккаунт'
+  const buttonText = isLoading ? 'Выходим...' : 'Выйти из аккаунта'
 
   const formik = useFormik({
     initialValues: {
@@ -38,14 +37,17 @@ export const LoginForm = (props) => {
     },
 
     onSubmit: (values) => {
-      loginHandler({ email: values.email, password: values.password })
+      localStorageRemove(['name', 'refreshToken', 'userId', 'token', 'message'])
+      dispatch(authSlice.actions.logOut())      
+      setIsAuthModal('');
+      // loginHandler({ email: values.email, password: values.password })
     },
-    validate: validateLogin,
+    // validate: validateLogin,
   })
 
   return (
     <form className={styles.form} onSubmit={formik.handleSubmit}>
-      <div className={styles.formGroup}>
+      {/* <div className={styles.formGroup}>
         <input
           className={styles.formInput}
           placeholder='Введи свой E-mail'
@@ -71,7 +73,7 @@ export const LoginForm = (props) => {
         />
         <label className={styles.formLabel} htmlFor='password'>Пароль</label>
         {formik.errors.password ? <p className={styles.formError}>{formik.errors.password}</p> : null}
-      </div>
+      </div> */}
       
 
       <button className={styles.formSubmit} disabled={isLoading} type='submit'>
