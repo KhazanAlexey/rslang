@@ -13,7 +13,7 @@ const SprintGame: React.FC<any> = ({
   score,
 }) => {
   const dispatch = useAppDispatch()
-  const [timeLeft, setTimeLeft] = useState<number>(30)
+  const [timeLeft, setTimeLeft] = useState<number>(3)
   const [startGame, setStartGame] = useState(true)
 
   useEffect(() => {
@@ -30,7 +30,6 @@ const SprintGame: React.FC<any> = ({
     return () => clearTimeout(timer)
   }, [timeLeft])
 
-  console.log(answerVariant)
   return (
     <>
       <div>{timeLeft}</div>

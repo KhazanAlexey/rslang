@@ -145,7 +145,7 @@ const Sprint: React.FC<any> = () => {
             />
           )}
 
-          {activeScreen == GameState.GameOver && <GamesOverScreen />}
+          {activeScreen == GameState.GameOver && <GamesOverScreen game={'sprint'} />}
         </div>
       </div>
     </section>
