@@ -14,7 +14,7 @@ export interface PropsType {
 const AuthModal: React.FC<PropsType> = (props) => {
   const { isAuthModal, setIsAuthModal } = props;
   
-  const authState = ['login', 'register', 'settings']
+  const authState = ['login', 'register', 'settings', '']
   const authHello = [{
     title: 'Вход в Enggo',
     subtitle: 'Привет!',
@@ -25,6 +25,10 @@ const AuthModal: React.FC<PropsType> = (props) => {
     text: 'Давай заведем тебе аккаунт, чтобы ты мог пользоваться всеми возможностями Enggo!'
   }, {
     title: 'Настройки',
+    subtitle: '',
+    text: ''
+  }, {
+    title: '',
     subtitle: '',
     text: ''
   }]
@@ -43,9 +47,9 @@ const AuthModal: React.FC<PropsType> = (props) => {
             </div>
             <p className={styles.authSubtitle}>{authText.subtitle}</p>
             <p className={styles.authText}>{authText.text}</p>
-            {isAuthModal == 'login' && <LoginForm />}
-            {isAuthModal == 'register' && <RegisterForm />}
-            {isAuthModal == 'settings' && <SettingsForm />}
+            {isAuthModal == 'login' && <LoginForm setIsAuthModal={setIsAuthModal} />}
+            {isAuthModal == 'register' && <RegisterForm setIsAuthModal={setIsAuthModal} />}
+            {isAuthModal == 'settings' && <SettingsForm setIsAuthModal={setIsAuthModal} />}
             {isAuthModal == 'login' && <p className={styles.authOptionalText}>Еще нет аккаунта? Не беда! <button className={styles.authLink} onClick={() => setIsAuthModal('register')}>Зарегистрироваться в Enggo</button></p>}
             {isAuthModal == 'settings' && <p className={styles.authOptionalText}>Enggo будет скучать...</p>}
           </div>

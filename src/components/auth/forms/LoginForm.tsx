@@ -10,7 +10,8 @@ import { validateLogin } from './formValidator'
 import { authSlice } from '../../../store/reducers/auth/authSlice'
 import styles from './Form.module.scss'
 
-export const LoginForm = () => {
+export const LoginForm = (props) => {
+  const { setIsAuthModal } = props;
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const [error, setError] = useState()
@@ -19,6 +20,7 @@ export const LoginForm = () => {
   const loginHandler = async ({ email, password }) => {
     try {
       await login({ email: email, password: password }).unwrap()
+      setIsAuthModal('');
       // navigate('/')
     } catch (e: any) {
       localStorageRemove(['name', 'refreshToken', 'userId', 'token', 'message'])

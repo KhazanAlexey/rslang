@@ -12,7 +12,8 @@ import { authApi } from '../../../services/AuthService'
 import { authSlice } from 'src/store/reducers/auth/authSlice'
 import styles from './Form.module.scss'
 
-export const RegisterForm = () => {
+export const RegisterForm = (props) => {
+  const { setIsAuthModal } = props;
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
@@ -33,6 +34,7 @@ export const RegisterForm = () => {
         password,
       }).unwrap()
       await login({ email: email, password: password })
+      setIsAuthModal('');
       console.log(createdUser)
       // navigate('/')
     } catch (e: any) {
