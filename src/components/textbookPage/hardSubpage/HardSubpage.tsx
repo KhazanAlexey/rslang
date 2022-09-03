@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Words from 'src/components/words/Words'
 import Detail from '../detail/Detail'
 import styles from './HardSubpage.module.scss'
 
 const HardSubpage: React.FC<any> = (props) => {
   const { hardWords, setHardWords } = props;
+  const [ wordDetail, setWordDetail ] = useState('');
 
 
   return (
@@ -17,20 +18,15 @@ const HardSubpage: React.FC<any> = (props) => {
       </section>
       <section className=''>  
         <div className={globalThis.globalStyles.container}>
+          
           <Detail 
-              wordEn='reusable' 
-              wordRu='многоразового использования'
-              transcription='[riúzəbl]'
-              image=''
-              sound=''
-              valueEn='An object that is reusable can be utilized over and over again.'
-              valueRu='Объект, который можно использовать повторно, можно использовать снова и снова'
-              exampleEn='Saburo keeps his empty jelly jars because they are reusable for storing sewing supplies.'
-              exampleRu='Сабуро хранит свои пустые желейные банки, потому что их можно использовать для хранения швейных принадлежностей'
+              id={wordDetail}
               complete={false}
-              hard={false} />
+              hard={false}
+              hardWords={hardWords}
+              setHardWords={setHardWords} />
         </div>
-        <Words />
+        {/* <Words />*/}
       </section>
     </section>
   )

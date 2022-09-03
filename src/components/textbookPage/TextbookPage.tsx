@@ -111,10 +111,14 @@ const TextBookPage: React.FC<any> = () => {
           setHardWords={setHardWords} />
       }
       {subpage == 'hard' && 
-        <HardSubpage hardWords={hardWords} setHardWords={setHardWords} />
+        <HardSubpage 
+          hardWords={hardWords} 
+          setHardWords={setHardWords} />
       }
       {subpage == 'complete' && 
-        <CompleteSubpage />
+        <CompleteSubpage 
+          hardWords={hardWords}
+          setHardWords={setHardWords} />
       }
       <section></section>
     </div>

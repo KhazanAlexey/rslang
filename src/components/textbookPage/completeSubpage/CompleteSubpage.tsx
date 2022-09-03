@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Words from 'src/components/words/Words'
 import Detail from '../detail/Detail'
 import styles from './CompleteSubpage.module.scss'
 
-const CompleteSubpage: React.FC<any> = () => {
+const CompleteSubpage: React.FC<any> = (props) => {
+  const { hardWords, setHardWords } = props;
+  const [ wordDetail, setWordDetail ] = useState('');
   return (
     <section className=''>
       <section>
@@ -15,11 +17,13 @@ const CompleteSubpage: React.FC<any> = () => {
       <section className=''>  
         <div className={globalThis.globalStyles.container}>
           <Detail 
-              
+              id={wordDetail}
               complete={false}
-              hard={false} />
+              hard={false}
+              hardWords={hardWords}
+              setHardWords={setHardWords} />
         </div>
-        <Words />
+        {/* <Words />*/}
       </section>
     </section>
   )
