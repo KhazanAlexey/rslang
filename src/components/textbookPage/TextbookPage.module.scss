@@ -1,0 +1,132 @@
+@use "sass:math";
+@import '../../styles/mixins.scss';
+
+.textbook {
+  .textbookInfo {
+    padding: rem(30) 0;
+  }
+  &Wrapper {
+    display: flex;
+    padding-right: rem(117);
+    justify-content: space-between;
+    @media (max-width: em(1200)){
+      padding-right: 0;
+    }
+    @media (max-width:$mobile){
+      flex-wrap: wrap;
+      gap: rem(20);
+    }
+  }
+  &Main {
+    @media (max-width:$mobile){
+      width: 100%;
+    }
+  }
+  &Games {
+    width: rem(179);
+    height: rem(251);
+    position: relative;
+    z-index: 3;
+    padding-top: rem(5);
+    margin-left: rem(365);
+    &>img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    @media (max-width:$tablet){
+      margin-left: rem(240);
+    }
+    @media (max-width:$mobile){
+      margin-left: auto;
+    }
+    @media (max-width:$mobileSmall){
+      width: rem(120);
+      height: rem(171);
+      &>img {
+        left: unset;
+        right: rem(-40);
+      }
+    }
+  }
+  &Game {
+    border-radius: 100%;
+    background: #000;
+    position: absolute;
+    &:first-child {
+      width: rem(220);
+      height: rem(220);
+      z-index: -2;
+      right: rem(324);
+      top: rem(37);
+      @media (max-width:$tablet){
+        width: rem(180);
+        height: rem(180);
+        right: rem(200);
+        top: rem(48);
+      }
+      @media (max-width:$mobile){
+        right: rem(280);
+      }
+      @media (max-width:$mobileSmall){
+        width: rem(120);
+        height: rem(120);
+        right: rem(180);
+      }
+    }
+    &:nth-child(2) {
+      width: rem(240);
+      height: rem(240);
+      z-index: -1;
+      right: rem(124);
+      background: cyan;
+      top: 0;
+      @media (max-width:$tablet){
+        width: rem(200);
+        height: rem(200);
+        top: rem(20);
+        right: rem(60);
+      }
+      @media (max-width:$mobile){
+        right: rem(120);
+      }
+      @media (max-width:$mobileSmall){
+        width: rem(160);
+        height: rem(160);
+        right: rem(50);
+      }
+    }
+  }
+  .textbookDescr {
+    max-width: rem(360);
+    margin-top: rem(9);
+  }
+  .textbookMenu {
+    display: flex;
+    gap: rem(9);
+    margin-top: rem(24);
+    flex-wrap: wrap;
+  }
+  &Subpage {
+    display: inline-flex;
+    align-items: center;
+    gap: rem(12);
+    padding: rem(10) rem(18);
+    font-weight: 400;
+    font-size: rem(18);
+    line-height: math.div(24 , 18);
+    background: $mainBgColor;
+    border-radius: rem(52);
+    transition: all .3s;
+    &::before {
+      font-size: rem(24);
+    }
+    &.subpageActive {
+      background: $mainButtonBgColor;
+      color: $mainBgColor;
+    }
+  }
+}

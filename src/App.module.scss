@@ -18,6 +18,10 @@ $containerWidth: $maxWidthContainer + $containerPadding;
 
 @import './styles/null.scss';
 
+body {
+  background: $mainBgColor;
+}
+
 .container {
   box-sizing: content-box;
   margin: 0 auto;
@@ -45,4 +49,29 @@ $containerWidth: $maxWidthContainer + $containerPadding;
   width: 100%;
   height: 75vh;
   background-color: var(--blue-color);
+}
+
+.pageTitle {
+  font-weight: 700;
+  font-size: rem(42);
+  line-height: math.div(61, 42);
+  color: $mainTitleColor;
+  @media (max-width:$mobileSmall){
+    font-size: rem(36);
+  }
+}
+.pageDescr {
+  font-weight: 400;
+  font-size: rem(18);
+  line-height: math.div(24, 18);
+  //@media (max-width:$mobileSmall){
+  //  font-size: rem(16);
+  //}
+}
+
+.sectionTitle {
+  font-weight: 700;
+  font-size: rem(30);
+  line-height: math.div(43 , 30);
+  color: $lightColor;
 }
