@@ -43,6 +43,27 @@
       background: $mainBgColor;
       left: 100%;
     }
+    @media (max-width:$mobile){
+      height: 100%;
+      overflow-y: auto;
+      right: rem(-10);
+      &::after {
+        display: none;
+      }
+    }
+    @media (max-width: em(350)){
+      position: fixed;
+      right: 0;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      padding: rem(24) rem(10) rem(60);
+      overflow-y: auto;
+      &::after {
+        display: none;
+      }
+    }
   }
   &Header {
     display: flex;

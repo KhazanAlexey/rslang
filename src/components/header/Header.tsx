@@ -87,6 +87,7 @@ const Header: React.FC<any> = () => {
               ['_icon-user']: !isAuth,
               ['_icon-settings']: isAuth,
             })}
+            onClick={() => isAuth ? setIsAuthModal('settings') : setIsAuthModal('login')}
           ></button>
           <button className={styles.headerBurger}>
             <span></span>
