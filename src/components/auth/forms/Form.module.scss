@@ -62,6 +62,10 @@
     color: $mainBgColor;
     background: $brightButtonBgColor;
     border-radius: rem(44);
+    transition: $transitionBtn;
+    &:hover, &:active {
+      background: $hoverBrightButtonBgColor;
+    }
   }
 
   &Error {
