@@ -6,62 +6,76 @@ import Levels from '../levels/Levels'
 import styles from './BookSubpage.module.scss'
 
 const Pagination: React.FC<any> = (props) => {
-  const { page, setPage } = props;
+  const { page, setPage } = props
 
   const arrNumButtons = (): number[] => {
     if (page < 4) {
-      return [ 1, 2, 3, 4, 5 ];
+      return [1, 2, 3, 4, 5]
     } else if (page > 17) {
-      return [ 16, 17, 18, 19, 20 ];
+      return [26, 27, 28, 29, 30]
     } else {
-      return [ page - 2, page - 1, +page, page + 1, page + 2 ];
+      return [page - 2, page - 1, +page, page + 1, page + 2]
     }
-  };
-  
-  const prevPage = () => {
-    if (page > 1) setPage(page - 1);
   }
-  
+
+  const prevPage = () => {
+    if (page > 1) setPage(page - 1)
+  }
+
   const nextPage = () => {
-    if (page < 20) setPage(page + 1);
+    if (page < 20) setPage(page + 1)
   }
 
   const changePage = (numPage: number) => {
-    setPage(numPage);
+    setPage(numPage)
   }
 
-  const pageList = arrNumButtons().map((numPage, ind) => 
+  const pageList = arrNumButtons().map((numPage, ind) => (
     <li key={ind} className={styles.paginationItem}>
-      <button className={clsx({
-        [styles.paginationBtn]: true,
-        [styles.paginationBtnActive]: numPage == page
-      })} onClick={() => changePage(numPage)}>{numPage}</button>
+      <button
+        className={clsx({
+          [styles.paginationBtn]: true,
+          [styles.paginationBtnActive]: numPage == page,
+        })}
+        onClick={() => changePage(numPage)}
+      >
+        {numPage}
+      </button>
     </li>
-  );
+  ))
 
   return (
     <div className={styles.pagination}>
-      <button className={clsx({
-        ['_icon-arrow']: true,
-        [styles.paginationPrev]: true,
-        [styles.paginationDisable]: page === 1
-      })} onClick={prevPage}><span>Назад</span></button>
-      <ul className={styles.paginationList}>
-        {pageList}
-      </ul> 
-      <button className={clsx({
-        ['_icon-arrow']: true,
-        [styles.paginationNext]: true,
-        [styles.paginationDisable]: page === 20
-      })} onClick={nextPage}><span>Далее</span></button>
+      <button
+        className={clsx({
+          ['_icon-arrow']: true,
+          [styles.paginationPrev]: true,
+          [styles.paginationDisable]: page === 1,
+        })}
+        onClick={prevPage}
+      >
+        <span>Назад</span>
+      </button>
+      <ul className={styles.paginationList}>{pageList}</ul>
+      <button
+        className={clsx({
+          ['_icon-arrow']: true,
+          [styles.paginationNext]: true,
+          [styles.paginationDisable]: page === 30,
+        })}
+        onClick={nextPage}
+      >
+        <span>Далее</span>
+      </button>
     </div>
   )
 }
 
 const BookSubpage: React.FC<any> = (props) => {
-  const { activeLvl, setActiveLvl, activePage, setActivePage, levels, hardWords, setHardWords } = props;
+  const { activeLvl, setActiveLvl, activePage, setActivePage, levels, hardWords, setHardWords } =
+    props
 
-  const [ wordDetail, setWordDetail ] = useState('');
+  const [wordDetail, setWordDetail] = useState('')
 
   // const activeLvl = 'Easy+';
   return (
@@ -69,25 +83,29 @@ const BookSubpage: React.FC<any> = (props) => {
       <section>
         <div className={globalThis.globalStyles.container}>
           <h2 className={globalThis.globalStyles.sectionTitle}>Сложность</h2>
-          <Levels 
-            activeLvl={activeLvl} 
-            setActiveLvl={setActiveLvl} 
+          <Levels
+            activeLvl={activeLvl}
+            setActiveLvl={setActiveLvl}
             levels={levels}
             activePage={activePage}
-            setActivePage={setActivePage} />
+            setActivePage={setActivePage}
+          />
         </div>
       </section>
       <section className={styles.bookSection}>
         <div className={globalThis.globalStyles.container}>
-          <h2 className={globalThis.globalStyles.sectionTitle}>Все слова {levels[activeLvl - 1].title}</h2>
+          <h2 className={globalThis.globalStyles.sectionTitle}>
+            Все слова {levels[activeLvl - 1].title}
+          </h2>
           <div className={styles.bookWrapper}>
             <div className={styles.bookWords}>
-              <Words 
-                page={activePage - 1} 
+              <Words
+                page={activePage - 1}
                 lvl={activeLvl - 1}
                 levels={levels}
                 wordDetail={wordDetail}
-                setWordDetail={setWordDetail} />
+                setWordDetail={setWordDetail}
+              />
               <Pagination page={activePage} setPage={setActivePage} />
             </div>
             <Detail
@@ -95,7 +113,8 @@ const BookSubpage: React.FC<any> = (props) => {
               complete={false}
               hard={false}
               hardWords={hardWords}
-              setHardWords={setHardWords} />
+              setHardWords={setHardWords}
+            />
           </div>
         </div>
       </section>

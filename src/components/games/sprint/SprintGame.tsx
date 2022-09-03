@@ -13,7 +13,7 @@ const SprintGame: React.FC<any> = ({
   score,
 }) => {
   const dispatch = useAppDispatch()
-  const [timeLeft, setTimeLeft] = useState<number>(3)
+  const [timeLeft, setTimeLeft] = useState<number>(20)
   const [startGame, setStartGame] = useState(true)
 
   useEffect(() => {

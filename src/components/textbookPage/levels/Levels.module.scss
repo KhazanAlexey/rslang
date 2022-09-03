@@ -1,4 +1,4 @@
-@use "sass:math";
+@use 'sass:math';
 @import '../../../styles/mixins.scss';
 
 .levels {
@@ -7,7 +7,7 @@
   gap: rem(20);
   margin-top: rem(24);
 
-  @media (max-width:$mobileSmall){
+  @media (max-width: $mobileSmall) {
     gap: rem(12);
   }
 }

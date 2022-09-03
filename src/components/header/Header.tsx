@@ -7,12 +7,10 @@ import { useAppSelector } from '../../hooks/redux'
 import AuthModal from '../auth/AuthModal'
 
 const Header: React.FC<any> = () => {
-  const [ isAuthModal, setIsAuthModal ] = useState('');
+  const [isAuthModal, setIsAuthModal] = useState('')
   const { isAuth, name: userName } = useAppSelector((state) => state.auth)
   const id = localStorage.getItem('userId') || ''
   const { data, error, isLoading } = userAPI.useFetchUserQuery(id)
-
-
 
   return (
     <header className={styles.header}>
@@ -87,7 +85,7 @@ const Header: React.FC<any> = () => {
               ['_icon-user']: !isAuth,
               ['_icon-settings']: isAuth,
             })}
-            onClick={() => isAuth ? setIsAuthModal('settings') : setIsAuthModal('login')}
+            onClick={() => (isAuth ? setIsAuthModal('settings') : setIsAuthModal('login'))}
           ></button>
           <button className={styles.headerBurger}>
             <span></span>

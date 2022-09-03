@@ -11,7 +11,7 @@ import { authSlice } from '../../../store/reducers/auth/authSlice'
 import styles from './Form.module.scss'
 
 export const LoginForm = (props) => {
-  const { setIsAuthModal } = props;
+  const { setIsAuthModal } = props
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const [error, setError] = useState()
@@ -20,7 +20,7 @@ export const LoginForm = (props) => {
   const loginHandler = async ({ email, password }) => {
     try {
       await login({ email: email, password: password }).unwrap()
-      setIsAuthModal('');
+      setIsAuthModal('')
       // navigate('/')
     } catch (e: any) {
       localStorageRemove(['name', 'refreshToken', 'userId', 'token', 'message'])
@@ -55,10 +55,12 @@ export const LoginForm = (props) => {
           onChange={formik.handleChange}
           value={formik.values.email}
         />
-        <label className={styles.formLabel} htmlFor='email'>E-mail</label>
+        <label className={styles.formLabel} htmlFor='email'>
+          E-mail
+        </label>
         {formik.errors.email ? <p className={styles.formError}>{formik.errors.email}</p> : null}
       </div>
-      
+
       <div className={styles.formGroup}>
         <input
           className={styles.formInput}
@@ -69,10 +71,13 @@ export const LoginForm = (props) => {
           onChange={formik.handleChange}
           value={formik.values.password}
         />
-        <label className={styles.formLabel} htmlFor='password'>Пароль</label>
-        {formik.errors.password ? <p className={styles.formError}>{formik.errors.password}</p> : null}
+        <label className={styles.formLabel} htmlFor='password'>
+          Пароль
+        </label>
+        {formik.errors.password ? (
+          <p className={styles.formError}>{formik.errors.password}</p>
+        ) : null}
       </div>
-      
 
       <button className={styles.formSubmit} disabled={isLoading} type='submit'>
         {buttonText}

@@ -24,7 +24,7 @@
     box-shadow: inset 0px 0px rem(4) rgba(0, 94, 124, 0.25);
     font-weight: 400;
     font-size: rem(16);
-    line-height: math.div(23 , 16);
+    line-height: math.div(23, 16);
     color: $mainColor;
     border: rem(1) solid rgba(255, 255, 255, 0);
     transition: $transitionForm;
@@ -35,9 +35,10 @@
       line-height: 23px;
       color: $placeholderColor;
     }
-    &:active, &:focus {
+    &:active,
+    &:focus {
       border: rem(1) solid $activeLinkColor;
-      ~.formLabel {
+      ~ .formLabel {
         color: $mainTitleColor;
       }
     }
@@ -46,7 +47,7 @@
     order: -1;
     font-weight: 700;
     font-size: rem(16);
-    line-height: math.div(23 , 16);
+    line-height: math.div(23, 16);
     padding-left: rem(20);
     transition: $transitionForm;
   }
@@ -58,12 +59,13 @@
     padding: rem(9) rem(30);
     font-weight: 500;
     font-size: rem(18);
-    line-height: math.div(26 , 18);
+    line-height: math.div(26, 18);
     color: $mainBgColor;
     background: $brightButtonBgColor;
     border-radius: rem(44);
     transition: $transitionBtn;
-    &:hover, &:active {
+    &:hover,
+    &:active {
       background: $hoverBrightButtonBgColor;
     }
   }

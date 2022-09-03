@@ -13,7 +13,7 @@ import { authSlice } from 'src/store/reducers/auth/authSlice'
 import styles from './Form.module.scss'
 
 export const RegisterForm = (props) => {
-  const { setIsAuthModal } = props;
+  const { setIsAuthModal } = props
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
@@ -34,7 +34,7 @@ export const RegisterForm = (props) => {
         password,
       }).unwrap()
       await login({ email: email, password: password })
-      setIsAuthModal('');
+      setIsAuthModal('')
       console.log(createdUser)
       // navigate('/')
     } catch (e: any) {
@@ -69,7 +69,9 @@ export const RegisterForm = (props) => {
           onChange={formik.handleChange}
           value={formik.values.name}
         />
-        <label className={styles.formLabel} htmlFor='name'>Как тебя зовут?</label>
+        <label className={styles.formLabel} htmlFor='name'>
+          Как тебя зовут?
+        </label>
         {formik.errors.name ? <p className={styles.formError}>{formik.errors.name}</p> : null}
       </div>
 
@@ -83,7 +85,9 @@ export const RegisterForm = (props) => {
           onChange={formik.handleChange}
           value={formik.values.email}
         />
-        <label className={styles.formLabel} htmlFor='email'>Адрес для писем от Enggo</label>
+        <label className={styles.formLabel} htmlFor='email'>
+          Адрес для писем от Enggo
+        </label>
         {formik.errors.email ? <p className={styles.formError}>{formik.errors.email}</p> : null}
       </div>
 
@@ -97,8 +101,12 @@ export const RegisterForm = (props) => {
           onChange={formik.handleChange}
           value={formik.values.password}
         />
-        <label className={styles.formLabel} htmlFor='password'>Придумай себе пароль</label>
-        {formik.errors.password ? <p className={styles.formError}>{formik.errors.password}</p> : null}
+        <label className={styles.formLabel} htmlFor='password'>
+          Придумай себе пароль
+        </label>
+        {formik.errors.password ? (
+          <p className={styles.formError}>{formik.errors.password}</p>
+        ) : null}
       </div>
 
       <div className={styles.formGroup}>
@@ -111,8 +119,12 @@ export const RegisterForm = (props) => {
           onChange={formik.handleChange}
           value={formik.values.passwordConfirm}
         />
-        <label className={styles.formLabel} htmlFor='passwordConfirm'>Повтори пароль</label>
-        {formik.errors.passwordConfirm ? <p className={styles.formError}>{formik.errors.passwordConfirm}</p> : null}
+        <label className={styles.formLabel} htmlFor='passwordConfirm'>
+          Повтори пароль
+        </label>
+        {formik.errors.passwordConfirm ? (
+          <p className={styles.formError}>{formik.errors.passwordConfirm}</p>
+        ) : null}
       </div>
 
       <button className={styles.formSubmit} disabled={isLoading} type='submit'>

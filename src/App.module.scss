@@ -56,7 +56,7 @@ body {
   font-size: rem(42);
   line-height: math.div(61, 42);
   color: $mainTitleColor;
-  @media (max-width:$mobileSmall){
+  @media (max-width: $mobileSmall) {
     font-size: rem(36);
   }
 }
@@ -72,6 +72,6 @@ body {
 .sectionTitle {
   font-weight: 700;
   font-size: rem(30);
-  line-height: math.div(43 , 30);
+  line-height: math.div(43, 30);
   color: $lightColor;
 }

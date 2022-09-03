@@ -7,11 +7,11 @@
   column-gap: rem(20);
   row-gap: rem(36);
   min-width: rem(300);
-  @media (max-width:$tablet){
+  @media (max-width: $tablet) {
     margin-top: rem(24);
     justify-content: center;
   }
-  @media (max-width:$mobileSmall){
+  @media (max-width: $mobileSmall) {
     column-gap: rem(10);
     row-gap: rem(18);
   }
@@ -19,7 +19,7 @@
 
 .word {
   border-radius: rem(4);
-  @media (max-width:$mobileSmall){
+  @media (max-width: $mobileSmall) {
     width: calc(50% - rem(5));
   }
   &Button {
@@ -28,19 +28,19 @@
     width: rem(213);
     height: rem(99);
     padding: rem(12) rem(36) rem(12) rem(18);
-    background: #FFFFFF;
+    background: #ffffff;
     border-radius: rem(4);
-    transition: all .2s;
+    transition: all 0.2s;
     &Active {
-      background: #FFFFFF00;
+      background: #ffffff00;
     }
     &:hover {
-      background: #FFFFFF00;
+      background: #ffffff00;
     }
-    @media (max-width: em(640)){
+    @media (max-width: em(640)) {
       width: rem(210);
     }
-    @media (max-width:$mobileSmall){
+    @media (max-width: $mobileSmall) {
       width: 100%;
       height: unset;
     }
@@ -48,10 +48,10 @@
   &Word {
     font-weight: 700;
     font-size: rem(20);
-    line-height: math.div(24 , 20);
+    line-height: math.div(24, 20);
     color: $mainColor;
     text-transform: capitalize;
-    @media (max-width:$mobileSmall){
+    @media (max-width: $mobileSmall) {
       font-size: rem(18);
     }
   }
@@ -59,9 +59,9 @@
     margin-top: rem(9);
     font-weight: 300;
     font-size: rem(18);
-    line-height: math.div(21 , 18);
+    line-height: math.div(21, 18);
     text-align: left;
-    @media (max-width:$mobileSmall){
+    @media (max-width: $mobileSmall) {
       font-size: rem(16);
       margin-top: rem(3);
     }

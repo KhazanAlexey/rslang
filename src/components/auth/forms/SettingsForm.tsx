@@ -11,7 +11,7 @@ import { authSlice } from '../../../store/reducers/auth/authSlice'
 import styles from './Form.module.scss'
 
 export const SettingsForm = (props) => {
-  const { setIsAuthModal } = props;
+  const { setIsAuthModal } = props
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const [error, setError] = useState()
@@ -38,8 +38,8 @@ export const SettingsForm = (props) => {
 
     onSubmit: (values) => {
       localStorageRemove(['name', 'refreshToken', 'userId', 'token', 'message'])
-      dispatch(authSlice.actions.logOut())      
-      setIsAuthModal('');
+      dispatch(authSlice.actions.logOut())
+      setIsAuthModal('')
       // loginHandler({ email: values.email, password: values.password })
     },
     // validate: validateLogin,
@@ -74,7 +74,6 @@ export const SettingsForm = (props) => {
         <label className={styles.formLabel} htmlFor='password'>Пароль</label>
         {formik.errors.password ? <p className={styles.formError}>{formik.errors.password}</p> : null}
       </div> */}
-      
 
       <button className={styles.formSubmit} disabled={isLoading} type='submit'>
         {buttonText}
