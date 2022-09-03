@@ -21,33 +21,24 @@ const Footer: React.FC<any> = () => {
           </div>
           <div className={styles.footerSecond}>
             <div className={styles.footerSecondTeam}>
-              <Link
-                to='https://github.com/KhazanAlexey'
+              <a
+                href='https://github.com/KhazanAlexey'
                 className={clsx({
                   ['_icon-github']: true,
                 })}
-              >
-                {' '}
-                Aliaxei Khazan{' '}
-              </Link>
-              <Link
-                to='https://github.com/alexbazhen'
+              >Aliaxei Khazan</a>
+              <a
+                href='https://github.com/alexbazhen'
                 className={clsx({
                   ['_icon-github']: true,
                 })}
-              >
-                {' '}
-                Aleksandr Bazhenov{' '}
-              </Link>
-              <Link
-                to='https://github.com/tedgregory'
+              >Aleksandr Bazhenov</a>
+              <a
+                href='https://github.com/tedgregory'
                 className={clsx({
                   ['_icon-github']: true,
                 })}
-              >
-                {' '}
-                Fedor Grigoryev{' '}
-              </Link>
+              >Fedor Grigoryev</a>
             </div>
           </div>
           <div className={styles.footerThird}>
@@ -56,16 +47,13 @@ const Footer: React.FC<any> = () => {
         </div>
         <div className={styles.footerBottom}>
           Created in 2022 within the{' '}
-          <Link
-            to='https://rs.school'
+          <a
+            href='https://rs.school'
             className={clsx({
               ['_icon-rs']: true,
               [styles.footerBottomLink]: true,
             })}
-          >
-            RS School
-          </Link>{' '}
-          JS-Frontend course JSFE2022Q1.
+          > RS School</a> JS-Frontend course JSFE2022Q1.
           <div className={styles.footerBottomBalloon}>
             <img src='./assets/svg/balloon.svg' alt='❤️️' />
           </div>

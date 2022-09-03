@@ -1,5 +1,5 @@
 @use 'sass:math';
-@import '../../../styles/mixins.scss';
+@import '../../../../styles/mixins.scss';
 
 .mainSection {
   position: relative;
@@ -34,6 +34,7 @@
     @media (max-width: $mobile) {
       padding-right: rem(90);
     }
+
     @media (max-width: $mobileSmall) {
       align-items: center;
       padding: rem(42) 0 rem(87);
@@ -57,6 +58,7 @@
       @media (max-width: $mobile) {
         font-size: rem(30);
       }
+
       @media (max-width: $mobileSmall) {
         font-size: rem(24);
         padding-right: 4vw;
@@ -94,6 +96,7 @@
       @media (max-width: $mobile) {
         font-size: rem(16);
       }
+
       @media (max-width: $mobileSmall) {
         font-size: rem(14);
         line-height: math.div(18, 14);

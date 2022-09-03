@@ -1,0 +1,60 @@
+@use "sass:math";
+@import '../../../../../styles/mixins.scss';
+
+.teamMember {
+  border-radius: rem(12);
+  background-color: transparent;
+  padding: rem(20);
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+
+  &:hover {
+    background-color: white;
+  }
+
+  &Img {
+    flex-basis: rem(200);
+
+    &Frame {
+      overflow: hidden;
+      width: rem(180);
+      height: rem(180);
+      border-radius: 50%;
+      box-shadow: 0 0 rem(5) $disableButtonBgColor;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  &Info {
+    padding: rem(5);
+
+    &Name {
+      font-size: rem(24);
+      line-height: rem(34);
+      font-weight: 700;
+      color: $activeLinkColor;
+    }
+
+    &Role {
+      font-size: rem(30);
+      line-height: rem(44);
+      display: flex;
+      gap: rem(9);
+
+      &Link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    &Story {
+      word-wrap: break-word;
+    }
+
+  }
+}

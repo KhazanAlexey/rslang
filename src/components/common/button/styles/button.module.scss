@@ -1,39 +1,37 @@
-// @use 'sass:math';
-@import './button.vars.module';
-// @import '../../../../styles/mixins.scss';
+@import './button.vars.module.scss';
 
 .button {
   display: inline-flex;
   flex-direction: row;
   align-items: center;
-  height: 22px;
-  min-width: 20px;
-  padding: 5px 10px;
-  //min-height: 20px;
-  border-radius: 10px;
-  color: $buttonTextColor;
-  border: 1px solid $buttonTextColor;
-  background-color: #ffffff;
-  font-size: 13px;
-  font-style: normal;
   font-weight: 500;
-  line-height: 16px;
+  font-size: rem(18);
+  line-height: 26px;
+  padding: rem(9) rem(30);
+  background-color: $mainButtonBgColor;
+  border-radius: rem(44);
+  transition: $transitionBtn;
+  color: $lightTextColor;
   letter-spacing: 0;
-  text-align: left;
+
+  @media (max-width: $mobile) {
+    font-size: rem(13);
+    padding: rem(5) rem(10);
+  }
 
   &:focus {
     outline: none;
   }
 
   &.disabled {
-    color: $buttonTextColorDisabled;
+    color: $disableButtonBgColor;
   }
 
   &.defaultHover {
     &:hover:not(.disabled) {
       cursor: pointer;
-      background-color: $buttonTextColor;
-      color: #fff;
+      background-color: $hoverButtonBgColor;
+      color: $lightTextColor;
     }
   }
 }

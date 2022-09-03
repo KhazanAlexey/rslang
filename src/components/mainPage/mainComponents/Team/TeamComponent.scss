@@ -1,0 +1,58 @@
+@use "sass:math";
+@import '../../../../styles/mixins.scss';
+
+.teamSection {
+
+  &Wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: rem(100) 0;
+    gap: rem(20);
+
+    @media (max-width: $mobile) {
+      flex-direction: column;
+    }
+  }
+
+  &List {
+    flex-basis: 45%;
+    display: flex;
+    flex-direction: column;
+    gap: rem(18);
+  }
+
+  &Decoration {
+    position: relative;
+    width: 55vw;
+
+    &Enggo {
+      position: absolute;
+      right: rem(10);
+      top: rem(200);
+      width: rem(256);
+      height: rem(408);
+
+      img {
+        width: 100%;
+      }
+    }
+
+    &Cloud {
+      transition: $transitionText;
+      position: absolute;
+      right: rem(10);
+      top: 0;
+      max-width: 30vw;
+      background-color: $lightColor;
+      border-radius: rem(12);
+      padding: rem(12) rem(18);
+
+      p {
+        font-size: rem(18);
+        line-height: rem(24);
+        color: $lightTextColor;
+      }
+    }
+  }
+
+}

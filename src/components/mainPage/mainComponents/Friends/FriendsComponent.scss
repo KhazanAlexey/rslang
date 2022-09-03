@@ -1,0 +1,80 @@
+@use 'sass:math';
+@import '../../../../styles/mixins.scss';
+@import '../../../../components/common/button/styles/button.module.scss';
+
+.friendsSection {
+  position: relative;
+  font-size: rem(18);
+  line-height: rem(24);
+
+  &Wrapper {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    flex: 1;
+    flex-wrap: wrap;
+    padding: rem(40) 0 rem(90);
+
+    @media (max-width: em(920)) {}
+
+    @media (max-width: $mobile) {}
+
+    @media (max-width: $mobileSmall) {}
+  }
+
+  &Header {
+    flex-basis: 100%;
+    font-size: rem(30);
+    line-height: rem(43);
+    font-weight: 700;
+    color: $brightColor;
+    text-align: center;
+    padding-bottom: rem(60);
+  }
+
+  &Item {
+    flex-basis: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: rem(30) rem(18);
+    gap: rem(30) 5vw;
+    background-color: white;
+    border-radius: rem(18);
+
+    &Text {
+      text-align: center;
+    }
+
+    &Img {
+      padding: rem(30);
+
+      img {
+        width: 100%;
+      }
+    }
+
+    &ActionBtn {
+      padding-top: rem(42);
+    }
+  }
+
+}
+
+.linkButton {
+  display: inline-block;
+  text-align: center;
+  font-weight: 500;
+  font-size: rem(18);
+  line-height: rem(26);
+  color: $lightTextColor;
+  padding: rem(9) rem(30);
+  background: $mainButtonBgColor;
+  border-radius: rem(44);
+  transition: $transitionBtn;
+
+  &:hover {
+    background: $hoverButtonBgColor;
+  }
+}

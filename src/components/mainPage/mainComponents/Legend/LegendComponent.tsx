@@ -1,12 +1,9 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import styles from './LegendComponent.scss'
-import { clsx } from '../../../utils/clsx'
+import { clsx } from '../../../../utils/clsx'
 
-type PropsType = {
-  auth: boolean
-}
 
-const LegendComponent: React.FC<any> = ({ auth }: PropsType) => {
+const LegendComponent: React.FC<any> = () => {
   return (
     <section className={styles.legendSection}>
       <div className={globalThis.globalStyles.container}>

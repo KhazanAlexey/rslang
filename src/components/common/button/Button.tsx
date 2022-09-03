@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { clsx } from '../../../utils/clsx'
 import { stlx } from '../../../utils/stlx'
 import styles from './styles/button.module.scss'
@@ -11,6 +12,7 @@ type Props = {
   classes?: string
   style?: string
   title?: string
+  href?:string
 }
 
 const ButtonCustom = (props: Props) => {
@@ -22,22 +24,26 @@ const ButtonCustom = (props: Props) => {
     classes = '',
     title,
     text,
+    href
   } = props
+  
+  const navigate = useNavigate()
 
   return (
-    <button
-      className={clsx({
+    <button {...{...props, ...{
+      className: clsx({
         [classes]: !!classes,
         [styles.button]: true,
         [styles.disabled]: disabled,
-        [styles.defaultHover]: enableDefaultHoverClasses,
-      })}
-      style={stlx({
-        [style]: !!style,
-      })}
-      onClick={onClick}
-      title={title}
-      disabled={disabled}
+        [styles.defaultHover]: enableDefaultHoverClasses
+      }),
+      style:stlx({
+        [style]: !!style
+      }),
+      onClick:() => href ? navigate(href) : onClick ? onClick : 'void',
+      title,
+      disabled
+    }}}
     >
       {text}
     </button>
