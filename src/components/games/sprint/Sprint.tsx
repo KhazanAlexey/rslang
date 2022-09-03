@@ -66,7 +66,7 @@ const Sprint: React.FC<any> = () => {
   useEffect(() => {
     const tim = setTimeout(() => {
       setSelectedAnswer(null)
-    }, 500)
+    }, 300)
     return () => clearTimeout(tim)
   }, [selectedAnswer])
 
@@ -115,8 +115,8 @@ const Sprint: React.FC<any> = () => {
     const handleKeyPress = (event: KeyboardEvent) => {
       console.log(event.key)
       if (event.repeat) return
-      if (event.key === 'ArrowLeft') answerHandler(true)
-      if (event.key === 'ArrowRight') answerHandler(false)
+      if (event.key === 'ArrowLeft') answerHandler(false)
+      if (event.key === 'ArrowRight') answerHandler(true)
     }
     window.addEventListener<'keyup'>('keyup', handleKeyPress)
     return () => window.removeEventListener('keyup', handleKeyPress)
