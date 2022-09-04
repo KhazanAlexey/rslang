@@ -1,0 +1,195 @@
+@use 'sass:math';
+@import '../../../styles/mixins.scss';
+
+.burger {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: $lightColor;
+  backdrop-filter: blur(6px);
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s;
+  display: none;
+
+  @media (max-width: $mobile) {
+    display: block;
+  }
+
+  &Open {
+    opacity: 1;
+    pointer-events: all;
+
+    .burgerWrapper {
+      box-shadow: -4px 0px 4px rgba(0, 0, 0, 0.1);
+      transform: translateX(0);
+    }
+  }
+
+  &>div {
+    height: 100%;
+  }
+
+
+  &Wrapper {
+    width: rem(340);
+    background: $mainBgColor;
+    box-shadow: -4px 0px 4px rgba(0, 0, 0, 0);
+    transform: translateX(100%);
+    height: 100%;
+    margin-left: auto;
+    // padding: rem(24) rem(20);
+    padding: rem(14);
+    position: relative;
+    transition: all 0.2s;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 40vw;
+      background: $mainBgColor;
+      left: 100%;
+    }
+
+    @media (max-width: $mobile) {
+      height: 100%;
+      overflow-y: auto;
+      right: rem(-10);
+
+      &::after {
+        display: none;
+      }
+    }
+
+    @media (max-width: em(350)) {
+      position: fixed;
+      right: 0;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      padding: rem(24) rem(10) rem(60);
+      overflow-y: auto;
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  &Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+      font-weight: 700;
+      font-size: rem(30);
+      line-height: math.div(43, 30);
+      color: $lightColor;
+    }
+  }
+
+  &Contents {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  &Dog {
+    position: relative;
+    height: 100%;
+
+    .dogWrapper {
+      position: absolute;
+      overflow: hidden;
+      width: rem(230);
+      height: rem(325);
+      left: rem(-20);
+      top: rem(50);
+
+      img {
+        height: 100%
+      }
+    }
+  }
+}
+
+.headerBurger {
+  height: rem(44);
+  transition: all .5s;
+
+  &Rotated {
+    transform: rotate(90deg);
+  }
+
+  >span {
+    display: block;
+    position: relative;
+    gap: rem(6);
+    width: rem(26);
+    height: rem(3);
+    margin: rem(6) 0;
+    background: $lightColor;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      display: flex;
+      width: rem(26);
+      height: rem(3);
+      background: $lightColor;
+    }
+
+    &::before {
+      bottom: rem(9);
+    }
+
+    &::after {
+      top: rem(9);
+    }
+  }
+}
+
+.burgerNav {
+  display: none;
+  width: 50%;
+  padding: rem(42) 0 0 rem(24);
+
+  @media (max-width: $mobile) {
+    display: block;
+  }
+}
+
+.burgerList {
+  display: flex;
+  flex-direction: column;
+  gap: rem(84);
+  padding-top: rem(4);
+
+  @media (max-width: $tablet) {
+    gap: rem(42);
+  }
+}
+
+.burgerItem {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 26px;
+  color: $mainNavColor;
+  transition: $transitionText;
+
+  &:hover {
+    color: $hoverNavColor;
+  }
+}
+
+.itemActive {
+  color: $activeNavColor;
+}

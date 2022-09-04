@@ -5,9 +5,11 @@ import styles from './Header.module.scss'
 import { userAPI } from '../../services/UserService'
 import { useAppSelector } from '../../hooks/redux'
 import AuthModal from '../auth/AuthModal'
+import BurgerComponent from './burger/BurgerComponent'
 
 const Header: React.FC<any> = () => {
   const [isAuthModal, setIsAuthModal] = useState('')
+  const [burger, setBurger] = useState(false)
   const { isAuth, name: userName } = useAppSelector((state) => state.auth)
   const id = localStorage.getItem('userId') || ''
   const { data, error, isLoading } = userAPI.useFetchUserQuery(id)
@@ -16,6 +18,7 @@ const Header: React.FC<any> = () => {
     <header className={styles.header}>
       <div className={globalThis.globalStyles.container}>
         <div className={styles.headerWrapper}>
+          <BurgerComponent burger={burger} setBurger={setBurger} />
           <Link
             to='/'
             className={clsx({
@@ -87,7 +90,13 @@ const Header: React.FC<any> = () => {
             })}
             onClick={() => (isAuth ? setIsAuthModal('settings') : setIsAuthModal('login'))}
           ></button>
-          <button className={styles.headerBurger}>
+          <button 
+            className={clsx({
+              [styles.headerBurger]:true,
+              [styles.headerBurgerRotated]: !!burger,
+            })} 
+            onClick={() => setBurger(true)}
+          >
             <span></span>
           </button>
           <AuthModal isAuthModal={isAuthModal} setIsAuthModal={setIsAuthModal} />
