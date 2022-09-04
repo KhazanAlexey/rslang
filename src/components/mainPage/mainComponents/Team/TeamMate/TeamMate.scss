@@ -6,15 +6,24 @@
   background-color: transparent;
   padding: rem(20);
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: stretch;
+  gap: rem(30);
+
+  @media (max-width: em(920)) {
+    gap: rem(15);
+  }
+
+  @media (max-width: $mobile) {
+    font-size: rem(10);
+  }
+
 
   &:hover {
     background-color: white;
   }
 
   &Img {
-    flex-basis: rem(200);
 
     &Frame {
       overflow: hidden;
@@ -22,6 +31,16 @@
       height: rem(180);
       border-radius: 50%;
       box-shadow: 0 0 rem(5) $disableButtonBgColor;
+
+      @media (max-width: em(920)) {
+        width: rem(120);
+        height: rem(120);
+      }
+
+      @media (max-width: $mobile) {
+        width: rem(80);
+        height: rem(80);
+      }
 
       img {
         width: 100%;
@@ -31,19 +50,37 @@
 
   &Info {
     padding: rem(5);
+    flex: 1;
 
     &Name {
       font-size: rem(24);
       line-height: rem(34);
       font-weight: 700;
       color: $activeLinkColor;
+
+      @media (max-width: em(920)) {
+        font-size: rem(18);
+      }
+
+      @media (max-width: $mobile) {
+        font-size: rem(14);
+      }
     }
 
     &Role {
       font-size: rem(30);
       line-height: rem(44);
+      font-weight: 700;
       display: flex;
       gap: rem(9);
+
+      @media (max-width: em(920)) {
+        font-size: rem(18);
+      }
+
+      @media (max-width: $mobile) {
+        font-size: rem(14);
+      }
 
       &Link {
         display: flex;

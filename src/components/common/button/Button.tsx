@@ -23,11 +23,10 @@ const ButtonCustom = (props: Props) => {
     style = '',
     classes = '',
     title,
-    text,
-    href
+    text // , href
   } = props
   
-  const navigate = useNavigate()
+ // const navigate = useNavigate()
 
   return (
     <button {...{...props, ...{
@@ -40,7 +39,7 @@ const ButtonCustom = (props: Props) => {
       style:stlx({
         [style]: !!style
       }),
-      onClick:() => href ? navigate(href) : onClick ? onClick : 'void',
+      onClick, // :() => href ? navigate(href) : onClick ? onClick : 'void',
       title,
       disabled
     }}}

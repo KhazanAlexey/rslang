@@ -1,13 +1,13 @@
 import React from 'react'
 import styles from './VideoComponent.scss'
-import { clsx } from '../../../utils/clsx'
+import { clsx } from '../../../../utils/clsx'
 
 const videoId = 'cFWpwtkto1s'
 const YoutubeEmbed = (embedId) => (
   // https://www.npmjs.com/package/react-player
   <div></div>
 )
-
+ 
 const VideoComponent: React.FC<any> = () => {
   return (
     <section className={styles.videoSection}>

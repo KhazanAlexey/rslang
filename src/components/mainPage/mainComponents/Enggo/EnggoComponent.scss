@@ -44,6 +44,11 @@
     flex: 1;
     text-align: center;
     margin: 0;
+
+    @media (max-width: $mobile) {
+      font-size: rem(12);
+      padding: 0 10vw rem(30);
+    }
   }
 
   .enggoText {

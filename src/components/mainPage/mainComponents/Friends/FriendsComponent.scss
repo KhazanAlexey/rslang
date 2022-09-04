@@ -7,6 +7,15 @@
   font-size: rem(18);
   line-height: rem(24);
 
+  @media (max-width: em(920)) {
+    font-size: rem(14);
+    line-height: 120%;
+  }
+
+  @media (max-width: $mobile) {
+    font-size: rem(11);
+  }
+
   &Wrapper {
     display: flex;
     align-items: stretch;
@@ -30,6 +39,17 @@
     color: $brightColor;
     text-align: center;
     padding-bottom: rem(60);
+
+    @media (max-width: em(920)) {
+      padding-bottom: rem(40);
+      font-size: rem(24);
+      line-height: 120%;
+    }
+
+    @media (max-width: $mobileSmall) {
+      font-size: rem(18);
+      padding-bottom: rem(10);
+    }
   }
 
   &Item {
@@ -42,6 +62,10 @@
     gap: rem(30) 5vw;
     background-color: white;
     border-radius: rem(18);
+
+    @media (max-width: em(920)) {
+      flex-basis: 100%;
+    }
 
     &Text {
       text-align: center;

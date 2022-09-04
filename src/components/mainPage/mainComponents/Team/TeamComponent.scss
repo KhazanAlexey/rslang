@@ -9,9 +9,36 @@
     padding: rem(100) 0;
     gap: rem(20);
 
-    @media (max-width: $mobile) {
-      flex-direction: column;
+    @media (max-width: em(920)) {
+      gap: rem(10);
+      padding: rem(60) 0;
     }
+
+    @media (max-width: $mobile) {
+      font-size: rem(14);
+      padding: rem(10) 0;
+    }
+  }
+
+  &Header {
+    font-size: rem(30);
+    line-height: rem(43);
+    font-weight: 700;
+    color: $brightColor;
+    text-align: center;
+    padding-bottom: rem(60);
+
+    @media (max-width: em(920)) {
+      padding-bottom: rem(40);
+      font-size: rem(24);
+      line-height: 120%;
+    }
+
+    @media (max-width: $mobileSmall) {
+      font-size: rem(18);
+      padding-bottom: rem(10);
+    }
+
   }
 
   &List {
@@ -19,18 +46,41 @@
     display: flex;
     flex-direction: column;
     gap: rem(18);
+
+    @media (max-width: em(920)) {
+      flex-basis: 100%;
+    }
   }
 
   &Decoration {
     position: relative;
     width: 55vw;
 
+    @media (max-width: em(920)) {
+      width: 100%;
+    }
+
+    @media (max-width: $mobile) {
+      display: none;
+      font-size: rem(14);
+    }
+
     &Enggo {
       position: absolute;
+      z-index: 201;
       right: rem(10);
       top: rem(200);
       width: rem(256);
       height: rem(408);
+
+      @media (max-width: em(920)) {
+        width: rem(128);
+        height: auto;
+      }
+
+      @media (max-width: $mobile) {
+        width: rem(100);
+      }
 
       img {
         width: 100%;
@@ -40,6 +90,7 @@
     &Cloud {
       transition: $transitionText;
       position: absolute;
+      z-index: 200;
       right: rem(10);
       top: 0;
       max-width: 30vw;
@@ -47,10 +98,24 @@
       border-radius: rem(12);
       padding: rem(12) rem(18);
 
+      @media (max-width: em(920)) {
+        position: static;
+        max-width: 40vw;
+      }
+
       p {
         font-size: rem(18);
         line-height: rem(24);
         color: $lightTextColor;
+
+        @media (max-width: em(920)) {
+          font-size: rem(14);
+          line-height: 100%;
+        }
+
+        @media (max-width: $mobile) {
+          font-size: rem(10);
+        }
       }
     }
   }

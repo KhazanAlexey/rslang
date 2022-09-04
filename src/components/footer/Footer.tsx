@@ -42,7 +42,7 @@ const Footer: React.FC<any> = () => {
             </div>
           </div>
           <div className={styles.footerThird}>
-            <div> #THIRD </div>
+            <div>🦊</div>
           </div>
         </div>
         <div className={styles.footerBottom}>

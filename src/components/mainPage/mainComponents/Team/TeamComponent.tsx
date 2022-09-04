@@ -16,6 +16,7 @@ const TeamComponent: React.FC<any> = () => {
   return (
     <section className={styles.teamSection}>
       <div className={globalThis.globalStyles.container}>
+        <h2 className={styles.teamSectionHeader}>Команда разработчиков Enggo.</h2>
         <div className={clsx({ [styles.teamSectionWrapper]: true })}>
           <div className={styles.teamSectionList}>
             {teamData.map((member: ITeamMate) => 
