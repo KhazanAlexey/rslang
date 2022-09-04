@@ -6,12 +6,12 @@
   &Wrapper {
     display: flex;
     justify-content: space-between;
-    padding: rem(100) 0;
+    padding: rem(100);
     gap: rem(20);
 
     @media (max-width: em(920)) {
       gap: rem(10);
-      padding: rem(60) 0;
+      padding: rem(60) rem(30);
     }
 
     @media (max-width: $mobile) {

@@ -1,17 +1,36 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { clsx } from 'src/utils/clsx'
 import styles from './GamePage.module.scss'
 
 const GamesPage: React.FC<any> = () => {
   return (
-    <div className={styles.gamesWrapper}>
-      <Link className={styles.game} to='/games/audiocall' onClick={() => null}>
-        <div>AudioCall</div>
-      </Link>
-      <Link className={styles.game} to='/games/sprint' onClick={() => null}>
-        <div>Sprint</div>
-      </Link>
-    </div>
+    <section className={styles.games}> 
+      <div className={globalThis.globalStyles.container}>
+        <div className={styles.gamesHeader}>
+          <h2>Мини-игры</h2>
+          <p>Ингго любит поиграть! Го вместе!</p>
+        </div>
+        <div className={styles.gamesWrapper}>
+          <div className={styles.gamesGame1}>
+            <Link to='/games/audiocall'>
+              <div className={styles.game}>
+                <img src="./assets/svg/bg-audiocall.svg" alt="Аудиовызов" />
+                <div className={styles.gameName}>Аудиовызов</div>
+              </div>
+            </Link>
+          </div>
+          <div className={styles.gamesGame2}>
+            <Link to='/games/sprint'>
+              <div className={styles.game}>
+                <img src="./assets/svg/bg-sprint.svg" alt="Аудиовызов" />
+                <div className={styles.gameName}>Спринт</div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
   )
 }
 

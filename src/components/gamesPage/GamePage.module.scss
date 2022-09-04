@@ -1,20 +1,84 @@
-.gamesWrapper {
-  width: 100%;
+@use 'sass:math';
+@import '../../styles/mixins.scss';
+
+.games {
   flex: 1;
-  display: flex;
+
+  &Header {
+    padding-left: 15vw;
+
+    h2 {
+      font-weight: 700;
+      font-size: rem(30);
+      line-height: 120%;
+      color: $brightColor;
+    }
+
+  }
+
+  &Wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: rem(20) 20vw;
+
+  }
 
   .game {
-    height: 100px;
-    width: 30%;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  &Game1 {
+    transition: all .5s;
+
+    &:hover {
+      z-index: 100;
+    }
+
+    .game {
+      width: 25vw;
+      height: 25vw;
+
+      @media (max-width: $tablet) {
+        margin-right: rem(-20);
+      }
+
+      @media (max-width: $mobile) {}
+
+      @media (max-width: $mobileSmall) {}
+
+
+      img {
+        height: 25vw;
+      }
+    }
+  }
+
+  &Game2 {
+
+    .game {
+      width: 30vw;
+      height: 30vw;
+
+      img {
+        height: 30vw;
+      }
+    }
+  }
+
+  .gameName {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 5px solid red;
-    margin-right: 10px;
+    font-weight: 700;
+    color: $lightTextColor;
+    text-shadow: 0 0 5px #333;
   }
-
-  //.test {
-  //  border: 1px solid black;
-  //  background-image: url('../../assets/test/logo.svg');
-  //}
 }
