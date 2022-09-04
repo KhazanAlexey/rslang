@@ -1,11 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
-import { IPostUsersWord, IUsersWords } from 'src/models/IUsersWords'
+import { IDeleteUsersWord, IPostUsersWord, IUsersWords } from 'src/models/IUsersWords'
 import { IWord } from '../models/IWord'
-
-interface IPageParams {
-  group?: number | null
-  page?: number
-}
 
 export const userWordsAPI = createApi({
   reducerPath: 'userWordsAPI',
@@ -20,7 +15,7 @@ export const userWordsAPI = createApi({
     },
   }),
 
-  tagTypes: ['userWords', 'userWord'],
+  tagTypes: ['userWords', 'userWord', 'AggregatedWords'],
   endpoints: (build) => ({
     fetchUserWords: build.query<IUsersWords[], string>({
       query: (id) => ({
@@ -45,7 +40,7 @@ export const userWordsAPI = createApi({
           optional: optional,
         },
       }),
-      invalidatesTags: ['userWord'],
+      invalidatesTags: ['userWord', 'userWords'],
     }),
 
     updateUserWord: build.mutation<IUsersWords[], IPostUsersWord>({
@@ -60,12 +55,23 @@ export const userWordsAPI = createApi({
       invalidatesTags: ['userWord'],
     }),
 
-    deleteUserWord: build.mutation<IUsersWords[], IPostUsersWord>({
+    deleteUserWord: build.mutation<IUsersWords[], IDeleteUsersWord>({
       query: ({ id, wordId }) => ({
         method: 'DELETE',
         url: `/users/${id}/words/${wordId}`,
       }),
-      invalidatesTags: ['userWord'],
+      invalidatesTags: ['userWord', 'AggregatedWords'],
+    }),
+
+    fetchAggregatedWords: build.query<any[], any>({
+      query: ({ id, wordsDifficult }) => ({
+        url: `/users/${id}/aggregatedWords`,
+        params: {
+          wordsPerPage: 3600,
+          filter: JSON.stringify({ 'userWord.difficulty': wordsDifficult }),
+        },
+      }),
+      providesTags: (result) => ['AggregatedWords'],
     }),
   }),
 })

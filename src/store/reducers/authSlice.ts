@@ -1,8 +1,8 @@
 import { CaseReducer, createSlice } from '@reduxjs/toolkit'
-import { IWord } from '../../../models/IWord'
-import { authApi } from '../../../services/AuthService'
-import { localStorageSet } from '../../../utils/localStoradre'
-import { userAPI } from '../../../services/UserService'
+import { IWord } from '../../models/IWord'
+import { authApi } from '../../services/AuthService'
+import { localStorageSet } from '../../utils/localStoradre'
+import { userAPI } from '../../services/UserService'
 
 interface UserState {
   words: IWord[]

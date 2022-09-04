@@ -9,7 +9,7 @@ import randomInteger from '../../../utils/random'
 import { shuffle } from '../../../utils/suffle'
 import GamesOverScreen from '../GamesOverScreen'
 import SprintGame from './SprintGame'
-import { sprintSlice } from '../../../store/reducers/sprint/sprintSlice'
+import { sprintSlice } from '../../../store/reducers/sprintSlice'
 
 const Sprint: React.FC<any> = () => {
   const dispatch = useAppDispatch()

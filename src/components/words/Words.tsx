@@ -39,16 +39,7 @@ const Word: React.FC<PropsType> = (props) => {
 }
 
 const Words: React.FC<any> = (props) => {
-  const { page, lvl, levels, wordDetail, setWordDetail } = props
-  const {
-    data: words,
-    isLoading: isLoadingWords,
-    error: errorWords,
-    refetch,
-  } = wordsAPI.useFetchWordsQuery({ group: lvl, page: page })
-  useEffect(() => {
-    words && setWordDetail(words[0].id)
-  }, [words])
+  const { page, words, errorWords, isLoadingWords, lvl, levels, wordDetail, setWordDetail } = props
 
   return (
     <ul className={styles.words}>
@@ -56,7 +47,7 @@ const Words: React.FC<any> = (props) => {
         words.map((word, ind) => (
           <Word
             key={ind}
-            bgGroup={levels[lvl].bg}
+            bgGroup={levels ? levels[lvl].bg : 'red'}
             id={word.id}
             word={word.word}
             wordTranslate={word.wordTranslate}

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Button from '../../common/button/Button'
 import styles from './SprintGame.module.scss'
 import { useAppDispatch } from '../../../hooks/redux'
-import { sprintSlice } from '../../../store/reducers/sprint/sprintSlice'
 import { GameState } from '../../../models/IAudioCall'
+import { sprintSlice } from '../../../store/reducers/sprintSlice'
 
 const SprintGame: React.FC<any> = ({
   answerVariant,

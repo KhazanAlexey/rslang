@@ -7,8 +7,8 @@ import { authApi } from 'src/services/AuthService'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from 'src/hooks/redux'
 import { validateLogin } from './formValidator'
-import { authSlice } from '../../../store/reducers/auth/authSlice'
 import styles from './Form.module.scss'
+import { authSlice } from 'src/store/reducers/authSlice'
 
 export const LoginForm = (props) => {
   const { setIsAuthModal } = props

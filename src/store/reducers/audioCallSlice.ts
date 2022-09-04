@@ -1,6 +1,6 @@
 import { CaseReducer, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { IWord } from '../../../models/IWord'
-import { GameState, Levels } from '../../../models/IAudioCall'
+import { IWord } from '../../models/IWord'
+import { GameState, Levels } from '../../models/IAudioCall'
 
 const initialState: AudioCallState = {
   level: 0,
@@ -32,8 +32,8 @@ const setWrongAnswers: CaseReducer<AudioCallState, PayloadAction<IWord>> = (stat
   state.wrongAnswers.push(action.payload)
 }
 
-export const sprintSlice = createSlice({
-  name: 'sprint',
+export const audioCallSlice = createSlice({
+  name: 'audioCall',
   initialState: initialState,
   reducers: {
     setLevel,

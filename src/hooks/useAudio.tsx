@@ -17,7 +17,7 @@ export const useAudio = (url) => {
     return () => {
       audio.removeEventListener('ended', () => setPlaying(false))
     }
-  }, [])
+  }, [toggle])
 
   return [playing, toggle] as const
 }

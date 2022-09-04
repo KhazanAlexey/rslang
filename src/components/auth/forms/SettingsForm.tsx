@@ -7,7 +7,7 @@ import { authApi } from 'src/services/AuthService'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from 'src/hooks/redux'
 import { validateLogin } from './formValidator'
-import { authSlice } from '../../../store/reducers/auth/authSlice'
+import { authSlice } from '../../../store/reducers/authSlice'
 import styles from './Form.module.scss'
 
 export const SettingsForm = (props) => {
@@ -60,7 +60,7 @@ export const SettingsForm = (props) => {
         <label className={styles.formLabel} htmlFor='email'>E-mail</label>
         {formik.errors.email ? <p className={styles.formError}>{formik.errors.email}</p> : null}
       </div>
-      
+
       <div className={styles.formGroup}>
         <input
           className={styles.formInput}

@@ -8,10 +8,17 @@ import BookSubpage from './bookSubpage/BookSubpage'
 import HardSubpage from './hardSubpage/HardSubpage'
 import CompleteSubpage from './completeSubpage/CompleteSubpage'
 import { Link } from 'react-router-dom'
+import { localStorageGet } from '../../utils/localStoradre'
+import { userWordsAPI } from '../../services/UsersWordsService'
+import { useAppSelector } from '../../hooks/redux'
 
 const TextBookPage: React.FC<any> = () => {
+  const local = localStorageGet(['userId'])
+
+  const { data: hardW } = userWordsAPI.useFetchUserWordsQuery(local['userId'])
   const [activeLvl, setActiveLvl] = useState(1)
   const [activePage, setActivePage] = useState(1)
+  const [hardWords, setHardWords] = useState([])
   const levels = [
     { id: 1, title: 'Easy', descr: 'До 600 слов', lvl: 'A1', bg: '#AFE2FF' },
     { id: 2, title: 'Easy+', descr: 'До 1200 слов', lvl: 'A2', bg: '#AFFFB3' },
@@ -20,9 +27,12 @@ const TextBookPage: React.FC<any> = () => {
     { id: 5, title: 'Hard', descr: 'До 3000 слов', lvl: 'C1', bg: '#EAAFFF' },
     { id: 6, title: 'Hard+', descr: 'До 3600 слов', lvl: 'C2', bg: '#BAAFFF' },
   ]
+  const { hardWordsIds, words } = useAppSelector((state) => state.userWords)
 
+  // console.log(hardWordsIds)
+  // console.log(words)
   // TODO: Привязать сложные и изученные слова к глобальным
-  const [hardWords, setHardWords] = useState([])
+
   const [completeWords, setCompleteWords] = useState([])
 
   const [subpage, setSubpage] = useState('book')

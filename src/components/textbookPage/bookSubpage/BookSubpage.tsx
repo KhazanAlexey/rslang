@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Words from 'src/components/words/Words'
 import { clsx } from 'src/utils/clsx'
 import Detail from '../detail/Detail'
 import Levels from '../levels/Levels'
 import styles from './BookSubpage.module.scss'
+import { useAppSelector } from '../../../hooks/redux'
+import { wordsAPI } from '../../../services/WordsService'
 
 const Pagination: React.FC<any> = (props) => {
   const { page, setPage } = props
@@ -74,8 +76,23 @@ const Pagination: React.FC<any> = (props) => {
 const BookSubpage: React.FC<any> = (props) => {
   const { activeLvl, setActiveLvl, activePage, setActivePage, levels, hardWords, setHardWords } =
     props
+  const {
+    data: bookWords,
+    isLoading: isLoadingWords,
+    error: errorWords,
+    refetch,
+  } = wordsAPI.useFetchWordsQuery({ group: activeLvl - 1, page: activePage - 1 })
 
+  const [isHard, setIsHard] = useState(false)
   const [wordDetail, setWordDetail] = useState('')
+  const { hardWordsIds } = useAppSelector((state) => state.userWords)
+  useEffect(() => {
+    const matched = hardWordsIds.indexOf(wordDetail) > -1
+    setIsHard(matched)
+  }, [hardWordsIds, wordDetail])
+  useEffect(() => {
+    bookWords && setWordDetail(bookWords[0].id)
+  }, [bookWords])
 
   // const activeLvl = 'Easy+';
   return (
@@ -105,16 +122,12 @@ const BookSubpage: React.FC<any> = (props) => {
                 levels={levels}
                 wordDetail={wordDetail}
                 setWordDetail={setWordDetail}
+                isLoadingWords={isLoadingWords}
+                words={bookWords}
               />
               <Pagination page={activePage} setPage={setActivePage} />
             </div>
-            <Detail
-              id={wordDetail}
-              complete={false}
-              hard={false}
-              hardWords={hardWords}
-              setHardWords={setHardWords}
-            />
+            <Detail id={wordDetail} complete={false} hard={isHard} />
           </div>
         </div>
       </section>

@@ -2,11 +2,19 @@ import React, { useState } from 'react'
 import Words from 'src/components/words/Words'
 import Detail from '../detail/Detail'
 import styles from './HardSubpage.module.scss'
+import { userWordsAPI } from '../../../services/UsersWordsService'
+import { localStorageGet } from '../../../utils/localStoradre'
 
 const HardSubpage: React.FC<any> = (props) => {
   const { hardWords, setHardWords } = props
   const [wordDetail, setWordDetail] = useState('')
-
+  const local = localStorageGet(['userId'])
+  const {
+    data: difficultUserWords,
+    error,
+    isLoading,
+  } = userWordsAPI.useFetchAggregatedWordsQuery({ id: local['userId'], wordsDifficult: 'hard' })
+  console.log('difficultUserWords', difficultUserWords)
   return (
     <section className=''>
       <section>
@@ -24,7 +32,13 @@ const HardSubpage: React.FC<any> = (props) => {
             setHardWords={setHardWords}
           />
         </div>
-        {/* <Words />*/}
+        <Words
+          words={difficultUserWords?.[0].paginatedResults}
+          errorWords={error}
+          isLoadingWords={isLoading}
+          wordDetail={wordDetail}
+          setWordDetail={setWordDetail}
+        />
       </section>
     </section>
   )

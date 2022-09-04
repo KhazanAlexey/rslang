@@ -9,7 +9,6 @@ interface IPageParams {
 export const wordsAPI = createApi({
   reducerPath: 'wordsAPI',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://rs-lang-193.herokuapp.com/' }),
-  tagTypes: ['Words'],
   endpoints: (build) => ({
     fetchWords: build.query<IWord[], IPageParams>({
       query: ({ group, page }) => ({
@@ -19,7 +18,6 @@ export const wordsAPI = createApi({
           page: page,
         },
       }),
-      providesTags: (result) => ['Words'],
     }),
     fetchWordById: build.query<IWord, string>({
       query: (id: string) => ({

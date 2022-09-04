@@ -9,8 +9,8 @@ import { userAPI } from '../../../services/UserService'
 import { IUserForm } from '../../../models/IUser'
 import { localStorageRemove } from 'src/utils/localStoradre'
 import { authApi } from '../../../services/AuthService'
-import { authSlice } from 'src/store/reducers/auth/authSlice'
 import styles from './Form.module.scss'
+import { authSlice } from '../../../store/reducers/authSlice'
 
 export const RegisterForm = (props) => {
   const { setIsAuthModal } = props

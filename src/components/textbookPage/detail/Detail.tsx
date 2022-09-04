@@ -3,35 +3,47 @@ import { wordsAPI } from 'src/services/WordsService'
 import { clsx } from 'src/utils/clsx'
 import styles from './Detail.module.scss'
 import { IWord } from '../../../models/IWord'
+import { useAudio } from '../../../hooks/useAudio'
+import { userWordsAPI } from '../../../services/UsersWordsService'
+import { localStorageGet } from '../../../utils/localStoradre'
+import { useAppSelector } from '../../../hooks/redux'
+import { useDispatch } from 'react-redux'
+import { userWordsSlice } from '../../../store/reducers/userWordsSlice'
 
 const Detail: React.FC<any> = (props) => {
-  const { id, hardWords, setHardWords } = props
-  const {
-    data: wordData,
-    isLoading: isLoadingWordData,
-    error: errorWordData,
-    refetch,
-  } = wordsAPI.useFetchWordByIdQuery(id)
-  console.log(wordData)
-  const { complete, hard } = props
+  const { id, complete, hard: isHard } = props
+  const dispatch = useDispatch()
+  const { data: wordData } = wordsAPI.useFetchWordByIdQuery(id)
+  const [postDifficultWord] = userWordsAPI.usePostUserWordMutation()
+  const [deleteDifficultWord] = userWordsAPI.useDeleteUserWordMutation()
 
+  const [playing, toggle] = useAudio(`https://rs-lang-193.herokuapp.com/${wordData?.audio}`)
   // TODO: сделать логику добавления в сложные
-  const [isHard, setIsHard] = useState(hard)
+
   const hardHandler = () => {
+    const local = localStorageGet(['userId'])
+    if (isHard) {
+      deleteDifficultWord({ id: local['userId'], wordId: id })
+      // @ts-ignore
+      dispatch(userWordsSlice.actions.deleteHardWord(id))
+    } else {
+      postDifficultWord({ id: local['userId'], difficulty: 'hard', wordId: id, optional: {} })
+    }
+
     // if (isHard === true) setIsHard(false)
     // else setIsHard(true)
-    if (isHard === true) {
-      setIsHard(false)
-      setHardWords(hardWords.filter((word) => word.id !== id))
-    } else {
-      setIsHard(true)
-      const newHardWord = {
-        id: id,
-        word: wordData ? wordData.word : '',
-        wordTranslate: wordData ? wordData.wordTranslate : '',
-      }
-      setHardWords([...hardWords, newHardWord])
-    }
+    // if (isHard === true) {
+    //   setIsHard(false)
+    //   setHardWords(hardWords.filter((word) => word.id !== id))
+    // } else {
+    //   setIsHard(true)
+    //   const newHardWord = {
+    //     id: id,
+    //     word: wordData ? wordData.word : '',
+    //     wordTranslate: wordData ? wordData.wordTranslate : '',
+    //   }
+    //   setHardWords([...hardWords, newHardWord])
+    // }
   }
   // TODO: сделать логику добавления в изученные
   const [isComplete, setIsComplete] = useState(complete)
@@ -39,11 +51,8 @@ const Detail: React.FC<any> = (props) => {
     if (isComplete === true) setIsComplete(false)
     else setIsComplete(true)
   }
-  // TODO: сделать управление озвучкой слова
-  const [soundOn, setSoundOn] = useState(false)
   const soundHandler = () => {
-    if (soundOn === true) setSoundOn(false)
-    else setSoundOn(true)
+    toggle()
   }
 
   return (
@@ -60,7 +69,7 @@ const Detail: React.FC<any> = (props) => {
           className={clsx({
             [styles.detailSound]: true,
             ['_icon-sound']: true,
-            [styles.soundOn]: soundOn,
+            [styles.soundOn]: playing,
           })}
           onClick={soundHandler}
         ></button>
