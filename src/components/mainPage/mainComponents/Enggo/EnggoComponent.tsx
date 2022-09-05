@@ -16,17 +16,15 @@ const EnggoComponent: React.FC<any> = () => {
             </div>
           </div>
           <div className={styles.enggoText}>
-            <h2 className={styles.enggoTextHeader}>
-              Hi, guys, my name is Enggo
-            </h2>
+            <h2 className={styles.enggoTextHeader}>Hi, guys, my name is Enggo</h2>
             <p className={styles.enggoTextContent}>
-              Жизнерадостный пёс породы сиба-ину, готовый стать верным спутником 
-              по дороге к изучению английского языка - это всё про нашего героя Ингго!
+              Жизнерадостный пёс породы сиба-ину, готовый стать верным спутником по дороге к
+              изучению английского языка - это всё про нашего героя Ингго!
             </p>
             <p className={styles.enggoTextContent}>
-              Ингго - настоящий затейник и просто рыжий красавчик. 
-              Он обожает любознательных друзей и подготовил для них <Link to='/textbook'>учебник</Link>, 
-              состоящий из 3600 слов, распределив их по 6 разделам, от самых простых до самых сложных. 
+              Ингго - настоящий затейник и просто рыжий красавчик. Он обожает любознательных друзей
+              и подготовил для них <Link to='/textbook'>учебник</Link>, состоящий из 3600 слов,
+              распределив их по 6 разделам, от самых простых до самых сложных.
             </p>
             <div className={styles.enggoActions}>
               <ButtonCustom
@@ -43,8 +41,8 @@ const EnggoComponent: React.FC<any> = () => {
         </div>
         <div className={styles.enggoSectionCopy}>
           <p>
-            Ингго против нарушения авторских прав, и поэтому он хотел бы 
-            оставить ссылку на своего великолепного художника - @catalyststuff.
+            Ингго против нарушения авторских прав, и поэтому он хотел бы оставить ссылку на своего
+            великолепного художника - @catalyststuff.
           </p>
         </div>
         <div className={styles.enggoSectionBg}>

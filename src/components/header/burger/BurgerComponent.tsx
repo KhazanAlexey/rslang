@@ -6,26 +6,28 @@ import styles from './BurgerComponent.scss'
 
 interface BurgerProps {
   burger: React.ReactNode
-  setBurger: (value:boolean) => void
+  setBurger: (value: boolean) => void
 }
 
-export default function BurgerComponent({setBurger, burger}: BurgerProps) {
+export default function BurgerComponent({ setBurger, burger }: BurgerProps) {
   const { isAuth } = useAppSelector((state) => state.auth)
   return (
-    <div className={clsx({
-      [styles.burger]:true,
-      [styles.burgerOpen]: !!burger
-    })}
-      onClick={() => setBurger(false)}> 
+    <div
+      className={clsx({
+        [styles.burger]: true,
+        [styles.burgerOpen]: !!burger,
+      })}
+      onClick={() => setBurger(false)}
+    >
       <div className={globalThis.globalStyles.container}>
         <div className={styles.burgerWrapper} onClick={(e) => e.stopPropagation()}>
           <div className={styles.burgerHeader}>
             <h2>Меню</h2>
-            <button 
+            <button
               className={clsx({
-                [styles.headerBurger]:true,
+                [styles.headerBurger]: true,
                 [styles.headerBurgerRotated]: !!burger,
-              })} 
+              })}
               onClick={() => setBurger(false)}
             >
               <span></span>
@@ -61,23 +63,23 @@ export default function BurgerComponent({setBurger, burger}: BurgerProps) {
                     Мини-игры
                   </NavLink>
                 </li>
-                {isAuth &&
-                <li className={styles.burgerItem}>
-                  <NavLink
-                    to='/stat'
-                    className={({ isActive }) => (isActive ? styles.itemActive : '')}
-                    onClick={() => setBurger(false)}
-                  >
-                    Статистика
-                  </NavLink>
-                </li>
-                }
+                {isAuth && (
+                  <li className={styles.burgerItem}>
+                    <NavLink
+                      to='/stat'
+                      className={({ isActive }) => (isActive ? styles.itemActive : '')}
+                      onClick={() => setBurger(false)}
+                    >
+                      Статистика
+                    </NavLink>
+                  </li>
+                )}
               </ul>
             </nav>
             <div className={styles.burgerDog}>
               <div className={styles.dogWrapper}>
                 <img src='./assets/svg/enggo.svg' alt='The dog Enggo' />
-              </div> 
+              </div>
             </div>
           </div>
         </div>

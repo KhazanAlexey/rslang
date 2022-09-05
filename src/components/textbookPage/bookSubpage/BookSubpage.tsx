@@ -74,28 +74,13 @@ const Pagination: React.FC<any> = (props) => {
 }
 
 const BookSubpage: React.FC<any> = (props) => {
-  const { activeLvl, setActiveLvl, activePage, setActivePage, levels, hardWords, setHardWords } =
+  const { activeLvl, setActiveLvl, bookWords, activePage, setActivePage, levels, isLoadingWords } =
     props
-  const {
-    data: bookWords,
-    isLoading: isLoadingWords,
-    error: errorWords,
-    refetch,
-  } = wordsAPI.useFetchWordsQuery({ group: activeLvl - 1, page: activePage - 1 })
 
-  const [isHard, setIsHard] = useState(false)
-  // const [wordDetail, setWordDetail] = useState('')
-  const { wordDetail, setWordDetail } = props;
-  const { hardWordsIds } = useAppSelector((state) => state.userWords)
-  useEffect(() => {
-    const matched = hardWordsIds.indexOf(wordDetail) > -1
-    setIsHard(matched)
-  }, [hardWordsIds, wordDetail])
-  useEffect(() => {
-    bookWords && setWordDetail(bookWords[0].id)
-  }, [bookWords])
+  // const [isHard, setIsHard] = useState(false)
+  // const [isCompleted, setIsCompleted] = useState(false)
+  const { wordDetail, setWordDetail } = props
 
-  // const activeLvl = 'Easy+';
   return (
     <section className={styles.book}>
       <section>
@@ -128,7 +113,6 @@ const BookSubpage: React.FC<any> = (props) => {
               />
               <Pagination page={activePage} setPage={setActivePage} />
             </div>
-            <Detail id={wordDetail} complete={false} hard={isHard} />
           </div>
         </div>
       </section>

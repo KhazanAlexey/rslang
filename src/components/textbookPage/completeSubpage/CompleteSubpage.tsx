@@ -1,11 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Words from 'src/components/words/Words'
 import Detail from '../detail/Detail'
 import styles from './CompleteSubpage.module.scss'
+import { localStorageGet } from '../../../utils/localStoradre'
+import { userWordsAPI } from '../../../services/UsersWordsService'
+import { useAppSelector } from '../../../hooks/redux'
 
 const CompleteSubpage: React.FC<any> = (props) => {
-  const { hardWords, setHardWords } = props
-  const [wordDetail, setWordDetail] = useState('')
+  const {
+    wordDetail,
+    setWordDetail,
+    completedUserWords,
+    isLoadingComplete: isLoading,
+    errorComplete: error,
+  } = props
+
   return (
     <section className=''>
       <section>
@@ -13,17 +22,20 @@ const CompleteSubpage: React.FC<any> = (props) => {
           <h2 className={globalThis.globalStyles.sectionTitle}>Изученные слова</h2>
         </div>
       </section>
-      <section className=''>
+      <section className={styles.hard}>
         <div className={globalThis.globalStyles.container}>
-          <Detail
-            id={wordDetail}
-            complete={false}
-            hard={false}
-            hardWords={hardWords}
-            setHardWords={setHardWords}
-          />
+          <div className={globalThis.globalStyles.bookWrapper}>
+            <div className={globalThis.globalStyles.bookWords}>
+              <Words
+                words={completedUserWords?.[0].paginatedResults}
+                errorWords={error}
+                isLoadingWords={isLoading}
+                wordDetail={wordDetail}
+                setWordDetail={setWordDetail}
+              />
+            </div>
+          </div>
         </div>
-        {/* <Words />*/}
       </section>
     </section>
   )

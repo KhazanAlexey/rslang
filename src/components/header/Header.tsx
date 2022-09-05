@@ -47,17 +47,17 @@ const Header: React.FC<any> = () => {
                   Мини-игры
                 </NavLink>
               </li>
-              {isAuth && 
-              <li className={styles.headerItem}>
-                <NavLink
-                  to='/stat'
-                  className={({ isActive }) => (isActive ? styles.itemActive : '')}
-                  onClick={() => null}
-                >
-                  Статистика
-                </NavLink>
-              </li>
-              }
+              {isAuth && (
+                <li className={styles.headerItem}>
+                  <NavLink
+                    to='/stat'
+                    className={({ isActive }) => (isActive ? styles.itemActive : '')}
+                    onClick={() => null}
+                  >
+                    Статистика
+                  </NavLink>
+                </li>
+              )}
             </ul>
           </nav>
           {!isAuth ? (
@@ -88,11 +88,11 @@ const Header: React.FC<any> = () => {
             })}
             onClick={() => (isAuth ? setIsAuthModal('settings') : setIsAuthModal('login'))}
           ></button>
-          <button 
+          <button
             className={clsx({
-              [styles.headerBurger]:true,
+              [styles.headerBurger]: true,
               [styles.headerBurgerRotated]: !!burger,
-            })} 
+            })}
             onClick={() => setBurger(true)}
           >
             <span></span>

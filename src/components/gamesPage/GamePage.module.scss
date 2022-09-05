@@ -13,7 +13,6 @@
       line-height: 120%;
       color: $brightColor;
     }
-
   }
 
   &Wrapper {
@@ -21,7 +20,6 @@
     align-items: center;
     justify-content: space-between;
     padding: rem(20) 20vw;
-
   }
 
   .game {
@@ -31,7 +29,7 @@
   }
 
   &Game1 {
-    transition: all .5s;
+    transition: all 0.5s;
 
     &:hover {
       z-index: 100;
@@ -45,10 +43,11 @@
         margin-right: rem(-20);
       }
 
-      @media (max-width: $mobile) {}
+      @media (max-width: $mobile) {
+      }
 
-      @media (max-width: $mobileSmall) {}
-
+      @media (max-width: $mobileSmall) {
+      }
 
       img {
         height: 25vw;
@@ -57,7 +56,6 @@
   }
 
   &Game2 {
-
     .game {
       width: 30vw;
       height: 30vw;

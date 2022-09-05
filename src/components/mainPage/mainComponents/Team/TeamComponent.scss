@@ -1,8 +1,7 @@
-@use "sass:math";
+@use 'sass:math';
 @import '../../../../styles/mixins.scss';
 
 .teamSection {
-
   &Wrapper {
     display: flex;
     justify-content: space-between;
@@ -38,7 +37,6 @@
       font-size: rem(18);
       padding-bottom: rem(10);
     }
-
   }
 
   &List {
@@ -119,5 +117,4 @@
       }
     }
   }
-
 }

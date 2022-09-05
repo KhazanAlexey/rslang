@@ -11,46 +11,52 @@ import { useDispatch } from 'react-redux'
 import { userWordsSlice } from '../../../store/reducers/userWordsSlice'
 
 const Detail: React.FC<any> = (props) => {
-  const { id, complete, hard: isHard } = props
+  const { id, complete: isComplete, hard: isHard } = props
   const dispatch = useDispatch()
-  const { data: wordData } = wordsAPI.useFetchWordByIdQuery(id)
-  const [postDifficultWord] = userWordsAPI.usePostUserWordMutation()
-  const [deleteDifficultWord] = userWordsAPI.useDeleteUserWordMutation()
 
+  const { data: wordData, refetch } = wordsAPI.useFetchWordByIdQuery(id)
+  useEffect(() => {
+    refetch()
+  }, [id])
+  const [postWord] = userWordsAPI.usePostUserWordMutation()
+  const [updateUserWord] = userWordsAPI.useUpdateUserWordMutation()
+  const [deleteWord] = userWordsAPI.useDeleteUserWordMutation()
+  const local = localStorageGet(['userId'])
   const [playing, toggle] = useAudio(`https://rs-lang-193.herokuapp.com/${wordData?.audio}`)
   // TODO: сделать логику добавления в сложные
 
   const hardHandler = () => {
-    const local = localStorageGet(['userId'])
-    if (isHard) {
-      deleteDifficultWord({ id: local['userId'], wordId: id })
-      // @ts-ignore
-      dispatch(userWordsSlice.actions.deleteHardWord(id))
-    } else {
-      postDifficultWord({ id: local['userId'], difficulty: 'hard', wordId: id, optional: {} })
+    // @ts-ignore
+    dispatch(userWordsSlice.actions.deleteCompletedWord(id))
+    // @ts-ignore
+    dispatch(userWordsSlice.actions.deleteHardWord(id))
+    if (isComplete) {
+      updateUserWord({ id: local['userId'], difficulty: 'hard', wordId: id })
     }
-
-    // if (isHard === true) setIsHard(false)
-    // else setIsHard(true)
-    // if (isHard === true) {
-    //   setIsHard(false)
-    //   setHardWords(hardWords.filter((word) => word.id !== id))
-    // } else {
-    //   setIsHard(true)
-    //   const newHardWord = {
-    //     id: id,
-    //     word: wordData ? wordData.word : '',
-    //     wordTranslate: wordData ? wordData.wordTranslate : '',
-    //   }
-    //   setHardWords([...hardWords, newHardWord])
-    // }
+    if (isHard) {
+      deleteWord({ id: local['userId'], wordId: id })
+    }
+    if (!isComplete && !isHard) postWord({ id: local['userId'], difficulty: 'hard', wordId: id })
   }
   // TODO: сделать логику добавления в изученные
-  const [isComplete, setIsComplete] = useState(complete)
   const completeHandler = () => {
-    if (isComplete === true) setIsComplete(false)
-    else setIsComplete(true)
+    // @ts-ignore
+    dispatch(userWordsSlice.actions.deleteCompletedWord(id))
+    // @ts-ignore
+    dispatch(userWordsSlice.actions.deleteHardWord(id))
+    if (isHard) {
+      // @ts-ignore
+      dispatch(userWordsSlice.actions.deleteHardWord(id))
+      updateUserWord({ id: local['userId'], difficulty: 'completed', wordId: id })
+    }
+    if (isComplete) {
+      deleteWord({ id: local['userId'], wordId: id })
+    }
+
+    if (!isComplete && !isHard)
+      postWord({ id: local['userId'], difficulty: 'completed', wordId: id })
   }
+
   const soundHandler = () => {
     toggle()
   }

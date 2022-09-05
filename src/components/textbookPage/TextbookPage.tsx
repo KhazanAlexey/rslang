@@ -11,11 +11,16 @@ import { Link } from 'react-router-dom'
 import { localStorageGet } from '../../utils/localStoradre'
 import { userWordsAPI } from '../../services/UsersWordsService'
 import { useAppSelector } from '../../hooks/redux'
+import { wordsAPI } from '../../services/WordsService'
 
 const TextBookPage: React.FC<any> = () => {
   const local = localStorageGet(['userId'])
-
+  const [isHard, setIsHard] = useState(false)
+  const [isCompleted, setIsCompleted] = useState(false)
   const [wordDetail, setWordDetail] = useState('')
+  const { isAuth } = useAppSelector((state) => state.auth)
+
+  const { hardWordsIds, completedWordsIds } = useAppSelector((state) => state.userWords)
 
   const { data: hardW } = userWordsAPI.useFetchUserWordsQuery(local['userId'])
   const [activeLvl, setActiveLvl] = useState(1)
@@ -29,13 +34,25 @@ const TextBookPage: React.FC<any> = () => {
     { id: 5, title: 'Hard', descr: 'До 3000 слов', lvl: 'C1', bg: '#EAAFFF' },
     { id: 6, title: 'Hard+', descr: 'До 3600 слов', lvl: 'C2', bg: '#BAAFFF' },
   ]
-  const { hardWordsIds, words } = useAppSelector((state) => state.userWords)
-
-  // console.log(hardWordsIds)
-  // console.log(words)
-  // TODO: Привязать сложные и изученные слова к глобальным
-
-  const [completeWords, setCompleteWords] = useState([])
+  const {
+    data: bookWords,
+    isLoading: isLoadingWords,
+    error: errorWords,
+    refetch,
+  } = wordsAPI.useFetchWordsQuery({ group: activeLvl - 1, page: activePage - 1 })
+  const {
+    data: difficultUserWords,
+    error: difficultWordsError,
+    isLoading: isLoadingHardWords,
+  } = userWordsAPI.useFetchAggregatedWordsQuery({ id: local['userId'], wordsDifficult: 'hard' })
+  const {
+    data: completedUserWords,
+    error: errorComplete,
+    isLoading: isLoadingComplete,
+  } = userWordsAPI.useFetchAggregatedWordsQuery({
+    id: local['userId'],
+    wordsDifficult: 'completed',
+  })
 
   const [subpage, setSubpage] = useState('book')
   const menuItems = ['Учебник', 'Сложные слова', 'Изученные']
@@ -58,7 +75,20 @@ const TextBookPage: React.FC<any> = () => {
         break
     }
   }
-
+  useEffect(() => {
+    if (subpage == 'book' && bookWords) setWordDetail(bookWords[0].id)
+    if (subpage == 'hard' && difficultUserWords)
+      setWordDetail(difficultUserWords?.[0].paginatedResults[0]._id)
+    if (subpage == 'complete' && completedUserWords)
+      setWordDetail(completedUserWords?.[0].paginatedResults[0]._id)
+    console.log(difficultUserWords)
+  }, [subpage, bookWords, difficultUserWords, completedUserWords])
+  useEffect(() => {
+    const matchedHard = hardWordsIds.indexOf(wordDetail) > -1
+    const matchedCompleted = completedWordsIds.indexOf(wordDetail) > -1
+    setIsHard(matchedHard)
+    setIsCompleted(matchedCompleted)
+  }, [hardWordsIds, wordDetail, completedWordsIds])
   return (
     <div className={styles.textbook}>
       <section className={styles.textbookInfo}>
@@ -116,7 +146,8 @@ const TextBookPage: React.FC<any> = () => {
             </div>
             <div className={styles.textbookGames}>
               <Link className={styles.textbookGame} to='/games/audiocall' onClick={() => null}>
-                <span>Аудио</span><span>Вызов</span>
+                <span>Аудио</span>
+                <span>Вызов</span>
               </Link>
               <Link className={styles.textbookGame} to='/games/sprint' onClick={() => null}>
                 <span>Спринт</span>
@@ -129,6 +160,7 @@ const TextBookPage: React.FC<any> = () => {
 
       {subpage == 'book' && (
         <BookSubpage
+          bookWords={bookWords}
           activeLvl={activeLvl}
           setActiveLvl={setActiveLvl}
           levels={levels}
@@ -138,21 +170,32 @@ const TextBookPage: React.FC<any> = () => {
           setHardWords={setHardWords}
           wordDetail={wordDetail}
           setWordDetail={setWordDetail}
+          isLoadingWords={isLoadingWords}
         />
       )}
-      {subpage == 'hard' && (
-        <HardSubpage 
-          hardWords={hardWords} 
+      {isAuth && subpage == 'hard' && (
+        <HardSubpage
+          difficultWordsError={difficultWordsError}
+          isLoadingHardWords={isLoadingHardWords}
+          difficultUserWords={difficultUserWords}
+          hardWords={hardWords}
           setHardWords={setHardWords}
           wordDetail={wordDetail}
-          setWordDetail={setWordDetail} />)}
-      {subpage == 'complete' && (
-        <CompleteSubpage 
-          hardWords={hardWords} 
-          setHardWords={setHardWords}
-          wordDetail={wordDetail}
-          setWordDetail={setWordDetail} />
+          setWordDetail={setWordDetail}
+        />
       )}
+      {isAuth && subpage == 'complete' && (
+        <CompleteSubpage
+          completedUserWords={completedUserWords}
+          isLoadingComplete={isLoadingComplete}
+          errorComplete={errorComplete}
+          hardWords={hardWords}
+          setHardWords={setHardWords}
+          wordDetail={wordDetail}
+          setWordDetail={setWordDetail}
+        />
+      )}
+      <Detail id={wordDetail} complete={isCompleted} hard={isHard} subpage={subpage} />
       <section></section>
     </div>
   )

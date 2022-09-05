@@ -2,7 +2,6 @@ import React, { ReactElement } from 'react'
 import styles from './LegendComponent.scss'
 import { clsx } from '../../../../utils/clsx'
 
-
 const LegendComponent: React.FC<any> = () => {
   return (
     <section className={styles.legendSection}>

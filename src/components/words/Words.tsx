@@ -24,10 +24,13 @@ const Word: React.FC<PropsType> = (props) => {
 
   return (
     <>
-      <li className={clsx({
-        [styles.word]: true,
-        ['_icon-bookmark']: isHard
-      })} style={{ background: bgGroup }}>
+      <li
+        className={clsx({
+          [styles.word]: true,
+          ['_icon-bookmark']: isHard,
+        })}
+        style={{ background: bgGroup }}
+      >
         <button
           className={clsx({
             [styles.wordButton]: true,
@@ -44,7 +47,7 @@ const Word: React.FC<PropsType> = (props) => {
 }
 
 const Words: React.FC<any> = (props) => {
-  const { page, words, errorWords, isLoadingWords, lvl, levels, wordDetail, setWordDetail } = props
+  const { words, errorWords, isLoadingWords, lvl, levels, wordDetail, setWordDetail } = props
 
   const { hardWordsIds } = useAppSelector((state) => state.userWords)
 

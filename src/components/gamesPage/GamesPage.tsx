@@ -5,7 +5,7 @@ import styles from './GamePage.module.scss'
 
 const GamesPage: React.FC<any> = () => {
   return (
-    <section className={styles.games}> 
+    <section className={styles.games}>
       <div className={globalThis.globalStyles.container}>
         <div className={styles.gamesHeader}>
           <h2>Мини-игры</h2>
@@ -15,7 +15,7 @@ const GamesPage: React.FC<any> = () => {
           <div className={styles.gamesGame1}>
             <Link to='/games/audiocall'>
               <div className={styles.game}>
-                <img src="./assets/svg/bg-audiocall.svg" alt="Аудиовызов" />
+                <img src='./assets/svg/bg-audiocall.svg' alt='Аудиовызов' />
                 <div className={styles.gameName}>Аудиовызов</div>
               </div>
             </Link>
@@ -23,7 +23,7 @@ const GamesPage: React.FC<any> = () => {
           <div className={styles.gamesGame2}>
             <Link to='/games/sprint'>
               <div className={styles.game}>
-                <img src="./assets/svg/bg-sprint.svg" alt="Аудиовызов" />
+                <img src='./assets/svg/bg-sprint.svg' alt='Аудиовызов' />
                 <div className={styles.gameName}>Спринт</div>
               </div>
             </Link>

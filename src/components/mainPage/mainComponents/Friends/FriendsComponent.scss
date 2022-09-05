@@ -24,7 +24,8 @@
     flex-wrap: wrap;
     padding: rem(40) 0 rem(90);
 
-    @media (max-width: em(920)) {}
+    @media (max-width: em(920)) {
+    }
 
     @media (max-width: $mobile) {
       gap: rem(20);
@@ -91,7 +92,6 @@
       padding-top: rem(42);
     }
   }
-
 }
 
 .linkButton {

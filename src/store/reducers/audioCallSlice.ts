@@ -1,6 +1,6 @@
 import { CaseReducer, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { IWord } from '../../models/IWord'
 import { GameState, Levels } from '../../models/IAudioCall'
+import { IWord } from '../../models/IWord'
 
 const initialState: AudioCallState = {
   level: 0,

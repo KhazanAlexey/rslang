@@ -12,7 +12,7 @@ type Props = {
   classes?: string
   style?: string
   title?: string
-  href?:string
+  href?: string
 }
 
 const ButtonCustom = (props: Props) => {
@@ -23,26 +23,30 @@ const ButtonCustom = (props: Props) => {
     style = '',
     classes = '',
     title,
-    text // , href
+    text, // , href
   } = props
-  
- // const navigate = useNavigate()
+
+  // const navigate = useNavigate()
 
   return (
-    <button {...{...props, ...{
-      className: clsx({
-        [classes]: !!classes,
-        [styles.button]: true,
-        [styles.disabled]: disabled,
-        [styles.defaultHover]: enableDefaultHoverClasses
-      }),
-      style:stlx({
-        [style]: !!style
-      }),
-      onClick, // :() => href ? navigate(href) : onClick ? onClick : 'void',
-      title,
-      disabled
-    }}}
+    <button
+      {...{
+        ...props,
+        ...{
+          className: clsx({
+            [classes]: !!classes,
+            [styles.button]: true,
+            [styles.disabled]: disabled,
+            [styles.defaultHover]: enableDefaultHoverClasses,
+          }),
+          style: stlx({
+            [style]: !!style,
+          }),
+          onClick, // :() => href ? navigate(href) : onClick ? onClick : 'void',
+          title,
+          disabled,
+        },
+      }}
     >
       {text}
     </button>

@@ -29,10 +29,9 @@
     }
   }
 
-  &>div {
+  & > div {
     height: 100%;
   }
-
 
   &Wrapper {
     width: rem(340);
@@ -114,7 +113,7 @@
       top: rem(50);
 
       img {
-        height: 100%
+        height: 100%;
       }
     }
   }
@@ -122,13 +121,13 @@
 
 .headerBurger {
   height: rem(44);
-  transition: all .5s;
+  transition: all 0.5s;
 
   &Rotated {
     transform: rotate(90deg);
   }
 
-  >span {
+  > span {
     display: block;
     position: relative;
     gap: rem(6);

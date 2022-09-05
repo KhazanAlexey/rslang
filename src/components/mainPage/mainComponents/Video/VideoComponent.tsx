@@ -7,7 +7,7 @@ const YoutubeEmbed = (embedId) => (
   // https://www.npmjs.com/package/react-player
   <div></div>
 )
- 
+
 const VideoComponent: React.FC<any> = () => {
   return (
     <section className={styles.videoSection}>

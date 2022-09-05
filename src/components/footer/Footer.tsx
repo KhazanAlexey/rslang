@@ -26,19 +26,25 @@ const Footer: React.FC<any> = () => {
                 className={clsx({
                   ['_icon-github']: true,
                 })}
-              >Aliaxei Khazan</a>
+              >
+                Aliaxei Khazan
+              </a>
               <a
                 href='https://github.com/alexbazhen'
                 className={clsx({
                   ['_icon-github']: true,
                 })}
-              >Aleksandr Bazhenov</a>
+              >
+                Aleksandr Bazhenov
+              </a>
               <a
                 href='https://github.com/tedgregory'
                 className={clsx({
                   ['_icon-github']: true,
                 })}
-              >Fedor Grigoryev</a>
+              >
+                Fedor Grigoryev
+              </a>
             </div>
           </div>
           <div className={styles.footerThird}>
@@ -53,7 +59,11 @@ const Footer: React.FC<any> = () => {
               ['_icon-rs']: true,
               [styles.footerBottomLink]: true,
             })}
-          > RS School</a> JS-Frontend course JSFE2022Q1.
+          >
+            {' '}
+            RS School
+          </a>{' '}
+          JS-Frontend course JSFE2022Q1.
           <div className={styles.footerBottomBalloon}>
             <img src='./assets/svg/balloon.svg' alt='❤️️' />
           </div>

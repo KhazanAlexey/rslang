@@ -1,6 +1,6 @@
 import { CaseReducer, createSlice } from '@reduxjs/toolkit'
+import { authApi } from 'src/services/AuthService'
 import { IWord } from '../../models/IWord'
-import { authApi } from '../../services/AuthService'
 import { localStorageSet } from '../../utils/localStoradre'
 import { userAPI } from '../../services/UserService'
 

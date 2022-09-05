@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 import { IDeleteUsersWord, IPostUsersWord, IUsersWords } from 'src/models/IUsersWords'
-import { IWord } from '../models/IWord'
 
 export const userWordsAPI = createApi({
   reducerPath: 'userWordsAPI',
@@ -15,7 +14,7 @@ export const userWordsAPI = createApi({
     },
   }),
 
-  tagTypes: ['userWords', 'userWord', 'AggregatedWords'],
+  tagTypes: ['userWords', 'userWord', 'AggregatedWords', 'FetchUserWordByID'],
   endpoints: (build) => ({
     fetchUserWords: build.query<IUsersWords[], string>({
       query: (id) => ({
@@ -40,7 +39,7 @@ export const userWordsAPI = createApi({
           optional: optional,
         },
       }),
-      invalidatesTags: ['userWord', 'userWords'],
+      invalidatesTags: ['userWord', 'userWords', 'AggregatedWords'],
     }),
 
     updateUserWord: build.mutation<IUsersWords[], IPostUsersWord>({
@@ -52,7 +51,7 @@ export const userWordsAPI = createApi({
           optional: optional,
         },
       }),
-      invalidatesTags: ['userWord'],
+      invalidatesTags: ['userWord', 'userWords', 'AggregatedWords'],
     }),
 
     deleteUserWord: build.mutation<IUsersWords[], IDeleteUsersWord>({
@@ -60,7 +59,7 @@ export const userWordsAPI = createApi({
         method: 'DELETE',
         url: `/users/${id}/words/${wordId}`,
       }),
-      invalidatesTags: ['userWord', 'AggregatedWords'],
+      invalidatesTags: ['userWord', 'AggregatedWords', 'AggregatedWords'],
     }),
 
     fetchAggregatedWords: build.query<any[], any>({
