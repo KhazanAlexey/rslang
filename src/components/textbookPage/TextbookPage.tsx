@@ -15,6 +15,8 @@ import { useAppSelector } from '../../hooks/redux'
 const TextBookPage: React.FC<any> = () => {
   const local = localStorageGet(['userId'])
 
+  const [wordDetail, setWordDetail] = useState('')
+
   const { data: hardW } = userWordsAPI.useFetchUserWordsQuery(local['userId'])
   const [activeLvl, setActiveLvl] = useState(1)
   const [activePage, setActivePage] = useState(1)
@@ -113,8 +115,12 @@ const TextBookPage: React.FC<any> = () => {
               </ul>
             </div>
             <div className={styles.textbookGames}>
-              <Link className={styles.textbookGame} to='/games/savanna' onClick={() => null}></Link>
-              <Link className={styles.textbookGame} to='/games/savanna' onClick={() => null}></Link>
+              <Link className={styles.textbookGame} to='/games/audiocall' onClick={() => null}>
+                <span>Аудио</span><span>Вызов</span>
+              </Link>
+              <Link className={styles.textbookGame} to='/games/sprint' onClick={() => null}>
+                <span>Спринт</span>
+              </Link>
               <img src='./assets/svg/enggo-textbook.svg' alt='Поиграй с Enggo' />
             </div>
           </div>
@@ -130,11 +136,22 @@ const TextBookPage: React.FC<any> = () => {
           setActivePage={setActivePage}
           hardWords={hardWords}
           setHardWords={setHardWords}
+          wordDetail={wordDetail}
+          setWordDetail={setWordDetail}
         />
       )}
-      {subpage == 'hard' && <HardSubpage hardWords={hardWords} setHardWords={setHardWords} />}
+      {subpage == 'hard' && (
+        <HardSubpage 
+          hardWords={hardWords} 
+          setHardWords={setHardWords}
+          wordDetail={wordDetail}
+          setWordDetail={setWordDetail} />)}
       {subpage == 'complete' && (
-        <CompleteSubpage hardWords={hardWords} setHardWords={setHardWords} />
+        <CompleteSubpage 
+          hardWords={hardWords} 
+          setHardWords={setHardWords}
+          wordDetail={wordDetail}
+          setWordDetail={setWordDetail} />
       )}
       <section></section>
     </div>

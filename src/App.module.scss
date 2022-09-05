@@ -75,3 +75,18 @@ body {
   line-height: math.div(43, 30);
   color: $lightColor;
 }
+
+.bookWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: rem(24);
+
+  @media (max-width: $tablet) {
+    flex-direction: column-reverse;
+  }
+}
+
+.bookWords {
+  max-width: rem(912);
+}
