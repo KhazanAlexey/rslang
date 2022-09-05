@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { useAppSelector } from 'src/hooks/redux'
 import { clsx } from 'src/utils/clsx'
 import styles from './BurgerComponent.scss'
 
@@ -9,7 +10,7 @@ interface BurgerProps {
 }
 
 export default function BurgerComponent({setBurger, burger}: BurgerProps) {
-
+  const { isAuth } = useAppSelector((state) => state.auth)
   return (
     <div className={clsx({
       [styles.burger]:true,
@@ -60,6 +61,7 @@ export default function BurgerComponent({setBurger, burger}: BurgerProps) {
                     Мини-игры
                   </NavLink>
                 </li>
+                {isAuth &&
                 <li className={styles.burgerItem}>
                   <NavLink
                     to='/stat'
@@ -69,6 +71,7 @@ export default function BurgerComponent({setBurger, burger}: BurgerProps) {
                     Статистика
                   </NavLink>
                 </li>
+                }
               </ul>
             </nav>
             <div className={styles.burgerDog}>

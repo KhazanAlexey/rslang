@@ -1,11 +1,13 @@
 import React from 'react'
 import styles from './SplashComponent.scss'
 import { clsx } from '../../../../utils/clsx'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAppSelector } from 'src/hooks/redux'
+import ButtonCustom from 'src/components/common/button/Button'
 
 const SplashComponent: React.FC<any> = () => {
   const { isAuth, name: userName } = useAppSelector((state) => state.auth)
+  const navigate = useNavigate();
   return (
     <section className={styles.mainSection}>
       <div className={globalThis.globalStyles.container}>
@@ -41,9 +43,9 @@ const SplashComponent: React.FC<any> = () => {
             )}
 
             <div className={styles.introActions}>
-              <button className={styles.introActionsGo}>Gooo!</button>
-              <Link
-                to='/textbook'
+              <button className={styles.introActionsGo} onClick={() => navigate('/textbook')}>Gooo!</button>
+              <a
+                href='#enggoSection'
                 className={clsx({
                   [styles.introActionsMore]: true,
                   ['_icon-arrow']: true,
@@ -51,7 +53,7 @@ const SplashComponent: React.FC<any> = () => {
                 onClick={() => null}
               >
                 Узнать больше об Enggo
-              </Link>
+              </a>
             </div>
           </div>
           <div className={styles.introDecoration}>

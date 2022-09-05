@@ -2,11 +2,12 @@ import React from 'react'
 import styles from './EnggoComponent.scss'
 import { clsx } from '../../../../utils/clsx'
 import ButtonCustom from 'src/components/common/button/Button'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const EnggoComponent: React.FC<any> = () => {
+  const navigate = useNavigate()
   return (
-    <section className={styles.enggoSection}>
+    <section className={styles.enggoSection} id='enggoSection'>
       <div className={globalThis.globalStyles.container}>
         <div className={clsx({ [styles.enggoSectionWrapper]: true })}>
           <div className={styles.enggoDecoration}>
@@ -34,7 +35,7 @@ const EnggoComponent: React.FC<any> = () => {
                   [styles.button]: true,
                   ['_icon-arrow']: true,
                 })}
-                href='/textbook'
+                onClick={() => navigate('/textbook')}
                 text='Вау! Заглянуть в учебник!'
               />
             </div>

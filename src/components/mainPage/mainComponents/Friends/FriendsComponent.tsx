@@ -2,8 +2,10 @@ import React from 'react'
 import styles from './FriendsComponent.scss'
 import { clsx } from '../../../../utils/clsx'
 import { Link } from 'react-router-dom'
+import { useAppSelector } from 'src/hooks/redux'
 
 const FriendsComponent: React.FC<any> = () => {
+  const { isAuth } = useAppSelector((state) => state.auth)
   return (
     <section className={styles.friendsSection}>
       <div className={globalThis.globalStyles.container}>
@@ -25,6 +27,7 @@ const FriendsComponent: React.FC<any> = () => {
               <a 
                 className={styles.linkButton}
                 href='https://lingualeo.com'
+                rel='nofollow'
               >Учиться у Лео</a>
             </div>
           </div>
@@ -46,6 +49,7 @@ const FriendsComponent: React.FC<any> = () => {
               >Сыграть в мини-игры</Link>
             </div>
           </div>
+          {isAuth &&
           <div className={clsx({ 
             [styles.friendsSectionItem]: true,
             [styles.friendsSectionItemLeo]: true
@@ -60,10 +64,11 @@ const FriendsComponent: React.FC<any> = () => {
             <div className={styles.friendsSectionActionBtn}>
             <Link 
                 className={styles.linkButton}
-                to='/stats'
+                to='/stat'
               >Проверить статистику</Link>
             </div>
           </div>
+          } 
         </div>
       </div>
     </section>

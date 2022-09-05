@@ -26,9 +26,16 @@
 
     @media (max-width: em(920)) {}
 
-    @media (max-width: $mobile) {}
+    @media (max-width: $mobile) {
+      gap: rem(20);
+      align-items: center;
+      padding: rem(20) 5vw;
+    }
 
-    @media (max-width: $mobileSmall) {}
+    @media (max-width: $mobileSmall) {
+      padding: rem(10) rem(5);
+      padding-bottom: rem(30);
+    }
   }
 
   &Header {
@@ -63,8 +70,9 @@
     background-color: white;
     border-radius: rem(18);
 
-    @media (max-width: em(920)) {
+    @media (max-width: $mobile) {
       flex-basis: 100%;
+      width: 90%;
     }
 
     &Text {
