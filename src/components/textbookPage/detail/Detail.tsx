@@ -23,6 +23,8 @@ const Detail: React.FC<any> = (props) => {
   const [deleteWord] = userWordsAPI.useDeleteUserWordMutation()
   const local = localStorageGet(['userId'])
   const [playing, toggle] = useAudio(`https://rs-lang-193.herokuapp.com/${wordData?.audio}`)
+  const [playingMeaning, meaningToggle] = useAudio(`https://rs-lang-193.herokuapp.com/${wordData?.audioMeaning}`)
+  const [playingExample, exampleToggle] = useAudio(`https://rs-lang-193.herokuapp.com/${wordData?.audioExample}`)
   // TODO: сделать логику добавления в сложные
 
   const hardHandler = () => {
@@ -60,6 +62,12 @@ const Detail: React.FC<any> = (props) => {
   const soundHandler = () => {
     toggle()
   }
+  const soundMeaningHandler = () => {
+    meaningToggle()
+  }
+  const soundExampleHandler = () => {
+    exampleToggle()
+  }
 
   return (
     <article
@@ -86,7 +94,16 @@ const Detail: React.FC<any> = (props) => {
       <div className={styles.detailMore}>
         <ul className={styles.detailList}>
           <li className={styles.detailItem}>
-            <h4 className={styles.detailSubtitle}>Значение слова</h4>
+            <h4 className={styles.detailSubtitle}>Значение слова 
+              <button
+                className={clsx({
+                  [styles.detailSound]: true,
+                  [styles.detailSubsound]: true,
+                  ['_icon-sound']: true,
+                  [styles.soundOn]: playingMeaning,
+                })}
+                onClick={soundMeaningHandler}
+              ></button></h4>
             {wordData && (
               <p
                 className={styles.detailText}
@@ -96,7 +113,16 @@ const Detail: React.FC<any> = (props) => {
             <p className={styles.detailText}>{wordData && wordData.textMeaningTranslate}</p>
           </li>
           <li className={styles.detailItem}>
-            <h4 className={styles.detailSubtitle}>Пример использования</h4>
+            <h4 className={styles.detailSubtitle}>Пример использования 
+              <button
+                className={clsx({
+                  [styles.detailSound]: true,
+                  [styles.detailSubsound]: true,
+                  ['_icon-sound']: true,
+                  [styles.soundOn]: playingExample,
+                })}
+                onClick={soundExampleHandler}
+              ></button></h4>
             {wordData && (
               <p
                 className={styles.detailText}

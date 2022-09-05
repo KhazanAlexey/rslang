@@ -8,6 +8,7 @@ import { useAppSelector } from '../../../hooks/redux'
 
 const CompleteSubpage: React.FC<any> = (props) => {
   const {
+    detail,
     wordDetail,
     setWordDetail,
     completedUserWords,
@@ -22,7 +23,7 @@ const CompleteSubpage: React.FC<any> = (props) => {
           <h2 className={globalThis.globalStyles.sectionTitle}>Изученные слова</h2>
         </div>
       </section>
-      <section className={styles.hard}>
+      <section className={styles.complete}>
         <div className={globalThis.globalStyles.container}>
           <div className={globalThis.globalStyles.bookWrapper}>
             <div className={globalThis.globalStyles.bookWords}>
@@ -34,6 +35,7 @@ const CompleteSubpage: React.FC<any> = (props) => {
                 setWordDetail={setWordDetail}
               />
             </div>
+            {detail}
           </div>
         </div>
       </section>

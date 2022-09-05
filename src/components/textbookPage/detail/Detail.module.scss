@@ -71,6 +71,9 @@
     background: rgba(255, 255, 255, 0);
     border-radius: rem(44);
     transition: all 0.3s;
+    &.detailSubsound {
+      font-size: rem(24);
+    }
     &.soundOn {
       color: $mainBgColor;
       background: $mainButtonBgColor;
@@ -138,6 +141,8 @@
     color: $mainHeaderColor;
     margin-top: rem(9);
     transition: all 0.3s;
+    display: flex;
+    align-items: center;
     @media (max-width: em(640)) {
       font-size: rem(18);
     }

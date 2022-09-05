@@ -1,0 +1,6 @@
+@use 'sass:math';
+@import '../../../styles/mixins.scss';
+
+.complete {
+  padding-bottom: rem(90);
+}

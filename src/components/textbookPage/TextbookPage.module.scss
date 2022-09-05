@@ -130,5 +130,24 @@
       background: $mainButtonBgColor;
       color: $mainBgColor;
     }
+    &.subpageDisable {
+      color: $disableLinkColor;
+      pointer-events: none;
+      cursor: default;
+      position: relative;
+      &::after {
+        position: absolute;
+        content: 'Требуется авторизация';
+        text-align: center;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: .8;
+        white-space: nowrap;
+        font-size: rem(14);
+        line-height: math.div(16 , 14);
+        font-style: italic;
+        bottom: rem(-10);
+      }
+    }
   }
 }

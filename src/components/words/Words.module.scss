@@ -29,6 +29,9 @@
     right: rem(12);
     top: rem(-3);
   }
+  &Complete {
+    background: linear-gradient(201.29deg, #f6ed00 0%, #fffa86 45.31%, #f2e900 100%) !important;
+  }
   &Button {
     display: flex;
     flex-direction: column;

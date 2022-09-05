@@ -8,6 +8,7 @@ import { useAppSelector } from 'src/hooks/redux'
 
 const HardSubpage: React.FC<any> = (props) => {
   const {
+    detail,
     wordDetail,
     setWordDetail,
     difficultUserWords,
@@ -34,6 +35,7 @@ const HardSubpage: React.FC<any> = (props) => {
                 setWordDetail={setWordDetail}
               />
             </div>
+            {detail}
           </div>
         </div>
       </section>

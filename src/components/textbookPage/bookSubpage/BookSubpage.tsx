@@ -74,7 +74,7 @@ const Pagination: React.FC<any> = (props) => {
 }
 
 const BookSubpage: React.FC<any> = (props) => {
-  const { activeLvl, setActiveLvl, bookWords, activePage, setActivePage, levels, isLoadingWords } =
+  const { detail, activeLvl, setActiveLvl, bookWords, activePage, setActivePage, levels, isLoadingWords } =
     props
 
   // const [isHard, setIsHard] = useState(false)
@@ -113,6 +113,7 @@ const BookSubpage: React.FC<any> = (props) => {
               />
               <Pagination page={activePage} setPage={setActivePage} />
             </div>
+            {detail}
           </div>
         </div>
       </section>

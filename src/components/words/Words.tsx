@@ -12,10 +12,11 @@ interface PropsType {
   wordDetail: string
   setWordDetail: any
   isHard: boolean
+  isCompleted: boolean
 }
 
 const Word: React.FC<PropsType> = (props) => {
-  const { bgGroup, id, word, wordTranslate, wordDetail, setWordDetail, isHard } = props
+  const { bgGroup, id, word, wordTranslate, wordDetail, setWordDetail, isHard, isCompleted } = props
 
   const viewDetail = () => {
     setWordDetail(id)
@@ -27,7 +28,7 @@ const Word: React.FC<PropsType> = (props) => {
       <li
         className={clsx({
           [styles.word]: true,
-          ['_icon-bookmark']: isHard,
+          ['_icon-bookmark']: isHard
         })}
         style={{ background: bgGroup }}
       >
@@ -35,6 +36,7 @@ const Word: React.FC<PropsType> = (props) => {
           className={clsx({
             [styles.wordButton]: true,
             [styles.wordButtonActive]: id == wordDetail,
+            [styles.wordComplete]: isCompleted
           })}
           onClick={viewDetail}
         >
@@ -49,7 +51,7 @@ const Word: React.FC<PropsType> = (props) => {
 const Words: React.FC<any> = (props) => {
   const { words, errorWords, isLoadingWords, lvl, levels, wordDetail, setWordDetail } = props
 
-  const { hardWordsIds } = useAppSelector((state) => state.userWords)
+  const { hardWordsIds, completedWordsIds } = useAppSelector((state) => state.userWords)
 
   return (
     <ul className={styles.words}>
@@ -64,6 +66,7 @@ const Words: React.FC<any> = (props) => {
             wordDetail={wordDetail}
             setWordDetail={setWordDetail}
             isHard={hardWordsIds.includes(word.id ?? word._id)}
+            isCompleted={completedWordsIds.includes(word.id ?? word._id)}
           />
         ))}
       {errorWords && <li>Error</li>}

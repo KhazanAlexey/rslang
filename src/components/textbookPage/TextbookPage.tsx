@@ -89,6 +89,8 @@ const TextBookPage: React.FC<any> = () => {
     setIsHard(matchedHard)
     setIsCompleted(matchedCompleted)
   }, [hardWordsIds, wordDetail, completedWordsIds])
+
+  const detail = <Detail id={wordDetail} complete={isCompleted} hard={isHard} subpage={subpage} />
   return (
     <div className={styles.textbook}>
       <section className={styles.textbookInfo}>
@@ -124,6 +126,7 @@ const TextBookPage: React.FC<any> = () => {
                       ['_icon-bookmark']: true,
                       [styles.textbookSubpage]: true,
                       [styles.subpageActive]: subpage == 'hard',
+                      [styles.subpageDisable]: !isAuth
                     })}
                     onClick={menuHandler}
                   >
@@ -136,6 +139,7 @@ const TextBookPage: React.FC<any> = () => {
                       ['_icon-star']: true,
                       [styles.textbookSubpage]: true,
                       [styles.subpageActive]: subpage == 'complete',
+                      [styles.subpageDisable]: !isAuth
                     })}
                     onClick={menuHandler}
                   >
@@ -160,6 +164,7 @@ const TextBookPage: React.FC<any> = () => {
 
       {subpage == 'book' && (
         <BookSubpage
+          detail={detail}
           bookWords={bookWords}
           activeLvl={activeLvl}
           setActiveLvl={setActiveLvl}
@@ -175,6 +180,7 @@ const TextBookPage: React.FC<any> = () => {
       )}
       {isAuth && subpage == 'hard' && (
         <HardSubpage
+          detail={detail}
           difficultWordsError={difficultWordsError}
           isLoadingHardWords={isLoadingHardWords}
           difficultUserWords={difficultUserWords}
@@ -186,6 +192,7 @@ const TextBookPage: React.FC<any> = () => {
       )}
       {isAuth && subpage == 'complete' && (
         <CompleteSubpage
+          detail={detail}
           completedUserWords={completedUserWords}
           isLoadingComplete={isLoadingComplete}
           errorComplete={errorComplete}
@@ -195,7 +202,7 @@ const TextBookPage: React.FC<any> = () => {
           setWordDetail={setWordDetail}
         />
       )}
-      <Detail id={wordDetail} complete={isCompleted} hard={isHard} subpage={subpage} />
+      {/* <Detail id={wordDetail} complete={isCompleted} hard={isHard} subpage={subpage} />*/}
       <section></section>
     </div>
   )
