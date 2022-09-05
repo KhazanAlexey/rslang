@@ -4,7 +4,13 @@ import Button from '../common/button/Button'
 import { clsx } from '../../utils/clsx'
 import { Levels } from 'src/models/IAudioCall'
 
-const GamesStartScreen: React.FC<any> = ({ header, text, setDifficultyLevel }) => {
+type PropsType = {
+  header: string
+  text: string
+  setDifficultyLevel: (_: Levels) => void
+}
+
+const GamesStartScreen: React.FC<PropsType> = ({ header, text, setDifficultyLevel }) => {
   const [level, setLevel] = useState<Levels>(0)
   const id = useId()
   const wordsGroup = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2']

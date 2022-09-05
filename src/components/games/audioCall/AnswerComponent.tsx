@@ -21,7 +21,7 @@ export const AnswerComponent: React.FC<Props> = ({
 
   return (
     <div className={styles.answer}>
-      {wordToGuess && <h3 className={styles.answerWordTitle}>{wordToGuess.word}</h3>}
+      {wordToGuess && <div className={styles.currentWord}> {wordToGuess.word}</div>}
       {wordToGuess && (
         <div className={styles.answerImage}>
           <img

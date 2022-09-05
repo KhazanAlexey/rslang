@@ -1,9 +1,12 @@
 @use 'sass:math';
 @import '../../../styles/mixins.scss';
 
-.audioCall {
+.sprint {
   padding: rem(30);
   flex: 1;
+  background-image: url('../../../assets/svg/bg-sprint.svg');
+  background-position: center;
+  background-size: cover;
 
   &Wrapper {
     width: 100%;

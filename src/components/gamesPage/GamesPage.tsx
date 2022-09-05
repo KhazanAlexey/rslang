@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { clsx } from 'src/utils/clsx'
 import styles from './GamePage.module.scss'
 
-const GamesPage: React.FC<any> = () => {
+const GamesPage: React.FC = () => {
   return (
     <section className={styles.games}>
       <div className={globalThis.globalStyles.container}>

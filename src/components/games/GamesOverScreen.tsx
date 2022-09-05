@@ -30,20 +30,25 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
   return (
     <>
       <div>
-        Correct:
-        {correctAnswers.map((el, index) => (
-          <div key={`${id}-${index}`}>
-            {el.word}-{el.wordTranslate}
-          </div>
+        <h3>Correct:</h3>
+        <ul>
+          {correctAnswers.map((el, index) => (
+          <li key={`${id}-${index}`}>
+            {el.word} - {el.wordTranslate}
+          </li>
         ))}
+        </ul>
+
       </div>
       <div>
-        Wrong:
-        {wrongAnswers.map((el, index) => (
-          <div key={`${id}-${index}`}>
-            {el.word}-{el.wordTranslate}
-          </div>
+        <h3>Wrong:</h3>
+        <ul>
+          {wrongAnswers.map((el, index) => (
+          <li key={`${id}-${index}`}>
+            {el.word} - {el.wordTranslate}
+          </li>
         ))}
+        </ul>
       </div>
       <Button text='exit' onClick={exitGameHandler} />
     </>

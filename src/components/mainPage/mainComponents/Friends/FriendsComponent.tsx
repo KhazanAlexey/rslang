@@ -4,7 +4,7 @@ import { clsx } from '../../../../utils/clsx'
 import { Link } from 'react-router-dom'
 import { useAppSelector } from 'src/hooks/redux'
 
-const FriendsComponent: React.FC<any> = () => {
+const FriendsComponent: React.FC = () => {
   const { isAuth } = useAppSelector((state) => state.auth)
   return (
     <section className={styles.friendsSection}>

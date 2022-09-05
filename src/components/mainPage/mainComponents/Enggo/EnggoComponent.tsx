@@ -4,7 +4,7 @@ import { clsx } from '../../../../utils/clsx'
 import ButtonCustom from 'src/components/common/button/Button'
 import { Link, useNavigate } from 'react-router-dom'
 
-const EnggoComponent: React.FC<any> = () => {
+const EnggoComponent: React.FC = () => {
   const navigate = useNavigate()
   return (
     <section className={styles.enggoSection} id='enggoSection'>

@@ -2,23 +2,30 @@
 @import '../../../styles/mixins.scss';
 
 .audioCall {
-  padding: rem(30);
   flex: 1;
+  background-image: url('../../../assets/svg/bg-audiocall.svg');
+
+  &Loading {
+    margin: rem(100) auto;
+    color: $lightTextColor;
+  }
 
   &Wrapper {
-    width: 100%;
+    padding: rem(30);
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-end;
   }
 
   &Header {
     align-self: flex-start;
     font-size: rem(30);
-    text-transform: uppercase;
   }
 
   &Screen {
     padding: 0 10vw;
+    color: $lightTextColor;
+
   }
 }

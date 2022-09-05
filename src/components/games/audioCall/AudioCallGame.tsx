@@ -18,8 +18,10 @@ const AudioCallGame: React.FC<any> = ({
     <>
       {wordToGuess && (
         <div className={styles.audioCallScreen}>
+          <div className={styles.audioCallScreenWrap}>
           <Player url={`https://rs-lang-193.herokuapp.com/${wordToGuess.audio}`} />
           <div className={styles.currentWord}> {wordToGuess.word}</div>
+          </div>
 
           <div className={styles.answerOptions}>
             {answerVariants.map((ans, index) => (

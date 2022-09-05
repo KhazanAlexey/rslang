@@ -1,8 +1,8 @@
-import React, { ReactElement } from 'react'
+import React from 'react'
 import styles from './LegendComponent.scss'
 import { clsx } from '../../../../utils/clsx'
 
-const LegendComponent: React.FC<any> = () => {
+const LegendComponent: React.FC = () => {
   return (
     <section className={styles.legendSection}>
       <div className={globalThis.globalStyles.container}>

@@ -12,7 +12,7 @@ import randomInteger from '../../../utils/random'
 import { shuffle } from '../../../utils/suffle'
 import GamesOverScreen from '../GamesOverScreen'
 
-const AudioCall: React.FC<any> = () => {
+const AudioCall: React.FC = () => {
   const dispatch = useAppDispatch()
   const [level, setLevel] = useState<Levels>()
   const [wordsForGame, setWordsForGame] = useState<IWord[]>([])
@@ -143,12 +143,12 @@ const AudioCall: React.FC<any> = () => {
     <section className={styles.audioCall}>
       <div className={globalThis.globalStyles.container}>
         <div className={styles.audioCallWrapper}>
-          <h1 className={styles.audioCallHeader}>Audio call</h1>
-          {isLoadingWords && <div className={styles.loading}>loading.....</div>}
+          {/* <h1 className={styles.audioCallHeader}>Аудиовызов</h1> */}
+          {isLoadingWords && <div className={styles.audioCallLoading}>loading.....</div>}
           {GameState.StartScreen === activeScreen && (
             <GamesStartScreen
               header='Аудиовызов'
-              text='Тренировка Аудиовызов улучшает твое восприятие речи на слух.'
+              text='Тренировка Аудиовызов улучшает твое восприятие речи на слух. Выбери уровень сложности:'
               setDifficultyLevel={startGameHandler}
             />
           )}

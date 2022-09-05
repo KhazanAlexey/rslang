@@ -123,15 +123,15 @@ const Sprint: React.FC<any> = () => {
   })
   console.log(answerVariant)
   return (
-    <section className={styles.audioCall}>
+    <section className={styles.sprint}>
       <div className={globalThis.globalStyles.container}>
-        <div className={styles.audioCallWrapper}>
-          <h1 className={styles.audioCallHeader}>Audio call</h1>
-          {isLoadingWords && <div className={styles.loading}>loading.....</div>}
+        <div className={styles.sprintWrapper}>
+          <h1 className={styles.sprintHeader}>Спринт!</h1>
+          {isLoadingWords && <div className={styles.loading}>loading...</div>}
           {GameState.StartScreen === activeScreen && (
             <GamesStartScreen
               header='Спринт'
-              text='Тренировка Спринт!.'
+              text='Тренировка Спринт! Выбери уровень:'
               setDifficultyLevel={startGameHandler}
             />
           )}

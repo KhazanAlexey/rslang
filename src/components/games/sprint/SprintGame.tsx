@@ -4,8 +4,17 @@ import styles from './SprintGame.module.scss'
 import { useAppDispatch } from '../../../hooks/redux'
 import { GameState } from '../../../models/IAudioCall'
 import { sprintSlice } from '../../../store/reducers/sprintSlice'
+import { IWord } from 'src/models/IWord'
 
-const SprintGame: React.FC<any> = ({
+type PropsType = {
+  answerVariant: IWord | undefined
+  wordToGuess: IWord | null
+  selectedAnswer: null | undefined | boolean
+  answerHandler: (_: boolean) => void
+  score: number
+}
+
+const SprintGame: React.FC<PropsType> = ({
   answerVariant,
   wordToGuess,
   selectedAnswer,

@@ -6,6 +6,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: $lightTextColor;
+  text-shadow: 0 0 rem(5) #555;
 
   &Levels {
     display: flex;
@@ -14,9 +16,15 @@
 
     .level {
       cursor: pointer;
-      border-radius: rem(10);
-      padding: rem(5);
+      width: rem(40);
+      height: rem(40);
+      display: flex;
+      align-items: center;
+      border-radius: 50%;
+      padding: rem(10);
       border: 1px solid $disableLinkColor;
+      backdrop-filter: blur(4px);
+      text-shadow: 0 0 rem(5) #333;
     }
 
     .activeLevel {
@@ -26,10 +34,10 @@
 
   &Header {
     font-size: rem(30);
+    font-weight: 700;
   }
 
   &Desc {
-    padding: rem(10);
-    background-color: $mainBgColor;
+    padding: rem(40);
   }
 }

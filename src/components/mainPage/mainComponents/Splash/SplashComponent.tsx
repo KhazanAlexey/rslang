@@ -3,9 +3,8 @@ import styles from './SplashComponent.scss'
 import { clsx } from '../../../../utils/clsx'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAppSelector } from 'src/hooks/redux'
-import ButtonCustom from 'src/components/common/button/Button'
 
-const SplashComponent: React.FC<any> = () => {
+const SplashComponent: React.FC = () => {
   const { isAuth, name: userName } = useAppSelector((state) => state.auth)
   const navigate = useNavigate()
   return (
