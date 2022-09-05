@@ -73,7 +73,6 @@ const Detail: React.FC<any> = (props) => {
           })}
           onClick={soundHandler}
         ></button>
-        {wordData && <audio src={`https://rs-lang-193.herokuapp.com/${wordData.audio}`}></audio>}
         <span className={styles.detailTranscription}>{wordData && wordData.transcription}</span>
         <p className={styles.detailTranslate}>{wordData && wordData.wordTranslate}</p>
         <hr className={styles.detailLine} />

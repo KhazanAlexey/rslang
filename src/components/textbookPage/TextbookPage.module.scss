@@ -56,6 +56,8 @@
     border-radius: 100%;
     background: #000;
     position: absolute;
+    display: flex;
+    align-items: center;
     &:first-child {
       width: rem(220);
       height: rem(220);

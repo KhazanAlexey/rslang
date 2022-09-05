@@ -84,7 +84,8 @@ const BookSubpage: React.FC<any> = (props) => {
   } = wordsAPI.useFetchWordsQuery({ group: activeLvl - 1, page: activePage - 1 })
 
   const [isHard, setIsHard] = useState(false)
-  const [wordDetail, setWordDetail] = useState('')
+  // const [wordDetail, setWordDetail] = useState('')
+  const { wordDetail, setWordDetail } = props;
   const { hardWordsIds } = useAppSelector((state) => state.userWords)
   useEffect(() => {
     const matched = hardWordsIds.indexOf(wordDetail) > -1

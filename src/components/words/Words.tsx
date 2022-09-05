@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { useAppSelector } from 'src/hooks/redux'
 import { clsx } from 'src/utils/clsx'
 import { wordsAPI } from '../../services/WordsService'
 import styles from './Words.module.scss'
@@ -10,10 +11,11 @@ interface PropsType {
   wordTranslate: string
   wordDetail: string
   setWordDetail: any
+  isHard: boolean
 }
 
 const Word: React.FC<PropsType> = (props) => {
-  const { bgGroup, id, word, wordTranslate, wordDetail, setWordDetail } = props
+  const { bgGroup, id, word, wordTranslate, wordDetail, setWordDetail, isHard } = props
 
   const viewDetail = () => {
     setWordDetail(id)
@@ -22,7 +24,10 @@ const Word: React.FC<PropsType> = (props) => {
 
   return (
     <>
-      <li className={styles.word} style={{ background: bgGroup }}>
+      <li className={clsx({
+        [styles.word]: true,
+        ['_icon-bookmark']: isHard
+      })} style={{ background: bgGroup }}>
         <button
           className={clsx({
             [styles.wordButton]: true,
@@ -41,18 +46,21 @@ const Word: React.FC<PropsType> = (props) => {
 const Words: React.FC<any> = (props) => {
   const { page, words, errorWords, isLoadingWords, lvl, levels, wordDetail, setWordDetail } = props
 
+  const { hardWordsIds } = useAppSelector((state) => state.userWords)
+
   return (
     <ul className={styles.words}>
       {words &&
         words.map((word, ind) => (
           <Word
             key={ind}
-            bgGroup={levels ? levels[lvl].bg : 'red'}
-            id={word.id}
+            bgGroup={levels ? levels[lvl].bg : '#FFAFAF'}
+            id={word.id ?? word._id}
             word={word.word}
             wordTranslate={word.wordTranslate}
             wordDetail={wordDetail}
             setWordDetail={setWordDetail}
+            isHard={hardWordsIds.includes(word.id ?? word._id)}
           />
         ))}
       {errorWords && <li>Error</li>}
