@@ -7,28 +7,37 @@ const GamesPage: React.FC = () => {
   return (
     <section className={styles.games}>
       <div className={globalThis.globalStyles.container}>
-        <div className={styles.gamesHeader}>
-          <h2>Мини-игры</h2>
-          <p>Ингго любит поиграть! Го вместе!</p>
-        </div>
-        <div className={styles.gamesWrapper}>
-          <div className={styles.gamesGame1}>
-            <Link to='/games/audiocall'>
-              <div className={styles.game}>
+        <h2 className={styles.gamesTitle}>
+          Мини-игры
+          <span className={styles.gamesImage}>
+            <img src='./assets/svg/enggo-hunt.svg' alt='Поиграй с Ингго' />
+          </span>
+        </h2>
+        <p className={styles.gamesDescr}>Иннго обожает играть со своими друзьями, и поэтому подготовил для них несколько игр. А ты сможешь бросить вызов Ингго?</p>
+        <ul className={styles.gamesList}>
+          <li className={styles.gamesGame1}>
+            <Link to='/games/audiocall' className={styles.game}>
+              <p className={styles.gameName}><span>Аудио</span> <span>вызов</span></p>
+              <span className={styles.gameGo}>Играть!</span>
+              <span className={styles.gameImage}>
                 <img src='./assets/png/bg-audiocall.png' alt='Аудиовызов' />
-                <div className={styles.gameName}>Аудиовызов</div>
-              </div>
+              </span>
             </Link>
-          </div>
-          <div className={styles.gamesGame2}>
-            <Link to='/games/sprint'>
-              <div className={styles.game}>
+          </li>
+          <li className={styles.gamesGame2}>
+            <Link to='/games/sprint' className={styles.game}>
+              <p className={styles.gameName}><span>Спринт</span></p>
+              <span className={styles.gameGo}>Играть!</span>
+              <span className={styles.gameImage}>
                 <img src='./assets/png/bg-sprint.png' alt='Аудиовызов' />
-                <div className={styles.gameName}>Спринт</div>
-              </div>
+              </span>
             </Link>
-          </div>
-        </div>
+          </li>
+          <li className={styles.gamesEnggo}>
+            <p hidden>Скоро тут появится еще одна игра</p>
+            <img src='./assets/svg/enggo-games.svg' alt='Ингго уже готовит новую игру для своих друзей' />
+          </li>
+        </ul>
       </div>
     </section>
   )
