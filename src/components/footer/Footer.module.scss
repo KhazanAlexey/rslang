@@ -27,8 +27,12 @@
       display: flex;
       flex: 1;
 
-      @media (max-width: $mobile) {
-        font-size: rem(50);
+      //@media (max-width: $mobile) {
+      //  font-size: rem(50);
+      //}
+
+      @media (max-width:$mobileSmall){
+        font-size: rem(60);
       }
     }
 
@@ -54,12 +58,23 @@
 
     &Team {
       display: flex;
-      gap: rem(10);
+      gap: rem(24);
       justify-content: space-evenly;
 
-      @media (max-width: $mobile) {
+      @media (max-width: $tablet) {
         flex-direction: column;
-        font-size: rem(14);
+        //font-size: rem(14);
+        gap: rem(12);
+      }
+
+      @media (max-width:$mobile){
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-top: rem(18);
+      }
+
+      @media (max-width:$mobileSmall){
+        flex-direction: column;
       }
 
       a {
@@ -79,7 +94,7 @@
   }
 
   &Bottom {
-    padding: rem(10) 0;
+    padding: rem(12) 0;
     // background-color: $mainColor;
     color: $lightTextColor;
     border-top: 1px solid $lightTextColor;
@@ -89,14 +104,21 @@
     position: relative;
 
     @media (max-width: $mobile) {
-      font-size: rem(10);
+      font-size: rem(14);
+      //flex-direction: column;
+    }
+
+    @media (max-width:$mobileSmall){
       flex-direction: column;
+      gap: rem(6);
     }
 
     &Link {
       padding: 0 rem(5);
       font-weight: 700;
       display: flex;
+      gap: rem(6);
+      align-items: center;
     }
 
     &Balloon {

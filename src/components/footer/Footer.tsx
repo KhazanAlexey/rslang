@@ -47,9 +47,6 @@ const Footer: React.FC<any> = () => {
               </a>
             </div>
           </div>
-          <div className={styles.footerThird}>
-            <div>🦊</div>
-          </div>
         </div>
         <div className={styles.footerBottom}>
           Created in 2022 within the{' '}
