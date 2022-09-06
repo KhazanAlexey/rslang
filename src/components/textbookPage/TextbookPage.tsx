@@ -15,14 +15,13 @@ import { wordsAPI } from '../../services/WordsService'
 
 const TextBookPage: React.FC<any> = () => {
   const local = localStorageGet(['userId'])
-  const [isHard, setIsHard] = useState(false)
+  const [isHard, setIsHard] = useState(true)
   const [isCompleted, setIsCompleted] = useState(false)
   const [wordDetail, setWordDetail] = useState('')
   const { isAuth } = useAppSelector((state) => state.auth)
 
   const { hardWordsIds, completedWordsIds } = useAppSelector((state) => state.userWords)
 
-  const { data: hardW } = userWordsAPI.useFetchUserWordsQuery(local['userId'])
   const [activeLvl, setActiveLvl] = useState(1)
   const [activePage, setActivePage] = useState(1)
   const [hardWords, setHardWords] = useState([])
@@ -34,11 +33,11 @@ const TextBookPage: React.FC<any> = () => {
     { id: 5, title: 'Hard', descr: 'До 3000 слов', lvl: 'C1', bg: '#EAAFFF' },
     { id: 6, title: 'Hard+', descr: 'До 3600 слов', lvl: 'C2', bg: '#BAAFFF' },
   ]
+
   const {
     data: bookWords,
     isLoading: isLoadingWords,
     error: errorWords,
-    refetch,
   } = wordsAPI.useFetchWordsQuery({ group: activeLvl - 1, page: activePage - 1 })
   const {
     data: difficultUserWords,

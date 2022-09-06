@@ -45,10 +45,10 @@ export const RegisterForm = (props) => {
 
   const formik = useFormik({
     initialValues: {
-      password: '123456789qwe',
-      email: 'alik@mail.ru',
-      name: 'user_name',
-      passwordConfirm: '123456789qwe',
+      password: '',
+      email: '',
+      name: '',
+      passwordConfirm: '',
     },
 
     onSubmit: (values: IUserForm) => {
