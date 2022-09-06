@@ -4,6 +4,7 @@
 .audioCall {
   flex: 1;
   background-image: url('../../../assets/svg/bg-audiocall.svg');
+  background-size: cover;
 
   &Loading {
     margin: rem(100) auto;
