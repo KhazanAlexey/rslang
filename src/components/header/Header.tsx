@@ -6,6 +6,7 @@ import { userAPI } from '../../services/UserService'
 import { useAppSelector } from '../../hooks/redux'
 import AuthModal from '../auth/AuthModal'
 import BurgerComponent from './burger/BurgerComponent'
+import { userWordsAPI } from '../../services/UsersWordsService'
 
 const Header: React.FC<any> = () => {
   const [isAuthModal, setIsAuthModal] = useState('')
@@ -13,6 +14,7 @@ const Header: React.FC<any> = () => {
   const { isAuth, name: userName } = useAppSelector((state) => state.auth)
   const id = localStorage.getItem('userId') || ''
   const { data, error, isLoading } = userAPI.useFetchUserQuery(id)
+  const { data: hardW } = userWordsAPI.useFetchUserWordsQuery(id)
 
   return (
     <header className={styles.header}>

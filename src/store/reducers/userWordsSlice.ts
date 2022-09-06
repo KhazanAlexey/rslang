@@ -6,16 +6,18 @@ import { wordsAPI } from '../../services/WordsService'
 
 const initialState: userWords = {
   hardWords: [],
-  words: [],
+  userWords: [],
   hardWordsIds: [],
+  userWordsIds:[],
   completedWords: [],
   completedWordsIds: [],
 }
 
 type userWords = {
-  words: IWord[]
+  userWords: IUsersWords[]
   hardWords: IUsersWords[]
   hardWordsIds: string[]
+  userWordsIds: string[]
   completedWords: IUsersWords[]
   completedWordsIds: string[]
 }
@@ -53,10 +55,12 @@ export const userWordsSlice = createSlice({
         state.hardWordsIds = hardWId
         state.completedWords = completedW
         state.completedWordsIds = completeWId
+        state.userWords=payload
+        state.userWordsIds=payload.map(word=>word.wordId)
       },
-    ),
-      builder.addMatcher(wordsAPI.endpoints.fetchWords.matchFulfilled, (state, { payload }) => {
-        state.words = payload
-      })
+    )
+      // builder.addMatcher(wordsAPI.endpoints.fetchWords.matchFulfilled, (state, { payload }) => {
+      //   state.words = payload
+      // })
   },
 })
