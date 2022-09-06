@@ -47,17 +47,19 @@ const Header: React.FC<any> = () => {
                   Мини-игры
                 </NavLink>
               </li>
-              {isAuth && (
-                <li className={styles.headerItem}>
+              <li className={styles.headerItem}>
                   <NavLink
-                    to='/stat'
-                    className={({ isActive }) => (isActive ? styles.itemActive : '')}
-                    onClick={() => null}
+                    to={!isAuth ? '#' : '/stat'}
+                    title={!isAuth ? 'Войдите в аккаунт для просмотра статистики' : ''}
+                    className={({ isActive }) => clsx({
+                      [styles.itemActive]: isActive,
+                      [styles.itemDisable]: !isAuth
+                    })}
+                    onClick={() => isAuth ? null : setIsAuthModal('login')}
                   >
                     Статистика
                   </NavLink>
                 </li>
-              )}
             </ul>
           </nav>
           {!isAuth ? (

@@ -2,20 +2,32 @@
 @import '../../../../styles/mixins.scss';
 
 .teamSection {
+  padding: rem(90) 0;
+  @media (max-width:$mobile){
+    padding-top: rem(24);
+    padding-bottom: rem(30);
+  }
   &Wrapper {
     display: flex;
     justify-content: space-between;
-    padding: rem(100);
+    align-items: center;
+    padding: 0 rem(117);
+    margin-top: rem(54);
     gap: rem(20);
 
-    @media (max-width: em(920)) {
-      gap: rem(10);
-      padding: rem(60) rem(30);
+    @media (max-width:$pc){
+      padding: 0 rem(60);
+    }
+    @media (max-width: em(1270)){
+      padding: 0;
+    }
+    @media (max-width: em(1150)){
+      gap: rem(36);
     }
 
-    @media (max-width: $mobile) {
-      font-size: rem(14);
-      padding: rem(10) 0;
+    @media (max-width:$mobile){
+      flex-direction: column;
+      margin-top: rem(30);
     }
   }
 
@@ -25,80 +37,110 @@
     font-weight: 700;
     color: $brightColor;
     text-align: center;
-    padding-bottom: rem(60);
-
-    @media (max-width: em(920)) {
-      padding-bottom: rem(40);
-      font-size: rem(24);
-      line-height: 120%;
-    }
-
-    @media (max-width: $mobileSmall) {
-      font-size: rem(18);
-      padding-bottom: rem(10);
+  }
+  &Subtitle {
+    margin-top: rem(24);
+    font-weight: 400;
+    font-size: rem(18);
+    line-height: math.div(24 , 18);  
+    text-align: center;
+    &>a {
+      color: $mainLinkColor;
+      transition: $transitionText;
+      &:hover {
+        color: $hoverLinkColor;
+      }
     }
   }
 
   &List {
-    flex-basis: 45%;
     display: flex;
     flex-direction: column;
-    gap: rem(18);
+    gap: rem(48);
 
-    @media (max-width: em(920)) {
-      flex-basis: 100%;
+    @media (max-width: em(1150)){
+      gap: rem(18);
+    }
+
+    @media (max-width:$tablet){
+      gap: rem(12);
+    }
+
+    @media (max-width:$mobile){
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+    }
+
+    @media (max-width: em(604)){
+      justify-content: start;
     }
   }
 
   &Decoration {
     position: relative;
-    width: 55vw;
+    width: rem(256);
+    height: rem(408);
 
-    @media (max-width: em(920)) {
-      width: 100%;
+    @media (max-width:$tablet) {
+      right: rem(-100);
     }
 
-    @media (max-width: $mobile) {
-      display: none;
-      font-size: rem(14);
+    @media (max-width: em(800)){
+      right: rem(-120);
     }
+    @media (max-width:$mobile){
+      width: rem(190);
+      height: rem(303);
+    }
+
+    @media (max-width: em(380)){
+      right: rem(-90);
+    }
+
 
     &Enggo {
-      position: absolute;
-      z-index: 201;
-      right: rem(10);
-      top: rem(200);
-      width: rem(256);
-      height: rem(408);
-
-      @media (max-width: em(920)) {
-        width: rem(128);
-        height: auto;
-      }
-
-      @media (max-width: $mobile) {
-        width: rem(100);
-      }
-
-      img {
-        width: 100%;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      &>img {
+        min-width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
       }
     }
 
     &Cloud {
       transition: $transitionText;
       position: absolute;
-      z-index: 200;
-      right: rem(10);
       top: 0;
-      max-width: 30vw;
+      width: rem(396);
+      right: rem(196);
       background-color: $lightColor;
       border-radius: rem(12);
       padding: rem(12) rem(18);
+      z-index: -1;
+      &>span {
+        position: absolute;
+        font-size: rem(36);
+        bottom: rem(-16);
+        right: rem(36);
+        color: $mainButtonBgColor;
+      }
 
-      @media (max-width: em(920)) {
-        position: static;
-        max-width: 40vw;
+      @media (max-width: em(1150)){
+        width: rem(360);
+        padding: rem(12);
+      }
+
+      @media (max-width: em(920)){
+        width: rem(280);
+      }
+
+      @media (max-width:$mobile){
+        width: 55vw;
+        right: rem(140);
       }
 
       p {
@@ -106,13 +148,13 @@
         line-height: rem(24);
         color: $lightTextColor;
 
-        @media (max-width: em(920)) {
-          font-size: rem(14);
-          line-height: 100%;
+        @media (max-width: em(1150)) {
+          font-size: rem(16);
         }
 
-        @media (max-width: $mobile) {
-          font-size: rem(10);
+        @media (max-width:$mobile){
+          font-size: rem(15);
+          line-height: math.div(20 , 15);
         }
       }
     }

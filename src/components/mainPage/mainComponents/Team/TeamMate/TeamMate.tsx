@@ -10,7 +10,7 @@ type PropsType = {
 
 const TeamMate: React.FC<any> = ({ data, setDesc: setDesc }: PropsType) => {
   return (
-    <div className={styles.teamMember} onMouseEnter={() => setDesc(data.description)}>
+    <li className={styles.teamMember} onMouseEnter={() => setDesc(data.description)}>
       <div className={styles.teamMemberImg}>
         <div className={styles.teamMemberImgFrame}>
           <img src={data.image} alt={data.name} />
@@ -18,7 +18,7 @@ const TeamMate: React.FC<any> = ({ data, setDesc: setDesc }: PropsType) => {
       </div>
       <div className={styles.teamMemberInfo}>
         <div className={styles.teamMemberInfoName}>{data.name}</div>
-        <div className={styles.teamMemberInfoRole}>
+        <p className={styles.teamMemberInfoRole}>
           {data.role}
           <a
             href={data.github}
@@ -27,10 +27,10 @@ const TeamMate: React.FC<any> = ({ data, setDesc: setDesc }: PropsType) => {
               ['_icon-github']: true,
             })}
           ></a>
-        </div>
+        </p>
         <p className={styles.teamMemberInfoStory}>{data.about}</p>
       </div>
-    </div>
+    </li>
   )
 }
 

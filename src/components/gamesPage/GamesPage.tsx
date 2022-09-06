@@ -15,7 +15,7 @@ const GamesPage: React.FC = () => {
           <div className={styles.gamesGame1}>
             <Link to='/games/audiocall'>
               <div className={styles.game}>
-                <img src='./assets/svg/bg-audiocall.svg' alt='Аудиовызов' />
+                <img src='./assets/png/bg-audiocall.png' alt='Аудиовызов' />
                 <div className={styles.gameName}>Аудиовызов</div>
               </div>
             </Link>
@@ -23,7 +23,7 @@ const GamesPage: React.FC = () => {
           <div className={styles.gamesGame2}>
             <Link to='/games/sprint'>
               <div className={styles.game}>
-                <img src='./assets/svg/bg-sprint.svg' alt='Аудиовызов' />
+                <img src='./assets/png/bg-sprint.png' alt='Аудиовызов' />
                 <div className={styles.gameName}>Спринт</div>
               </div>
             </Link>

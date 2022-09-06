@@ -9,7 +9,7 @@ const EnggoComponent: React.FC = () => {
   return (
     <section className={styles.enggoSection} id='enggoSection'>
       <div className={globalThis.globalStyles.container}>
-        <div className={clsx({ [styles.enggoSectionWrapper]: true })}>
+        <div className={styles.enggoSectionWrapper}>
           <div className={styles.enggoDecoration}>
             <div className={styles.enggoDecorationDog}>
               <img src='./assets/svg/enggo-chair.svg' alt='Sneaky Enggo' />
@@ -39,12 +39,10 @@ const EnggoComponent: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className={styles.enggoSectionCopy}>
-          <p>
-            Ингго против нарушения авторских прав, и поэтому он хотел бы оставить ссылку на своего
-            великолепного художника - @catalyststuff.
-          </p>
-        </div>
+        <p className={styles.enggoSectionCopy}>
+          Ингго против нарушения авторских прав, и поэтому он хотел бы оставить ссылку на своего
+          великолепного художника - <a href='https://ru.freepik.com/author/catalyststuff'>@catalyststuff</a>
+        </p>
         <div className={styles.enggoSectionBg}>
           <img src='./assets/svg/wave.svg' alt='' />
         </div>

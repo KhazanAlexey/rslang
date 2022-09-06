@@ -150,11 +150,17 @@ const TextBookPage: React.FC<any> = () => {
             </div>
             <div className={styles.textbookGames}>
               <Link className={styles.textbookGame} to='/games/audiocall' onClick={() => null}>
-                <span>Аудио</span>
-                <span>Вызов</span>
+                <span className={styles.textbookGameText}>Аудио</span>
+                <span className={styles.textbookGameText}>Вызов</span>
+                <span className={styles.textbookGameBg}>
+                  <img src='./assets/png/bg-audiocall.png' alt='Сыграть в аудиовызов' />
+                </span>
               </Link>
               <Link className={styles.textbookGame} to='/games/sprint' onClick={() => null}>
-                <span>Спринт</span>
+                <span className={styles.textbookGameText}>Спринт</span>
+                <span className={styles.textbookGameBg}>
+                  <img src='./assets/png/bg-sprint.png' alt='Сыграть в спринт' />
+                </span>
               </Link>
               <img src='./assets/svg/enggo-textbook.svg' alt='Поиграй с Enggo' />
             </div>

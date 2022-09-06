@@ -58,6 +58,10 @@
     color: $activeNavColor;
   }
 
+  .itemDisable {
+    color: $disableLinkColor;
+  }
+
   .headerAuth {
     display: flex;
     gap: rem(24);

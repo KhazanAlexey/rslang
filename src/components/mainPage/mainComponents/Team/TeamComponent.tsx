@@ -12,19 +12,21 @@ const TeamComponent: React.FC<any> = () => {
   return (
     <section className={styles.teamSection}>
       <div className={globalThis.globalStyles.container}>
-        <h2 className={styles.teamSectionHeader}>Команда разработчиков Enggo.</h2>
-        <div className={clsx({ [styles.teamSectionWrapper]: true })}>
-          <div className={styles.teamSectionList}>
+        <h2 className={styles.teamSectionHeader}>#DREAMTEAM</h2>
+        <h3 className={styles.teamSectionSubtitle}>Команда мечты, созданная в <a href='https://rs.school/'>RS School</a>.</h3>
+        <div className={styles.teamSectionWrapper}>
+          <ul className={styles.teamSectionList}>
             {teamData.map((member: ITeamMate) => (
               <TeamMate data={member} key={member.id} setDesc={setDesc} />
             ))}
-          </div>
+          </ul>
           <div className={styles.teamSectionDecoration}>
             <div className={styles.teamSectionDecorationEnggo}>
               <img src='./assets/svg/enggo-smart.svg' alt='Enggo Smart' />
             </div>
             <div className={styles.teamSectionDecorationCloud}>
               <p>{desc}</p>
+              <span className='_icon-arrow'></span>
             </div>
           </div>
         </div>
