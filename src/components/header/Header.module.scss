@@ -1,12 +1,40 @@
 @use 'sass:math';
 @import '../../styles/mixins.scss';
 
+.optionalBg {
+  position: relative;  
+  &::after {
+    content: '';
+    position: absolute;
+    width: calc(100% + rem(42));
+    height: calc(100% + rem(100));
+    border-radius: rem(24);
+    background: $mainBgColor;
+    opacity: 0.9;
+    bottom: rem(-12);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -1;
+    @media (max-width:$pc){
+      width: calc(100% + rem(48));
+    }
+    @media (max-width:$mobileSmall){
+      display: none;
+    }
+  }
+}
+
 .header {
   height: rem(93);
   padding: rem(14) 0;
+  position: relative;
+  z-index: 10;
   @media (max-width: $mobile) {
     padding: rem(12) 0;
     height: rem(74);
+  }
+  @media (max-width:$mobileSmall){
+    background: rgba(249, 249, 249, 0.9);
   }
 
   .headerWrapper {
@@ -18,7 +46,7 @@
   .headerLogo {
     font-size: rem(65);
     color: $lightColor;
-    transition: $transitionText;
+    transition: $transitionText;    
     &:hover {
       color: $brightColor;
     }

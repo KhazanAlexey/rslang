@@ -33,7 +33,7 @@ const GamesStartScreen: React.FC<PropsType> = ({ header, text, setDifficultyLeve
             </div>
           ))}
         </div>
-        <Button text='start' onClick={() => setDifficultyLevel(level)} />
+        <Button text='Тренироваться!' onClick={() => setDifficultyLevel(level)} />
       </div>
     </>
   )

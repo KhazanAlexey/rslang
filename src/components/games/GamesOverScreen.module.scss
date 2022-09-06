@@ -1,0 +1,28 @@
+@use 'sass:math';
+@import '../../styles/mixins.scss';
+
+.over {
+  &Group {
+    margin: rem(24) 0;
+    padding: rem(18) rem(36);
+    background: $mainBgColor;
+    border-radius: rem(24);
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+  &Title {
+    color: $mainTitleColor;
+    font-weight: 700;
+    font-size: rem(24);
+    line-height: math.div(31 , 24);
+  }
+  &List {
+    margin-top: rem(9);
+  }
+  &Item {
+    margin-top: rem(3);
+    font-size: rem(16);
+    line-height: math.div(20 , 16);
+  }
+}

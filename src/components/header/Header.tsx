@@ -23,12 +23,16 @@ const Header: React.FC<any> = () => {
             to='/'
             className={clsx({
               [styles.headerLogo]: true,
+              [styles.optionalBg]: true,
               ['_icon-logo']: true,
             })}
             onClick={() => null}
           ></Link>
           <nav className={styles.headerNav}>
-            <ul className={styles.headerList}>
+            <ul className={clsx({
+              [styles.headerList]: true,
+              [styles.optionalBg]: true
+            })}>
               <li className={styles.headerItem}>
                 <NavLink
                   to='/textbook'
@@ -63,7 +67,10 @@ const Header: React.FC<any> = () => {
             </ul>
           </nav>
           {!isAuth ? (
-            <div className={styles.headerAuth}>
+            <div className={clsx({
+              [styles.headerAuth]: true,
+              [styles.optionalBg]: true
+            })}>
               <button className={styles.authLogin} onClick={() => setIsAuthModal('login')}>
                 Вход
               </button>
@@ -75,6 +82,7 @@ const Header: React.FC<any> = () => {
             <button
               className={clsx({
                 [styles.headerUsername]: true,
+                [styles.optionalBg]: true,
                 ['_icon-settings']: true,
               })}
               onClick={() => setIsAuthModal('settings')}
@@ -85,6 +93,7 @@ const Header: React.FC<any> = () => {
           <button
             className={clsx({
               [styles.headerUser]: true,
+              [styles.optionalBg]: true,
               ['_icon-user']: !isAuth,
               ['_icon-settings']: isAuth,
             })}
@@ -93,6 +102,7 @@ const Header: React.FC<any> = () => {
           <button
             className={clsx({
               [styles.headerBurger]: true,
+              [styles.optionalBg]: true,
               [styles.headerBurgerRotated]: !!burger,
             })}
             onClick={() => setBurger(true)}

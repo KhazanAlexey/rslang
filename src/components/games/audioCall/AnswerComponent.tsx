@@ -44,7 +44,7 @@ export const AnswerComponent: React.FC<Props> = ({
           </button>
         ))}
       </div>
-      <Button text='NExT question' onClick={nextWordHandler}></Button>
+      <Button text='Следующее слово' onClick={nextWordHandler}></Button>
     </div>
   )
 }

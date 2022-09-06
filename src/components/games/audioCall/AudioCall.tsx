@@ -142,13 +142,14 @@ const AudioCall: React.FC = () => {
   return (
     <section className={styles.audioCall}>
       <div className={globalThis.globalStyles.container}>
+        <h1 className={styles.audioCallTitle}>Аудиовызов</h1>
         <div className={styles.audioCallWrapper}>
           {/* <h1 className={styles.audioCallHeader}>Аудиовызов</h1> */}
-          {isLoadingWords && <div className={styles.audioCallLoading}>loading.....</div>}
+          {isLoadingWords && <div className={styles.audioCallLoading}>Загружаем слова..</div>}
           {GameState.StartScreen === activeScreen && (
             <GamesStartScreen
-              header='Аудиовызов'
-              text='Тренировка Аудиовызов улучшает твое восприятие речи на слух. Выбери уровень сложности:'
+              header='Потренируемся?'
+              text='Тренировка "Аудиовызов" улучшает твое восприятие речи на слух. Выбери уровень сложности:'
               setDifficultyLevel={startGameHandler}
             />
           )}
@@ -174,6 +175,9 @@ const AudioCall: React.FC = () => {
           )}
           {activeScreen == GameState.GameOver && <GamesOverScreen />}
         </div>
+      </div>
+      <div className={styles.audioCallBg}>
+        <img src='../assets/png/bg-audiocall.png' alt='Аудиовызов' />
       </div>
     </section>
   )

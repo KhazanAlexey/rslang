@@ -41,23 +41,23 @@ const SprintGame: React.FC<PropsType> = ({
 
   return (
     <>
-      <div>{timeLeft}</div>
-      <div>score:{score}</div>
+      <p className={styles.timer}>Осталось {timeLeft} сек.</p>
+      <p className={styles.score}>Получено очков: {score}</p>
       {wordToGuess && (
         <div className={styles.audioCallScreen}>
           <div className={styles.currentWord}> {wordToGuess.word}</div>
           <div className={styles.currentWord}> {answerVariant && answerVariant.wordTranslate}</div>
 
-          <div style={{ display: 'flex' }}>
+          <div className={styles.answerList}>
+            <Button
+              text='Правильно'
+              classes={selectedAnswer === true && styles.selectedAnswer}
+              onClick={() => answerHandler(true)}
+            />
             <Button
               text='НЕ правильно'
               classes={selectedAnswer === false && styles.selectedAnswer}
               onClick={() => answerHandler(false)}
-            />
-            <Button
-              text='правильно'
-              classes={selectedAnswer === true && styles.selectedAnswer}
-              onClick={() => answerHandler(true)}
             />
           </div>
         </div>

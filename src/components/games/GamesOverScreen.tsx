@@ -1,5 +1,6 @@
 import React, { useId } from 'react'
 import Button from '../common/button/Button'
+import styles from './GamesOverScreen.module.scss'
 import { useAppSelector } from '../../hooks/redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -29,28 +30,27 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
   }
   return (
     <>
-      <div>
-        <h3>Correct:</h3>
-        <ul>
+      <div className={styles.overGroup}>
+        <h3 className={styles.overTitle}>Правильные ответы:</h3>
+        <ol className={styles.overList}>
           {correctAnswers.map((el, index) => (
-          <li key={`${id}-${index}`}>
+          <li className={styles.overItem} key={`${id}-${index}`}>
             {el.word} - {el.wordTranslate}
           </li>
         ))}
-        </ul>
-
+        </ol>
       </div>
-      <div>
-        <h3>Wrong:</h3>
-        <ul>
+      <div className={styles.overGroup}>
+        <h3 className={styles.overTitle}>Ошибки:</h3>
+        <ol className={styles.overList}>
           {wrongAnswers.map((el, index) => (
-          <li key={`${id}-${index}`}>
+          <li className={styles.overItem} key={`${id}-${index}`}>
             {el.word} - {el.wordTranslate}
           </li>
         ))}
-        </ul>
+        </ol>
       </div>
-      <Button text='exit' onClick={exitGameHandler} />
+      <Button text='Выход' onClick={exitGameHandler} />
     </>
   )
 }

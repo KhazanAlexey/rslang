@@ -125,13 +125,13 @@ const Sprint: React.FC<any> = () => {
   return (
     <section className={styles.sprint}>
       <div className={globalThis.globalStyles.container}>
+        <h1 className={styles.sprintTitle}>Спринт</h1>
         <div className={styles.sprintWrapper}>
-          <h1 className={styles.sprintHeader}>Спринт!</h1>
           {isLoadingWords && <div className={styles.loading}>loading...</div>}
           {GameState.StartScreen === activeScreen && (
             <GamesStartScreen
-              header='Спринт'
-              text='Тренировка Спринт! Выбери уровень:'
+              header='Кто быстрее?'
+              text='Тренировка на скорость Спринт отлично помогает закрепить слова! Выбери уровень:'
               setDifficultyLevel={startGameHandler}
             />
           )}
@@ -147,6 +147,9 @@ const Sprint: React.FC<any> = () => {
 
           {activeScreen == GameState.GameOver && <GamesOverScreen game={'sprint'} />}
         </div>
+      </div>
+      <div className={styles.sprintBg}>
+        <img src='../assets/png/bg-sprint.png' alt='Спринт' />
       </div>
     </section>
   )

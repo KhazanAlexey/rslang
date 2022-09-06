@@ -35,7 +35,7 @@
   &Options {
     display: flex;
     flex-wrap: nowrap;
-    gap: 2vw;
+    gap: rem(24);
     justify-content: center;
     margin-bottom: rem(20);
 
@@ -64,9 +64,11 @@
     padding: rem(10);
     backdrop-filter: blur(5px);
     font-size: 2vw;
-    margin: 0 rem(10);
+    padding: rem(9) rem(24);
+    //margin: 0 rem(10);
     border-radius: 3vw;
     color: $lightTextColor;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
     cursor: pointer;
 
     @media (max-width: $mobile) {

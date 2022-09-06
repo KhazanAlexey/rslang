@@ -12,7 +12,7 @@
   &Levels {
     display: flex;
     gap: rem(10);
-    margin-bottom: rem(20);
+    margin-bottom: rem(36);
 
     .level {
       cursor: pointer;
@@ -39,5 +39,9 @@
 
   &Desc {
     padding: rem(40);
+    max-width: rem(560);
+    text-align: center;
+    font-size: rem(18);
+    line-height: math.div(24 , 18);
   }
 }
