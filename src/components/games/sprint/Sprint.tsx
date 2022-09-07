@@ -10,6 +10,7 @@ import { shuffle } from '../../../utils/suffle'
 import GamesOverScreen from '../GamesOverScreen'
 import SprintGame from './SprintGame'
 import { sprintSlice } from '../../../store/reducers/sprintSlice'
+import { useAudio } from 'src/hooks/useAudio'
 
 const Sprint: React.FC<any> = () => {
   const dispatch = useAppDispatch()
@@ -45,18 +46,39 @@ const Sprint: React.FC<any> = () => {
     },
   )
 
+  // const [playingErrorSound, toggleErrorSound] = useAudio('../../assets/sound/error-sound.m4a')
+  // const [playingSuccessSound, toggleSuccessSound] = useAudio('../../assets/sound/success-sound.m4a')
+  const errSound = () => {
+    const audio = new Audio('../../assets/sound/error-sound.m4a');
+    audio.play();
+  }
+  const successSound = () => {
+    const audio = new Audio('../../assets/sound/success-sound.m4a');
+    audio.play();
+  }
+
   const answerHandler = (isRight: boolean) => {
     setSelectedAnswer(isRight)
     if (isRight) {
       if (wordToGuess?.id === answerVariant?.id) {
+        // toggleSuccessSound()
+        successSound()
         wordToGuess && dispatch(sprintSlice.actions.setCorrectAnswers(wordToGuess))
         setScore(score + 10)
-      } else wordToGuess && dispatch(sprintSlice.actions.setWrongAnswers(wordToGuess))
+      } else {
+        // toggleErrorSound()
+        errSound()
+        wordToGuess && dispatch(sprintSlice.actions.setWrongAnswers(wordToGuess))
+      }
     }
     if (!isRight) {
       if (wordToGuess?.id === answerVariant?.id) {
+        errSound()
+        // toggleErrorSound()
         wordToGuess && dispatch(sprintSlice.actions.setWrongAnswers(wordToGuess))
       } else {
+        // toggleSuccessSound()
+        successSound()
         wordToGuess && dispatch(sprintSlice.actions.setCorrectAnswers(wordToGuess))
         setScore(score + 10)
       }

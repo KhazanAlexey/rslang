@@ -11,6 +11,7 @@ import { wordsAPI } from '../../../services/WordsService'
 import randomInteger from '../../../utils/random'
 import { shuffle } from '../../../utils/suffle'
 import GamesOverScreen from '../GamesOverScreen'
+import { useAudio } from 'src/hooks/useAudio'
 
 const AudioCall: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -44,13 +45,28 @@ const AudioCall: React.FC = () => {
     },
   )
 
+  // const [playingErrorSound, toggleErrorSound] = useAudio('../../assets/sound/error-sound.m4a')
+  // const [playingSuccessSound, toggleSuccessSound] = useAudio('../../assets/sound/success-sound.m4a')
+  const errSound = () => {
+    const audio = new Audio('../../assets/sound/error-sound.m4a');
+    audio.play();
+  }
+  const successSound = () => {
+    const audio = new Audio('../../assets/sound/success-sound.m4a');
+    audio.play();
+  }
+
   const answerHandler = (selectedAnswer: IWord) => {
     answerSelectHandler(selectedAnswer)
 
     if (wordToGuess?.id === selectedAnswer.id) {
       dispatch(audioCallSlice.actions.setCorrectAnswers(selectedAnswer))
+      // toggleSuccessSound()
+      successSound()
       // setCurrentWordIndex(currentWordIndex + 1)
     } else {
+      // toggleErrorSound()
+      errSound()
       dispatch(audioCallSlice.actions.setWrongAnswers(selectedAnswer))
     }
     dispatch(audioCallSlice.actions.setActiveScreen(GameState.Answer))
