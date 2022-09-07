@@ -2,6 +2,7 @@
 @import '../../styles/mixins.scss';
 
 .textbook {
+  min-height: calc(100vh - rem(93) - rem(170));
   .textbookInfo {
     padding: rem(30) 0;
   }

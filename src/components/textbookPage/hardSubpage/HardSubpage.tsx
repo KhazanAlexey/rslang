@@ -16,6 +16,7 @@ const HardSubpage: React.FC<any> = (props) => {
     difficultWordsError: error,
   } = props
 
+  const isEmpty = !difficultUserWords?.[0].paginatedResults.find((x) => x.userWord.difficulty == 'hard')
   return (
     <section className=''>
       <section>
@@ -27,6 +28,7 @@ const HardSubpage: React.FC<any> = (props) => {
         <div className={globalThis.globalStyles.container}>
           <div className={globalThis.globalStyles.bookWrapper}>
             <div className={globalThis.globalStyles.bookWords}>
+              {isEmpty && <p>Пока сложных слов нет</p>}
               <Words
                 words={difficultUserWords?.[0].paginatedResults}
                 errorWords={error}

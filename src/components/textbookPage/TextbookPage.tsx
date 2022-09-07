@@ -204,7 +204,6 @@ const TextBookPage: React.FC<any> = () => {
         />
       )}
       {/* <Detail id={wordDetail} complete={isCompleted} hard={isHard} subpage={subpage} />*/}
-      <section></section>
     </div>
   )
 }
