@@ -31,7 +31,7 @@
       z-index: -1;
       background: rgba(0, 0, 0, 0.2);
     }
-    &>img {
+    & > img {
       position: absolute;
       min-width: 102%;
       height: 100%;
@@ -42,7 +42,7 @@
 
   &Title {
     font-size: rem(42);
-    line-height: math.div(48 , 42);
+    line-height: math.div(48, 42);
     font-weight: 700;
     color: $mainBgColor;
     text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.35);
@@ -72,6 +72,5 @@
   &Screen {
     padding: 0 10vw;
     color: $lightTextColor;
-
   }
 }

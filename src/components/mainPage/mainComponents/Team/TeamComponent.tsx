@@ -13,7 +13,9 @@ const TeamComponent: React.FC<any> = () => {
     <section className={styles.teamSection}>
       <div className={globalThis.globalStyles.container}>
         <h2 className={styles.teamSectionHeader}>#DREAMTEAM</h2>
-        <h3 className={styles.teamSectionSubtitle}>Команда мечты, созданная в <a href='https://rs.school/'>RS School</a>.</h3>
+        <h3 className={styles.teamSectionSubtitle}>
+          Команда мечты, созданная в <a href='https://rs.school/'>RS School</a>.
+        </h3>
         <div className={styles.teamSectionWrapper}>
           <ul className={styles.teamSectionList}>
             {teamData.map((member: ITeamMate) => (

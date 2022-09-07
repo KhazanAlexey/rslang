@@ -5,18 +5,18 @@
   //flex: 1;
   padding: rem(30) 0 rem(30);
 
-  @media (max-width:$mobileSmall){
+  @media (max-width: $mobileSmall) {
     padding-top: rem(18);
   }
 
   &Title {
     font-weight: 700;
     font-size: rem(42);
-    line-height: math.div(61 , 42);
+    line-height: math.div(61, 42);
     color: $mainTitleColor;
     position: relative;
 
-    @media (max-width:$mobileSmall){
+    @media (max-width: $mobileSmall) {
       font-size: rem(30);
     }
   }
@@ -29,26 +29,26 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    &>img {
+    & > img {
       position: absolute;
       min-width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    @media (max-width:$tablet){
+    @media (max-width: $tablet) {
       width: rem(307);
       height: rem(275);
     }
-    @media (max-width: em(840)){
+    @media (max-width: em(840)) {
       width: rem(257);
       height: rem(230);
     }
-    @media (max-width: em(580)){
+    @media (max-width: em(580)) {
       width: rem(201);
       height: rem(180);
     }
-    @media (max-width:$mobileSmall){
+    @media (max-width: $mobileSmall) {
       right: rem(-110);
     }
   }
@@ -56,12 +56,12 @@
     margin-top: rem(9);
     font-weight: 400;
     font-size: rem(18);
-    line-height: math.div(24 , 18);
+    line-height: math.div(24, 18);
     max-width: rem(360);
-    @media (max-width:$mobile){
+    @media (max-width: $mobile) {
       max-width: rem(280);
     }
-    @media (max-width:$mobileSmall){
+    @media (max-width: $mobileSmall) {
       font-size: rem(16);
       max-width: rem(240);
     }
@@ -75,11 +75,11 @@
     position: relative;
     padding-bottom: rem(180);
     //padding: rem(20) 20vw;
-    @media (max-width:$tablet){
+    @media (max-width: $tablet) {
       gap: rem(12);
     }
 
-    @media (max-width:$mobileSmall){
+    @media (max-width: $mobileSmall) {
       gap: unset;
       flex-direction: column;
       margin-top: rem(36);
@@ -103,7 +103,7 @@
         height: rem(360);
       }
 
-      @media (max-width: em(840)){
+      @media (max-width: em(840)) {
         width: rem(320);
         height: rem(320);
       }
@@ -113,7 +113,7 @@
         height: rem(240);
       }
 
-      @media (max-width: em(580)){
+      @media (max-width: em(580)) {
         width: rem(200);
         height: rem(200);
       }
@@ -126,7 +126,7 @@
   &Game2 {
     margin-top: rem(120);
 
-    @media (max-width:$mobileSmall){
+    @media (max-width: $mobileSmall) {
       margin-top: unset;
       margin-left: auto;
       position: relative;
@@ -135,20 +135,20 @@
     .game {
       width: rem(480);
       height: rem(480);
-      
-      @media (max-width:$tablet){
+
+      @media (max-width: $tablet) {
         width: rem(420);
         height: rem(420);
       }
-      @media (max-width: em(840)){
+      @media (max-width: em(840)) {
         width: rem(380);
         height: rem(380);
       }
-      @media (max-width:$mobile){
+      @media (max-width: $mobile) {
         width: rem(280);
         height: rem(280);
       }
-      @media (max-width: em(580)){
+      @media (max-width: em(580)) {
         width: rem(240);
         height: rem(240);
       }
@@ -164,24 +164,24 @@
     align-items: center;
     left: rem(24);
     bottom: 0;
-    &>img {
+    & > img {
       position: absolute;
       min-width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    @media (max-width: em(840)){
+    @media (max-width: em(840)) {
       width: rem(218);
       height: rem(320);
     }
 
-    @media (max-width: em(580)){
+    @media (max-width: em(580)) {
       width: rem(177);
       height: rem(260);
     }
 
-    @media (max-width:$mobileSmall){
+    @media (max-width: $mobileSmall) {
       left: 0;
       width: rem(150);
       height: rem(222);
@@ -221,23 +221,23 @@
   align-items: center;
   &Name {
     font-size: rem(48);
-    line-height: math.div(54 , 48);
+    line-height: math.div(54, 48);
     width: 70%;
     display: flex;
     flex-direction: column;
     align-items: start;
-    transition: all .3s;
-    &>span {
+    transition: all 0.3s;
+    & > span {
       display: flex;
       width: 100%;
       &:nth-child(2) {
         padding-left: 20%;
       }
     }
-    @media (max-width:$mobile){
+    @media (max-width: $mobile) {
       font-size: rem(36);
     }
-    @media (max-width: em(580)){
+    @media (max-width: em(580)) {
       font-size: rem(30);
     }
   }
@@ -254,7 +254,7 @@
       background: rgba(0, 0, 0, 0.25);
       z-index: -1;
     }
-    &>img {
+    & > img {
       z-index: -2;
       min-width: 100%;
       left: 0;
@@ -273,17 +273,17 @@
     padding: rem(12) rem(24);
     background: $mainBgColor;
     font-size: rem(24);
-    line-height: math.div(27 , 24);
+    line-height: math.div(27, 24);
     border-radius: rem(44);
     color: $hoverBrightButtonBgColor;
     font-weight: 700;
     transform: translateY(300%);
-    transition: all .3s;
-    @media (max-width:$mobile){
+    transition: all 0.3s;
+    @media (max-width: $mobile) {
       bottom: rem(24);
       font-size: rem(18);
     }
-    @media (max-width: em(580)){
+    @media (max-width: em(580)) {
       padding: rem(6) rem(12);
       font-size: rem(16);
     }
@@ -294,7 +294,7 @@
       transform: rotate(-5deg) scale(1.1);
     }
     .gameImage {
-      &>img {
+      & > img {
         animation-play-state: running;
       }
     }

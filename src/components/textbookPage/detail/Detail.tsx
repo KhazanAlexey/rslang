@@ -13,18 +13,24 @@ import { userWordsSlice } from '../../../store/reducers/userWordsSlice'
 const Detail: React.FC<any> = (props) => {
   const { id, complete: isComplete, hard: isHard } = props
   const dispatch = useDispatch()
-
+  const userid = localStorage.getItem('userId') || ''
   const { data: wordData, refetch } = wordsAPI.useFetchWordByIdQuery(id)
+  const { data: userWord } = userWordsAPI.useFetchUserWordQuery({ id: userid, wordId: id })
   useEffect(() => {
     refetch()
   }, [id])
+
   const [postWord] = userWordsAPI.usePostUserWordMutation()
   const [updateUserWord] = userWordsAPI.useUpdateUserWordMutation()
   const [deleteWord] = userWordsAPI.useDeleteUserWordMutation()
   const local = localStorageGet(['userId'])
   const [playing, toggle] = useAudio(`https://rs-lang-193.herokuapp.com/${wordData?.audio}`)
-  const [playingMeaning, meaningToggle] = useAudio(`https://rs-lang-193.herokuapp.com/${wordData?.audioMeaning}`)
-  const [playingExample, exampleToggle] = useAudio(`https://rs-lang-193.herokuapp.com/${wordData?.audioExample}`)
+  const [playingMeaning, meaningToggle] = useAudio(
+    `https://rs-lang-193.herokuapp.com/${wordData?.audioMeaning}`,
+  )
+  const [playingExample, exampleToggle] = useAudio(
+    `https://rs-lang-193.herokuapp.com/${wordData?.audioExample}`,
+  )
   // TODO: сделать логику добавления в сложные
 
   const hardHandler = () => {
@@ -58,7 +64,7 @@ const Detail: React.FC<any> = (props) => {
     if (!isComplete && !isHard)
       postWord({ id: local['userId'], difficulty: 'completed', wordId: id })
   }
-
+  console.log('userW', userWord)
   const soundHandler = () => {
     toggle()
   }
@@ -68,7 +74,7 @@ const Detail: React.FC<any> = (props) => {
   const soundExampleHandler = () => {
     exampleToggle()
   }
-
+  if (!id) return <div></div>
   return (
     <article
       className={clsx({
@@ -94,7 +100,8 @@ const Detail: React.FC<any> = (props) => {
       <div className={styles.detailMore}>
         <ul className={styles.detailList}>
           <li className={styles.detailItem}>
-            <h4 className={styles.detailSubtitle}>Значение слова 
+            <h4 className={styles.detailSubtitle}>
+              Значение слова
               <button
                 className={clsx({
                   [styles.detailSound]: true,
@@ -103,7 +110,8 @@ const Detail: React.FC<any> = (props) => {
                   [styles.soundOn]: playingMeaning,
                 })}
                 onClick={soundMeaningHandler}
-              ></button></h4>
+              ></button>
+            </h4>
             {wordData && (
               <p
                 className={styles.detailText}
@@ -113,7 +121,8 @@ const Detail: React.FC<any> = (props) => {
             <p className={styles.detailText}>{wordData && wordData.textMeaningTranslate}</p>
           </li>
           <li className={styles.detailItem}>
-            <h4 className={styles.detailSubtitle}>Пример использования 
+            <h4 className={styles.detailSubtitle}>
+              Пример использования
               <button
                 className={clsx({
                   [styles.detailSound]: true,
@@ -122,7 +131,8 @@ const Detail: React.FC<any> = (props) => {
                   [styles.soundOn]: playingExample,
                 })}
                 onClick={soundExampleHandler}
-              ></button></h4>
+              ></button>
+            </h4>
             {wordData && (
               <p
                 className={styles.detailText}

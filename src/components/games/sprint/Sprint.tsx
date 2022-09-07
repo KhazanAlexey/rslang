@@ -113,7 +113,6 @@ const Sprint: React.FC<any> = () => {
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
-      console.log(event.key)
       if (event.repeat) return
       if (event.key === 'ArrowLeft') answerHandler(false)
       if (event.key === 'ArrowRight') answerHandler(true)

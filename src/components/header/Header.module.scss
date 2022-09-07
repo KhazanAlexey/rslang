@@ -2,7 +2,7 @@
 @import '../../styles/mixins.scss';
 
 .optionalBg {
-  position: relative;  
+  position: relative;
   &::after {
     content: '';
     position: absolute;
@@ -15,10 +15,10 @@
     left: 50%;
     transform: translateX(-50%);
     z-index: -1;
-    @media (max-width:$pc){
+    @media (max-width: $pc) {
       width: calc(100% + rem(48));
     }
-    @media (max-width:$mobileSmall){
+    @media (max-width: $mobileSmall) {
       display: none;
     }
   }
@@ -33,7 +33,7 @@
     padding: rem(12) 0;
     height: rem(74);
   }
-  @media (max-width:$mobileSmall){
+  @media (max-width: $mobileSmall) {
     background: rgba(249, 249, 249, 0.9);
   }
 
@@ -46,7 +46,7 @@
   .headerLogo {
     font-size: rem(65);
     color: $lightColor;
-    transition: $transitionText;    
+    transition: $transitionText;
     &:hover {
       color: $brightColor;
     }

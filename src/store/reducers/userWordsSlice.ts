@@ -8,7 +8,7 @@ const initialState: userWords = {
   hardWords: [],
   userWords: [],
   hardWordsIds: [],
-  userWordsIds:[],
+  userWordsIds: [],
   completedWords: [],
   completedWordsIds: [],
 }
@@ -55,12 +55,12 @@ export const userWordsSlice = createSlice({
         state.hardWordsIds = hardWId
         state.completedWords = completedW
         state.completedWordsIds = completeWId
-        state.userWords=payload
-        state.userWordsIds=payload.map(word=>word.wordId)
+        state.userWords = payload
+        state.userWordsIds = payload.map((word) => word.wordId)
       },
     )
-      // builder.addMatcher(wordsAPI.endpoints.fetchWords.matchFulfilled, (state, { payload }) => {
-      //   state.words = payload
-      // })
+    // builder.addMatcher(wordsAPI.endpoints.fetchWords.matchFulfilled, (state, { payload }) => {
+    //   state.words = payload
+    // })
   },
 })

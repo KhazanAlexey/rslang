@@ -13,7 +13,7 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
     (state) => state.sprint,
   )
   const local = localStorageGet(['userId'])
-  const { userWords, userWordsIds } = useAppSelector(state => state.userWords)
+  const { userWords, userWordsIds } = useAppSelector((state) => state.userWords)
   const { wrongAnswers: wrongAnswersAudioCAll, correctAnswers: correctAnswersAudioCall } =
     useAppSelector((state) => state.audioCall)
   const [updateUserWord] = userWordsAPI.useUpdateUserWordMutation()
@@ -21,12 +21,11 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
   let correctAnswers
   let wrongAnswers
   const answersIds = (wrong: any) => {
-    return wrong.map(word => word.id)
+    return wrong.map((word) => word.id)
   }
 
-
   const found = (arr1, arr2) => {
-    return arr1.some(r => arr2.indexOf(r) >= 0)
+    return arr1.some((r) => arr2.indexOf(r) >= 0)
   }
 
   if (game === 'sprint') {
@@ -43,25 +42,31 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
 
   useEffect(() => {
     if (local) {
-
-
-      allAnswerID.forEach(answerID => {
-        postUserWord({ id: local['userId'], wordId: answerID, optional: { attempts: 1 } })
-
-
-        // userWordsIds.find(id=>{
-        //    if(allAnswerID.indexOf(id)==-1) {
-        //      postUserWord({ id: local['userId'], wordId: id, optional: { attempts: 1 } })
-        //    } else {
-        //      const attempts = answerID?.optional?.attempts || 0
-        //      updateUserWord({ id: local['userId'], wordId: id, optional: { attempts: attempts + 1 } })
-        //    }
-        //
-        //  })
+      correctAnswersID.forEach((answerId) => {
+        if (userWordsIds.includes(answerId)) {
+          const currentWord = userWords[answerId]
+          const attempts = currentWord?.optional?.attempts || 0
+          const successAttempts = currentWord?.optional?.successAttempts || 0
+          updateUserWord({
+            id: local['userId'],
+            wordId: id,
+            optional: { attempts: attempts + 1, successAttempts: successAttempts + 1 },
+          })
+        } else {
+          postUserWord({ id: local['userId'], wordId: answerId, optional: { attempts: 1 } })
+        }
       })
 
+      wrongAnswersID.forEach((answerId) => {
+        if (userWordsIds.includes(answerId)) {
+          const currentWord = userWords[answerId]
+          const attempts = currentWord?.optional?.attempts || 0
+          updateUserWord({ id: local['userId'], wordId: id, optional: { attempts: attempts + 1 } })
+        } else {
+          postUserWord({ id: local['userId'], wordId: answerId, optional: { attempts: 1 } })
+        }
+      })
     }
-
   }, [])
 
   const id = useId()

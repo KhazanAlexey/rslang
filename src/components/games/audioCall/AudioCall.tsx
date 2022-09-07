@@ -45,8 +45,6 @@ const AudioCall: React.FC = () => {
   )
 
   const answerHandler = (selectedAnswer: IWord) => {
-    console.log(selectedAnswer)
-
     answerSelectHandler(selectedAnswer)
 
     if (wordToGuess?.id === selectedAnswer.id) {
@@ -80,7 +78,6 @@ const AudioCall: React.FC = () => {
   }
 
   const startGameHandler = (level: Levels) => {
-    console.log('level', level)
     setLevel(level)
 
     dispatch(audioCallSlice.actions.setActiveScreen(GameState.Game))

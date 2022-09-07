@@ -20,7 +20,6 @@ const Word: React.FC<PropsType> = (props) => {
 
   const viewDetail = () => {
     setWordDetail(id)
-    console.log(wordDetail)
   }
 
   return (
@@ -28,7 +27,7 @@ const Word: React.FC<PropsType> = (props) => {
       <li
         className={clsx({
           [styles.word]: true,
-          ['_icon-bookmark']: isHard
+          ['_icon-bookmark']: isHard,
         })}
         style={{ background: bgGroup }}
       >
@@ -36,7 +35,7 @@ const Word: React.FC<PropsType> = (props) => {
           className={clsx({
             [styles.wordButton]: true,
             [styles.wordButtonActive]: id == wordDetail,
-            [styles.wordComplete]: isCompleted
+            [styles.wordComplete]: isCompleted,
           })}
           onClick={viewDetail}
         >
@@ -52,7 +51,6 @@ const Words: React.FC<any> = (props) => {
   const { words, errorWords, isLoadingWords, lvl, levels, wordDetail, setWordDetail } = props
 
   const { hardWordsIds, completedWordsIds } = useAppSelector((state) => state.userWords)
-
   return (
     <ul className={styles.words}>
       {words &&

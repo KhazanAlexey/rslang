@@ -63,7 +63,7 @@
     overflow: hidden;
     //box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.5);
     z-index: 2;
-    transition: all .5s;
+    transition: all 0.5s;
     &:first-child {
       width: rem(220);
       height: rem(220);
@@ -122,14 +122,14 @@
       display: block;
       font-weight: 700;
       font-size: rem(30);
-      line-height: math.div(42 , 30);
-      color: #F9F9F9;
+      line-height: math.div(42, 30);
+      color: #f9f9f9;
       text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       &:first-child {
         width: 80%;
         padding-top: rem(30);
       }
-      @media (max-width:$mobileSmall){
+      @media (max-width: $mobileSmall) {
         font-size: rem(18);
       }
     }
@@ -138,7 +138,7 @@
       width: 100%;
       height: 100%;
       z-index: -1;
-      transition: all .5s;
+      transition: all 0.5s;
       &::before {
         content: '';
         position: absolute;
@@ -149,9 +149,9 @@
         top: 0;
         left: 0;
         background: rgba(0, 0, 0, 0.2);
-        transition: all .4s;
+        transition: all 0.4s;
       }
-      &>img {
+      & > img {
         position: absolute;
         min-width: 100%;
         height: 100%;
@@ -199,10 +199,10 @@
         text-align: center;
         left: 50%;
         transform: translateX(-50%);
-        opacity: .8;
+        opacity: 0.8;
         white-space: nowrap;
         font-size: rem(14);
-        line-height: math.div(16 , 14);
+        line-height: math.div(16, 14);
         font-style: italic;
         bottom: rem(-10);
       }

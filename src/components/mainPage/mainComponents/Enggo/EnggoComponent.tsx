@@ -41,7 +41,8 @@ const EnggoComponent: React.FC = () => {
         </div>
         <p className={styles.enggoSectionCopy}>
           Ингго против нарушения авторских прав, и поэтому он хотел бы оставить ссылку на своего
-          великолепного художника - <a href='https://ru.freepik.com/author/catalyststuff'>@catalyststuff</a>
+          великолепного художника -{' '}
+          <a href='https://ru.freepik.com/author/catalyststuff'>@catalyststuff</a>
         </p>
         <div className={styles.enggoSectionBg}>
           <img src='./assets/svg/wave.svg' alt='' />

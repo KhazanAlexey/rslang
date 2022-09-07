@@ -31,10 +31,12 @@ const Header: React.FC<any> = () => {
             onClick={() => null}
           ></Link>
           <nav className={styles.headerNav}>
-            <ul className={clsx({
-              [styles.headerList]: true,
-              [styles.optionalBg]: true
-            })}>
+            <ul
+              className={clsx({
+                [styles.headerList]: true,
+                [styles.optionalBg]: true,
+              })}
+            >
               <li className={styles.headerItem}>
                 <NavLink
                   to='/textbook'
@@ -54,25 +56,29 @@ const Header: React.FC<any> = () => {
                 </NavLink>
               </li>
               <li className={styles.headerItem}>
-                  <NavLink
-                    to={!isAuth ? '#' : '/stat'}
-                    title={!isAuth ? 'Войдите в аккаунт для просмотра статистики' : ''}
-                    className={({ isActive }) => clsx({
+                <NavLink
+                  to={!isAuth ? '#' : '/stat'}
+                  title={!isAuth ? 'Войдите в аккаунт для просмотра статистики' : ''}
+                  className={({ isActive }) =>
+                    clsx({
                       [styles.itemActive]: isActive,
-                      [styles.itemDisable]: !isAuth
-                    })}
-                    onClick={() => isAuth ? null : setIsAuthModal('login')}
-                  >
-                    Статистика
-                  </NavLink>
-                </li>
+                      [styles.itemDisable]: !isAuth,
+                    })
+                  }
+                  onClick={() => (isAuth ? null : setIsAuthModal('login'))}
+                >
+                  Статистика
+                </NavLink>
+              </li>
             </ul>
           </nav>
           {!isAuth ? (
-            <div className={clsx({
-              [styles.headerAuth]: true,
-              [styles.optionalBg]: true
-            })}>
+            <div
+              className={clsx({
+                [styles.headerAuth]: true,
+                [styles.optionalBg]: true,
+              })}
+            >
               <button className={styles.authLogin} onClick={() => setIsAuthModal('login')}>
                 Вход
               </button>

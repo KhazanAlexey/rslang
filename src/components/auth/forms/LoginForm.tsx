@@ -33,8 +33,8 @@ export const LoginForm = (props) => {
 
   const formik = useFormik({
     initialValues: {
-      password: '',//123456789qwe
-      email: '',//alik@mail.ru
+      password: '', //123456789qwe
+      email: '', //alik@mail.ru
     },
 
     onSubmit: (values) => {

@@ -17,7 +17,8 @@ export const wordsAPI = createApi({
         headers.set('Authorization', `Bearer ${token}`)
       }
       return headers
-    },}),
+    },
+  }),
   endpoints: (build) => ({
     fetchWords: build.query<IWord[], IPageParams>({
       query: ({ group, page }) => ({

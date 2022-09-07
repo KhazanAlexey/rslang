@@ -3,21 +3,20 @@ import { useAudio } from 'src/hooks/useAudio'
 import { clsx } from 'src/utils/clsx'
 
 type PlayerProps = {
-  url:string
+  url: string
 }
 
-const Player = ({ url }:PlayerProps) => {
+const Player = ({ url }: PlayerProps) => {
   const [playing, toggle] = useAudio(url)
 
   return (
     <div>
       <button onClick={() => toggle()}>
-        <span 
-          className={
-            clsx({
-              ['_icon-sound']: !playing,
-              ['_icon-arrow']: playing,
-            })}
+        <span
+          className={clsx({
+            ['_icon-sound']: !playing,
+            ['_icon-arrow']: playing,
+          })}
         ></span>
       </button>
     </div>

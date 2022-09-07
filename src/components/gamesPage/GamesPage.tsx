@@ -13,11 +13,16 @@ const GamesPage: React.FC = () => {
             <img src='./assets/svg/enggo-hunt.svg' alt='Поиграй с Ингго' />
           </span>
         </h2>
-        <p className={styles.gamesDescr}>Иннго обожает играть со своими друзьями, и поэтому подготовил для них несколько игр. А ты сможешь бросить вызов Ингго?</p>
+        <p className={styles.gamesDescr}>
+          Иннго обожает играть со своими друзьями, и поэтому подготовил для них несколько игр. А ты
+          сможешь бросить вызов Ингго?
+        </p>
         <ul className={styles.gamesList}>
           <li className={styles.gamesGame1}>
             <Link to='/games/audiocall' className={styles.game}>
-              <p className={styles.gameName}><span>Аудио</span> <span>вызов</span></p>
+              <p className={styles.gameName}>
+                <span>Аудио</span> <span>вызов</span>
+              </p>
               <span className={styles.gameGo}>Играть!</span>
               <span className={styles.gameImage}>
                 <img src='./assets/png/bg-audiocall.png' alt='Аудиовызов' />
@@ -26,7 +31,9 @@ const GamesPage: React.FC = () => {
           </li>
           <li className={styles.gamesGame2}>
             <Link to='/games/sprint' className={styles.game}>
-              <p className={styles.gameName}><span>Спринт</span></p>
+              <p className={styles.gameName}>
+                <span>Спринт</span>
+              </p>
               <span className={styles.gameGo}>Играть!</span>
               <span className={styles.gameImage}>
                 <img src='./assets/png/bg-sprint.png' alt='Аудиовызов' />
@@ -35,7 +42,10 @@ const GamesPage: React.FC = () => {
           </li>
           <li className={styles.gamesEnggo}>
             <p hidden>Скоро тут появится еще одна игра</p>
-            <img src='./assets/svg/enggo-games.svg' alt='Ингго уже готовит новую игру для своих друзей' />
+            <img
+              src='./assets/svg/enggo-games.svg'
+              alt='Ингго уже готовит новую игру для своих друзей'
+            />
           </li>
         </ul>
       </div>

@@ -59,15 +59,12 @@ const TextBookPage: React.FC<any> = () => {
     e.preventDefault()
     switch (e.target.innerText) {
       case menuItems[0]:
-        console.log('Учебник')
         setSubpage('book')
         break
       case menuItems[1]:
-        console.log('Сложные слова')
         setSubpage('hard')
         break
       case menuItems[2]:
-        console.log('Изученные')
         setSubpage('complete')
         break
       default:
@@ -75,12 +72,11 @@ const TextBookPage: React.FC<any> = () => {
     }
   }
   useEffect(() => {
-    if (subpage == 'book' && bookWords) setWordDetail(bookWords[0].id)
+    if (subpage == 'book' && bookWords) setWordDetail(bookWords?.[0].id || '')
     if (subpage == 'hard' && difficultUserWords)
-      setWordDetail(difficultUserWords?.[0].paginatedResults[0]._id)
+      setWordDetail(difficultUserWords?.[0].paginatedResults[0]?._id)
     if (subpage == 'complete' && completedUserWords)
-      setWordDetail(completedUserWords?.[0].paginatedResults[0]._id)
-    console.log(difficultUserWords)
+      setWordDetail(completedUserWords?.[0].paginatedResults[0]?._id)
   }, [subpage, bookWords, difficultUserWords, completedUserWords])
   useEffect(() => {
     const matchedHard = hardWordsIds.indexOf(wordDetail) > -1
@@ -125,7 +121,7 @@ const TextBookPage: React.FC<any> = () => {
                       ['_icon-bookmark']: true,
                       [styles.textbookSubpage]: true,
                       [styles.subpageActive]: subpage == 'hard',
-                      [styles.subpageDisable]: !isAuth
+                      [styles.subpageDisable]: !isAuth,
                     })}
                     onClick={menuHandler}
                   >
@@ -138,7 +134,7 @@ const TextBookPage: React.FC<any> = () => {
                       ['_icon-star']: true,
                       [styles.textbookSubpage]: true,
                       [styles.subpageActive]: subpage == 'complete',
-                      [styles.subpageDisable]: !isAuth
+                      [styles.subpageDisable]: !isAuth,
                     })}
                     onClick={menuHandler}
                   >

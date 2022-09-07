@@ -30,8 +30,8 @@ const FriendsComponent: React.FC = () => {
               </div>
               <p className={styles.friendsSectionItemText}>
                 Львенок Лео - давний друг Ингго и, по совместительству, владелец крутой полноценной
-                платформы по изучению английского языка - <a href='https://lingualeo.com'>LinguaLeo</a>
-                .
+                платформы по изучению английского языка -{' '}
+                <a href='https://lingualeo.com'>LinguaLeo</a>.
               </p>
               <a href='https://lingualeo.com' rel='nofollow' className={styles.linkButton}>
                 Учиться у Лео
@@ -53,7 +53,7 @@ const FriendsComponent: React.FC = () => {
               <Link className={styles.linkButton} to='/games'>
                 Сыграть в мини-игры
               </Link>
-            </li> 
+            </li>
             <li
               className={clsx({
                 [styles.friendsSectionItem]: true,
@@ -67,13 +67,15 @@ const FriendsComponent: React.FC = () => {
                 Во время обучения, если ты авторизован, Ингго записывает все твои достижения в свой
                 журнал и ведет полноценную статистику твоего прогресса!
               </p>
-              <Link className={clsx({
+              <Link
+                className={clsx({
                   [styles.linkButton]: true,
-                  [styles.linkButtonDisable]: !isAuth
+                  [styles.linkButtonDisable]: !isAuth,
                 })}
                 title={isAuth ? '' : 'Сначала войдите в аккаунт'}
                 to={isAuth ? '/stat' : '#'}
-                onClick={(e) => isAuth ? null : statHandler(e)}>
+                onClick={(e) => (isAuth ? null : statHandler(e))}
+              >
                 Проверить статистику
               </Link>
             </li>
