@@ -1,0 +1,10 @@
+@use 'sass:math';
+@import '../../styles/mixins.scss';
+
+.stat {
+  min-height: calc(100vh - rem(93) - rem(170));
+  padding: rem(30) 0 rem(90);
+  &Descr {
+    margin-top: rem(12);
+  }
+}
