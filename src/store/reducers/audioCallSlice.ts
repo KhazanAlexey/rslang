@@ -20,6 +20,11 @@ const setLevel: CaseReducer<AudioCallState, PayloadAction<number>> = (state, act
   state.level = action.payload
 }
 
+const reset: CaseReducer<AudioCallState> = (state) => {
+  state.correctAnswers = []
+  state.wrongAnswers = []
+}
+
 const setActiveScreen: CaseReducer<AudioCallState, PayloadAction<GameState>> = (state, action) => {
   state.activeScreen = action.payload
 }
@@ -36,6 +41,7 @@ export const audioCallSlice = createSlice({
   name: 'audioCall',
   initialState: initialState,
   reducers: {
+    reset,
     setLevel,
     setActiveScreen,
     setCorrectAnswers,

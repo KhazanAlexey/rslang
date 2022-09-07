@@ -19,7 +19,10 @@ type AudioCallState = {
 const setLevel: CaseReducer<AudioCallState, PayloadAction<number>> = (state, action) => {
   state.level = action.payload
 }
-
+const reset: CaseReducer<AudioCallState> = (state) => {
+  state.correctAnswers = []
+  state.wrongAnswers = []
+}
 const setActiveScreen: CaseReducer<AudioCallState, PayloadAction<GameState>> = (state, action) => {
   state.activeScreen = action.payload
 }
@@ -36,6 +39,7 @@ export const sprintSlice = createSlice({
   name: 'sprint',
   initialState: initialState,
   reducers: {
+    reset,
     setLevel,
     setActiveScreen,
     setCorrectAnswers,

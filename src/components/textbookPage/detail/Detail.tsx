@@ -150,28 +150,30 @@ const Detail: React.FC<any> = (props) => {
           alt={wordData && wordData.word}
         />
       </div>
-      {isAuth && <div className={styles.detailControl}>
-        <button
-          className={clsx({
-            [styles.controlBtn]: true,
-            [styles.controlHard]: true,
-            ['_icon-bookmark']: true,
-          })}
-          onClick={hardHandler}
-        >
-          <span>Сложное</span>
-        </button>
-        <button
-          className={clsx({
-            [styles.controlBtn]: true,
-            [styles.controlComplete]: true,
-            ['_icon-star']: true,
-          })}
-          onClick={completeHandler}
-        >
-          <span>Изучено</span>
-        </button>
-      </div>}
+      {isAuth && (
+        <div className={styles.detailControl}>
+          <button
+            className={clsx({
+              [styles.controlBtn]: true,
+              [styles.controlHard]: true,
+              ['_icon-bookmark']: true,
+            })}
+            onClick={hardHandler}
+          >
+            <span>Сложное</span>
+          </button>
+          <button
+            className={clsx({
+              [styles.controlBtn]: true,
+              [styles.controlComplete]: true,
+              ['_icon-star']: true,
+            })}
+            onClick={completeHandler}
+          >
+            <span>Изучено</span>
+          </button>
+        </div>
+      )}
     </article>
   )
 }

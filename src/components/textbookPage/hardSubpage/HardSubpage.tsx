@@ -16,7 +16,9 @@ const HardSubpage: React.FC<any> = (props) => {
     difficultWordsError: error,
   } = props
 
-  const isEmpty = !difficultUserWords?.[0].paginatedResults.find((x) => x.userWord.difficulty == 'hard')
+  const isEmpty = !difficultUserWords?.[0].paginatedResults.find(
+    (x) => x.userWord.difficulty == 'hard',
+  )
   return (
     <section className=''>
       <section>

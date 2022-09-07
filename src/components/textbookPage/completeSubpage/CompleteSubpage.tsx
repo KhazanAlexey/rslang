@@ -16,7 +16,9 @@ const CompleteSubpage: React.FC<any> = (props) => {
     errorComplete: error,
   } = props
 
-  const isEmpty = !completedUserWords?.[0].paginatedResults.find((x) => x.userWord.difficulty == 'completed')
+  const isEmpty = !completedUserWords?.[0].paginatedResults.find(
+    (x) => x.userWord.difficulty == 'completed',
+  )
 
   return (
     <section className=''>

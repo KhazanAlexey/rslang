@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { clsx } from 'src/utils/clsx'
 import styles from './GamePage.module.scss'
+import { useDispatch } from 'react-redux'
+import { audioCallSlice } from '../../store/reducers/audioCallSlice'
+import { sprintSlice } from '../../store/reducers/sprintSlice'
 
 const GamesPage: React.FC = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(audioCallSlice.actions.reset())
+    dispatch(sprintSlice.actions.reset())
+  }, [])
   return (
     <section className={styles.games}>
       <div className={globalThis.globalStyles.container}>
