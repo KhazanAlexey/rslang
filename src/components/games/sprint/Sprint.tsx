@@ -49,12 +49,12 @@ const Sprint: React.FC<any> = () => {
   // const [playingErrorSound, toggleErrorSound] = useAudio('../../assets/sound/error-sound.m4a')
   // const [playingSuccessSound, toggleSuccessSound] = useAudio('../../assets/sound/success-sound.m4a')
   const errSound = () => {
-    const audio = new Audio('../../assets/sound/error-sound.m4a');
-    audio.play();
+    const audio = new Audio('../../assets/sound/error-sound.m4a')
+    audio.play()
   }
   const successSound = () => {
-    const audio = new Audio('../../assets/sound/success-sound.m4a');
-    audio.play();
+    const audio = new Audio('../../assets/sound/success-sound.m4a')
+    audio.play()
   }
 
   const answerHandler = (isRight: boolean) => {

@@ -53,10 +53,11 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
             optional: { attempts: attempts + 1, successAttempts: successAttempts + 1 },
           })
         } else {
-          postUserWord({ 
-            id: local['userId'], 
-            wordId: answerId, 
-            optional: { attempts: 1, successAttempts: 1 } })
+          postUserWord({
+            id: local['userId'],
+            wordId: answerId,
+            optional: { attempts: 1, successAttempts: 1 },
+          })
         }
       })
 
@@ -64,16 +65,16 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
         if (userWordsIds.includes(answerId)) {
           const currentWord = userWords[answerId]
           const attempts = currentWord?.optional?.attempts || 0
-          updateUserWord({ 
-            id: local['userId'], 
-            wordId: id, 
-            optional: { attempts: attempts + 1 } 
+          updateUserWord({
+            id: local['userId'],
+            wordId: id,
+            optional: { attempts: attempts + 1 },
           })
         } else {
-          postUserWord({ 
-            id: local['userId'], 
-            wordId: answerId, 
-            optional: { attempts: 1 } 
+          postUserWord({
+            id: local['userId'],
+            wordId: answerId,
+            optional: { attempts: 1 },
           })
         }
       })
