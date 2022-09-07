@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux'
 import { userWordsSlice } from '../../../store/reducers/userWordsSlice'
 
 const Detail: React.FC<any> = (props) => {
+  const { isAuth } = useAppSelector((state) => state.auth)
   const { id, complete: isComplete, hard: isHard } = props
   const dispatch = useDispatch()
   const userid = localStorage.getItem('userId') || ''
@@ -64,7 +65,7 @@ const Detail: React.FC<any> = (props) => {
     if (!isComplete && !isHard)
       postWord({ id: local['userId'], difficulty: 'completed', wordId: id })
   }
-  console.log('userW', userWord)
+  // console.log('userW', userWord)
   const soundHandler = () => {
     toggle()
   }
@@ -149,7 +150,7 @@ const Detail: React.FC<any> = (props) => {
           alt={wordData && wordData.word}
         />
       </div>
-      <div className={styles.detailControl}>
+      {isAuth && <div className={styles.detailControl}>
         <button
           className={clsx({
             [styles.controlBtn]: true,
@@ -170,7 +171,7 @@ const Detail: React.FC<any> = (props) => {
         >
           <span>Изучено</span>
         </button>
-      </div>
+      </div>}
     </article>
   )
 }
