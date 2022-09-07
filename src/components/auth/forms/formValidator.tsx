@@ -2,8 +2,12 @@ import 'react-app-polyfill/ie11'
 import * as React from 'react'
 import { IUserForm } from 'src/models/IUser'
 
+type ErrorType = {
+  [key: string]: string
+}
+
 export const validateLogin = (values: IUserForm) => {
-  const errors: any = {}
+  const errors: ErrorType = {}
 
   if (!values.password) {
     errors.password = 'Required'

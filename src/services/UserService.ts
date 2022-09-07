@@ -39,12 +39,13 @@ export const userAPI = createApi({
       providesTags: (result) => ['User'],
     }),
     updateUser: build.mutation<IUserResp, IUser>({
-      query: ({ id, password, email }) => ({
+      query: ({ id, password, email, name }) => ({
         url: `/users/${id}`,
         method: 'PUT',
         body: {
           password: password,
           email: email,
+          name,
         },
       }),
       invalidatesTags: ['User'],

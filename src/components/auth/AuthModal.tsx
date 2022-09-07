@@ -7,7 +7,7 @@ import { SettingsForm } from './forms/SettingsForm'
 
 export interface PropsType {
   isAuthModal: string
-  setIsAuthModal: any
+  setIsAuthModal: <T extends string>(arg: T) => unknown
   children?: React.ReactNode | React.ReactNode[]
 }
 

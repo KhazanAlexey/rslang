@@ -9,13 +9,31 @@ import { useAppDispatch } from 'src/hooks/redux'
 import { validateLogin } from './formValidator'
 import { authSlice } from '../../../store/reducers/authSlice'
 import styles from './Form.module.scss'
+import { userAPI } from 'src/services/UserService'
 
-export const SettingsForm = (props) => {
-  const { setIsAuthModal } = props
+type PropsType = {
+  setIsAuthModal: (_: string) => void
+}
+
+export const SettingsForm = ({ setIsAuthModal }: PropsType) => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const [error, setError] = useState()
-  const [login, { isLoading }] = authApi.useLoginMutation()
+  const [error, setError] = useState<string>()
+  const [login, { isLoading: isLoginngIn }] = authApi.useLoginMutation()
+  const [updateUser, { isLoading }] = userAPI.useCreateUserMutation()
+
+  const updateHandler = async ({ name, email, password }) => {
+    localStorageRemove(['name', 'refreshToken', 'userId', 'token', 'message'])
+    dispatch(authSlice.actions.logOut())
+    try {
+      const updated = updateUser({ name, email, password }).unwrap()
+      await login({ email, password }).unwrap()
+      setIsAuthModal('')
+    } catch (e: { data: string } | unknown) {
+      e && setError(e as string)
+      console.error(`ERROR UPDATING USER: ${e as string}`)
+    }
+  }
 
   const loginHandler = async ({ email, password }) => {
     try {
@@ -28,12 +46,12 @@ export const SettingsForm = (props) => {
       console.log(e)
     }
   }
-  const buttonText = isLoading ? 'Выходим...' : 'Выйти из аккаунта'
+  const buttonText = isLoginngIn ? 'Выходим...' : 'Выйти из аккаунта'
 
   const formik = useFormik({
     initialValues: {
-      password: '123456789qwe',
-      email: 'alik@mail.ru',
+      password: '',
+      email: '',
     },
 
     onSubmit: (values) => {

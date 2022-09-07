@@ -10,8 +10,11 @@ import { validateLogin } from './formValidator'
 import styles from './Form.module.scss'
 import { authSlice } from 'src/store/reducers/authSlice'
 
-export const LoginForm = (props) => {
-  const { setIsAuthModal } = props
+type PropsType = {
+  setIsAuthModal: (_: string) => void
+}
+
+export const LoginForm = ({ setIsAuthModal }: PropsType) => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const [error, setError] = useState()
@@ -33,8 +36,8 @@ export const LoginForm = (props) => {
 
   const formik = useFormik({
     initialValues: {
-      password: '', //123456789qwe
-      email: '', //alik@mail.ru
+      password: '', // 123456789qwe
+      email: '', // alik@mail.ru
     },
 
     onSubmit: (values) => {

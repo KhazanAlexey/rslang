@@ -12,8 +12,11 @@ import { authApi } from '../../../services/AuthService'
 import styles from './Form.module.scss'
 import { authSlice } from '../../../store/reducers/authSlice'
 
-export const RegisterForm = (props) => {
-  const { setIsAuthModal } = props
+type PropsType = {
+  setIsAuthModal: (_: string) => void
+}
+
+export const RegisterForm = ({ setIsAuthModal }: PropsType) => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
