@@ -7,8 +7,8 @@ export const validateLogin = (values: IUserForm) => {
 
   if (!values.password) {
     errors.password = 'Required'
-  } else if (values.password.length < 3) {
-    errors.password = 'Must be 3 characters or more'
+  } else if (values.password.length < 8) {
+    errors.password = 'Must be 8 characters or more'
   }
 
   if (!values.email) {
@@ -25,8 +25,8 @@ export const validateRegister = (values: IUserForm) => {
 
   if (!values.password) {
     errors.password = 'Required'
-  } else if (values.password.length < 3) {
-    errors.password = 'Must be 3 characters or more'
+  } else if (values.password.length < 8) {
+    errors.password = 'Must be 8 characters or more'
   }
 
   if (!values.passwordConfirm) {
