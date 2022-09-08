@@ -13,7 +13,7 @@ const Pagination: React.FC<any> = (props) => {
   const arrNumButtons = (): number[] => {
     if (page < 4) {
       return [1, 2, 3, 4, 5]
-    } else if (page > 17) {
+    } else if (page > 27) {
       return [26, 27, 28, 29, 30]
     } else {
       return [page - 2, page - 1, +page, page + 1, page + 2]
@@ -25,7 +25,7 @@ const Pagination: React.FC<any> = (props) => {
   }
 
   const nextPage = () => {
-    if (page < 20) setPage(page + 1)
+    if (page < 30) setPage(page + 1)
   }
 
   const changePage = (numPage: number) => {
