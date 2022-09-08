@@ -72,12 +72,14 @@ const TextBookPage: React.FC<any> = () => {
     }
   }
   useEffect(() => {
-    if (subpage == 'book' && bookWords) setWordDetail(bookWords?.[0].id || '')
     if (subpage == 'hard' && difficultUserWords)
       setWordDetail(difficultUserWords?.[0].paginatedResults[0]?._id)
     if (subpage == 'complete' && completedUserWords)
       setWordDetail(completedUserWords?.[0].paginatedResults[0]?._id)
   }, [subpage, bookWords, difficultUserWords, completedUserWords])
+  useEffect(() => {
+    if (subpage == 'book' && bookWords) setWordDetail(bookWords?.[0].id || '')
+  }, [subpage, bookWords])
   useEffect(() => {
     const matchedHard = hardWordsIds.indexOf(wordDetail) > -1
     const matchedCompleted = completedWordsIds.indexOf(wordDetail) > -1
