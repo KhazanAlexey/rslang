@@ -21,6 +21,13 @@ const Detail: React.FC<any> = (props) => {
     refetch()
   }, [id])
 
+  const { userWords, userWordsIds } = useAppSelector((state) => state.userWords)
+
+  const statWord = userWords.find((word) => word.wordId == id);
+  const beInGameWord = statWord ? (statWord.optional?.attempts ?? 0) : 0
+  const successWord = statWord ? (statWord.optional?.successAttempts ?? 0) : 0
+  const wrongWord = beInGameWord - successWord
+
   const [postWord] = userWordsAPI.usePostUserWordMutation()
   const [updateUserWord] = userWordsAPI.useUpdateUserWordMutation()
   const [deleteWord] = userWordsAPI.useDeleteUserWordMutation()
@@ -32,6 +39,12 @@ const Detail: React.FC<any> = (props) => {
   const [playingExample, exampleToggle] = useAudio(
     `https://rs-lang-193.herokuapp.com/${wordData?.audioExample}`,
   )
+
+  const [isStatOpen, setIsStatOpen] = useState(false);
+
+  const stathandler = () => {
+    isStatOpen ? setIsStatOpen(false) : setIsStatOpen(true)
+  }
   // TODO: сделать логику добавления в сложные
 
   const hardHandler = () => {
@@ -145,6 +158,23 @@ const Detail: React.FC<any> = (props) => {
         </ul>
       </div>
       <div className={styles.detailImage}>
+        {isAuth && !statWord && (
+          <div className={styles.detailStat}>
+            <h4>Еще не встречалось в играх</h4>
+          </div>
+        )}
+        {isAuth && statWord && (
+          <div className={clsx({
+            [styles.detailStat]: true,
+            [styles.detailStatHave]: true,
+            [styles.detailStatOpen]: isStatOpen
+          })} onClick={stathandler}>
+            <h4>Статистика по слову</h4>
+            <p>Встречалось в играх {beInGameWord}</p>
+            <p>Отгадано {successWord}</p>
+            <p>Не отгадано {wrongWord}</p>
+          </div>
+        )}
         <img
           src={wordData && `https://rs-lang-193.herokuapp.com/${wordData.image}`}
           alt={wordData && wordData.word}
