@@ -3,8 +3,18 @@ import Button from '../../common/button/Button'
 import { clsx } from '../../../utils/clsx'
 import styles from './AudioCallGame.module.scss'
 import Player from './PlaySound'
+import { IWord } from 'src/models/IWord'
 
-const AudioCallGame: React.FC<any> = ({
+type PropsType = {
+  answerVariants: IWord[]
+  wordToGuess: IWord | null
+  selectedAnswer: IWord | null
+  answerSelectHandler: (_: IWord | null) => void
+  answerHandler: (_: IWord) => void
+  skipAnswerHandler: (_?: IWord | null) => void
+}
+
+const AudioCallGame: React.FC<PropsType> = ({
   answerVariants,
   wordToGuess,
   selectedAnswer,

@@ -13,7 +13,7 @@ import { userWordsAPI } from '../../services/UsersWordsService'
 import { useAppSelector } from '../../hooks/redux'
 import { wordsAPI } from '../../services/WordsService'
 
-const TextBookPage: React.FC<any> = () => {
+const TextBookPage: React.FC = () => {
   const local = localStorageGet(['userId'])
   const [isHard, setIsHard] = useState(true)
   const [isCompleted, setIsCompleted] = useState(false)

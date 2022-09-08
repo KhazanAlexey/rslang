@@ -5,8 +5,13 @@ import { useAppSelector } from '../../hooks/redux'
 import { useNavigate } from 'react-router-dom'
 import { userWordsAPI } from 'src/services/UsersWordsService'
 import { localStorageGet } from 'src/utils/localStoradre'
+import { IPostUsersWord } from 'src/models/IUsersWords'
 
-const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
+type PropsType = {
+  game?: string
+}
+
+const GamesOverScreen: React.FC<PropsType> = ({ game = 'audioCall' }) => {
   const navigate = useNavigate()
 
   const { wrongAnswers: wrongAnswersSprint, correctAnswers: correctAnswersSprint } = useAppSelector(
@@ -20,7 +25,7 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
   const [postUserWord] = userWordsAPI.usePostUserWordMutation()
   let correctAnswers
   let wrongAnswers
-  const answersIds = (wrong: any) => {
+  const answersIds = (wrong: IPostUsersWord[]): string[] => {
     return wrong.map((word) => word.id)
   }
 
@@ -53,10 +58,11 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
             optional: { attempts: attempts + 1, successAttempts: successAttempts + 1 },
           })
         } else {
-          postUserWord({ 
-            id: local['userId'], 
-            wordId: answerId, 
-            optional: { attempts: 1, successAttempts: 1 } })
+          postUserWord({
+            id: local['userId'],
+            wordId: answerId,
+            optional: { attempts: 1, successAttempts: 1 },
+          })
         }
       })
 
@@ -64,16 +70,16 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
         if (userWordsIds.includes(answerId)) {
           const currentWord = userWords[answerId]
           const attempts = currentWord?.optional?.attempts || 0
-          updateUserWord({ 
-            id: local['userId'], 
-            wordId: id, 
-            optional: { attempts: attempts + 1 } 
+          updateUserWord({
+            id: local['userId'],
+            wordId: id,
+            optional: { attempts: attempts + 1 },
           })
         } else {
-          postUserWord({ 
-            id: local['userId'], 
-            wordId: answerId, 
-            optional: { attempts: 1 } 
+          postUserWord({
+            id: local['userId'],
+            wordId: answerId,
+            optional: { attempts: 1 },
           })
         }
       })

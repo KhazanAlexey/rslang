@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { clsx } from 'src/utils/clsx'
 import styles from './Footer.module.scss'
 
-const Footer: React.FC<any> = () => {
+const Footer: React.FC = () => {
   return (
     <footer className={styles.footer}>
       <div className={globalThis.globalStyles.container}>

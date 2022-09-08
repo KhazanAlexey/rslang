@@ -5,7 +5,7 @@ import teamJson from '../../../../data/team.json'
 import TeamMate from './TeamMate/TeamMate'
 import { ITeamMate } from 'src/models/ITeamMate'
 
-const TeamComponent: React.FC<any> = () => {
+const TeamComponent: React.FC = () => {
   const teamData = JSON.parse(JSON.stringify(teamJson)) as ITeamMate[]
   const [desc, setDesc] = useState(teamData[0].description)
 

@@ -5,10 +5,10 @@ import styles from './TeamMate.scss'
 
 type PropsType = {
   data: ITeamMate
-  setDesc: (desc: string) => { return }
+  setDesc: (_: string) => unknown
 }
 
-const TeamMate: React.FC<any> = ({ data, setDesc: setDesc }: PropsType) => {
+const TeamMate: React.FC<PropsType> = ({ data, setDesc: setDesc }) => {
   return (
     <li className={styles.teamMember} onMouseEnter={() => setDesc(data.description)}>
       <div className={styles.teamMemberImg}>

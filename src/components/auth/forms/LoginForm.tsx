@@ -9,6 +9,7 @@ import { useAppDispatch } from 'src/hooks/redux'
 import { validateLogin } from './formValidator'
 import styles from './Form.module.scss'
 import { authSlice } from 'src/store/reducers/authSlice'
+import { getErrorMessage } from 'src/utils/getErrorMessage'
 
 type PropsType = {
   setIsAuthModal: (_: string) => void
@@ -17,7 +18,7 @@ type PropsType = {
 export const LoginForm = ({ setIsAuthModal }: PropsType) => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const [error, setError] = useState()
+  const [error, setError] = useState<string>()
   const [login, { isLoading }] = authApi.useLoginMutation()
 
   const loginHandler = async ({ email, password }) => {
@@ -25,11 +26,11 @@ export const LoginForm = ({ setIsAuthModal }: PropsType) => {
       await login({ email: email, password: password }).unwrap()
       setIsAuthModal('')
       // navigate('/')
-    } catch (e: any) {
+    } catch (e: unknown) {
       localStorageRemove(['name', 'refreshToken', 'userId', 'token', 'message'])
       dispatch(authSlice.actions.logOut())
-      setError(e.error)
-      console.log(e)
+      setError(getErrorMessage(e))
+      console.log(getErrorMessage(e))
     }
   }
   const buttonText = isLoading ? 'Секунду...' : 'Войти в аккаунт'

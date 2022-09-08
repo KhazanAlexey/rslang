@@ -10,10 +10,9 @@ export function localStorageRemove(keyArray: string[]): void {
   })
 }
 
-export function localStorageGet(keyArray: string[]) {
-  let obj = {}
-  keyArray.forEach((key) => {
-    obj[key] = localStorage.getItem(key)
-  })
-  return obj
+export function localStorageGet(keyArray: string[] = []) {
+  return keyArray.reduce((res, key) => {
+    res[key] = localStorage.getItem(key)
+    return res
+  }, {})
 }

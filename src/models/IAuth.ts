@@ -5,3 +5,8 @@ export interface IAuth {
   userId: string
   name: string
 }
+
+export type AuthErrorType = {
+  [key: string]: string
+}
+

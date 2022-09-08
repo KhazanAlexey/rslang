@@ -8,7 +8,7 @@ const YoutubeEmbed = (embedId) => (
   <div></div>
 )
 
-const VideoComponent: React.FC<any> = () => {
+const VideoComponent: React.FC = () => {
   return (
     <section className={styles.videoSection}>
       <div className={globalThis.globalStyles.container}>

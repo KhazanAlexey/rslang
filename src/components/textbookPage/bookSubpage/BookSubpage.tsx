@@ -6,8 +6,38 @@ import Levels from '../levels/Levels'
 import styles from './BookSubpage.module.scss'
 import { useAppSelector } from '../../../hooks/redux'
 import { wordsAPI } from '../../../services/WordsService'
+import { IWord } from 'src/models/IWord'
+import { IUsersWords } from 'src/models/IUsersWords'
 
-const Pagination: React.FC<any> = (props) => {
+type PropsType = {
+  page: number
+  setPage: (_: number) => unknown
+}
+
+type levelsType = {
+  id: number
+  title: string
+  descr: string
+  lvl: string
+  bg: string
+}
+
+type BookSPProps = {
+  detail: JSX.Element
+  activeLvl: number
+  setActiveLvl: (_: number) => unknown
+  bookWords: IWord[] | undefined
+  hardWords: IWord[] | undefined
+  setHardWords: (_: never[]) => unknown
+  activePage: number
+  setActivePage: (_: number) => unknown
+  levels: levelsType[]
+  isLoadingWords: boolean
+  wordDetail: string
+  setWordDetail: (_: string) => unknown
+}
+
+const Pagination: React.FC<PropsType> = (props) => {
   const { page, setPage } = props
 
   const arrNumButtons = (): number[] => {
@@ -73,7 +103,7 @@ const Pagination: React.FC<any> = (props) => {
   )
 }
 
-const BookSubpage: React.FC<any> = (props) => {
+const BookSubpage: React.FC<BookSPProps> = (props) => {
   const {
     detail,
     activeLvl,

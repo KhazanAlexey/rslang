@@ -24,8 +24,14 @@ type AuthState = {
   email: string
 }
 
-export const logOut: CaseReducer<AuthState> = (state, action) => {
+export const logOut: CaseReducer<AuthState> = () => {
   return initialState
+}
+
+export const logIn: CaseReducer<AuthState> = (state, {payload}) => {
+  state.name = payload.name
+  state.isAuth = true
+  state.email = payload.email
 }
 
 export const authSlice = createSlice({
@@ -33,6 +39,7 @@ export const authSlice = createSlice({
   initialState: initialState,
   reducers: {
     logOut,
+    logIn,
   },
   extraReducers: (builder) => {
     builder.addMatcher(authApi.endpoints.login.matchFulfilled, (state, { payload }) => {

@@ -20,7 +20,7 @@ export const RegisterForm = ({ setIsAuthModal }: PropsType) => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
-  const [error, setError] = useState()
+  const [error, setError] = useState<string>()
 
   const [createUser, { isLoading }] = userAPI.useCreateUserMutation()
   const [login] = authApi.useLoginMutation()
@@ -40,9 +40,11 @@ export const RegisterForm = ({ setIsAuthModal }: PropsType) => {
       setIsAuthModal('')
       console.log(createdUser)
       // navigate('/')
-    } catch (e: any) {
-      setError(e.data)
-      console.log(e)
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        setError(e.message)
+        console.log(e.message)
+      }
     }
   }
 

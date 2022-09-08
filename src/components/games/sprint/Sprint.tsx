@@ -12,7 +12,7 @@ import SprintGame from './SprintGame'
 import { sprintSlice } from '../../../store/reducers/sprintSlice'
 import { useAudio } from 'src/hooks/useAudio'
 
-const Sprint: React.FC<any> = () => {
+const Sprint: React.FC = () => {
   const dispatch = useAppDispatch()
   const [score, setScore] = useState<number>(0)
   const [level, setLevel] = useState<Levels>()
@@ -49,12 +49,12 @@ const Sprint: React.FC<any> = () => {
   // const [playingErrorSound, toggleErrorSound] = useAudio('../../assets/sound/error-sound.m4a')
   // const [playingSuccessSound, toggleSuccessSound] = useAudio('../../assets/sound/success-sound.m4a')
   const errSound = () => {
-    const audio = new Audio('../../assets/sound/error-sound.m4a');
-    audio.play();
+    const audio = new Audio('../../assets/sound/error-sound.m4a')
+    audio.play()
   }
   const successSound = () => {
-    const audio = new Audio('../../assets/sound/success-sound.m4a');
-    audio.play();
+    const audio = new Audio('../../assets/sound/success-sound.m4a')
+    audio.play()
   }
 
   const answerHandler = (isRight: boolean) => {
