@@ -158,12 +158,12 @@ const Detail: React.FC<any> = (props) => {
         </ul>
       </div>
       <div className={styles.detailImage}>
-        {isAuth && !statWord && (
+        {isAuth && !beInGameWord && (
           <div className={styles.detailStat}>
             <h4>Еще не встречалось в играх</h4>
           </div>
         )}
-        {isAuth && statWord && (
+        {isAuth && beInGameWord && (
           <div className={clsx({
             [styles.detailStat]: true,
             [styles.detailStatHave]: true,
