@@ -22,6 +22,7 @@ export interface IDateStat {
 interface IStatGame {
   attempts: number
   successAttempts: number
+  maxSeries: number
 }
 
 export interface IPostUsersWord extends IUsersWords {
