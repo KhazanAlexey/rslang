@@ -5,6 +5,8 @@ import { useAppSelector } from '../../hooks/redux'
 import { useNavigate } from 'react-router-dom'
 import { userWordsAPI } from 'src/services/UsersWordsService'
 import { localStorageGet } from 'src/utils/localStoradre'
+import { getDateFromRu, getNowDateRu } from 'src/utils/date-helper'
+import { IDateStat, IUsersWords } from 'src/models/IUsersWords'
 
 const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
   const navigate = useNavigate()
@@ -40,6 +42,116 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
   const correctAnswersID = answersIds(correctAnswers)
   const allAnswerID = [...wrongAnswersID, ...correctAnswersID]
 
+  // ========================================================================================================================================================
+  const nowDateRu = getNowDateRu()
+  getDateFromRu(nowDateRu);
+
+  // First Attempt Options
+  const firstAttemptOptions = (result: boolean) => {
+    return {
+      attempts: 1,
+      successAttemts: +result,
+      history: [{
+        date: nowDateRu,
+        gamesStat: {
+          audioCall: {
+            attempts: game === 'audioCall' ? +result : 0,
+            successAttempts: game === 'audioCall' ? +result : 0
+          },
+          sprint: {
+            attempts: game === 'sprint' ? +result : 0,
+            successAttempts: game === 'sprint' ? +result : 0
+          }
+        }
+      }]
+    }
+  }
+  // Update Options
+  const updateOptions = (currentWord: IUsersWords, result: boolean) => {
+    const attempts = (currentWord?.optional?.attempts ?? 0) + 1
+    const successAttempts = (currentWord?.optional?.successAttempts ?? 0) + +result
+    const history = currentWord?.optional?.history ?? []
+    const newHistory: IDateStat[] = []
+    if (history.length) {
+      // Проверяем есть ли статистика на сегодняшний день
+      const historyNowDay = history.find((day) => day.date === nowDateRu)
+      if (historyNowDay) { // Статистика за сегодняшний день уже есть
+        
+      }
+      // Если статистики на сегодня нету, то 
+      // добавляем в массив новую статистику с сегодняшней датой
+    } else {
+      // Если история пуста
+      // const newDayStat = {
+      //  date: nowDateRu,
+      //  gamesStat: {
+      //    audioCall: {
+      //      attempts: game === 'audioCall' ? 
+      //    },
+      //    sprint: {
+
+      //    }
+      //  }
+      // }
+      // newHistory.push(newDayStat)
+    }
+    return {
+      attempts: 1,
+      successAttemts: +result,
+      history: [{
+        date: nowDateRu,
+        gamesStat: {
+          audioCall: {
+            attempts: game === 'audioCall' ? +result : 0,
+            successAttempts: game === 'audioCall' ? +result : 0
+          },
+          sprint: {
+            attempts: game === 'sprint' ? +result : 0,
+            successAttempts: game === 'sprint' ? +result : 0
+          }
+        }
+      }]
+    }
+  }
+
+  // ========================================================================================================================================================
+
+  /* 
+    {
+      attempts: number
+      successAttempts: number
+      learned: boolean
+      attempts: [
+        {
+          date: string,
+          gamesStat: {
+            audiocall: {
+              attempts: number,
+              successAttempts: number
+            },
+            sprint: {
+              attempts: number,
+              successAttempts: number
+            }
+          }
+        },
+        {
+          date: string,
+          gamesStat: {
+            audiocall: {
+              attempts: number,
+              successAttempts: number
+            },
+            sprint: {
+              attempts: number,
+              successAttempts: number
+            }
+          }
+        },
+      ]
+    }
+  */
+
   useEffect(() => {
     if (local) {
       correctAnswersID.forEach((answerId) => {
@@ -47,16 +159,20 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
           const currentWord = userWords[answerId]
           const attempts = currentWord?.optional?.attempts || 0
           const successAttempts = currentWord?.optional?.successAttempts || 0
+
           updateUserWord({
             id: local['userId'],
             wordId: id,
-            optional: { attempts: attempts + 1, successAttempts: successAttempts + 1 },
+            optional: { 
+              attempts: attempts + 1, 
+              successAttempts: successAttempts + 1,
+            },
           })
-        } else {
+        } else {          
           postUserWord({
             id: local['userId'],
             wordId: answerId,
-            optional: { attempts: 1, successAttempts: 1 },
+            optional: firstAttemptOptions(true),
           })
         }
       })
@@ -65,6 +181,8 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
         if (userWordsIds.includes(answerId)) {
           const currentWord = userWords[answerId]
           const attempts = currentWord?.optional?.attempts || 0
+          // const attemptsAudiocall = currentWord?.optional?.attemptsAudiocall || 0
+          // const attemptsSprint = currentWord?.optional?.attemptsSprint || 0
           updateUserWord({
             id: local['userId'],
             wordId: id,
@@ -74,7 +192,7 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
           postUserWord({
             id: local['userId'],
             wordId: answerId,
-            optional: { attempts: 1 },
+            optional: firstAttemptOptions(false),
           })
         }
       })

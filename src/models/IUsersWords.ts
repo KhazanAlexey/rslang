@@ -8,6 +8,20 @@ export interface IUsersWordsOptional {
   attempts?: number
   successAttempts?: number
   learned?: boolean
+  history?: IDateStat[]
+}
+
+export interface IDateStat {
+  date: string
+  gamesStat: {
+    audioCall: IStatGame
+    sprint: IStatGame
+  }
+}
+
+interface IStatGame {
+  attempts: number
+  successAttempts: number
 }
 
 export interface IPostUsersWord extends IUsersWords {
