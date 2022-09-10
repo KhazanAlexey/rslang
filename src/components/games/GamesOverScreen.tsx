@@ -82,7 +82,7 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
 
   const allAnswerID = sumAttempts(correctAnswersID, wrongAnswersID)
 
-  
+
 
   // ========================================================================================================================================================
   const nowDateRu = getNowDateRu()
@@ -94,7 +94,7 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
     return {
       attempts,
       successAttempts,
-      history: [{
+      history:JSON.stringify( [{
         date: nowDateRu,
         gamesStat: {
           audioCall: {
@@ -108,7 +108,7 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
             maxSeries: 0 // TODO: прикрутить логику максимальных серий
           }
         }
-      }]
+      }])
     }
   }
   // Update Options
@@ -156,7 +156,7 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
         history.push(...oldHistory)
         const indexDay = history.findIndex((day) => day.date === nowDateRu)
         history.splice(indexDay, 1, updateDayStat)
-      } else { // Если статистики на сегодня нету, то 
+      } else { // Если статистики на сегодня нету, то
       // добавляем в старый массив новую статистику с сегодняшней датой
         history.push(...oldHistory, newDayStat)
       }
@@ -166,13 +166,13 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
     return {
       attempts,
       successAttempts,
-      history
+      history: JSON.stringify(history)
     }
   }
 
   // ========================================================================================================================================================
 
-  /* 
+  /*
     {
       attempts: number
       successAttempts: number
@@ -239,12 +239,12 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
           updateUserWord({
             id: local['userId'],
             wordId: id,
-            optional: { 
-              attempts: attempts + 1, 
+            optional: {
+              attempts: attempts + 1,
               successAttempts: successAttempts + 1,
             },
           })
-        } else {          
+        } else {
           postUserWord({
             id: local['userId'],
             wordId: answerId,
