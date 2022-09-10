@@ -1,6 +1,6 @@
 export interface IUsersWords {
   wordId: string
-  difficulty?: 'hard' | 'completed'
+  difficulty?: 'hard' | 'completed' | 'learn'
   optional?: IUsersWordsOptional
 }
 

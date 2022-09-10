@@ -213,16 +213,20 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
       allAnswerID.forEach((answerId) => {
         if (userWordsIds.includes(answerId.id)) {
           const currentWord = userWords[answerId.id]
+          const optional = updateAttemptsOptions(currentWord, answerId)
           updateUserWord({
             id: local['userId'],
-            wordId: id,
-            optional: updateAttemptsOptions(currentWord, answerId)
+            wordId: answerId.id,
+            difficulty: 'learn',
+            optional
           })
         } else {
+          const optional = firstAttemptsOptions(answerId)
           postUserWord({
             id: local['userId'],
             wordId: answerId.id,
-            optional: firstAttemptsOptions(answerId)
+            difficulty: 'learn',
+            optional
           })
         }
       })

@@ -6,7 +6,7 @@ export const getDateFromRu = (str: string) => {
 export const getNowDateRu = () => {
   const nowDate = new Date()
   const dateItemFormat = (num: number) => num < 10 ? `0${num}` : `${num}`
-  const nowYear = `${nowDate.getFullYear}`
+  const nowYear = `${nowDate.getFullYear()}`
   const nowMonth = dateItemFormat(nowDate.getMonth() + 1)
   const nowDay = dateItemFormat(nowDate.getDate())
   const nowFullDate = `${nowDay}.${nowMonth}.${nowYear}` // Ex. '08.09.2022'
