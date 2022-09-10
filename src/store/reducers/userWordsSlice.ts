@@ -47,17 +47,16 @@ export const userWordsSlice = createSlice({
     builder.addMatcher(
       userWordsAPI.endpoints.fetchUserWords.matchFulfilled,
       (state, { payload }) => {
-        const parsedPayload=payload.map(w=>({...w,optional:{...w.optional,history:JSON.parse(w.optional.history)}}))
-        const hardW = parsedPayload.filter((word) => word.difficulty == 'hard')
-        const hardWId = parsedPayload.map((word) => word.wordId)
-        const completedW = parsedPayload.filter((word) => word.difficulty == 'completed')
+        const hardW = payload.filter((word) => word.difficulty == 'hard')
+        const hardWId = payload.map((word) => word.wordId)
+        const completedW = payload.filter((word) => word.difficulty == 'completed')
         const completeWId = completedW.map((word) => word.wordId)
         state.hardWords = hardW
         state.hardWordsIds = hardWId
         state.completedWords = completedW
         state.completedWordsIds = completeWId
-        state.userWords = parsedPayload
-        state.userWordsIds = parsedPayload.map((word) => word.wordId)
+        state.userWords = payload
+        state.userWordsIds = payload.map((word) => word.wordId)
       },
     )
     // builder.addMatcher(wordsAPI.endpoints.fetchWords.matchFulfilled, (state, { payload }) => {

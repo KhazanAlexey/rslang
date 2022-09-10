@@ -1,3 +1,4 @@
+import { BaseQueryMeta, BaseQueryResult } from '@reduxjs/toolkit/dist/query/baseQueryTypes'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 import { IDeleteUsersWord, IPostUsersWord, IUsersWords } from 'src/models/IUsersWords'
 
@@ -69,6 +70,7 @@ export const userWordsAPI = createApi({
           wordsPerPage: 3600,
           filter: JSON.stringify({ 'userWord.difficulty': wordsDifficult }),
         },
+
       }),
       providesTags: (result) => ['AggregatedWords'],
     }),
