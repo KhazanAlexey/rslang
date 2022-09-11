@@ -86,7 +86,6 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
 
   // ========================================================================================================================================================
   const nowDateRu = getNowDateRu()
-  getDateFromRu(nowDateRu);
 
   // First Attempts Options
   const firstAttemptsOptions = (resultWord: {id: string, attempts: number, successAttempts: number}) => {
@@ -115,7 +114,7 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
   const updateAttemptsOptions = (currentWord: IUsersWords, resultWord: {id: string, attempts: number, successAttempts: number}) => {
     const attempts = (currentWord?.optional?.attempts ?? 0) + resultWord.attempts
     const successAttempts = (currentWord?.optional?.successAttempts ?? 0) + resultWord.successAttempts
-    const oldHistory = currentWord?.optional?.history ?? []
+    const oldHistory = currentWord?.optional?.history ? JSON.parse(currentWord?.optional?.history) : []
     const history: IDateStat[] = []
     const newDayStat = {
       date: nowDateRu,
@@ -172,106 +171,31 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
 
   // ========================================================================================================================================================
 
-  /*
-    {
-      attempts: number
-      successAttempts: number
-      learned: boolean
-      attempts: [
-        {
-          date: string,
-          gamesStat: {
-            audiocall: {
-              attempts: number,
-              successAttempts: number
-            },
-            sprint: {
-              attempts: number,
-              successAttempts: number
-            }
-          }
-        },
-        {
-          date: string,
-          gamesStat: {
-            audiocall: {
-              attempts: number,
-              successAttempts: number
-            },
-            sprint: {
-              attempts: number,
-              successAttempts: number
-            }
-          }
-        },
-      ]
-    }
-  */
-
   useEffect(() => {
     if (local) {
       allAnswerID.forEach((answerId) => {
         if (userWordsIds.includes(answerId.id)) {
           const currentWord = userWords[answerId.id]
+          const difficulty = currentWord?.difficulty ?? 'learn'
           const optional = updateAttemptsOptions(currentWord, answerId)
           updateUserWord({
             id: local['userId'],
             wordId: answerId.id,
-            difficulty: 'learn',
+            difficulty,
             optional
           })
         } else {
+          const currentWord = userWords[answerId.id]
+          const difficulty = currentWord?.difficulty ?? 'learn'
           const optional = firstAttemptsOptions(answerId)
           postUserWord({
             id: local['userId'],
             wordId: answerId.id,
-            difficulty: 'learn',
+            difficulty,
             optional
           })
         }
       })
-      /* sumCorrectAnswersIDs.forEach((answerId) => {
-        if (userWordsIds.includes(answerId.id)) {
-          const currentWord = userWords[answerId.id]
-          const attempts = currentWord?.optional?.attempts || 0
-          const successAttempts = currentWord?.optional?.successAttempts || 0
-
-          updateUserWord({
-            id: local['userId'],
-            wordId: id,
-            optional: {
-              attempts: attempts + 1,
-              successAttempts: successAttempts + 1,
-            },
-          })
-        } else {
-          postUserWord({
-            id: local['userId'],
-            wordId: answerId,
-            optional: firstAttemptOptions(true),
-          })
-        }
-      })
-
-      sumWrongAnswersIDs.forEach((answerId) => {
-        if (userWordsIds.includes(answerId.id)) {
-          const currentWord = userWords[answerId.id]
-          const attempts = currentWord?.optional?.attempts || 0
-          // const attemptsAudiocall = currentWord?.optional?.attemptsAudiocall || 0
-          // const attemptsSprint = currentWord?.optional?.attemptsSprint || 0
-          updateUserWord({
-            id: local['userId'],
-            wordId: id,
-            optional: { attempts: attempts + 1 },
-          })
-        } else {
-          postUserWord({
-            id: local['userId'],
-            wordId: answerId,
-            optional: firstAttemptOptions(false),
-          })
-        }
-      })*/
     }
   }, [])
 

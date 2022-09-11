@@ -12,3 +12,12 @@ export const getNowDateRu = () => {
   const nowFullDate = `${nowDay}.${nowMonth}.${nowYear}` // Ex. '08.09.2022'
   return nowFullDate
 }
+
+export const getDateInRu = (date: Date) => {
+  const dateItemFormat = (num: number) => num < 10 ? `0${num}` : `${num}`
+  const nowYear = `${date.getFullYear()}`
+  const nowMonth = dateItemFormat(date.getMonth() + 1)
+  const nowDay = dateItemFormat(date.getDate())
+  const nowFullDate = `${nowDay}.${nowMonth}.${nowYear}` // Ex. '08.09.2022'
+  return nowFullDate
+}

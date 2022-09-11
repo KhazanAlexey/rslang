@@ -2,14 +2,15 @@ export interface IUsersWords {
   wordId: string
   difficulty?: 'hard' | 'completed' | 'learn'
   // optional?: IUsersWordsOptional
-  optional?: any
+  optional?: IUsersWordsOptional
 }
 
 export interface IUsersWordsOptional {
   attempts?: number
   successAttempts?: number
   learned?: boolean
-  history?: IDateStat[]
+  // history?: IDateStat[]
+  history?: string
 }
 
 export interface IDateStat {
