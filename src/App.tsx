@@ -12,7 +12,7 @@ import Sprint from './components/games/sprint/Sprint'
 
 globalThis.globalStyles = styles
 
-export function App() {
+export function App() {  
   return (
     <BrowserRouter>
       <div className={styles.wrapper}>

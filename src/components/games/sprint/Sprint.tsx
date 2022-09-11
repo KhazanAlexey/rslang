@@ -136,8 +136,8 @@ const Sprint: React.FC<any> = () => {
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
       if (event.repeat) return
-      if (event.key === 'ArrowLeft') answerHandler(false)
-      if (event.key === 'ArrowRight') answerHandler(true)
+      if (event.key === 'ArrowLeft') answerHandler(true)
+      if (event.key === 'ArrowRight') answerHandler(false)
     }
     window.addEventListener<'keyup'>('keyup', handleKeyPress)
     return () => window.removeEventListener('keyup', handleKeyPress)

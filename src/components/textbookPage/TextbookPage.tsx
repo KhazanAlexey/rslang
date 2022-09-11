@@ -86,7 +86,7 @@ const TextBookPage: React.FC<any> = () => {
     setIsHard(matchedHard)
     setIsCompleted(matchedCompleted)
   }, [hardWordsIds, wordDetail, completedWordsIds])
-
+console.log('difficultUserWords',difficultUserWords)
   const detail = <Detail id={wordDetail} complete={isCompleted} hard={isHard} subpage={subpage} />
   return (
     <div className={styles.textbook}>
