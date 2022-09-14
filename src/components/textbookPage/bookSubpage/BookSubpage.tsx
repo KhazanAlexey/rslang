@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Words from 'src/components/words/Words'
 import { clsx } from 'src/utils/clsx'
-import Detail from '../detail/Detail'
 import Levels from '../levels/Levels'
 import styles from './BookSubpage.module.scss'
-import { useAppSelector } from '../../../hooks/redux'
-import { wordsAPI } from '../../../services/WordsService'
 
 const Pagination: React.FC<any> = (props) => {
   const { page, setPage } = props
@@ -74,19 +71,9 @@ const Pagination: React.FC<any> = (props) => {
 }
 
 const BookSubpage: React.FC<any> = (props) => {
-  const {
-    detail,
-    activeLvl,
-    setActiveLvl,
-    bookWords,
-    activePage,
-    setActivePage,
-    levels,
-    isLoadingWords,
-  } = props
+  const { activeLvl, setActiveLvl, bookWords, activePage, setActivePage, levels, isLoadingWords } =
+    props
 
-  // const [isHard, setIsHard] = useState(false)
-  // const [isCompleted, setIsCompleted] = useState(false)
   const { wordDetail, setWordDetail } = props
 
   return (
@@ -121,7 +108,6 @@ const BookSubpage: React.FC<any> = (props) => {
               />
               <Pagination page={activePage} setPage={setActivePage} />
             </div>
-            {detail}
           </div>
         </div>
       </section>

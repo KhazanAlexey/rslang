@@ -11,7 +11,7 @@ export function localStorageRemove(keyArray: string[]): void {
 }
 
 export function localStorageGet(keyArray: string[]) {
-  let obj = {}
+  let obj: any = {}
   keyArray.forEach((key) => {
     obj[key] = localStorage.getItem(key)
   })

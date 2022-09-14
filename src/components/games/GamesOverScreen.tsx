@@ -47,7 +47,7 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
   // Пересчет по каждому слову кол-ва всех видов попыток для отправки уникального запроса
 
   const sumAttempts = (correctAnswersArrID: string[], wrongAnswersArrID: string[]) => {
-    const arr: {id: string, attempts: number, successAttempts: number}[] = []
+    const arr: { id: string; attempts: number; successAttempts: number }[] = []
     if (correctAnswersArrID.length) {
       correctAnswersArrID.forEach((id) => {
         if (arr.length) {
@@ -82,39 +82,49 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
 
   const allAnswerID = sumAttempts(correctAnswersID, wrongAnswersID)
 
-
-
   // ========================================================================================================================================================
   const nowDateRu = getNowDateRu()
 
   // First Attempts Options
-  const firstAttemptsOptions = (resultWord: {id: string, attempts: number, successAttempts: number}) => {
+  const firstAttemptsOptions = (resultWord: {
+    id: string
+    attempts: number
+    successAttempts: number
+  }) => {
     const { attempts, successAttempts } = resultWord
     return {
       attempts,
       successAttempts,
-      history:JSON.stringify( [{
-        date: nowDateRu,
-        gamesStat: {
-          audioCall: {
-            attempts: game === 'audioCall' ? attempts : 0,
-            successAttempts: game === 'audioCall' ? successAttempts : 0,
-            maxSeries: 0 // TODO: прикрутить логику максимальных серий
+      history: JSON.stringify([
+        {
+          date: nowDateRu,
+          gamesStat: {
+            audioCall: {
+              attempts: game === 'audioCall' ? attempts : 0,
+              successAttempts: game === 'audioCall' ? successAttempts : 0,
+              maxSeries: 0, // TODO: прикрутить логику максимальных серий
+            },
+            sprint: {
+              attempts: game === 'sprint' ? attempts : 0,
+              successAttempts: game === 'sprint' ? successAttempts : 0,
+              maxSeries: 0, // TODO: прикрутить логику максимальных серий
+            },
           },
-          sprint: {
-            attempts: game === 'sprint' ? attempts : 0,
-            successAttempts: game === 'sprint' ? successAttempts : 0,
-            maxSeries: 0 // TODO: прикрутить логику максимальных серий
-          }
-        }
-      }])
+        },
+      ]),
     }
   }
   // Update Options
-  const updateAttemptsOptions = (currentWord: IUsersWords, resultWord: {id: string, attempts: number, successAttempts: number}) => {
+  const updateAttemptsOptions = (
+    currentWord: IUsersWords,
+    resultWord: { id: string; attempts: number; successAttempts: number },
+  ) => {
     const attempts = (currentWord?.optional?.attempts ?? 0) + resultWord.attempts
-    const successAttempts = (currentWord?.optional?.successAttempts ?? 0) + resultWord.successAttempts
-    const oldHistory = currentWord?.optional?.history ? JSON.parse(currentWord?.optional?.history) : []
+    const successAttempts =
+      (currentWord?.optional?.successAttempts ?? 0) + resultWord.successAttempts
+    const oldHistory = currentWord?.optional?.history
+      ? JSON.parse(currentWord?.optional?.history)
+      : []
     const history: IDateStat[] = []
     const newDayStat = {
       date: nowDateRu,
@@ -122,50 +132,65 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
         audioCall: {
           attempts: game === 'audioCall' ? attempts : 0,
           successAttempts: game === 'audioCall' ? successAttempts : 0,
-          maxSeries: game === 'audioCall' ? 0 : 0
+          maxSeries: game === 'audioCall' ? 0 : 0,
         },
         sprint: {
           attempts: game === 'sprint' ? attempts : 0,
           successAttempts: game === 'sprint' ? successAttempts : 0,
-          maxSeries: game === 'sprint' ? 0 : 0
-        }
-      }
+          maxSeries: game === 'sprint' ? 0 : 0,
+        },
+      },
     }
     if (oldHistory.length) {
       // Проверяем есть ли статистика на сегодняшний день
       const historyNowDay = oldHistory.find((day) => day.date === nowDateRu)
-      if (historyNowDay) { // Статистика за сегодняшний день уже есть
+      if (historyNowDay) {
+        // Статистика за сегодняшний день уже есть
         const oldDayAudioCall = historyNowDay.gamesStat.audioCall
         const oldDaySprint = historyNowDay.gamesStat.sprint
         const updateDayStat = {
           date: nowDateRu,
           gamesStat: {
             audioCall: {
-              attempts: game === 'audioCall' ? oldDayAudioCall.attempts + resultWord.attempts : oldDayAudioCall.attempts,
-              successAttempts: game === 'audioCall' ? oldDayAudioCall.successAttempts + resultWord.successAttempts : oldDayAudioCall.successAttempts,
-              maxSeries: game === 'audioCall' ? 0 : 0 // TODO: MAXSERIES
+              attempts:
+                game === 'audioCall'
+                  ? oldDayAudioCall.attempts + resultWord.attempts
+                  : oldDayAudioCall.attempts,
+              successAttempts:
+                game === 'audioCall'
+                  ? oldDayAudioCall.successAttempts + resultWord.successAttempts
+                  : oldDayAudioCall.successAttempts,
+              maxSeries: game === 'audioCall' ? 0 : 0, // TODO: MAXSERIES
             },
             sprint: {
-              attempts: game === 'sprint' ? oldDaySprint.attempts + resultWord.attempts : oldDaySprint.attempts,
-              successAttempts: game === 'sprint' ? oldDaySprint.successAttempts + resultWord.successAttempts : oldDaySprint.successAttempts,
-              maxSeries: game === 'sprint' ? 0 : 0 // TODO: MAXSERIES
-            }
-          }
+              attempts:
+                game === 'sprint'
+                  ? oldDaySprint.attempts + resultWord.attempts
+                  : oldDaySprint.attempts,
+              successAttempts:
+                game === 'sprint'
+                  ? oldDaySprint.successAttempts + resultWord.successAttempts
+                  : oldDaySprint.successAttempts,
+              maxSeries: game === 'sprint' ? 0 : 0, // TODO: MAXSERIES
+            },
+          },
         }
         history.push(...oldHistory)
         const indexDay = history.findIndex((day) => day.date === nowDateRu)
         history.splice(indexDay, 1, updateDayStat)
-      } else { // Если статистики на сегодня нету, то
-      // добавляем в старый массив новую статистику с сегодняшней датой
+      } else {
+        // Если статистики на сегодня нету, то
+        // добавляем в старый массив новую статистику с сегодняшней датой
         history.push(...oldHistory, newDayStat)
       }
-    } else { // Если история в принципе отсутствует
+    } else {
+      // Если история в принципе отсутствует
       history.push(newDayStat)
     }
     return {
       attempts,
       successAttempts,
-      history: JSON.stringify(history)
+      history: JSON.stringify(history),
     }
   }
 
@@ -182,7 +207,7 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
             id: local['userId'],
             wordId: answerId.id,
             difficulty,
-            optional
+            optional,
           })
         } else {
           const currentWord = userWords[answerId.id]
@@ -192,7 +217,7 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
             id: local['userId'],
             wordId: answerId.id,
             difficulty,
-            optional
+            optional,
           })
         }
       })

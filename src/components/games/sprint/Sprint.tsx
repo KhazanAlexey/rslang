@@ -142,7 +142,6 @@ const Sprint: React.FC<any> = () => {
     window.addEventListener<'keyup'>('keyup', handleKeyPress)
     return () => window.removeEventListener('keyup', handleKeyPress)
   })
-  console.log(answerVariant)
   return (
     <section className={styles.sprint}>
       <div className={globalThis.globalStyles.container}>

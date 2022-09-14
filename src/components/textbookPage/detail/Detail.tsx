@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { wordsAPI } from 'src/services/WordsService'
 import { clsx } from 'src/utils/clsx'
 import styles from './Detail.module.scss'
-import { IWord } from '../../../models/IWord'
 import { useAudio } from '../../../hooks/useAudio'
 import { userWordsAPI } from '../../../services/UsersWordsService'
 import { localStorageGet } from '../../../utils/localStoradre'
@@ -15,38 +14,46 @@ const Detail: React.FC<any> = (props) => {
   const { id, complete: isComplete, hard: isHard } = props
   const dispatch = useDispatch()
   const userid = localStorage.getItem('userId') || ''
+  const [skip, setSkip] = useState(true)
   const { data: wordData, refetch } = wordsAPI.useFetchWordByIdQuery(id)
   const { data: userWord } = userWordsAPI.useFetchUserWordQuery({ id: userid, wordId: id })
   useEffect(() => {
-    refetch()
+    if (id) {
+      refetch()
+    }
   }, [id])
 
   const { userWords, userWordsIds } = useAppSelector((state) => state.userWords)
 
-  const statWord = userWords.find((word) => word.wordId == id);
-  const beInGameWord = statWord ? (statWord.optional?.attempts ?? 0) : 0
-  const successWord = statWord ? (statWord.optional?.successAttempts ?? 0) : 0
+  const statWord = userWords.find((word) => word.wordId == id)
+  const beInGameWord = statWord ? statWord.optional?.attempts ?? 0 : 0
+  const successWord = statWord ? statWord.optional?.successAttempts ?? 0 : 0
   const wrongWord = beInGameWord - successWord
 
   const [postWord] = userWordsAPI.usePostUserWordMutation()
   const [updateUserWord] = userWordsAPI.useUpdateUserWordMutation()
   const [deleteWord] = userWordsAPI.useDeleteUserWordMutation()
   const local = localStorageGet(['userId'])
-  const [playing, toggle] = useAudio(`https://rs-lang-193.herokuapp.com/${wordData?.audio}`)
+  const [playing, toggle] = useAudio(
+    wordData?.audio && `https://rs-lang-193.herokuapp.com/${wordData?.audio}`,
+  )
   const [playingMeaning, meaningToggle] = useAudio(
-    `https://rs-lang-193.herokuapp.com/${wordData?.audioMeaning}`,
+    wordData?.audioMeaning && `https://rs-lang-193.herokuapp.com/${wordData?.audioMeaning}`,
   )
   const [playingExample, exampleToggle] = useAudio(
-    `https://rs-lang-193.herokuapp.com/${wordData?.audioExample}`,
+    wordData?.audioExample && `https://rs-lang-193.herokuapp.com/${wordData?.audioExample}`,
   )
 
-  const [isStatOpen, setIsStatOpen] = useState(false);
+  const [isStatOpen, setIsStatOpen] = useState(false)
 
   const stathandler = () => {
     isStatOpen ? setIsStatOpen(false) : setIsStatOpen(true)
   }
   // TODO: сделать логику добавления в сложные
-
+  useEffect(() => {
+    if (isComplete) {
+    }
+  }, [])
   const hardHandler = () => {
     // @ts-ignore
     dispatch(userWordsSlice.actions.deleteCompletedWord(id))
@@ -78,7 +85,6 @@ const Detail: React.FC<any> = (props) => {
     if (!isComplete && !isHard)
       postWord({ id: local['userId'], difficulty: 'completed', wordId: id })
   }
-  // console.log('userW', userWord)
   const soundHandler = () => {
     toggle()
   }
@@ -132,7 +138,7 @@ const Detail: React.FC<any> = (props) => {
                 dangerouslySetInnerHTML={{ __html: wordData.textMeaning }}
               ></p>
             )}
-            <p className={styles.detailText}>{wordData && wordData.textMeaningTranslate}</p>
+            <p className={styles.detailText}>{wordData ? wordData.textMeaningTranslate : ''}</p>
           </li>
           <li className={styles.detailItem}>
             <h4 className={styles.detailSubtitle}>
@@ -164,11 +170,14 @@ const Detail: React.FC<any> = (props) => {
           </div>
         )}
         {isAuth && beInGameWord && (
-          <div className={clsx({
-            [styles.detailStat]: true,
-            [styles.detailStatHave]: true,
-            [styles.detailStatOpen]: isStatOpen
-          })} onClick={stathandler}>
+          <div
+            className={clsx({
+              [styles.detailStat]: true,
+              [styles.detailStatHave]: true,
+              [styles.detailStatOpen]: isStatOpen,
+            })}
+            onClick={stathandler}
+          >
             <h4>Статистика по слову</h4>
             <p>Встречалось в играх {beInGameWord}</p>
             <p>Отгадано {successWord}</p>
@@ -176,7 +185,7 @@ const Detail: React.FC<any> = (props) => {
           </div>
         )}
         <img
-          src={wordData && `https://rs-lang-193.herokuapp.com/${wordData.image}`}
+          src={wordData?.image && `https://rs-lang-193.herokuapp.com/${wordData.image}`}
           alt={wordData && wordData.word}
         />
       </div>

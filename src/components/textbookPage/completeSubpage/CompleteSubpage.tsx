@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Words from 'src/components/words/Words'
-import Detail from '../detail/Detail'
 import styles from './CompleteSubpage.module.scss'
-import { localStorageGet } from '../../../utils/localStoradre'
-import { userWordsAPI } from '../../../services/UsersWordsService'
-import { useAppSelector } from '../../../hooks/redux'
 
 const CompleteSubpage: React.FC<any> = (props) => {
   const {
-    detail,
     wordDetail,
     setWordDetail,
     completedUserWords,
@@ -40,7 +35,6 @@ const CompleteSubpage: React.FC<any> = (props) => {
                 setWordDetail={setWordDetail}
               />
             </div>
-            {detail}
           </div>
         </div>
       </section>

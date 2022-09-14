@@ -70,7 +70,6 @@ export const userWordsAPI = createApi({
           wordsPerPage: 3600,
           filter: JSON.stringify({ 'userWord.difficulty': wordsDifficult }),
         },
-
       }),
       providesTags: (result) => ['AggregatedWords'],
     }),

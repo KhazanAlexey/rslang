@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Words from 'src/components/words/Words'
-import Detail from '../detail/Detail'
 import styles from './HardSubpage.module.scss'
-import { userWordsAPI } from '../../../services/UsersWordsService'
-import { localStorageGet } from '../../../utils/localStoradre'
-import { useAppSelector } from 'src/hooks/redux'
 
 const HardSubpage: React.FC<any> = (props) => {
   const {
-    detail,
     wordDetail,
     setWordDetail,
     difficultUserWords,
@@ -39,7 +34,6 @@ const HardSubpage: React.FC<any> = (props) => {
                 setWordDetail={setWordDetail}
               />
             </div>
-            {detail}
           </div>
         </div>
       </section>

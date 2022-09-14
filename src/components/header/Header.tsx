@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { clsx } from 'src/utils/clsx'
 import styles from './Header.module.scss'
@@ -11,11 +11,15 @@ import { userWordsAPI } from '../../services/UsersWordsService'
 const Header: React.FC<any> = () => {
   const [isAuthModal, setIsAuthModal] = useState('')
   const [burger, setBurger] = useState(false)
+  const [skip, setSkip] = useState(true)
+
   const { isAuth, name: userName } = useAppSelector((state) => state.auth)
   const id = localStorage.getItem('userId') || ''
   const { data, error, isLoading } = userAPI.useFetchUserQuery(id)
-  const { data: hardW } = userWordsAPI.useFetchUserWordsQuery(id)
-
+  const { data: hardW } = userWordsAPI.useFetchUserWordsQuery(id, { skip })
+  useEffect(() => {
+    if (isAuth) setSkip(false)
+  }, [isAuth])
   return (
     <header className={styles.header}>
       <div className={globalThis.globalStyles.container}>

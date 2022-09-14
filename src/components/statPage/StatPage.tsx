@@ -20,7 +20,7 @@ const StatPage: React.FC<any> = () => {
   const nowDayDate = getDateFromRu(nowDay)
 
   // ========================================================================================================================================================
-  
+
   // const checkIsNew = (history: IDateStat) => {}
   // 1. Сортируем массив слов по датам
   // 2. Функция для создания объекта статистики за конкретный день
@@ -56,13 +56,17 @@ const StatPage: React.FC<any> = () => {
         if (word.optional) {
           const { optional } = word
           const history: IDateStat[] = optional.history?.length ? JSON.parse(optional.history) : []
-          if (history && history.length) { // Если вообще есть история
+          if (history && history.length) {
+            // Если вообще есть история
             const wordBecameNewDate = dateWordBecameNew(history)
             const wordBecameNewDateRu = getDateInRu(wordBecameNewDate)
             const isCurrentDayFirst = wordBecameNewDate.getTime() === findDayDate.getTime()
-            console.log(`Сегодняшняя дата: ${findDay}, слово появилось в статистике ${wordBecameNewDateRu}`)
+            console.log(
+              `Сегодняшняя дата: ${findDay}, слово появилось в статистике ${wordBecameNewDateRu}`,
+            )
             const nowDayStat = history.find((dayStat) => dayStat.date === findDay)
-            if (nowDayStat) { // Если есть статистика за сегодня
+            if (nowDayStat) {
+              // Если есть статистика за сегодня
               const { audioCall, sprint } = nowDayStat.gamesStat
               if ((audioCall.attempts || sprint.attempts) && isCurrentDayFirst) {
                 wordsStat.new += 1 // +1 новое слово сегодня
@@ -87,17 +91,18 @@ const StatPage: React.FC<any> = () => {
       })
     }
     wordsStat.rightPercent = attemptsDay ? getRightPercent(attemptsDay, successAttemptsDay) : 0
-    audioCallStat.rightPercent = attemptsDay ? getRightPercent(audioCallAttemptsDay, audioCallSuccessAttemptsDay) : 0
-    sprintStat.rightPercent = attemptsDay ? getRightPercent(sprintAttemptsDay, sprintSuccessAttemptsDay) : 0
+    audioCallStat.rightPercent = attemptsDay
+      ? getRightPercent(audioCallAttemptsDay, audioCallSuccessAttemptsDay)
+      : 0
+    sprintStat.rightPercent = attemptsDay
+      ? getRightPercent(sprintAttemptsDay, sprintSuccessAttemptsDay)
+      : 0
     return { wordsStat, audioCallStat, sprintStat }
   }
 
   const nowDayStat = getDayStat(nowDay)
 
   console.log(nowDayStat)
-  
-
-  
 
   const isStat = userWords.find((word) => (word.optional?.attempts ?? 0) > 0)
 
@@ -138,20 +143,20 @@ const StatPage: React.FC<any> = () => {
               <p>Всего попыток со словами: {allAttempts}</p>
               <p>Из них успешных: {allSuccessAttempts}</p>
               <p>Процент правильных ответов в играх: {allPercentRight}%</p>
-              <h2 style={{fontWeight:700}}>ЗА СЕГОДНЯ</h2>
-              <h3 style={{fontWeight:700}}>Слова</h3>
+              <h2 style={{ fontWeight: 700 }}>ЗА СЕГОДНЯ</h2>
+              <h3 style={{ fontWeight: 700 }}>Слова</h3>
               <ul>
                 <li>Новых слов: {nowDayStat.wordsStat.new}</li>
                 <li>Правильные: {nowDayStat.wordsStat.rightPercent}%</li>
                 <li>Изучено: {nowDayStat.wordsStat.learned}</li>
               </ul>
-              <h3 style={{fontWeight:700}}>Аудиовызов</h3>
+              <h3 style={{ fontWeight: 700 }}>Аудиовызов</h3>
               <ul>
                 <li>Новых слов: {nowDayStat.audioCallStat.new}</li>
                 <li>Правильные: {nowDayStat.audioCallStat.rightPercent}%</li>
                 <li>Макс. серия: {nowDayStat.audioCallStat.maxSeries}</li>
               </ul>
-              <h3 style={{fontWeight:700}}>Спринт</h3>
+              <h3 style={{ fontWeight: 700 }}>Спринт</h3>
               <ul>
                 <li>Новых слов: {nowDayStat.sprintStat.new}</li>
                 <li>Правильные: {nowDayStat.sprintStat.rightPercent}%</li>
