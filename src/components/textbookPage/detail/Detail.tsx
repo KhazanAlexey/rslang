@@ -16,13 +16,17 @@ const Detail: React.FC<any> = (props) => {
   const userid = localStorage.getItem('userId') || ''
   const [skip, setSkip] = useState(true)
   const { data: wordData, refetch } = wordsAPI.useFetchWordByIdQuery(id)
-  const { data: userWord } = userWordsAPI.useFetchUserWordQuery({ id: userid, wordId: id })
+  const { data: userWord } = userWordsAPI.useFetchUserWordQuery({ id: userid, wordId: id },{skip})
   useEffect(() => {
     if (id) {
       refetch()
     }
   }, [id])
-
+  useEffect(() => {
+    if (isAuth) {
+      setSkip(false)
+    }
+  }, [isAuth])
   const { userWords, userWordsIds } = useAppSelector((state) => state.userWords)
 
   const statWord = userWords.find((word) => word.wordId == id)

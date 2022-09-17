@@ -22,7 +22,7 @@ const Footer: React.FC<any> = () => {
           <div className={styles.footerSecond}>
             <div className={styles.footerSecondTeam}>
               <a
-                href='https://github.com/KhazanAlexey'
+                 href='https://github.com/KhazanAlexey'
                 className={clsx({
                   ['_icon-github']: true,
                 })}

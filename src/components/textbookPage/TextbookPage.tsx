@@ -81,8 +81,9 @@ const TextBookPage: React.FC<any> = () => {
     }
   }
   useEffect(() => {
-    setSkip(false)
+    if(isAuth) setSkip(false)
   }, [isAuth])
+
   useEffect(() => {
     if (subpage == 'hard' && difficultUserWords)
       setWordDetail(difficultUserWords?.[0].paginatedResults[0]?._id)
@@ -177,6 +178,7 @@ const TextBookPage: React.FC<any> = () => {
           </div>
         </div>
       </section>
+      <Detail id={wordDetail} complete={isCompleted} hard={isHard} subpage={subpage} />
 
       {subpage == 'book' && (
         <BookSubpage
@@ -215,7 +217,6 @@ const TextBookPage: React.FC<any> = () => {
           setWordDetail={setWordDetail}
         />
       )}
-      <Detail id={wordDetail} complete={isCompleted} hard={isHard} subpage={subpage} />
     </div>
   )
 }
