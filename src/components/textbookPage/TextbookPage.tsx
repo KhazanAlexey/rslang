@@ -10,6 +10,7 @@ import { localStorageGet } from '../../utils/localStoradre'
 import { userWordsAPI } from '../../services/UsersWordsService'
 import { useAppSelector } from '../../hooks/redux'
 import { wordsAPI } from '../../services/WordsService'
+import Levels from './levels/Levels'
 
 const TextBookPage: React.FC<any> = () => {
   const local = localStorageGet(['userId'])
@@ -178,45 +179,75 @@ const TextBookPage: React.FC<any> = () => {
           </div>
         </div>
       </section>
-      <Detail id={wordDetail} complete={isCompleted} hard={isHard} subpage={subpage} />
 
-      {subpage == 'book' && (
-        <BookSubpage
-          bookWords={bookWords}
-          activeLvl={activeLvl}
-          setActiveLvl={setActiveLvl}
-          levels={levels}
-          activePage={activePage}
-          setActivePage={setActivePage}
-          hardWords={hardWords}
-          setHardWords={setHardWords}
-          wordDetail={wordDetail}
-          setWordDetail={setWordDetail}
-          isLoadingWords={isLoadingWords}
-        />
-      )}
-      {isAuth && subpage == 'hard' && (
-        <HardSubpage
-          difficultWordsError={difficultWordsError}
-          isLoadingHardWords={isLoadingHardWords}
-          difficultUserWords={difficultUserWords}
-          hardWords={hardWords}
-          setHardWords={setHardWords}
-          wordDetail={wordDetail}
-          setWordDetail={setWordDetail}
-        />
-      )}
-      {isAuth && subpage == 'complete' && (
-        <CompleteSubpage
-          completedUserWords={completedUserWords}
-          isLoadingComplete={isLoadingComplete}
-          errorComplete={errorComplete}
-          hardWords={hardWords}
-          setHardWords={setHardWords}
-          wordDetail={wordDetail}
-          setWordDetail={setWordDetail}
-        />
-      )}
+      <section className={styles.subpage}>
+        {subpage == 'book' && (
+          <section className={styles.subpageLvl}>
+            <div className={globalThis.globalStyles.container}>
+              <h2 className={globalThis.globalStyles.sectionTitle}>Сложность</h2>
+              <Levels
+                activeLvl={activeLvl}
+                setActiveLvl={setActiveLvl}
+                levels={levels}
+                activePage={activePage}
+                setActivePage={setActivePage}
+              />
+            </div>
+          </section>
+        )}
+        <section>
+          <div className={globalThis.globalStyles.container}>
+            {subpage == 'book' && (
+              <h2 className={globalThis.globalStyles.sectionTitle}>
+                Все слова {levels[activeLvl - 1].title}
+              </h2>
+            )}
+            {isAuth && subpage !== 'book' && (
+              <h2 className={globalThis.globalStyles.sectionTitle}>{subpage == 'complete' ? 'Изученные слова' : 'Сложные слова'}</h2>
+            )}
+            <div className={styles.subpageWrapper}>
+              {subpage == 'book' && (
+                <BookSubpage
+                  bookWords={bookWords}
+                  activeLvl={activeLvl}
+                  setActiveLvl={setActiveLvl}
+                  levels={levels}
+                  activePage={activePage}
+                  setActivePage={setActivePage}
+                  hardWords={hardWords}
+                  setHardWords={setHardWords}
+                  wordDetail={wordDetail}
+                  setWordDetail={setWordDetail}
+                  isLoadingWords={isLoadingWords}
+                />
+              )}
+              {isAuth && subpage == 'hard' && (
+                <HardSubpage
+                  difficultWordsError={difficultWordsError}
+                  isLoadingHardWords={isLoadingHardWords}
+                  difficultUserWords={difficultUserWords}
+                  hardWords={hardWords}
+                  setHardWords={setHardWords}
+                  wordDetail={wordDetail}
+                  setWordDetail={setWordDetail}
+                />
+              )}
+              {isAuth && subpage == 'complete' && (
+                <CompleteSubpage
+                  completedUserWords={completedUserWords}
+                  isLoadingComplete={isLoadingComplete}
+                  errorComplete={errorComplete}
+                  hardWords={hardWords}
+                  setHardWords={setHardWords}
+                  wordDetail={wordDetail}
+                  setWordDetail={setWordDetail}
+                />
+              )}
+              <Detail id={wordDetail} complete={isCompleted} hard={isHard} subpage={subpage} />
+            </div>
+          </div>
+        </section>
+      </section>
     </div>
   )
 }

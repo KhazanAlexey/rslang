@@ -1,7 +1,6 @@
 import React from 'react'
 import Words from 'src/components/words/Words'
 import { clsx } from 'src/utils/clsx'
-import Levels from '../levels/Levels'
 import styles from './BookSubpage.module.scss'
 
 const Pagination: React.FC<any> = (props) => {
@@ -71,47 +70,24 @@ const Pagination: React.FC<any> = (props) => {
 }
 
 const BookSubpage: React.FC<any> = (props) => {
-  const { activeLvl, setActiveLvl, bookWords, activePage, setActivePage, levels, isLoadingWords } =
+  const { activeLvl, bookWords, activePage, setActivePage, levels, isLoadingWords } =
     props
 
   const { wordDetail, setWordDetail } = props
 
   return (
-    <section className={styles.book}>
-      <section>
-        <div className={globalThis.globalStyles.container}>
-          <h2 className={globalThis.globalStyles.sectionTitle}>Сложность</h2>
-          <Levels
-            activeLvl={activeLvl}
-            setActiveLvl={setActiveLvl}
-            levels={levels}
-            activePage={activePage}
-            setActivePage={setActivePage}
-          />
-        </div>
-      </section>
-      <section className={styles.bookSection}>
-        <div className={globalThis.globalStyles.container}>
-          <h2 className={globalThis.globalStyles.sectionTitle}>
-            Все слова {levels[activeLvl - 1].title}
-          </h2>
-          <div className={styles.bookWrapper}>
-            <div className={styles.bookWords}>
-              <Words
-                page={activePage - 1}
-                lvl={activeLvl - 1}
-                levels={levels}
-                wordDetail={wordDetail}
-                setWordDetail={setWordDetail}
-                isLoadingWords={isLoadingWords}
-                words={bookWords}
-              />
-              <Pagination page={activePage} setPage={setActivePage} />
-            </div>
-          </div>
-        </div>
-      </section>
-    </section>
+    <div className={globalThis.globalStyles.bookWords}>
+      <Words
+        page={activePage - 1}
+        lvl={activeLvl - 1}
+        levels={levels}
+        wordDetail={wordDetail}
+        setWordDetail={setWordDetail}
+        isLoadingWords={isLoadingWords}
+        words={bookWords}
+      />
+      <Pagination page={activePage} setPage={setActivePage} />
+    </div>
   )
 }
 
