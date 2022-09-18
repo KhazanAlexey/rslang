@@ -210,3 +210,20 @@
     }
   }
 }
+
+.subpage {
+  padding-bottom: rem(90);
+  &Lvl {
+    margin-bottom: rem(36);
+  }
+  &Wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: rem(24);
+  
+    @media (max-width: $tablet) {
+      flex-direction: column-reverse;
+    }
+  }
+}
