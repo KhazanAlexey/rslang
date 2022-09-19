@@ -1,0 +1,150 @@
+@use 'sass:math';
+@import '../../../../../styles/mixins.scss';
+
+.teamMember {
+  border-radius: rem(24);
+  background-color: transparent;
+  padding: rem(12) rem(18);
+  display: flex;
+  align-items: center;
+  gap: rem(24);
+  transition: $transitionBtn;
+  cursor: pointer;
+  max-width: rem(516);
+
+  @media (max-width: em(1150)) {
+    gap: rem(12);
+    padding: rem(12);
+    max-width: rem(400);
+  }
+
+  @media (max-width: em(920)) {
+    gap: rem(15);
+  }
+
+  @media (max-width: $mobile) {
+    padding: rem(6);
+  }
+
+  @media (max-width: em(604)) {
+    &:nth-child(2) {
+      margin-left: auto;
+    }
+  }
+  //@media (max-width: $mobile) {
+  //  font-size: rem(10);
+  //}
+
+  &:hover {
+    background-color: white;
+  }
+
+  &Img {
+    &Frame {
+      overflow: hidden;
+      width: rem(180);
+      height: rem(180);
+      border-radius: 50%;
+      box-shadow: inset 0 0 rem(5) $disableButtonBgColor;
+
+      @media (max-width: em(1150)) {
+        width: rem(130);
+        height: rem(130);
+      }
+
+      @media (max-width: em(920)) {
+        width: rem(120);
+        height: rem(120);
+      }
+
+      @media (max-width: $mobile) {
+        width: rem(80);
+        height: rem(80);
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  &Info {
+    //padding: rem(5);
+    flex: 1;
+
+    &Name {
+      font-size: rem(24);
+      line-height: rem(34);
+      font-weight: 700;
+      color: $activeLinkColor;
+
+      @media (max-width: em(1150)) {
+        font-size: rem(21);
+      }
+
+      @media (max-width: em(920)) {
+        font-size: rem(18);
+      }
+
+      //@media (max-width: $mobile) {
+      //  font-size: rem(14);
+      //}
+    }
+
+    &Role {
+      margin-top: rem(6);
+      font-weight: 700;
+      font-size: rem(21);
+      line-height: math.div(30, 21);
+      color: $lightColor;
+      display: flex;
+      gap: rem(12);
+
+      @media (max-width: em(1150)) {
+        margin-top: rem(3);
+        font-size: rem(18);
+      }
+
+      @media (max-width: em(920)) {
+        font-size: rem(18);
+      }
+
+      @media (max-width: $mobile) {
+        font-size: rem(16);
+        gap: rem(6);
+      }
+
+      &Link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: rem(21);
+        color: $mainButtonBgColor;
+        transition: $transitionText;
+        &:hover {
+          color: $hoverButtonBgColor;
+        }
+        @media (max-width: $mobile) {
+          font-size: rem(18);
+        }
+      }
+    }
+
+    &Story {
+      margin-top: rem(12);
+      font-weight: 400;
+      font-size: rem(18);
+      line-height: math.div(24, 18);
+      width: rem(276);
+      @media (max-width: em(1150)) {
+        margin-top: rem(3);
+        font-size: rem(16);
+        width: rem(212);
+      }
+      @media (max-width: $mobile) {
+        font-size: rem(14);
+        width: rem(180);
+      }
+    }
+  }
+}

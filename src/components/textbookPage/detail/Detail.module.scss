@@ -1,0 +1,323 @@
+@use 'sass:math';
+@import '../../../styles/mixins.scss';
+
+.detail {
+  width: rem(447);
+  flex-shrink: 0;
+  padding: rem(238) rem(24) rem(24);
+  //background: linear-gradient(201.29deg, #F6ED00 0%, #FFFA86 45.31%, #F2E900 100%);
+  transition: all 0.3s ease-in-out;
+  border-radius: rem(24);
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  @media (max-width: $tablet) {
+    width: 100%;
+    padding: rem(24) calc(50% + rem(24)) rem(24) rem(24);
+  }
+  @media (max-width: em(640)) {
+    //max-width: rem(600);
+    padding: rem(246) rem(18) rem(18);
+  }
+  @media (max-width: $mobileSmall) {
+    padding-top: rem(212);
+  }
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    //background: #FFFFFF;
+    //z-index: -1;
+  }
+  &::before {
+    background: #ffffff;
+    z-index: -2;
+  }
+  &::after {
+    z-index: -1;
+    background: linear-gradient(201.29deg, #f6ed00 0%, #fffa86 45.31%, #f2e900 100%);
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  .detailMain {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .detailTitle {
+    text-transform: capitalize;
+    font-weight: 700;
+    font-size: rem(27);
+    line-height: math.div(44, 27);
+    color: $mainTitleColor;
+    transition: all 0.3s;
+    @media (max-width: em(640)) {
+      font-size: rem(24);
+    }
+  }
+
+  .detailSound {
+    font-size: rem(30);
+    margin-left: rem(6);
+    color: $mainButtonBgColor;
+    padding: rem(7);
+    background: rgba(255, 255, 255, 0);
+    border-radius: rem(44);
+    transition: all 0.3s;
+    &.detailSubsound {
+      font-size: rem(24);
+    }
+    &.soundOn {
+      color: $mainBgColor;
+      background: $mainButtonBgColor;
+    }
+  }
+
+  .detailTranscription {
+    font-weight: 700;
+    font-size: rem(18);
+    line-height: math.div(44, 18);
+    margin-left: auto;
+    @media (max-width: em(640)) {
+      font-size: rem(16);
+    }
+  }
+
+  .detailTranslate {
+    width: 100%;
+    margin-top: rem(3);
+    font-weight: 400;
+    font-size: rem(21);
+    line-height: math.div(30, 21);
+    @media (max-width: em(640)) {
+      font-size: rem(18);
+      margin-top: rem(0);
+    }
+  }
+
+  .detailLine {
+    height: rem(1);
+    margin-top: rem(12);
+    width: 100%;
+    background: #d9d9d9;
+    transition: all 0.3s;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+    width: 0;
+  }
+  .detailMore {
+    max-height: rem(360);
+    overflow-y: auto;
+  }
+
+  .detailItem {
+    &::after {
+      display: block;
+      content: '';
+      width: 100%;
+      height: rem(1);
+      margin-top: rem(12);
+      background: #d9d9d9;
+      transition: all 0.3s;
+    }
+    &:last-child::after {
+      display: none;
+    }
+  }
+
+  .detailSubtitle {
+    font-weight: 600;
+    font-size: rem(21);
+    line-height: math.div(30, 21);
+    color: $mainHeaderColor;
+    margin-top: rem(9);
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    @media (max-width: em(640)) {
+      font-size: rem(18);
+    }
+  }
+
+  .detailText {
+    font-weight: 400;
+    font-size: rem(18);
+    line-height: math.div(26, 18);
+    margin-top: rem(9);
+    &:first-of-type {
+      margin-top: rem(6);
+    }
+    > b,
+    strong {
+      font-weight: 700;
+    }
+    @media (max-width: em(640)) {
+      font-size: rem(16);
+      margin-top: rem(3);
+    }
+  }
+
+  .detailImage {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: rem(220);
+    background: rgb(139, 0, 151);
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    & > img {
+      position: absolute;
+      width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+    }
+    @media (max-width: $tablet) {
+      width: 50%;
+      left: 50%;
+      height: 100%;
+    }
+    @media (max-width: em(640)) {
+      height: rem(236);
+      left: 0;
+      width: 100%;
+    }
+    @media (max-width: $mobileSmall) {
+      height: rem(200);
+    }
+  }
+
+  .detailControl {
+    position: absolute;
+    top: rem(12);
+    right: rem(12);
+    display: flex;
+    gap: rem(12);
+  }
+
+  .controlBtn {
+    border-radius: rem(44);
+    background: $mainBgColor;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    height: rem(44);
+    align-items: center;
+    justify-content: center;
+    padding: rem(8);
+    transition: all 0.3s ease-in;
+    overflow: hidden;
+    color: $mainButtonBgColor;
+    & > span {
+      max-width: rem(0);
+      margin-left: rem(0);
+      font-weight: 500;
+      font-size: rem(18);
+      line-height: math.div(26, 18);
+      transition: all 0.3s ease-in;
+      opacity: 0;
+    }
+    &:hover {
+      background: $hoverBrightButtonBgColor;
+      color: $mainBgColor;
+      & > span {
+        max-width: rem(100);
+        margin-left: rem(6);
+        opacity: 1;
+        color: $mainBgColor;
+      }
+    }
+  }
+  .controlComplete {
+    font-size: rem(28);
+  }
+  .controlHard {
+    font-size: rem(24);
+    &::before {
+      margin: rem(2);
+    }
+  }
+
+  // COMPLETE CARD
+  &.detailComplete {
+    background: linear-gradient(201.29deg, #f6ed00 0%, #fffa86 45.31%, #f2e900 100%) !important;
+    &::after {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .controlComplete {
+      background: $mainButtonBgColor;
+      color: $mainBgColor;
+      &:hover {
+        background: $mainColor;
+      }
+    }
+    .detailTitle,
+    .detailSubtitle {
+      color: $mainColor;
+    }
+    .detailLine,
+    .detailItem::after {
+      background: #afac56;
+    }
+
+    .detailSound {
+      color: $mainColor;
+      &.soundOn {
+        color: $mainBgColor;
+        background: $mainColor;
+      }
+    }
+  }
+  &.detailHard {
+    .controlHard {
+      background: $mainButtonBgColor;
+      color: $mainBgColor;
+      &:hover {
+        background: $mainColor;
+      }
+    }
+  }
+
+  &Stat {
+    position: absolute;
+    z-index: 2;
+    background: #ffffff;
+    //opacity: 0.7;
+    bottom: 0;
+    right: 0;
+    padding: rem(3) rem(18) rem(3) rem(12);
+    border-top-left-radius: rem(9);
+    & > h4 {
+      color: $lightColor;
+      font-weight: 700;
+      font-size: rem(16);
+    }
+    & > p {
+      font-size: rem(14);
+      line-height: math.div(18, 14);
+    }
+    &Have {
+      transition: all 0.3s;
+      transform: translateY(calc(100% - rem(21)));
+      cursor: pointer;
+
+      &:hover {
+        transform: translateY(0);
+      }
+    }
+    &Open {
+      transform: translateY(0) !important;
+    }
+  }
+}

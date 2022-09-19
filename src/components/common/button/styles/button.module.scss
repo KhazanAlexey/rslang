@@ -1,0 +1,37 @@
+@import './button.vars.module.scss';
+
+.button {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: 500;
+  font-size: rem(18);
+  line-height: 26px;
+  padding: rem(9) rem(30);
+  background-color: $mainButtonBgColor;
+  border-radius: rem(44);
+  transition: $transitionBtn;
+  color: $lightTextColor;
+  letter-spacing: 0;
+
+  //@media (max-width: $mobile) {
+  //  font-size: rem(13);
+  //  padding: rem(5) rem(10);
+  //}
+
+  &:focus {
+    outline: none;
+  }
+
+  &.disabled {
+    color: $disableButtonBgColor;
+  }
+
+  &.defaultHover {
+    &:hover:not(.disabled) {
+      cursor: pointer;
+      background-color: $hoverButtonBgColor;
+      color: $lightTextColor;
+    }
+  }
+}

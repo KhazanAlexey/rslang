@@ -1,0 +1,81 @@
+@use 'sass:math';
+@import '../../../styles/mixins.scss';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: rem(24);
+  &Group {
+    display: flex;
+    flex-direction: column;
+    margin-top: rem(18);
+    width: 100%;
+    &:first-child {
+      margin-top: rem(0);
+    }
+  }
+  &Input {
+    margin-top: rem(3);
+    width: 100%;
+    border-radius: rem(44);
+    height: rem(44);
+    padding: rem(10) rem(24);
+    box-shadow: inset 0px 0px rem(4) rgba(0, 94, 124, 0.25);
+    font-weight: 400;
+    font-size: rem(16);
+    line-height: math.div(23, 16);
+    color: $mainColor;
+    border: rem(1) solid rgba(255, 255, 255, 0);
+    transition: $transitionForm;
+    &::placeholder {
+      font-style: italic;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 23px;
+      color: $placeholderColor;
+    }
+    &:active,
+    &:focus {
+      border: rem(1) solid $activeLinkColor;
+      ~ .formLabel {
+        color: $mainTitleColor;
+      }
+    }
+  }
+  &Label {
+    order: -1;
+    font-weight: 700;
+    font-size: rem(16);
+    line-height: math.div(23, 16);
+    padding-left: rem(20);
+    transition: $transitionForm;
+  }
+  &Submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: rem(36);
+    padding: rem(9) rem(30);
+    font-weight: 500;
+    font-size: rem(18);
+    line-height: math.div(26, 18);
+    color: $mainBgColor;
+    background: $brightButtonBgColor;
+    border-radius: rem(44);
+    transition: $transitionBtn;
+    &:hover,
+    &:active {
+      background: $hoverBrightButtonBgColor;
+    }
+  }
+
+  &Error {
+    color: red;
+    margin-top: rem(3);
+    padding: 0 rem(20);
+    &::before {
+      content: '*';
+    }
+  }
+}

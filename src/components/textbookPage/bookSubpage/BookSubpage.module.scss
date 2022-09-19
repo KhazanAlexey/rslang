@@ -1,0 +1,111 @@
+@use 'sass:math';
+@import '../../../styles/mixins.scss';
+
+.pagination {
+  margin-top: rem(33);
+  display: flex;
+  justify-content: center;
+  gap: rem(30);
+  align-items: center;
+  @media (max-width: em(1060)) {
+    gap: rem(18);
+  }
+  @media (max-width: $mobileSmall) {
+    gap: rem(6);
+  }
+  &List {
+    display: flex;
+    gap: rem(12);
+    @media (max-width: $mobileSmall) {
+      gap: 0;
+    }
+  }
+  &Item {
+    @media (max-width: $mobileSmall) {
+      &:first-child {
+        & > button {
+          border-top-left-radius: rem(24);
+          border-bottom-left-radius: rem(24);
+        }
+      }
+      &:last-child {
+        & > button {
+          border-top-right-radius: rem(24);
+          border-bottom-right-radius: rem(24);
+        }
+      }
+    }
+  }
+  &Btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: rem(44);
+    height: rem(44);
+    background: #ffffff;
+    border-radius: rem(44);
+    box-shadow: inset 0px 0px rem(4) rgba(0, 0, 0, 0.25);
+    font-weight: 400;
+    font-size: rem(21);
+    line-height: 1;
+    text-align: center;
+    color: $lightColor;
+    &Active {
+      background: $mainButtonBgColor;
+      color: $mainBgColor;
+      box-shadow: inset 0px 0px rem(4) rgba(0, 0, 0, 0);
+    }
+    @media (max-width: $mobileSmall) {
+      width: rem(40);
+      height: rem(40);
+      border-radius: 0;
+    }
+  }
+  &Prev,
+  &Next {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: rem(18);
+    line-height: math.div(26, 18);
+    gap: rem(9);
+    background: $mainButtonBgColor;
+    border-radius: rem(44);
+    color: $mainBgColor;
+    transition: $transitionBtn;
+    &::before {
+      font-size: rem(16);
+    }
+    &:hover {
+      background: $hoverButtonBgColor;
+    }
+    @media (max-width: em(1080)) {
+      width: rem(44);
+      height: rem(44);
+      padding: unset !important;
+      & > span {
+        display: none;
+      }
+    }
+    @media (max-width: em(350)) {
+      width: rem(40);
+      height: rem(40);
+    }
+  }
+  &Prev {
+    padding: rem(9) rem(24) rem(9) rem(18);
+  }
+  &Next {
+    flex-direction: row-reverse;
+    padding: rem(9) rem(18) rem(9) rem(24);
+    &::before {
+      transform: rotate(180deg);
+    }
+  }
+  &Disable {
+    background: $disableButtonBgColor;
+    pointer-events: none;
+    cursor: default;
+  }
+}

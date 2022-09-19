@@ -1,0 +1,111 @@
+@use 'sass:math';
+@import '../../../styles/mixins.scss';
+
+.audioCallScreen {
+  display: flex;
+  flex-direction: column;
+  gap: rem(20);
+  align-items: center;
+}
+
+.answer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0 rem(20);
+
+  &WordTitle {
+    font-size: rem(30);
+  }
+
+  &Options {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: rem(24);
+    justify-content: center;
+    margin-bottom: rem(20);
+  }
+
+  &Image {
+    width: 20vw;
+    margin: rem(10) 0;
+    border-radius: rem(20);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &Variant {
+    padding: rem(5);
+    background-color: #dddddd;
+    font-size: rem(18);
+    padding: rem(9) rem(24);
+    //margin: 0 rem(10);
+    border-radius: rem(10);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.activeVariant {
+  background: aquamarine;
+}
+
+.correctVariant {
+  background: yellowgreen !important;
+}
+
+.currentWord {
+  margin-top: rem(12);
+  text-align: center;
+  font-size: rem(27);
+  font-weight: 700;
+}
+
+.selectedAnswer {
+  background-color: blueviolet !important;
+}
+
+.timer {
+  font-size: rem(18);
+  line-height: math.div(24, 18);
+}
+.score {
+  font-size: rem(18);
+  line-height: math.div(24, 18);
+}
+
+.answerList {
+  display: flex;
+  gap: rem(18);
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.freeze {
+  display: flex;
+  flex-direction: column;
+  gap: rem(24);
+  //background: $mainBgColor;
+  //padding: rem(20) rem(36);
+  //border-radius: rem(30);
+  &Text {
+    font-size: rem(30);
+    line-height: math.div(24 , 21);
+    font-weight: 700;
+    color: $mainBgColor;
+    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+  }
+  &Ready {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: rem(44);
+    margin: 0 auto;
+  }
+}

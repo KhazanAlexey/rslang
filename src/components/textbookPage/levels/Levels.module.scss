@@ -1,0 +1,13 @@
+@use 'sass:math';
+@import '../../../styles/mixins.scss';
+
+.levels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: rem(20);
+  margin-top: rem(24);
+
+  @media (max-width: $mobileSmall) {
+    gap: rem(12);
+  }
+}

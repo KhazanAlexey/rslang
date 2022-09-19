@@ -1,0 +1,201 @@
+@use 'sass:math';
+@import '../../../../styles/mixins.scss';
+@import '../../../../components/common/button/styles/button.module.scss';
+
+.enggoSection {
+  position: relative;
+  padding: rem(90) 0;
+
+  @media (max-width: em(600)) {
+    padding-top: rem(18);
+  }
+
+  @media (max-width: $mobile) {
+    padding-bottom: rem(60);
+  }
+
+  & a {
+    color: $mainLinkColor;
+    transition: $transitionText;
+
+    &:hover {
+      color: $hoverLinkColor;
+    }
+  }
+
+  &Bg {
+    position: absolute;
+    width: rem(2560);
+    height: rem(189);
+    z-index: -1;
+    top: rem(-36);
+    left: 50%;
+    transform: translateX(-50%) rotateX(180deg) scaleX(-1);
+  }
+
+  &Wrapper {
+    //padding: rem(90) rem(117) rem(154);
+    display: flex;
+    align-items: center;
+    //justify-content: space-between;
+    //flex: 1;
+    justify-content: center;
+    gap: rem(111);
+
+    @media (max-width: $tablet) {
+      gap: rem(54);
+    }
+
+    @media (max-width: em(600)) {
+      flex-direction: column;
+      gap: rem(30);
+      align-items: center;
+    }
+
+    @media (max-width: $mobileSmall) {
+      gap: rem(24);
+    }
+  }
+
+  &Copy {
+    width: 100%;
+    //flex: 1;
+    text-align: center;
+    margin: rem(90) auto 0;
+    font-weight: 400;
+    font-size: rem(18);
+    line-height: math.div(24, 18);
+    max-width: rem(612);
+
+    @media (max-width: $mobile) {
+      font-size: rem(16);
+      max-width: rem(540);
+      //padding: 0 10vw rem(30);
+    }
+  }
+
+  .enggoText {
+    max-width: rem(420);
+
+    //@media (max-width: $mobile) {
+    //  width: calc(100% - rem(70));
+    //  padding-top: rem(30);
+    //}
+    @media (max-width: em(600)) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &Header {
+      font-family: 'Jost';
+      font-size: rem(30);
+      line-height: math.div(54, 42);
+      font-weight: 700;
+      color: $mainTitleColor;
+
+      //@media (max-width: $mobile) {
+      //  font-size: rem(24);
+      //  text-align: right;
+      //}
+
+      @media (max-width: $mobileSmall) {
+        font-size: rem(23);
+      }
+    }
+
+    &Content {
+      font-size: rem(18);
+      line-height: math.div(24, 18);
+      max-width: rem(420);
+      color: $mainTextColor;
+      margin-top: rem(24);
+
+      @media (max-width: $mobile) {
+        font-size: rem(16);
+      }
+
+      @media (max-width: em(600)) {
+        text-align: center;
+      }
+
+      @media (max-width: $mobileSmall) {
+        font-size: rem(16);
+        margin-top: rem(18);
+      }
+    }
+
+    .enggoActions {
+      display: flex;
+      align-items: center;
+      margin-top: rem(48);
+      gap: rem(20);
+
+      @media (max-width: $mobile) {
+        margin-top: rem(30);
+      }
+
+      &ToTextbook {
+        border: none;
+        display: inline-flex;
+        gap: rem(9);
+        flex-direction: row-reverse;
+
+        &:before {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+}
+
+.enggoDecoration {
+  position: relative;
+  //width: rem(540);
+  width: rem(428);
+  height: rem(479);
+
+  @media (max-width: $mobile) {
+    width: rem(240);
+    height: 360px;
+  }
+
+  @media (max-width: $mobileSmall) {
+    height: rem(266);
+  }
+
+  &Dog {
+    position: absolute;
+    width: rem(540);
+    top: rem(28);
+    //transform: translateY(-50%);
+    //width: rem(540);
+    height: rem(479);
+    top: 0;
+    right: 0;
+
+    @media (max-width: $mobile) {
+      width: rem(400);
+      height: rem(354);
+    }
+
+    @media (max-width: em(600)) {
+      display: flex;
+      justify-content: center;
+      right: 50%;
+      transform: translateX(40%);
+    }
+
+    @media (max-width: $mobileSmall) {
+      width: rem(300);
+      height: rem(266);
+    }
+
+    img {
+      position: absolute;
+      min-width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}

@@ -1,0 +1,74 @@
+@use 'sass:math';
+@import '../../../../styles/mixins.scss';
+
+.level {
+  border-radius: rem(4);
+  overflow: hidden;
+  transition: all 0.2s;
+  background: #e6e6e6;
+  width: rem(213);
+  @media (max-width: $mobile) {
+    width: calc(33% - rem(12));
+  }
+
+  @media (max-width: $mobileSmall) {
+    width: calc(50% - rem(6));
+  }
+  &:hover {
+    .levelButton {
+      color: $mainTextColor;
+    }
+  }
+  &.active {
+    color: $mainTextColor;
+    cursor: default;
+    pointer-events: none;
+    .levelButton {
+      color: $mainTextColor;
+      background: #e6e6e600;
+    }
+  }
+  .levelButton {
+    padding: rem(9) rem(18);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    background: #e6e6e6;
+    transition: all 0.2s;
+    background-size: 0;
+    color: #878787;
+    &:hover {
+      background: #e6e6e600;
+    }
+    @media (max-width: em(500)) {
+      padding: rem(6) rem(12);
+    }
+  }
+
+  .levelTitle {
+    font-weight: 700;
+    font-size: rem(20);
+    line-height: math.div(24, 20);
+  }
+
+  .levelDescr {
+    margin-top: rem(6);
+    font-weight: 300;
+    font-size: rem(16);
+    line-height: math.div(23, 16);
+  }
+
+  .levelLvl {
+    position: absolute;
+    font-weight: 700;
+    font-size: rem(54);
+    line-height: math.div(54, 54);
+    text-align: right;
+    right: rem(3);
+    bottom: rem(-8);
+    color: $mainBgColor;
+    z-index: -1;
+  }
+}

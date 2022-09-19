@@ -1,0 +1,37 @@
+.iconButtonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.active {
+    border-bottom: 2px solid #6879eb;
+  }
+
+  .iconButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    color: #444444;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    &.disabled {
+      opacity: 0.4;
+    }
+
+    &.defaultHover {
+      &:hover:not(.disabled) {
+        transform: scale(1.2);
+        cursor: pointer;
+      }
+    }
+  }
+}

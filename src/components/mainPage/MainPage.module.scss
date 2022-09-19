@@ -1,0 +1,10 @@
+@use 'sass:math';
+@import '../../styles/mixins.scss';
+
+.lenegdSection {
+  &wrapper {
+    padding-top: rem(200);
+    display: flex;
+    flex-direction: column;
+  }
+}

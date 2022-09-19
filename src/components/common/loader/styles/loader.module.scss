@@ -1,0 +1,34 @@
+.loaderContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+
+  .loader {
+    display: flex;
+    $size: 10.5%;
+    width: $size;
+    height: $size;
+    $minSize: 20px;
+    min-width: $minSize;
+    min-height: $minSize;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .loader {
+    animation: loader-spin infinite 3s linear;
+  }
+}
+
+@keyframes loader-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

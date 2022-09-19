@@ -1,0 +1,92 @@
+@use 'sass:math';
+@import './styles/root.scss';
+@import './styles/fonts.scss';
+@import './styles/mixins.scss';
+
+/* SETTINGS */
+$fontFamily: 'Jost', sans-serif;
+$fontSize: rem(16);
+// Минимальная ширина страницы
+$minWidth: 320;
+// Ширина полотна (макета)
+$maxWidth: 1920;
+// Ширина ограничивающего контейнера
+$maxWidthContainer: 1380;
+// Отступ у контейнера
+$containerPadding: 15;
+$containerWidth: $maxWidthContainer + $containerPadding;
+
+@import './styles/null.scss';
+
+body {
+  background: $mainBgColor;
+}
+
+.container {
+  box-sizing: content-box;
+  margin: 0 auto;
+  max-width: rem($maxWidthContainer);
+  padding: 0 rem($containerPadding);
+
+  @media (max-width: $mobile) {
+    padding: 0 rem(10);
+  }
+}
+
+.wrapper {
+  min-height: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  main {
+    flex: 1 1 auto;
+  }
+}
+
+.contentWrapper {
+  width: 100%;
+  height: 75vh;
+  background-color: var(--blue-color);
+}
+
+.pageTitle {
+  font-weight: 700;
+  font-size: rem(42);
+  line-height: math.div(61, 42);
+  color: $mainTitleColor;
+  @media (max-width: $mobileSmall) {
+    font-size: rem(36);
+  }
+}
+.pageDescr {
+  font-weight: 400;
+  font-size: rem(18);
+  line-height: math.div(24, 18);
+  //@media (max-width:$mobileSmall){
+  //  font-size: rem(16);
+  //}
+}
+
+.sectionTitle {
+  font-weight: 700;
+  font-size: rem(30);
+  line-height: math.div(43, 30);
+  color: $lightColor;
+}
+
+.bookWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: rem(24);
+
+  @media (max-width: $tablet) {
+    flex-direction: column-reverse;
+  }
+}
+
+.bookWords {
+  max-width: rem(912);
+}

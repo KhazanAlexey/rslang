@@ -1,0 +1,305 @@
+@use 'sass:math';
+@import '../../styles/mixins.scss';
+
+.games {
+  //flex: 1;
+  padding: rem(30) 0 rem(30);
+
+  @media (max-width: $mobileSmall) {
+    padding-top: rem(18);
+  }
+
+  &Title {
+    font-weight: 700;
+    font-size: rem(42);
+    line-height: math.div(61, 42);
+    color: $mainTitleColor;
+    position: relative;
+
+    @media (max-width: $mobileSmall) {
+      font-size: rem(30);
+    }
+  }
+  &Image {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: rem(335);
+    height: rem(300);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & > img {
+      position: absolute;
+      min-width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @media (max-width: $tablet) {
+      width: rem(307);
+      height: rem(275);
+    }
+    @media (max-width: em(840)) {
+      width: rem(257);
+      height: rem(230);
+    }
+    @media (max-width: em(580)) {
+      width: rem(201);
+      height: rem(180);
+    }
+    @media (max-width: $mobileSmall) {
+      right: rem(-110);
+    }
+  }
+  &Descr {
+    margin-top: rem(9);
+    font-weight: 400;
+    font-size: rem(18);
+    line-height: math.div(24, 18);
+    max-width: rem(360);
+    @media (max-width: $mobile) {
+      max-width: rem(280);
+    }
+    @media (max-width: $mobileSmall) {
+      font-size: rem(16);
+      max-width: rem(240);
+    }
+  }
+
+  &List {
+    margin-top: rem(60);
+    display: flex;
+    justify-content: center;
+    gap: rem(48);
+    position: relative;
+    padding-bottom: rem(180);
+    //padding: rem(20) 20vw;
+    @media (max-width: $tablet) {
+      gap: rem(12);
+    }
+
+    @media (max-width: $mobileSmall) {
+      gap: unset;
+      flex-direction: column;
+      margin-top: rem(36);
+      padding-bottom: rem(120);
+    }
+  }
+
+  &Game1 {
+    transition: all 0.5s;
+
+    &:hover {
+      //z-index: 100;
+    }
+
+    .game {
+      width: rem(380);
+      height: rem(380);
+
+      @media (max-width: $tablet) {
+        width: rem(360);
+        height: rem(360);
+      }
+
+      @media (max-width: em(840)) {
+        width: rem(320);
+        height: rem(320);
+      }
+
+      @media (max-width: $mobile) {
+        width: rem(240);
+        height: rem(240);
+      }
+
+      @media (max-width: em(580)) {
+        width: rem(200);
+        height: rem(200);
+      }
+
+      @media (max-width: $mobileSmall) {
+      }
+    }
+  }
+
+  &Game2 {
+    margin-top: rem(120);
+
+    @media (max-width: $mobileSmall) {
+      margin-top: unset;
+      margin-left: auto;
+      position: relative;
+      top: rem(-36);
+    }
+    .game {
+      width: rem(480);
+      height: rem(480);
+
+      @media (max-width: $tablet) {
+        width: rem(420);
+        height: rem(420);
+      }
+      @media (max-width: em(840)) {
+        width: rem(380);
+        height: rem(380);
+      }
+      @media (max-width: $mobile) {
+        width: rem(280);
+        height: rem(280);
+      }
+      @media (max-width: em(580)) {
+        width: rem(240);
+        height: rem(240);
+      }
+    }
+  }
+
+  &Enggo {
+    position: absolute;
+    width: rem(260);
+    height: rem(382);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: rem(24);
+    bottom: 0;
+    & > img {
+      position: absolute;
+      min-width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @media (max-width: em(840)) {
+      width: rem(218);
+      height: rem(320);
+    }
+
+    @media (max-width: em(580)) {
+      width: rem(177);
+      height: rem(260);
+    }
+
+    @media (max-width: $mobileSmall) {
+      left: 0;
+      width: rem(150);
+      height: rem(222);
+    }
+  }
+
+  .gameName {
+    //position: absolute;
+    //top: 0;
+    //bottom: 0;
+    //left: 0;
+    //right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    color: $lightTextColor;
+    text-shadow: 0 0 5px #333;
+  }
+}
+
+@keyframes fly {
+  50% {
+    transform: translate3d(-30%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.game {
+  position: relative;
+  border-radius: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &Name {
+    font-size: rem(48);
+    line-height: math.div(54, 48);
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    transition: all 0.3s;
+    & > span {
+      display: flex;
+      width: 100%;
+      &:nth-child(2) {
+        padding-left: 20%;
+      }
+    }
+    @media (max-width: $mobile) {
+      font-size: rem(36);
+    }
+    @media (max-width: em(580)) {
+      font-size: rem(30);
+    }
+  }
+  &Image {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    &::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.25);
+      z-index: -1;
+    }
+    & > img {
+      z-index: -2;
+      min-width: 100%;
+      left: 0;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      //transition: all .3s ease;
+      transform: translate3d(0, 0, 0);
+      animation: fly 7s infinite ease-in-out;
+      animation-play-state: paused;
+    }
+  }
+  &Go {
+    position: absolute;
+    bottom: rem(36);
+    padding: rem(12) rem(24);
+    background: $mainBgColor;
+    font-size: rem(24);
+    line-height: math.div(27, 24);
+    border-radius: rem(44);
+    color: $hoverBrightButtonBgColor;
+    font-weight: 700;
+    transform: translateY(300%);
+    transition: all 0.3s;
+    @media (max-width: $mobile) {
+      bottom: rem(24);
+      font-size: rem(18);
+    }
+    @media (max-width: em(580)) {
+      padding: rem(6) rem(12);
+      font-size: rem(16);
+    }
+  }
+
+  &:hover {
+    .gameName {
+      transform: rotate(-5deg) scale(1.1);
+    }
+    .gameImage {
+      & > img {
+        animation-play-state: running;
+      }
+    }
+    .gameGo {
+      transform: rotate(-5deg) translateY(0);
+    }
+  }
+}

@@ -1,0 +1,97 @@
+@use 'sass:math';
+@import '../../../styles/mixins.scss';
+
+.audioCallScreen {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: rem(20);
+  align-items: center;
+
+  &Wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: rem(15);
+    font-size: rem(40);
+    color: $lightTextColor;
+    text-shadow: 0 0 rem(10) $brightColor;
+  }
+}
+
+.answer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: rem(20);
+
+  &WordTitle {
+    font-size: rem(30);
+    color: $lightTextColor;
+    padding: rem(20);
+    text-align: center;
+  }
+
+  &Options {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: rem(24);
+    justify-content: center;
+    margin-bottom: rem(20);
+
+    @media (max-width: $mobile) {
+      padding-bottom: rem(30);
+      flex-direction: column;
+      gap: rem(10);
+    }
+  }
+
+  &Image {
+    max-width: 30vw;
+    height: 25vw;
+    border-radius: rem(20);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      height: 100%;
+    }
+  }
+
+  &Variant {
+    padding: rem(10);
+    backdrop-filter: blur(5px);
+    font-size: 2vw;
+    padding: rem(9) rem(24);
+    //margin: 0 rem(10);
+    border-radius: 3vw;
+    color: $lightTextColor;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+
+    @media (max-width: $mobile) {
+      font-size: rem(20);
+    }
+
+    &:hover {
+      box-shadow: inset 0 0 5px $mainBgColor;
+    }
+  }
+}
+
+.activeVariant {
+  background: $brightColor;
+}
+
+.correctVariant {
+  background: yellowgreen !important;
+}
+
+.currentWord {
+  text-align: center;
+  font-size: rem(27);
+  font-weight: 700;
+  color: $lightTextColor;
+}

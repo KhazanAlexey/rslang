@@ -1,0 +1,82 @@
+@use 'sass:math';
+@import '../../../../styles/mixins.scss';
+
+.legendSection {
+  background-color: $lightColor;
+
+  &Wrapper {
+    padding: rem(170) 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media (max-width: $mobile) {
+      padding: rem(129) 0;
+    }
+  }
+
+  &PawLeft,
+  &PawRight {
+    & > img {
+      position: absolute;
+      width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+    }
+  }
+  &PawLeft {
+    position: absolute;
+    width: rem(203);
+    height: rem(203);
+    left: rem(50);
+    top: rem(40);
+    transform: rotate(-15deg);
+    opacity: 0.5;
+
+    @media (max-width: em(1200)) {
+      width: rem(120);
+      height: rem(120);
+    }
+    @media (max-width: $mobile) {
+      left: 0;
+      top: 0;
+    }
+  }
+
+  &PawRight {
+    position: absolute;
+    width: rem(203);
+    height: rem(203);
+    right: rem(50);
+    bottom: rem(40);
+    transform: rotate(15deg);
+    opacity: 0.5;
+
+    @media (max-width: em(1200)) {
+      width: rem(120);
+      height: rem(120);
+    }
+    @media (max-width: $mobile) {
+      right: 0;
+      bottom: 0;
+    }
+  }
+
+  &Text {
+    max-width: rem(667);
+    color: $lightTextColor;
+    font-size: rem(24);
+    line-height: math.div(35, 24);
+    text-align: center;
+    font-weight: 300;
+
+    @media (max-width: $mobile) {
+      max-width: rem(560);
+      font-size: rem(18);
+    }
+    @media (max-width: $mobileSmall) {
+      font-size: rem(16);
+    }
+  }
+}

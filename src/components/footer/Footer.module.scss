@@ -1,0 +1,136 @@
+@use 'sass:math';
+@import '../../styles/mixins.scss';
+
+.footer {
+  background-color: $lightColor;
+  min-height: rem(120);
+  position: relative;
+
+  &Wrapper {
+    width: 100%;
+    padding: rem(30) 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+  }
+
+  &First {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: rem(35);
+    // background-color: $activeButtonBgColor;
+
+    &Logo {
+      color: $lightTextColor;
+      font-size: rem(69);
+      display: flex;
+      flex: 1;
+
+      //@media (max-width: $mobile) {
+      //  font-size: rem(50);
+      //}
+
+      @media (max-width: $mobileSmall) {
+        font-size: rem(60);
+      }
+    }
+
+    &Phrase {
+      display: flex;
+      font-size: rem(18);
+      font-weight: 400;
+      color: $lightTextColor;
+      justify-items: center;
+      width: rem(176);
+
+      @media (max-width: $mobile) {
+        display: none;
+      }
+    }
+  }
+
+  &Second {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: $lightTextColor;
+
+    &Team {
+      display: flex;
+      gap: rem(24);
+      justify-content: space-evenly;
+
+      @media (max-width: $tablet) {
+        flex-direction: column;
+        //font-size: rem(14);
+        gap: rem(12);
+      }
+
+      @media (max-width: $mobile) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-top: rem(18);
+      }
+
+      @media (max-width: $mobileSmall) {
+        flex-direction: column;
+      }
+
+      a {
+        display: flex;
+        gap: rem(5);
+      }
+    }
+  }
+
+  &Third {
+    display: flex;
+    align-items: stretch;
+
+    @media (max-width: $mobile) {
+      display: none;
+    }
+  }
+
+  &Bottom {
+    padding: rem(12) 0;
+    // background-color: $mainColor;
+    color: $lightTextColor;
+    border-top: 1px solid $lightTextColor;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    @media (max-width: $mobile) {
+      font-size: rem(14);
+      //flex-direction: column;
+    }
+
+    @media (max-width: $mobileSmall) {
+      flex-direction: column;
+      gap: rem(6);
+    }
+
+    &Link {
+      padding: 0 rem(5);
+      font-weight: 700;
+      display: flex;
+      gap: rem(6);
+      align-items: center;
+    }
+
+    &Balloon {
+      position: absolute;
+      z-index: -1;
+      right: 0;
+      bottom: 0;
+      transform: translateX(rem(-100));
+
+      @media (max-width: $mobile) {
+        display: none;
+      }
+    }
+  }
+}
