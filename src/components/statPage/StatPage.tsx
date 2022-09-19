@@ -2,7 +2,7 @@ import React from 'react'
 import { useAppSelector } from 'src/hooks/redux'
 import { IDateStat, IUsersWordsOptional } from 'src/models/IUsersWords'
 import { getDateFromRu, getDateInRu, getNowDateRu } from 'src/utils/date-helper'
-import { localStorageGet } from 'src/utils/localStoradre'
+import { localStorageGet } from 'src/utils/localStorage'
 import styles from './StatPage.module.scss'
 
 const StatPage: React.FC<any> = () => {
