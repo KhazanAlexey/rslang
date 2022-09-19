@@ -24,10 +24,12 @@ const SprintGame: React.FC<PropsType> = ({
   const dispatch = useAppDispatch()
   const [timeLeft, setTimeLeft] = useState<number>(15)
   const [startGame, setStartGame] = useState(true)
+  const [freeze, setFreeze] = useState(true);
+  const [isLoadingWords, setIsLoadingWords] = useState(false)
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout>
-    if (startGame) {
+    if (startGame && !freeze) {
       timer = setTimeout(() => {
         setTimeLeft(timeLeft - 1)
       }, 1000)
@@ -37,29 +39,48 @@ const SprintGame: React.FC<PropsType> = ({
       dispatch(sprintSlice.actions.setActiveScreen(GameState.GameOver))
     }
     return () => clearTimeout(timer)
-  }, [timeLeft])
+  }, [timeLeft, freeze])
+
+  useEffect(() => {
+    if (!isLoadingWords) setIsLoadingWords(true);
+  }, [wordToGuess])
+
+  const handleFreeze = () => {
+    setFreeze(false);
+  }
+
 
   return (
     <>
-      <p className={styles.timer}>Осталось {timeLeft} сек.</p>
-      <p className={styles.score}>Получено очков: {score}</p>
-      {wordToGuess && (
-        <div className={styles.audioCallScreen}>
-          <div className={styles.currentWord}> {wordToGuess.word}</div>
-          <div className={styles.currentWord}> {answerVariant && answerVariant.wordTranslate}</div>
+      {!freeze && (
+      <>
+        <p className={styles.timer}>Осталось {timeLeft} сек.</p>
+        <p className={styles.score}>Получено очков: {score}</p>
+        {wordToGuess && (
+            <div className={styles.audioCallScreen}>
+              <div className={styles.currentWord}> {wordToGuess.word}</div>
+              <div className={styles.currentWord}> {answerVariant && answerVariant.wordTranslate}</div>
 
-          <div className={styles.answerList}>
-            <Button
-              text='Правильно'
-              classes={selectedAnswer === true && styles.selectedAnswer}
-              onClick={() => answerHandler(true)}
-            />
-            <Button
-              text='НЕ правильно'
-              classes={selectedAnswer === false && styles.selectedAnswer}
-              onClick={() => answerHandler(false)}
-            />
-          </div>
+              <div className={styles.answerList}>
+                <Button
+                  text='Правильно'
+                  classes={selectedAnswer === true && styles.selectedAnswer || 'false'}
+                  onClick={() => answerHandler(true)}
+                />
+                <Button
+                  text='НЕ правильно'
+                  classes={selectedAnswer === false && styles.selectedAnswer || 'false'}
+                  onClick={() => answerHandler(false)}
+                />
+              </div>
+            </div>
+          )}
+      </>
+      )}
+      {freeze && (
+        <div className={styles.freeze}>
+          <p className={styles.freezeText}>Ингго уже {!isLoadingWords ? 'готовит слова для тебя, подожди немного...' : 'подготовил слова! Are you ready?'}</p>
+          {isLoadingWords && (<Button text='Поехали!' classes={styles.freezeReady} onClick={handleFreeze} />)}
         </div>
       )}
     </>

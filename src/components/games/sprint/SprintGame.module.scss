@@ -86,3 +86,26 @@
   align-items: center;
   justify-content: center;
 }
+
+.freeze {
+  display: flex;
+  flex-direction: column;
+  gap: rem(24);
+  //background: $mainBgColor;
+  //padding: rem(20) rem(36);
+  //border-radius: rem(30);
+  &Text {
+    font-size: rem(30);
+    line-height: math.div(24 , 21);
+    font-weight: 700;
+    color: $mainBgColor;
+    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+  }
+  &Ready {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: rem(44);
+    margin: 0 auto;
+  }
+}
