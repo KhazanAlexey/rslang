@@ -11,12 +11,19 @@ import GamesOverScreen from '../GamesOverScreen'
 import SprintGame from './SprintGame'
 import { sprintSlice } from '../../../store/reducers/sprintSlice'
 import { useAudio } from 'src/hooks/useAudio'
+import { gameSettingsSlice } from 'src/store/reducers/gameSettingsSlice'
 
 const Sprint: React.FC<any> = () => {
+  const WORD_TO_RELOAD = 7
+  const MAX_NUM_PAGE = 29
+
   const dispatch = useAppDispatch()
+
   const [score, setScore] = useState<number>(0)
   const [level, setLevel] = useState<Levels>()
   const [wordsForGame, setWordsForGame] = useState<IWord[]>([])
+  const [wordsBeenGame, setWordsBeenGame] = useState<string[]>([])
+  const [pageBeenGame, setPageBeenGame] = useState<number[]>([])
   const [answerVariant, setAnswerVariant] = useState<IWord>()
 
   const [wordToGuess, setWordToGuess] = useState<IWord | null>(null)
@@ -24,30 +31,34 @@ const Sprint: React.FC<any> = () => {
   const [selectedAnswer, setSelectedAnswer] = useState<boolean | null>()
   const { activeScreen } = useAppSelector((state) => state.sprint)
 
-  const [page, setPage] = useState<number>()
-  const [additionalPage, setAdditionalPage] = useState<number>()
+  const [page, setPage] = useState<number>(0)
+  const [isGameBook, setIsGameBook] = useState<boolean>(false)
+  const [futurePage, setFuturePage] = useState<number>(0)
   const [skip, setSkip] = useState(true)
+  const { isFromBook, lvlFromBook, pageFromBook } = useAppSelector((state) => state.gameSettings)
   const {
     data: words,
     isLoading: isLoadingWords,
-    error: errorWords,
-    refetch,
+    error: errorWords
   } = wordsAPI.useFetchWordsQuery(
     { group: level, page: page },
     {
       skip,
     },
   )
-
-  const { data: additionalWords } = wordsAPI.useFetchWordsQuery(
-    { group: level, page: additionalPage },
+  
+  const { data: moreWords, isLoading: isLoadingMoreWords, refetch } = wordsAPI.useFetchWordsQuery(
+    { group: level, page: futurePage },
     {
       skip,
     },
   )
 
-  // const [playingErrorSound, toggleErrorSound] = useAudio('../../assets/sound/error-sound.m4a')
-  // const [playingSuccessSound, toggleSuccessSound] = useAudio('../../assets/sound/success-sound.m4a')
+  useEffect(() => {
+    if (futurePage) refetch()
+  }, [futurePage])
+
+
   const errSound = () => {
     const audio = new Audio('../../assets/sound/error-sound.m4a')
     audio.play()
@@ -61,12 +72,10 @@ const Sprint: React.FC<any> = () => {
     setSelectedAnswer(isRight)
     if (isRight) {
       if (wordToGuess?.id === answerVariant?.id) {
-        // toggleSuccessSound()
         successSound()
         wordToGuess && dispatch(sprintSlice.actions.setCorrectAnswers(wordToGuess))
         setScore(score + 10)
       } else {
-        // toggleErrorSound()
         errSound()
         wordToGuess && dispatch(sprintSlice.actions.setWrongAnswers(wordToGuess))
       }
@@ -74,10 +83,8 @@ const Sprint: React.FC<any> = () => {
     if (!isRight) {
       if (wordToGuess?.id === answerVariant?.id) {
         errSound()
-        // toggleErrorSound()
         wordToGuess && dispatch(sprintSlice.actions.setWrongAnswers(wordToGuess))
       } else {
-        // toggleSuccessSound()
         successSound()
         wordToGuess && dispatch(sprintSlice.actions.setCorrectAnswers(wordToGuess))
         setScore(score + 10)
@@ -93,36 +100,74 @@ const Sprint: React.FC<any> = () => {
   }, [selectedAnswer])
 
   const startGameHandler = (level: Levels) => {
+    dispatch(sprintSlice.actions.reset())
     setLevel(level)
     dispatch(sprintSlice.actions.setActiveScreen(GameState.Game))
     setSkip(false)
   }
 
   useEffect(() => {
-    if (words && additionalWords) {
-      setWordsForGame([...words, ...additionalWords])
-    }
-  }, [words, additionalWords])
+    if (words) setWordsForGame([...words])
+  }, [words])
+
+  const randomizer = (): number => {
+    const random = randomInteger(0, MAX_NUM_PAGE)
+    if (pageBeenGame.length === MAX_NUM_PAGE + 1) return -1
+    if (pageBeenGame.includes(random)) return randomizer()
+    setPageBeenGame([...pageBeenGame, random])
+    return random
+  }
 
   useEffect(() => {
-    dispatch(sprintSlice.actions.setActiveScreen(GameState.StartScreen))
-    let random = randomInteger(0, 21)
-    let randomAdd = randomInteger(0, 21)
-
-    function randomizer() {
-      random = randomInteger(0, 21)
-      randomAdd = randomInteger(0, 21)
+    if (!isFromBook) {
+      dispatch(sprintSlice.actions.setActiveScreen(GameState.StartScreen))
+      const newPage = randomizer()
+      setPage(newPage)
+      setFuturePage(newPage ?? [])
+    } else {
+      dispatch(gameSettingsSlice.actions.toggleIsFromBook(false));
+      setIsGameBook(true)
+      setPage(pageFromBook)
+      setFuturePage(pageFromBook ?? [])
+      startGameHandler(lvlFromBook);
     }
-
-    if (random === randomAdd) randomizer()
-
-    setPage(randomInteger(0, 21))
-    setAdditionalPage(randomInteger(0, 21))
+    
   }, [])
 
   useEffect(() => {
     setWordToGuess(wordsForGame[currentWordIndex])
+    if (wordsForGame[currentWordIndex] && wordsForGame[currentWordIndex].id) {
+      setWordsBeenGame([...wordsBeenGame, wordsForGame[currentWordIndex].id])
+    }
   }, [currentWordIndex, wordsForGame])
+
+  useEffect(() => {
+    if (currentWordIndex + WORD_TO_RELOAD === wordsForGame.length) {
+      if (futurePage !== 0 && isGameBook) {
+        setFuturePage(futurePage - 1);
+      } else if (!isGameBook) {
+        const newPage = randomizer()
+        if (newPage > -1) {
+          setFuturePage(randomizer())
+        } else {
+          dispatch(sprintSlice.actions.setActiveScreen(GameState.GameOver))
+        }
+      }
+    } 
+    if (currentWordIndex !== 0 && currentWordIndex === wordsForGame.length) {
+      if (moreWords && moreWords.length) {
+        const newWords = moreWords.filter((word) => !wordsBeenGame.includes(word.id))
+        if (newWords && newWords.length) {
+          setWordsForGame([...newWords])
+          setCurrentWordIndex(0)
+        } else {
+          dispatch(sprintSlice.actions.setActiveScreen(GameState.GameOver))
+        }
+      } else {
+        dispatch(sprintSlice.actions.setActiveScreen(GameState.GameOver))
+      }
+    }
+  }, [currentWordIndex])
 
   useEffect(() => {
     if (wordToGuess) {
@@ -147,7 +192,7 @@ const Sprint: React.FC<any> = () => {
       <div className={globalThis.globalStyles.container}>
         <h1 className={styles.sprintTitle}>Спринт</h1>
         <div className={styles.sprintWrapper}>
-          {isLoadingWords && <div className={styles.loading}>loading...</div>}
+          {/* {isLoadingWords && <div className={styles.loading}>loading...</div>} */}
           {GameState.StartScreen === activeScreen && (
             <GamesStartScreen
               header='Кто быстрее?'
@@ -162,6 +207,7 @@ const Sprint: React.FC<any> = () => {
               answerVariant={answerVariant}
               selectedAnswer={selectedAnswer}
               wordToGuess={wordToGuess}
+              isLoadingWords={isLoadingWords}
             />
           )}
 

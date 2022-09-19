@@ -4,7 +4,7 @@ import { clsx } from 'src/utils/clsx'
 import styles from './Detail.module.scss'
 import { useAudio } from '../../../hooks/useAudio'
 import { userWordsAPI } from '../../../services/UsersWordsService'
-import { localStorageGet } from '../../../utils/localStoradre'
+import { localStorageGet } from '../../../utils/localStorage'
 import { useAppSelector } from '../../../hooks/redux'
 import { useDispatch } from 'react-redux'
 import { userWordsSlice } from '../../../store/reducers/userWordsSlice'
@@ -16,10 +16,11 @@ const Detail: React.FC<any> = (props) => {
   const userid = localStorage.getItem('userId') || ''
   const [skip, setSkip] = useState(true)
   const { data: wordData, refetch } = wordsAPI.useFetchWordByIdQuery(id)
-  const { data: userWord } = userWordsAPI.useFetchUserWordQuery({ id: userid, wordId: id },{skip})
+  const { data: userWord, refetch: refetchUserWord } = userWordsAPI.useFetchUserWordQuery({ id: userid, wordId: id },{skip})
   useEffect(() => {
     if (id) {
       refetch()
+      refetchUserWord()
     }
   }, [id])
   useEffect(() => {
@@ -54,40 +55,75 @@ const Detail: React.FC<any> = (props) => {
     isStatOpen ? setIsStatOpen(false) : setIsStatOpen(true)
   }
   // TODO: сделать логику добавления в сложные
-  useEffect(() => {
-    if (isComplete) {
-    }
-  }, [])
+  // useEffect(() => {
+  //  if (isComplete) {
+  //  }
+  // }, [])
+  // console.log('USER WORD')
+  // console.log(userWordsIds)
   const hardHandler = () => {
-    // @ts-ignore
-    dispatch(userWordsSlice.actions.deleteCompletedWord(id))
-    // @ts-ignore
-    dispatch(userWordsSlice.actions.deleteHardWord(id))
-    if (isComplete) {
-      updateUserWord({ id: local['userId'], difficulty: 'hard', wordId: id })
+    if (userWordsIds && userWordsIds.includes(id)) {
+      const findWord = userWords.find((word) => word.wordId === id)
+      if (findWord) {
+        // @ts-ignore
+        dispatch(userWordsSlice.actions.deleteHardWord(id))
+        if (findWord.difficulty === 'hard') {
+          // UPDATE TO LEARN
+          if (findWord.optional) {
+            updateUserWord({ id: local['userId'], difficulty: 'learn', wordId: id })
+          } else {
+            const optional = findWord.optional;
+            updateUserWord({ id: local['userId'], difficulty: 'learn', wordId: id, optional })
+          }
+        } else {
+          // UPDATE TO HARD
+          if (findWord.optional) {
+            updateUserWord({ id: local['userId'], difficulty: 'hard', wordId: id })
+          } else {
+            const optional = findWord.optional;
+            updateUserWord({ id: local['userId'], difficulty: 'hard', wordId: id, optional })
+          }
+        }
+      } else {
+        // POST
+        postWord({ id: local['userId'], difficulty: 'hard', wordId: id })
+      }
+    } else { // POST
+      postWord({ id: local['userId'], difficulty: 'hard', wordId: id })
     }
-    if (isHard) {
-      deleteWord({ id: local['userId'], wordId: id })
-    }
-    if (!isComplete && !isHard) postWord({ id: local['userId'], difficulty: 'hard', wordId: id })
   }
   // TODO: сделать логику добавления в изученные
   const completeHandler = () => {
-    // @ts-ignore
-    dispatch(userWordsSlice.actions.deleteCompletedWord(id))
-    // @ts-ignore
-    dispatch(userWordsSlice.actions.deleteHardWord(id))
-    if (isHard) {
-      // @ts-ignore
-      dispatch(userWordsSlice.actions.deleteHardWord(id))
-      updateUserWord({ id: local['userId'], difficulty: 'completed', wordId: id })
-    }
-    if (isComplete) {
-      deleteWord({ id: local['userId'], wordId: id })
-    }
-
-    if (!isComplete && !isHard)
+    if (userWordsIds && userWordsIds.includes(id)) {
+      const findWord = userWords.find((word) => word.wordId === id)
+      if (findWord) {
+        if (findWord.difficulty === 'completed') {
+          // UPDATE TO LEARN
+          // @ts-ignore
+          dispatch(userWordsSlice.actions.deleteCompletedWord(id))
+          if (findWord.optional) {
+            updateUserWord({ id: local['userId'], difficulty: 'learn', wordId: id })
+          } else {
+            const optional = findWord.optional;
+            updateUserWord({ id: local['userId'], difficulty: 'learn', wordId: id, optional })
+          }
+          
+        } else {
+          // UPDATE TO HARD
+          if (findWord.optional) {
+            updateUserWord({ id: local['userId'], difficulty: 'completed', wordId: id })
+          } else {
+            const optional = findWord.optional;
+            updateUserWord({ id: local['userId'], difficulty: 'completed', wordId: id, optional })
+          }
+        }
+      } else {
+        // POST
+        postWord({ id: local['userId'], difficulty: 'completed', wordId: id })
+      }
+    } else { // POST
       postWord({ id: local['userId'], difficulty: 'completed', wordId: id })
+    }
   }
   const soundHandler = () => {
     toggle()

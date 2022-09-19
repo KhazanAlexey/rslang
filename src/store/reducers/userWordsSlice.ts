@@ -47,9 +47,9 @@ export const userWordsSlice = createSlice({
     builder.addMatcher(
       userWordsAPI.endpoints.fetchUserWords.matchFulfilled,
       (state, { payload }) => {
-        const hardW = payload.filter((word) => word.difficulty == 'hard')
-        const hardWId = payload.map((word) => word.wordId)
-        const completedW = payload.filter((word) => word.difficulty == 'completed')
+        const hardW = payload.filter((word) => word.difficulty === 'hard')
+        const hardWId = hardW.map((word) => word.wordId)
+        const completedW = payload.filter((word) => word.difficulty === 'completed')
         const completeWId = completedW.map((word) => word.wordId)
         state.hardWords = hardW
         state.hardWordsIds = hardWId

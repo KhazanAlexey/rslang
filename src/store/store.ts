@@ -7,8 +7,10 @@ import { authSlice } from './reducers/authSlice'
 import { userWordsAPI } from '../services/UsersWordsService'
 import { userWordsSlice } from './reducers/userWordsSlice'
 import { sprintSlice } from './reducers/sprintSlice'
+import { gameSettingsSlice } from './reducers/gameSettingsSlice'
 
 const rootReducer = combineReducers({
+  gameSettings: gameSettingsSlice.reducer,
   audioCall: audioCallSlice.reducer,
   auth: authSlice.reducer,
   sprint: sprintSlice.reducer,

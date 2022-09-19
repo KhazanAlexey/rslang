@@ -4,13 +4,18 @@ import styles from './GamesOverScreen.module.scss'
 import { useAppSelector } from '../../hooks/redux'
 import { useNavigate } from 'react-router-dom'
 import { userWordsAPI } from 'src/services/UsersWordsService'
-import { localStorageGet } from 'src/utils/localStoradre'
+import { localStorageGet } from 'src/utils/localStorage'
 import { getDateFromRu, getNowDateRu } from 'src/utils/date-helper'
 import { IDateStat, IUsersWords } from 'src/models/IUsersWords'
 import { IWord } from 'src/models/IWord'
+import { useDispatch } from 'react-redux'
+import { sprintSlice } from 'src/store/reducers/sprintSlice'
+import { audioCallSlice } from 'src/store/reducers/audioCallSlice'
 
 const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
-  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()  
+  const { isAuth } = useAppSelector((state) => state.auth)
 
   const { wrongAnswers: wrongAnswersSprint, correctAnswers: correctAnswersSprint } = useAppSelector(
     (state) => state.sprint,
@@ -197,7 +202,7 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
   // ========================================================================================================================================================
 
   useEffect(() => {
-    if (local) {
+    if (local && isAuth) {
       allAnswerID.forEach((answerId) => {
         if (userWordsIds.includes(answerId.id)) {
           const currentWord = userWords[answerId.id]
@@ -230,27 +235,36 @@ const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
   }
   return (
     <>
-      <div className={styles.overGroup}>
-        <h3 className={styles.overTitle}>Правильные ответы:</h3>
-        <ol className={styles.overList}>
-          {correctAnswers.map((el, index) => (
-            <li className={styles.overItem} key={`${id}-${index}`}>
-              {el.word} - {el.wordTranslate}
-            </li>
-          ))}
-        </ol>
-      </div>
-      <div className={styles.overGroup}>
-        <h3 className={styles.overTitle}>Ошибки:</h3>
-        <ol className={styles.overList}>
-          {wrongAnswers.map((el, index) => (
-            <li className={styles.overItem} key={`${id}-${index}`}>
-              {el.word} - {el.wordTranslate}
-            </li>
-          ))}
-        </ol>
-      </div>
-      <Button text='Выход' onClick={exitGameHandler} />
+      {correctAnswers && !!correctAnswers.length && (
+        <div className={styles.overGroup}>
+          <h3 className={styles.overTitle}>Правильные ответы:</h3>
+          <ol className={styles.overList}>
+            {correctAnswers.map((el, index) => (
+              <li className={styles.overItem} key={`${id}-${index}`}>
+                {el.word} - {el.wordTranslate}
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
+      {wrongAnswers && !!wrongAnswers.length && (
+        <div className={styles.overGroup}>
+          <h3 className={styles.overTitle}>Ошибки:</h3>
+          <ol className={styles.overList}>
+            {wrongAnswers.map((el, index) => (
+              <li className={styles.overItem} key={`${id}-${index}`}>
+                {el.word} - {el.wordTranslate}
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
+      {!wrongAnswers.length && !correctAnswers.length && (
+        <div className={styles.overGroup}>
+          <h3 className={styles.overTitle}>Ингго становится грустно, когда с ним не играют</h3>
+        </div>
+      )}
+      <Button text='К играм' onClick={exitGameHandler} />
     </>
   )
 }

@@ -1,7 +1,7 @@
 import { CaseReducer, createSlice } from '@reduxjs/toolkit'
 import { authApi } from 'src/services/AuthService'
 import { IWord } from '../../models/IWord'
-import { localStorageSet } from '../../utils/localStoradre'
+import { localStorageSet } from '../../utils/localStorage'
 import { userAPI } from '../../services/UserService'
 
 interface UserState {

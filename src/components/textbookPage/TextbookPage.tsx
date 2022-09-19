@@ -5,14 +5,19 @@ import { clsx } from 'src/utils/clsx'
 import BookSubpage from './bookSubpage/BookSubpage'
 import HardSubpage from './hardSubpage/HardSubpage'
 import CompleteSubpage from './completeSubpage/CompleteSubpage'
-import { Link } from 'react-router-dom'
-import { localStorageGet } from '../../utils/localStoradre'
+import { Link, useNavigate } from 'react-router-dom'
+import { localStorageGet } from '../../utils/localStorage'
 import { userWordsAPI } from '../../services/UsersWordsService'
 import { useAppSelector } from '../../hooks/redux'
 import { wordsAPI } from '../../services/WordsService'
 import Levels from './levels/Levels'
+import { useDispatch } from 'react-redux'
+import { gameSettingsSlice } from 'src/store/reducers/gameSettingsSlice'
 
 const TextBookPage: React.FC<any> = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  
   const local = localStorageGet(['userId'])
   const [isHard, setIsHard] = useState(true)
   const [isCompleted, setIsCompleted] = useState(false)
@@ -22,6 +27,8 @@ const TextBookPage: React.FC<any> = () => {
   const { isAuth } = useAppSelector((state) => state.auth)
 
   const { hardWordsIds, completedWordsIds } = useAppSelector((state) => state.userWords)
+  const { isFromBook } = useAppSelector((state) => state.gameSettings)
+  if (isFromBook) dispatch(gameSettingsSlice.actions.toggleIsFromBook(false));
 
   const [activeLvl, setActiveLvl] = useState(1)
   const [activePage, setActivePage] = useState(1)
@@ -101,6 +108,19 @@ const TextBookPage: React.FC<any> = () => {
     setIsCompleted(matchedCompleted)
   }, [hardWordsIds, wordDetail, completedWordsIds])
 
+  useEffect(() => {
+    dispatch(gameSettingsSlice.actions.setLvlBook(activeLvl - 1));
+  }, [activeLvl])
+  useEffect(() => {
+    dispatch(gameSettingsSlice.actions.setPageBook(activePage - 1));
+  }, [activePage])
+
+  const handleGames = (game: string) => {
+    dispatch(gameSettingsSlice.actions.toggleIsFromBook(true));
+    if (game === 'sprint') navigate('/games/sprint')
+    if (game === 'audiocall') navigate('/games/audiocall')
+  }
+
   // const detail =wordDetail&& <Detail id={wordDetail} complete={isCompleted} hard={isHard} subpage={subpage} />
 
   return (
@@ -161,19 +181,19 @@ const TextBookPage: React.FC<any> = () => {
               </ul>
             </div>
             <div className={styles.textbookGames}>
-              <Link className={styles.textbookGame} to='/games/audiocall' onClick={() => null}>
+              <a className={styles.textbookGame} onClick={() => handleGames('audiocall')}>
                 <span className={styles.textbookGameText}>Аудио</span>
                 <span className={styles.textbookGameText}>Вызов</span>
                 <span className={styles.textbookGameBg}>
                   <img src='./assets/png/bg-audiocall.png' alt='Сыграть в аудиовызов' />
                 </span>
-              </Link>
-              <Link className={styles.textbookGame} to='/games/sprint' onClick={() => null}>
+              </a>
+              <a className={styles.textbookGame} onClick={() => handleGames('sprint')}>
                 <span className={styles.textbookGameText}>Спринт</span>
                 <span className={styles.textbookGameBg}>
                   <img src='./assets/png/bg-sprint.png' alt='Сыграть в спринт' />
                 </span>
-              </Link>
+              </a>
               <img src='./assets/svg/enggo-textbook.svg' alt='Поиграй с Enggo' />
             </div>
           </div>
