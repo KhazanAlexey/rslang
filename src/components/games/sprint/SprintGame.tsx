@@ -12,6 +12,7 @@ type PropsType = {
   selectedAnswer: null | undefined | boolean
   answerHandler: (_: boolean) => void
   score: number
+  isLoadingWords: boolean
 }
 
 const SprintGame: React.FC<PropsType> = ({
@@ -20,12 +21,13 @@ const SprintGame: React.FC<PropsType> = ({
   selectedAnswer,
   answerHandler,
   score,
+  isLoadingWords
 }) => {
   const dispatch = useAppDispatch()
   const [timeLeft, setTimeLeft] = useState<number>(15)
   const [startGame, setStartGame] = useState(true)
   const [freeze, setFreeze] = useState(true);
-  const [isLoadingWords, setIsLoadingWords] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout>
@@ -42,8 +44,8 @@ const SprintGame: React.FC<PropsType> = ({
   }, [timeLeft, freeze])
 
   useEffect(() => {
-    if (!isLoadingWords) setIsLoadingWords(true);
-  }, [wordToGuess])
+    if (!isLoadingWords) setIsLoaded(true);
+  }, [isLoadingWords])
 
   const handleFreeze = () => {
     setFreeze(false);
@@ -79,8 +81,8 @@ const SprintGame: React.FC<PropsType> = ({
       )}
       {freeze && (
         <div className={styles.freeze}>
-          <p className={styles.freezeText}>Ингго уже {!isLoadingWords ? 'готовит слова для тебя, подожди немного...' : 'подготовил слова! Are you ready?'}</p>
-          {isLoadingWords && (<Button text='Поехали!' classes={styles.freezeReady} onClick={handleFreeze} />)}
+          <p className={styles.freezeText}>Ингго уже {!isLoaded ? 'готовит слова для тебя, подожди немного...' : 'подготовил слова! Are you ready?'}</p>
+          {isLoaded && (<Button text='Поехали!' classes={styles.freezeReady} onClick={handleFreeze} />)}
         </div>
       )}
     </>

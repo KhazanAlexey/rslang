@@ -11,26 +11,39 @@ import { wordsAPI } from '../../../services/WordsService'
 import randomInteger from '../../../utils/random'
 import { shuffle } from '../../../utils/suffle'
 import GamesOverScreen from '../GamesOverScreen'
+import { gameSettingsSlice } from 'src/store/reducers/gameSettingsSlice'
 import { useAudio } from 'src/hooks/useAudio'
 
 const AudioCall: React.FC = () => {
+  const WORD_TO_RELOAD = 3
+  const MAX_NUM_PAGE = 29
+  const MAX_MOVE = 20
+  const MAX_TIME = 60
   const dispatch = useAppDispatch()
   const [level, setLevel] = useState<Levels>()
   const [wordsForGame, setWordsForGame] = useState<IWord[]>([])
+  const [wordsBeenGame, setWordsBeenGame] = useState<string[]>([])
+  const [pageBeenGame, setPageBeenGame] = useState<number[]>([])
+  const [moreWordsForGame, setMoreWordsForGame] = useState<IWord[]>([])
   const [answerVariants, setAnswerVariants] = useState<IWord[]>([])
   const [wordToGuess, setWordToGuess] = useState<IWord | null>(null)
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
   const [selectedAnswer, setSelectedAnswer] = useState<IWord | null>(null)
   const { activeScreen } = useAppSelector((state) => state.audioCall)
 
-  const [page, setPage] = useState<number>()
-  const [additionalPage, setAdditionalPage] = useState<number>()
+  const [page, setPage] = useState<number>(0)
+  const [futurePage, setFuturePage] = useState<number>(0)
   const [skip, setSkip] = useState(true)
+  const { isFromBook, lvlFromBook, pageFromBook } = useAppSelector((state) => state.gameSettings)
+  const [isGameBook, setIsGameBook] = useState<boolean>(false)
+  const [startGame, setStartGame] = useState(false)
+  const [timeLeft, setTimeLeft] = useState<number>(MAX_TIME)
+  const [generalIndex, setGeneralIndex] = useState<number>(0)
   const {
     data: words,
     isLoading: isLoadingWords,
     error: errorWords,
-    refetch,
+    refetch: refetchWords,
   } = wordsAPI.useFetchWordsQuery(
     { group: level, page: page },
     {
@@ -38,15 +51,31 @@ const AudioCall: React.FC = () => {
     },
   )
 
-  const { data: additionalWords } = wordsAPI.useFetchWordsQuery(
-    { group: level, page: additionalPage },
+  const { data: moreWords, isLoading: isLoadingMoreWords, refetch } = wordsAPI.useFetchWordsQuery(
+    { group: level, page: futurePage },
     {
       skip,
     },
   )
 
-  // const [playingErrorSound, toggleErrorSound] = useAudio('../../assets/sound/error-sound.m4a')
-  // const [playingSuccessSound, toggleSuccessSound] = useAudio('../../assets/sound/success-sound.m4a')
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>
+    if (startGame) {
+      timer = setTimeout(() => {
+        setTimeLeft(timeLeft - 1)
+      }, 1000)
+    }
+    if (timeLeft === 1 && startGame) {
+      setStartGame(false)
+      dispatch(audioCallSlice.actions.setActiveScreen(GameState.GameOver))
+    }
+    return () => clearTimeout(timer)
+  }, [timeLeft, startGame])
+
+  useEffect(() => {
+    if (futurePage) refetch()
+  }, [futurePage])
+
   const errSound = () => {
     const audio = new Audio('../../assets/sound/error-sound.m4a')
     audio.play()
@@ -57,19 +86,21 @@ const AudioCall: React.FC = () => {
   }
 
   const answerHandler = (selectedAnswer: IWord) => {
-    answerSelectHandler(selectedAnswer)
+    if (generalIndex === 0) setStartGame(true)
+    if (startGame || generalIndex === 0) {
+      answerSelectHandler(selectedAnswer)
 
-    if (wordToGuess?.id === selectedAnswer.id) {
-      dispatch(audioCallSlice.actions.setCorrectAnswers(selectedAnswer))
-      // toggleSuccessSound()
-      successSound()
-      // setCurrentWordIndex(currentWordIndex + 1)
-    } else {
-      // toggleErrorSound()
-      errSound()
-      dispatch(audioCallSlice.actions.setWrongAnswers(selectedAnswer))
+      if (wordToGuess?.id === selectedAnswer.id) {
+        dispatch(audioCallSlice.actions.setCorrectAnswers(selectedAnswer))
+        // toggleSuccessSound()
+        successSound()
+        // setCurrentWordIndex(currentWordIndex + 1)
+      } else {
+        errSound()
+        dispatch(audioCallSlice.actions.setWrongAnswers(selectedAnswer))
+      }
+      dispatch(audioCallSlice.actions.setActiveScreen(GameState.Answer))
     }
-    dispatch(audioCallSlice.actions.setActiveScreen(GameState.Answer))
   }
 
   const answerSelectHandler = (ans: IWord | null) => {
@@ -77,20 +108,34 @@ const AudioCall: React.FC = () => {
   }
 
   const skipAnswerHandler = () => {
-    if (wordToGuess) {
-      dispatch(audioCallSlice.actions.setWrongAnswers(wordToGuess))
+    if (generalIndex === 0) setStartGame(true)
+    if (startGame || generalIndex === 0) {
+      if (wordToGuess) {
+        dispatch(audioCallSlice.actions.setWrongAnswers(wordToGuess))
+      }
+      dispatch(audioCallSlice.actions.setActiveScreen(GameState.Answer))
     }
-    dispatch(audioCallSlice.actions.setActiveScreen(GameState.Answer))
+  }
+
+  const nextMove = () => {
+    setCurrentWordIndex(currentWordIndex + 1)
+    setGeneralIndex(generalIndex + 1)
+    answerSelectHandler(null)
+    dispatch(audioCallSlice.actions.setActiveScreen(GameState.Game))
   }
 
   const nextWordHandler = () => {
-    if (currentWordIndex == 7) {
-      dispatch(audioCallSlice.actions.setActiveScreen(GameState.GameOver))
+    if (!startGame && isGameBook) setStartGame(true);
+    if (!isGameBook) {
+      if (generalIndex === MAX_MOVE - 1) {
+        dispatch(audioCallSlice.actions.setActiveScreen(GameState.GameOver))
+        setStartGame(false)
+      } else {
+        nextMove()
+      }
     } else {
-      setCurrentWordIndex(currentWordIndex + 1)
-      answerSelectHandler(null)
-      dispatch(audioCallSlice.actions.setActiveScreen(GameState.Game))
-    }
+      nextMove()
+    }    
   }
 
   const startGameHandler = (level: Levels) => {    
@@ -102,30 +147,76 @@ const AudioCall: React.FC = () => {
   }
 
   useEffect(() => {
-    if (words && additionalWords) {
-      setWordsForGame([...words, ...additionalWords].slice(0, 8))
-    }
-  }, [words, additionalWords])
+    if (words) setWordsForGame([...words])
+  }, [words])
+
+  const randomizer = () => {
+    const random = randomInteger(0, MAX_NUM_PAGE)
+    if (pageBeenGame.length === MAX_NUM_PAGE + 1) return -1
+    if (pageBeenGame.includes(random)) return randomizer()
+    setPageBeenGame([...pageBeenGame, random])
+    return random
+  }
+
 
   useEffect(() => {
-    dispatch(audioCallSlice.actions.setActiveScreen(GameState.StartScreen))
-    let random = randomInteger(0, 21)
-    let randomAdd = randomInteger(0, 21)
-
-    function randomizer() {
-      random = randomInteger(0, 21)
-      randomAdd = randomInteger(0, 21)
+    if (!isFromBook) {      
+      dispatch(audioCallSlice.actions.setActiveScreen(GameState.StartScreen))
+      setPageBeenGame([])
+      const newPage = randomizer()
+      setPage(newPage)
+      setFuturePage(newPage ?? [])
+    } else {
+      dispatch(gameSettingsSlice.actions.toggleIsFromBook(false))
+      setIsGameBook(true)
+      setPageBeenGame([pageFromBook])
+      setPage(pageFromBook)
+      setFuturePage(pageFromBook ?? [])
+      startGameHandler(lvlFromBook)
     }
-
-    if (random === randomAdd) randomizer()
-
-    setPage(randomInteger(0, 21))
-    setAdditionalPage(randomInteger(0, 21))
   }, [])
 
   useEffect(() => {
     setWordToGuess(wordsForGame[currentWordIndex])
+    if (wordsForGame[currentWordIndex] && wordsForGame[currentWordIndex].id) {
+      setWordsBeenGame([...wordsBeenGame, wordsForGame[currentWordIndex].id])
+    }
   }, [currentWordIndex, wordsForGame])
+
+  useEffect(() => {
+    if (currentWordIndex + WORD_TO_RELOAD === wordsForGame.length) { // Подгрузка слов с запасом по времени
+      if (futurePage !== 0 && isGameBook) {
+        setFuturePage(futurePage - 1);
+      } else if (!isGameBook) {
+        const newPage = randomizer()
+        if (newPage > -1) {
+          setFuturePage(newPage)
+        } else {
+          dispatch(audioCallSlice.actions.setActiveScreen(GameState.GameOver))
+          setIsGameBook(false)
+          setStartGame(false)
+        }
+      }
+    } 
+    if (currentWordIndex !== 0 && currentWordIndex === wordsForGame.length) {
+      if (moreWords && moreWords.length) {
+        const newWords = moreWords.filter((word) => !wordsBeenGame.includes(word.id))
+        if (newWords && newWords.length) {
+          setWordsForGame([...newWords])
+          setCurrentWordIndex(0)
+          setGeneralIndex(generalIndex + 1)
+        } else {
+          dispatch(audioCallSlice.actions.setActiveScreen(GameState.GameOver))
+          setIsGameBook(false)
+          setStartGame(false)
+        }
+      } else {
+        dispatch(audioCallSlice.actions.setActiveScreen(GameState.GameOver))
+        setIsGameBook(false)
+        setStartGame(false)
+      }
+    }
+  }, [currentWordIndex])
 
   useEffect(() => {
     if (wordToGuess) {
@@ -159,6 +250,9 @@ const AudioCall: React.FC = () => {
         <h1 className={styles.audioCallTitle}>Аудиовызов</h1>
         <div className={styles.audioCallWrapper}>
           {/* <h1 className={styles.audioCallHeader}>Аудиовызов</h1> */}
+          {startGame && (
+            <div><p>TIMER: {timeLeft}</p></div>
+          )}
           {isLoadingWords && <div className={styles.audioCallLoading}>Загружаем слова..</div>}
           {GameState.StartScreen === activeScreen && (
             <GamesStartScreen

@@ -14,7 +14,8 @@ import { useAudio } from 'src/hooks/useAudio'
 import { gameSettingsSlice } from 'src/store/reducers/gameSettingsSlice'
 
 const Sprint: React.FC<any> = () => {
-  const WORD_TO_RELOAD = 7;
+  const WORD_TO_RELOAD = 7
+  const MAX_NUM_PAGE = 29
 
   const dispatch = useAppDispatch()
 
@@ -22,7 +23,7 @@ const Sprint: React.FC<any> = () => {
   const [level, setLevel] = useState<Levels>()
   const [wordsForGame, setWordsForGame] = useState<IWord[]>([])
   const [wordsBeenGame, setWordsBeenGame] = useState<string[]>([])
-  const [moreWordsForGame, setMoreWordsForGame] = useState<IWord[]>([])
+  const [pageBeenGame, setPageBeenGame] = useState<number[]>([])
   const [answerVariant, setAnswerVariant] = useState<IWord>()
 
   const [wordToGuess, setWordToGuess] = useState<IWord | null>(null)
@@ -31,8 +32,8 @@ const Sprint: React.FC<any> = () => {
   const { activeScreen } = useAppSelector((state) => state.sprint)
 
   const [page, setPage] = useState<number>(0)
+  const [isGameBook, setIsGameBook] = useState<boolean>(false)
   const [futurePage, setFuturePage] = useState<number>(0)
-  const [additionalPage, setAdditionalPage] = useState<number>()
   const [skip, setSkip] = useState(true)
   const { isFromBook, lvlFromBook, pageFromBook } = useAppSelector((state) => state.gameSettings)
   const {
@@ -58,8 +59,6 @@ const Sprint: React.FC<any> = () => {
   }, [futurePage])
 
 
-  // const [playingErrorSound, toggleErrorSound] = useAudio('../../assets/sound/error-sound.m4a')
-  // const [playingSuccessSound, toggleSuccessSound] = useAudio('../../assets/sound/success-sound.m4a')
   const errSound = () => {
     const audio = new Audio('../../assets/sound/error-sound.m4a')
     audio.play()
@@ -111,21 +110,23 @@ const Sprint: React.FC<any> = () => {
     if (words) setWordsForGame([...words])
   }, [words])
 
-  const randomizerTwoValues = (min: number, max: number): number[] => {
-    const random = randomInteger(min, max)
-    const randomAdd = randomInteger(min, max)
-    if (random === randomAdd) return randomizerTwoValues(min, max)
-    return [random, randomAdd]
+  const randomizer = (): number => {
+    const random = randomInteger(0, MAX_NUM_PAGE)
+    if (pageBeenGame.length === MAX_NUM_PAGE + 1) return -1
+    if (pageBeenGame.includes(random)) return randomizer()
+    setPageBeenGame([...pageBeenGame, random])
+    return random
   }
 
   useEffect(() => {
     if (!isFromBook) {
       dispatch(sprintSlice.actions.setActiveScreen(GameState.StartScreen))
-      const [ page ] = randomizerTwoValues(0, 29)
-      setPage(page)
-      setFuturePage(page ?? [])
+      const newPage = randomizer()
+      setPage(newPage)
+      setFuturePage(newPage ?? [])
     } else {
       dispatch(gameSettingsSlice.actions.toggleIsFromBook(false));
+      setIsGameBook(true)
       setPage(pageFromBook)
       setFuturePage(pageFromBook ?? [])
       startGameHandler(lvlFromBook);
@@ -142,20 +143,26 @@ const Sprint: React.FC<any> = () => {
 
   useEffect(() => {
     if (currentWordIndex + WORD_TO_RELOAD === wordsForGame.length) {
-      if (futurePage !== 0) {
+      if (futurePage !== 0 && isGameBook) {
         setFuturePage(futurePage - 1);
+      } else if (!isGameBook) {
+        const newPage = randomizer()
+        if (newPage > -1) {
+          setFuturePage(randomizer())
+        } else {
+          dispatch(sprintSlice.actions.setActiveScreen(GameState.GameOver))
+        }
       }
     } 
     if (currentWordIndex !== 0 && currentWordIndex === wordsForGame.length) {
       if (moreWords && moreWords.length) {
-        console.log(moreWords)
-         const newWords = moreWords.filter((word) => !wordsBeenGame.includes(word.id))
-         if (newWords && newWords.length) {
+        const newWords = moreWords.filter((word) => !wordsBeenGame.includes(word.id))
+        if (newWords && newWords.length) {
           setWordsForGame([...newWords])
           setCurrentWordIndex(0)
-         } else {
+        } else {
           dispatch(sprintSlice.actions.setActiveScreen(GameState.GameOver))
-         }
+        }
       } else {
         dispatch(sprintSlice.actions.setActiveScreen(GameState.GameOver))
       }
@@ -185,7 +192,7 @@ const Sprint: React.FC<any> = () => {
       <div className={globalThis.globalStyles.container}>
         <h1 className={styles.sprintTitle}>Спринт</h1>
         <div className={styles.sprintWrapper}>
-          {isLoadingWords && <div className={styles.loading}>loading...</div>}
+          {/* {isLoadingWords && <div className={styles.loading}>loading...</div>} */}
           {GameState.StartScreen === activeScreen && (
             <GamesStartScreen
               header='Кто быстрее?'
@@ -200,6 +207,7 @@ const Sprint: React.FC<any> = () => {
               answerVariant={answerVariant}
               selectedAnswer={selectedAnswer}
               wordToGuess={wordToGuess}
+              isLoadingWords={isLoadingWords}
             />
           )}
 
