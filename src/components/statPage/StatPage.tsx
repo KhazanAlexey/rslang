@@ -37,6 +37,7 @@ const StatPage: React.FC<any> = () => {
   }
 
   const getRightPercent = (attempts: number, success: number) => {
+    if (attempts === 0 || success === 0) return 0
     return Math.round(success / (attempts / 100))
   }
 
