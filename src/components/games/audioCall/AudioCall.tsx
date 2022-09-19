@@ -93,7 +93,8 @@ const AudioCall: React.FC = () => {
     }
   }
 
-  const startGameHandler = (level: Levels) => {
+  const startGameHandler = (level: Levels) => {    
+    dispatch(audioCallSlice.actions.reset())
     setLevel(level)
 
     dispatch(audioCallSlice.actions.setActiveScreen(GameState.Game))

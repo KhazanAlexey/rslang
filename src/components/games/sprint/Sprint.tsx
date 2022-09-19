@@ -93,6 +93,7 @@ const Sprint: React.FC<any> = () => {
   }, [selectedAnswer])
 
   const startGameHandler = (level: Levels) => {
+    dispatch(sprintSlice.actions.reset())
     setLevel(level)
     dispatch(sprintSlice.actions.setActiveScreen(GameState.Game))
     setSkip(false)
