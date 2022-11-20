@@ -1,23 +1,33 @@
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
 import React, { useEffect } from 'react'
 import { useAppSelector } from 'src/hooks/redux'
+import { LvlType } from 'src/models/IGamesSettings'
+import { IWord } from 'src/models/IWord'
 import { clsx } from 'src/utils/clsx'
 import { wordsAPI } from '../../services/WordsService'
 import styles from './Words.module.scss'
 
-interface PropsType {
+interface PropsTypeWord {
   bgGroup: string
   id: string
   word: string
   wordTranslate: string
   wordDetail: string
-  setWordDetail: any
+  setWordDetail: React.Dispatch<string>
   isHard: boolean
   isCompleted: boolean
 }
 
-const Word: React.FC<PropsType> = (props) => {
-  const { bgGroup, id, word, wordTranslate, wordDetail, setWordDetail, isHard, isCompleted } = props
-
+const Word: React.FC<PropsTypeWord> = ({
+  bgGroup,
+  id,
+  word,
+  wordTranslate,
+  wordDetail,
+  setWordDetail,
+  isHard,
+  isCompleted,
+}) => {
   const viewDetail = () => {
     setWordDetail(id)
   }
@@ -47,9 +57,26 @@ const Word: React.FC<PropsType> = (props) => {
   )
 }
 
-const Words: React.FC<any> = (props) => {
-  const { words, errorWords, isLoadingWords, lvl, levels, wordDetail, setWordDetail } = props
+type PropsTypeWords = {
+  words: (IWord & { _id?: string })[]
+  errorWords?: FetchBaseQueryError
+  isLoadingWords: boolean
+  lvl?: number
+  levels?: LvlType[]
+  wordDetail: string
+  setWordDetail: React.Dispatch<string>
+  page?: number
+}
 
+const Words: React.FC<PropsTypeWords> = ({
+  words,
+  errorWords,
+  isLoadingWords,
+  lvl,
+  levels,
+  wordDetail,
+  setWordDetail,
+}) => {
   const { hardWordsIds, completedWordsIds } = useAppSelector((state) => state.userWords)
   return (
     <ul className={styles.words}>
@@ -57,7 +84,7 @@ const Words: React.FC<any> = (props) => {
         words.map((word, ind) => (
           <Word
             key={ind}
-            bgGroup={levels ? levels[lvl].bg : '#FFAFAF'}
+            bgGroup={levels && lvl ? levels[lvl].bg : '#FFAFAF'}
             id={word.id ?? word._id}
             word={word.word}
             wordTranslate={word.wordTranslate}

@@ -5,10 +5,10 @@ import teamJson from '../../../../data/team.json'
 import TeamMate from './TeamMate/TeamMate'
 import { ITeamMate } from 'src/models/ITeamMate'
 
-const TeamComponent: React.FC<any> = () => {
+const TeamComponent = () => {
   const teamData = JSON.parse(JSON.stringify(teamJson)) as ITeamMate[]
   const [desc, setDesc] = useState(teamData[0].description)
-const id=useId()
+  const id = useId()
   return (
     <section className={styles.teamSection}>
       <div className={globalThis.globalStyles.container}>
@@ -18,8 +18,8 @@ const id=useId()
         </h3>
         <div className={styles.teamSectionWrapper}>
           <ul className={styles.teamSectionList}>
-            {teamData.map((member: ITeamMate,index) => (
-              <TeamMate  key={`${index}-${id}`} data={member} setDesc={setDesc} />
+            {teamData.map((member: ITeamMate, index) => (
+              <TeamMate key={`${index}-${id}`} data={member} setDesc={setDesc} />
             ))}
           </ul>
           <div className={styles.teamSectionDecoration}>

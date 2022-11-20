@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { MouseEventHandler } from 'react'
 import { clsx } from '../../../utils/clsx'
 import styles from './styles/iconButton.module.scss'
 
 type Props = {
-  icon: any
-  onClick?: (e: MouseEvent) => void
+  icon: string | (() => string | JSX.Element)
+  onClick?: MouseEventHandler<HTMLElement>
   disabled?: boolean
   enableDefaultHoverClasses?: boolean
   classes?: string
-  style?: Object
+  style?: Record<string, unknown>
   width?: string
   height?: string
   title?: string
@@ -55,11 +55,9 @@ const IconButton = (props: Props) => {
           height: `${height}`,
         }}
         role={onClick ? 'button' : undefined}
-        // @ts-ignore
-        onClick={disabled ? () => null : onClick}
+        onClick={disabled ? undefined : onClick}
         title={title}
       >
-        <span />
         {typeof icon === 'function' && icon()}
       </span>
     </span>

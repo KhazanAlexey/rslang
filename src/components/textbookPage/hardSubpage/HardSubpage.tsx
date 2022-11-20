@@ -1,15 +1,23 @@
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
 import React from 'react'
 import Words from 'src/components/words/Words'
+import { IAggreratedWords } from 'src/models/IUsersWords'
 
-const HardSubpage: React.FC<any> = (props) => {
-  const {
-    wordDetail,
-    setWordDetail,
-    difficultUserWords,
-    isLoadingHardWords,
-    difficultWordsError: error,
-  } = props
+type PropsType = {
+  wordDetail: string
+  setWordDetail: React.Dispatch<string>
+  difficultUserWords: IAggreratedWords
+  isLoadingHardWords: boolean
+  difficultWordsError: FetchBaseQueryError | undefined
+}
 
+const HardSubpage: React.FC<PropsType> = ({
+  wordDetail,
+  setWordDetail,
+  difficultUserWords,
+  isLoadingHardWords,
+  difficultWordsError: error,
+}) => {
   const isEmpty = !difficultUserWords?.[0].paginatedResults.find(
     (x) => x.userWord.difficulty == 'hard',
   )

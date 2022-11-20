@@ -9,12 +9,17 @@ import { useAppDispatch } from 'src/hooks/redux'
 import { validateLogin } from './formValidator'
 import styles from './Form.module.scss'
 import { authSlice } from 'src/store/reducers/authSlice'
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
 
-export const LoginForm = (props) => {
+type PropsType = {
+  setIsAuthModal: (v: string) => void
+}
+
+export const LoginForm = (props: PropsType) => {
   const { setIsAuthModal } = props
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const [error, setError] = useState()
+  const [error, setError] = useState<string>()
   const [login, { isLoading }] = authApi.useLoginMutation()
 
   const loginHandler = async ({ email, password }) => {
@@ -22,19 +27,19 @@ export const LoginForm = (props) => {
       await login({ email: email, password: password }).unwrap()
       setIsAuthModal('')
       // navigate('/')
-    } catch (e: any) {
+    } catch (e) {
       localStorageRemove(['name', 'refreshToken', 'userId', 'token', 'message'])
       dispatch(authSlice.actions.logOut())
-      setError(e.error)
-      console.log(e)
+      setError(e as string)
+      // console.log(e)
     }
   }
   const buttonText = isLoading ? 'Секунду...' : 'Войти в аккаунт'
 
   const formik = useFormik({
     initialValues: {
-      password: '', //123456789qwe
-      email: '', //alik@mail.ru
+      password: '', // 123456789qwe
+      email: '', // alik@mail.ru
     },
 
     onSubmit: (values) => {
@@ -44,45 +49,47 @@ export const LoginForm = (props) => {
   })
 
   return (
-    <form className={styles.form} onSubmit={formik.handleSubmit}>
-      <div className={styles.formGroup}>
-        <input
-          className={styles.formInput}
-          placeholder='Введи свой E-mail'
-          id='email'
-          name='email'
-          type='email'
-          onChange={formik.handleChange}
-          value={formik.values.email}
-        />
-        <label className={styles.formLabel} htmlFor='email'>
-          E-mail
-        </label>
-        {formik.errors.email ? <p className={styles.formError}>{formik.errors.email}</p> : null}
-      </div>
+    <>
+      <form className={styles.form} onSubmit={formik.handleSubmit}>
+        <div className={styles.formGroup}>
+          <input
+            className={styles.formInput}
+            placeholder='Введи свой E-mail'
+            id='email'
+            name='email'
+            type='email'
+            onChange={formik.handleChange}
+            value={formik.values.email}
+          />
+          <label className={styles.formLabel} htmlFor='email'>
+            E-mail
+          </label>
+          {formik.errors.email ? <p className={styles.formError}>{formik.errors.email}</p> : null}
+        </div>
 
-      <div className={styles.formGroup}>
-        <input
-          className={styles.formInput}
-          placeholder='Введи свой пароль'
-          id='password'
-          name='password'
-          type='password'
-          onChange={formik.handleChange}
-          value={formik.values.password}
-        />
-        <label className={styles.formLabel} htmlFor='password'>
-          Пароль
-        </label>
-        {formik.errors.password ? (
-          <p className={styles.formError}>{formik.errors.password}</p>
-        ) : null}
-      </div>
+        <div className={styles.formGroup}>
+          <input
+            className={styles.formInput}
+            placeholder='Введи свой пароль'
+            id='password'
+            name='password'
+            type='password'
+            onChange={formik.handleChange}
+            value={formik.values.password}
+          />
+          <label className={styles.formLabel} htmlFor='password'>
+            Пароль
+          </label>
+          {formik.errors.password ? (
+            <p className={styles.formError}>{formik.errors.password}</p>
+          ) : null}
+        </div>
 
-      <button className={styles.formSubmit} disabled={isLoading} type='submit'>
-        {buttonText}
-      </button>
-      {error && <div>{error}</div>}
-    </form>
+        <button className={styles.formSubmit} disabled={isLoading} type='submit'>
+          {buttonText}
+        </button>
+        {error && <div>{error}</div>}
+      </form>
+    </>
   )
 }

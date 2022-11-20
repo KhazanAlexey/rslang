@@ -1,12 +1,13 @@
 import { BaseQueryMeta, BaseQueryResult } from '@reduxjs/toolkit/dist/query/baseQueryTypes'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
-import { IDeleteUsersWord, IPostUsersWord, IUsersWords } from 'src/models/IUsersWords'
+import { IAggreratedWords, IDeleteUsersWord, IPostUsersWord, IUsersWords } from 'src/models/IUsersWords'
+import { IWord } from 'src/models/IWord'
 
 export const userWordsAPI = createApi({
   reducerPath: 'userWordsAPI',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://rs-lang-193.herokuapp.com/',
-    prepareHeaders: (headers, { getState }) => {
+    prepareHeaders: (headers) => {
       const token = localStorage.getItem('token')
       if (token) {
         headers.set('Authorization', `Bearer ${token}`)
@@ -21,14 +22,14 @@ export const userWordsAPI = createApi({
       query: (id) => ({
         url: `/users/${id}/words`,
       }),
-      providesTags: (result) => ['userWords'],
+      providesTags: () => ['userWords'],
     }),
 
     fetchUserWord: build.query<IUsersWords, IPostUsersWord>({
       query: ({ id, wordId }) => ({
         url: `/users/${id}/words/${wordId}`,
       }),
-      providesTags: (result) => ['userWord'],
+      providesTags: () => ['userWord'],
     }),
 
     postUserWord: build.mutation<IUsersWords[], IPostUsersWord>({
@@ -63,7 +64,7 @@ export const userWordsAPI = createApi({
       invalidatesTags: ['userWord', 'AggregatedWords', 'AggregatedWords'],
     }),
 
-    fetchAggregatedWords: build.query<any[], any>({
+    fetchAggregatedWords: build.query<IAggreratedWords, {id: string; wordsDifficult: string}>({
       query: ({ id, wordsDifficult }) => ({
         url: `/users/${id}/aggregatedWords`,
         params: {
@@ -71,7 +72,7 @@ export const userWordsAPI = createApi({
           filter: JSON.stringify({ 'userWord.difficulty': wordsDifficult }),
         },
       }),
-      providesTags: (result) => ['AggregatedWords'],
+      providesTags: () => ['AggregatedWords'],
     }),
   }),
 })

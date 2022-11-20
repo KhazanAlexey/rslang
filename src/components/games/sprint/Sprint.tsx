@@ -13,7 +13,7 @@ import { sprintSlice } from '../../../store/reducers/sprintSlice'
 import { useAudio } from 'src/hooks/useAudio'
 import { gameSettingsSlice } from 'src/store/reducers/gameSettingsSlice'
 
-const Sprint: React.FC<any> = () => {
+const Sprint = () => {
   const WORD_TO_RELOAD = 7
   const MAX_NUM_PAGE = 29
 
@@ -39,15 +39,19 @@ const Sprint: React.FC<any> = () => {
   const {
     data: words,
     isLoading: isLoadingWords,
-    error: errorWords
+    error: errorWords,
   } = wordsAPI.useFetchWordsQuery(
     { group: level, page: page },
     {
       skip,
     },
   )
-  
-  const { data: moreWords, isLoading: isLoadingMoreWords, refetch } = wordsAPI.useFetchWordsQuery(
+
+  const {
+    data: moreWords,
+    isLoading: isLoadingMoreWords,
+    refetch,
+  } = wordsAPI.useFetchWordsQuery(
     { group: level, page: futurePage },
     {
       skip,
@@ -57,7 +61,6 @@ const Sprint: React.FC<any> = () => {
   useEffect(() => {
     if (futurePage) refetch()
   }, [futurePage])
-
 
   const errSound = () => {
     const audio = new Audio('../../assets/sound/error-sound.m4a')
@@ -125,13 +128,12 @@ const Sprint: React.FC<any> = () => {
       setPage(newPage)
       setFuturePage(newPage ?? [])
     } else {
-      dispatch(gameSettingsSlice.actions.toggleIsFromBook(false));
+      dispatch(gameSettingsSlice.actions.toggleIsFromBook(false))
       setIsGameBook(true)
       setPage(pageFromBook)
       setFuturePage(pageFromBook ?? [])
-      startGameHandler(lvlFromBook);
+      startGameHandler(lvlFromBook)
     }
-    
   }, [])
 
   useEffect(() => {
@@ -144,7 +146,7 @@ const Sprint: React.FC<any> = () => {
   useEffect(() => {
     if (currentWordIndex + WORD_TO_RELOAD === wordsForGame.length) {
       if (futurePage !== 0 && isGameBook) {
-        setFuturePage(futurePage - 1);
+        setFuturePage(futurePage - 1)
       } else if (!isGameBook) {
         const newPage = randomizer()
         if (newPage > -1) {
@@ -153,7 +155,7 @@ const Sprint: React.FC<any> = () => {
           dispatch(sprintSlice.actions.setActiveScreen(GameState.GameOver))
         }
       }
-    } 
+    }
     if (currentWordIndex !== 0 && currentWordIndex === wordsForGame.length) {
       if (moreWords && moreWords.length) {
         const newWords = moreWords.filter((word) => !wordsBeenGame.includes(word.id))

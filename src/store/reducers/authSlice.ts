@@ -24,7 +24,7 @@ type AuthState = {
   email: string
 }
 
-export const logOut: CaseReducer<AuthState> = (state, action) => {
+export const logOut: CaseReducer<AuthState> = () => {
   return initialState
 }
 
@@ -48,7 +48,7 @@ export const authSlice = createSlice({
       state.name = payload.name || ''
     })
 
-    builder.addMatcher(userAPI.endpoints.fetchUser.matchRejected, (state, { payload }) => {
+    builder.addMatcher(userAPI.endpoints.fetchUser.matchRejected, () => {
       return initialState
     })
   },

@@ -9,14 +9,22 @@ import { useAppSelector } from '../../../hooks/redux'
 import { useDispatch } from 'react-redux'
 import { userWordsSlice } from '../../../store/reducers/userWordsSlice'
 
-const Detail: React.FC<any> = (props) => {
+type PropsType = {
+  id: string
+  complete: boolean
+  hard: boolean
+  subpage: string
+}
+const Detail: React.FC<PropsType> = ({ id, complete: isComplete, hard: isHard }) => {
   const { isAuth } = useAppSelector((state) => state.auth)
-  const { id, complete: isComplete, hard: isHard } = props
   const dispatch = useDispatch()
   const userid = localStorage.getItem('userId') || ''
   const [skip, setSkip] = useState(true)
   const { data: wordData, refetch } = wordsAPI.useFetchWordByIdQuery(id)
-  const { data: userWord, refetch: refetchUserWord } = userWordsAPI.useFetchUserWordQuery({ id: userid, wordId: id },{skip})
+  const { data: userWord, refetch: refetchUserWord } = userWordsAPI.useFetchUserWordQuery(
+    { id: userid, wordId: id },
+    { skip },
+  )
   useEffect(() => {
     if (id) {
       refetch()
@@ -65,14 +73,13 @@ const Detail: React.FC<any> = (props) => {
     if (userWordsIds && userWordsIds.includes(id)) {
       const findWord = userWords.find((word) => word.wordId === id)
       if (findWord) {
-        // @ts-ignore
         dispatch(userWordsSlice.actions.deleteHardWord(id))
         if (findWord.difficulty === 'hard') {
           // UPDATE TO LEARN
           if (findWord.optional) {
             updateUserWord({ id: local['userId'], difficulty: 'learn', wordId: id })
           } else {
-            const optional = findWord.optional;
+            const optional = findWord.optional
             updateUserWord({ id: local['userId'], difficulty: 'learn', wordId: id, optional })
           }
         } else {
@@ -80,7 +87,7 @@ const Detail: React.FC<any> = (props) => {
           if (findWord.optional) {
             updateUserWord({ id: local['userId'], difficulty: 'hard', wordId: id })
           } else {
-            const optional = findWord.optional;
+            const optional = findWord.optional
             updateUserWord({ id: local['userId'], difficulty: 'hard', wordId: id, optional })
           }
         }
@@ -88,7 +95,8 @@ const Detail: React.FC<any> = (props) => {
         // POST
         postWord({ id: local['userId'], difficulty: 'hard', wordId: id })
       }
-    } else { // POST
+    } else {
+      // POST
       postWord({ id: local['userId'], difficulty: 'hard', wordId: id })
     }
   }
@@ -99,21 +107,19 @@ const Detail: React.FC<any> = (props) => {
       if (findWord) {
         if (findWord.difficulty === 'completed') {
           // UPDATE TO LEARN
-          // @ts-ignore
           dispatch(userWordsSlice.actions.deleteCompletedWord(id))
           if (findWord.optional) {
             updateUserWord({ id: local['userId'], difficulty: 'learn', wordId: id })
           } else {
-            const optional = findWord.optional;
+            const optional = findWord.optional
             updateUserWord({ id: local['userId'], difficulty: 'learn', wordId: id, optional })
           }
-          
         } else {
           // UPDATE TO HARD
           if (findWord.optional) {
             updateUserWord({ id: local['userId'], difficulty: 'completed', wordId: id })
           } else {
-            const optional = findWord.optional;
+            const optional = findWord.optional
             updateUserWord({ id: local['userId'], difficulty: 'completed', wordId: id, optional })
           }
         }
@@ -121,7 +127,8 @@ const Detail: React.FC<any> = (props) => {
         // POST
         postWord({ id: local['userId'], difficulty: 'completed', wordId: id })
       }
-    } else { // POST
+    } else {
+      // POST
       postWord({ id: local['userId'], difficulty: 'completed', wordId: id })
     }
   }

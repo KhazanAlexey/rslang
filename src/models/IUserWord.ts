@@ -1,4 +1,4 @@
 export interface UserWord {
   difficulty: string
-  optional: {}
+  optional: unknown
 }

@@ -9,22 +9,27 @@ import { useAppDispatch } from 'src/hooks/redux'
 import { validateLogin } from './formValidator'
 import { authSlice } from '../../../store/reducers/authSlice'
 import styles from './Form.module.scss'
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
 
-export const SettingsForm = (props) => {
+type PropsType = {
+  setIsAuthModal: (v: string) => void
+}
+
+export const SettingsForm = (props: PropsType) => {
   const { setIsAuthModal } = props
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const [error, setError] = useState()
+  const [error, setError] = useState<string>()
   const [login, { isLoading }] = authApi.useLoginMutation()
 
   const loginHandler = async ({ email, password }) => {
     try {
       await login({ email: email, password: password }).unwrap()
       // navigate('/')
-    } catch (e: any) {
+    } catch (e) {
       localStorageRemove(['name', 'refreshToken', 'userId', 'token', 'message'])
       dispatch(authSlice.actions.logOut())
-      setError(e.error)
+      setError((e as FetchBaseQueryError).data as string)
       console.log(e)
     }
   }
@@ -36,7 +41,7 @@ export const SettingsForm = (props) => {
       email: 'alik@mail.ru',
     },
 
-    onSubmit: (values) => {
+    onSubmit: () => {
       localStorageRemove(['name', 'refreshToken', 'userId', 'token', 'message'])
       dispatch(authSlice.actions.logOut())
       setIsAuthModal('')

@@ -1,9 +1,9 @@
 import 'react-app-polyfill/ie11'
-import * as React from 'react'
+import React from 'react'
 import { IUserForm } from 'src/models/IUser'
 
 export const validateLogin = (values: IUserForm) => {
-  const errors: any = {}
+  const errors: Record<string, string> = {}
 
   if (!values.password) {
     errors.password = 'Required'
@@ -21,7 +21,7 @@ export const validateLogin = (values: IUserForm) => {
 }
 
 export const validateRegister = (values: IUserForm) => {
-  const errors: any = {}
+  const errors: Record<string, string> = {}
 
   if (!values.password) {
     errors.password = 'Required'

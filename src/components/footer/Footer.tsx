@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { clsx } from 'src/utils/clsx'
 import styles from './Footer.module.scss'
 
-const Footer: React.FC<any> = () => {
+const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={globalThis.globalStyles.container}>
@@ -22,7 +22,7 @@ const Footer: React.FC<any> = () => {
           <div className={styles.footerSecond}>
             <div className={styles.footerSecondTeam}>
               <a
-                 href='https://github.com/KhazanAlexey'
+                href='https://github.com/KhazanAlexey'
                 className={clsx({
                   ['_icon-github']: true,
                 })}

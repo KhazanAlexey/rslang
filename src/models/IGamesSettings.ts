@@ -3,3 +3,11 @@ export interface IGameSettings {
   lvlFromBook: number
   pageFromBook: number
 }
+
+export type LvlType = { 
+  id: number
+  title: string
+  descr: string
+  lvl: string
+  bg: string 
+}

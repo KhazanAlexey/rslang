@@ -1,9 +1,24 @@
 import React, { useEffect, useState } from 'react'
+import { LvlType } from 'src/models/IGamesSettings'
 import { clsx } from 'src/utils/clsx'
 import styles from './Level.module.scss'
 
-const Level: React.FC<any> = (props) => {
-  const { id, title, descr, lvl, bg, activeLvl, setActiveLvl, setActivePage } = props
+type PropsType = LvlType & {
+  activeLvl: number
+  setActiveLvl: React.Dispatch<number>
+  setActivePage: React.Dispatch<number>
+}
+
+const Level: React.FC<PropsType> = ({
+  id,
+  title,
+  descr,
+  lvl,
+  bg,
+  activeLvl,
+  setActiveLvl,
+  setActivePage,
+}) => {
   const changeLvl = () => {
     if (!(id == activeLvl)) {
       setActivePage(1)

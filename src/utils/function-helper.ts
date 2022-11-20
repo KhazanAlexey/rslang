@@ -8,9 +8,7 @@ export class FunctionHelper {
   ) {
     const timeoutName: string = this.createTimeoutName(timeoutId)
 
-    // @ts-ignore
     clearTimeout(window[timeoutName])
-    // @ts-ignore
     window[timeoutName] = setTimeout(func, delay)
   }
 
@@ -21,12 +19,9 @@ export class FunctionHelper {
   ) {
     const timeoutName: string = this.createTimeoutName(timeoutId)
 
-    // @ts-ignore
     if (!window[timeoutName]) {
       func()
-      // @ts-ignore
       window[timeoutName] = setTimeout(function () {
-        // @ts-ignore
         window[timeoutName] = undefined
       }, limit)
     }

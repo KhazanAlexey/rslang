@@ -11,7 +11,7 @@ export const wordsAPI = createApi({
 
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://rs-lang-193.herokuapp.com/',
-    prepareHeaders: (headers, { getState }) => {
+    prepareHeaders: (headers) => {
       const token = localStorage.getItem('token')
       if (token) {
         headers.set('Authorization', `Bearer ${token}`)

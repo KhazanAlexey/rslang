@@ -5,7 +5,7 @@ import { getDateFromRu, getDateInRu, getNowDateRu } from 'src/utils/date-helper'
 import { localStorageGet } from 'src/utils/localStorage'
 import styles from './StatPage.module.scss'
 
-const StatPage: React.FC<any> = () => {
+const StatPage = () => {
   const local = localStorageGet(['userId'])
   const { userWords, userWordsIds } = useAppSelector((state) => state.userWords)
 

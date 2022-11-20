@@ -22,15 +22,13 @@ type userWords = {
   completedWordsIds: string[]
 }
 
-// @ts-ignore
-export const deleteHardWord: CaseReducer<userWords> = (state, action: PayloadAction<string>) => {
+export const deleteHardWord: CaseReducer<userWords, PayloadAction<string>> = (state, action: PayloadAction<string>) => {
   state.hardWords = state.hardWords.filter((word) => word.wordId !== action.payload)
   state.hardWordsIds = state.hardWordsIds.filter((word) => word !== action.payload)
 }
-// @ts-ignore
-export const deleteCompletedWord: CaseReducer<userWords> = (
+export const deleteCompletedWord: CaseReducer<userWords, PayloadAction<string>> = (
   state,
-  action: PayloadAction<string>,
+  action,
 ) => {
   state.completedWords = state.completedWords.filter((word) => word.wordId !== action.payload)
   state.completedWordsIds = state.completedWordsIds.filter((word) => word !== action.payload)

@@ -1,8 +1,15 @@
+import { IWord } from './IWord'
+
 export interface IUsersWords {
   wordId: string
   difficulty?: 'hard' | 'completed' | 'learn'
   // optional?: IUsersWordsOptional
   optional?: IUsersWordsOptional
+}
+
+export interface IAggreratedWords {
+  paginatedResults: Array<Omit<IWord, 'id'> & {_id:string}>
+  totalCount: {count: number}[]
 }
 
 export interface IUsersWordsOptional {

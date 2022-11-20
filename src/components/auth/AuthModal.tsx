@@ -7,7 +7,7 @@ import { SettingsForm } from './forms/SettingsForm'
 
 export interface PropsType {
   isAuthModal: string
-  setIsAuthModal: any
+  setIsAuthModal: React.Dispatch<string>
   children?: React.ReactNode | React.ReactNode[]
 }
 

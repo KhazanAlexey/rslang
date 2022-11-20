@@ -11,13 +11,18 @@ import { localStorageRemove } from 'src/utils/localStorage'
 import { authApi } from '../../../services/AuthService'
 import styles from './Form.module.scss'
 import { authSlice } from '../../../store/reducers/authSlice'
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
 
-export const RegisterForm = (props) => {
+type PropsType = {
+  setIsAuthModal: (v: string) => void
+}
+
+export const RegisterForm = (props: PropsType) => {
   const { setIsAuthModal } = props
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
-  const [error, setError] = useState()
+  const [error, setError] = useState<string>()
 
   const [createUser, { isLoading }] = userAPI.useCreateUserMutation()
   const [login] = authApi.useLoginMutation()
@@ -37,8 +42,8 @@ export const RegisterForm = (props) => {
       setIsAuthModal('')
       console.log(createdUser)
       // navigate('/')
-    } catch (e: any) {
-      setError(e.data)
+    } catch (e) {
+      setError((e as FetchBaseQueryError).data as string)
       console.log(e)
     }
   }

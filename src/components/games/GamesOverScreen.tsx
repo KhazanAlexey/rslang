@@ -12,9 +12,13 @@ import { useDispatch } from 'react-redux'
 import { sprintSlice } from 'src/store/reducers/sprintSlice'
 import { audioCallSlice } from 'src/store/reducers/audioCallSlice'
 
-const GamesOverScreen: React.FC<any> = ({ game = 'audioCall' }) => {
+type PropsType = {
+  game?: string
+}
+
+const GamesOverScreen = ({ game = 'audioCall' }: PropsType) => {
   const dispatch = useDispatch()
-  const navigate = useNavigate()  
+  const navigate = useNavigate()
   const { isAuth } = useAppSelector((state) => state.auth)
 
   const { wrongAnswers: wrongAnswersSprint, correctAnswers: correctAnswersSprint } = useAppSelector(

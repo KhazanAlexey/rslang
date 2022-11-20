@@ -9,7 +9,7 @@ import FriendsComponent from './mainComponents/Friends/FriendsComponent'
 // import wave from '../../assets/svg/wave.svg'
 // import enggo from '../../assets/svg/enggo.svg'
 
-export const MainPage: React.FC<any> = () => {
+export const MainPage = () => {
   return (
     <>
       <SplashComponent />

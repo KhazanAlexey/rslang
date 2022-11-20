@@ -1,11 +1,15 @@
 import React from 'react'
 import Words from 'src/components/words/Words'
+import { IWord } from 'src/models/IWord'
 import { clsx } from 'src/utils/clsx'
 import styles from './BookSubpage.module.scss'
 
-const Pagination: React.FC<any> = (props) => {
-  const { page, setPage } = props
+type PropsType = {
+  page: number
+  setPage: React.Dispatch<number>
+}
 
+const Pagination: React.FC<PropsType> = ({ page, setPage }) => {
   const arrNumButtons = (): number[] => {
     if (page < 4) {
       return [1, 2, 3, 4, 5]
@@ -69,12 +73,26 @@ const Pagination: React.FC<any> = (props) => {
   )
 }
 
-const BookSubpage: React.FC<any> = (props) => {
-  const { activeLvl, bookWords, activePage, setActivePage, levels, isLoadingWords } =
-    props
-
-  const { wordDetail, setWordDetail } = props
-
+type SubpagePropsType = {
+  activeLvl: number
+  bookWords: IWord[]
+  activePage: number
+  setActivePage: React.Dispatch<number>
+  levels: any[]
+  isLoadingWords: boolean
+  wordDetail: string
+  setWordDetail: React.Dispatch<string>
+}
+const BookSubpage: React.FC<SubpagePropsType> = ({
+  wordDetail,
+  setWordDetail,
+  activeLvl,
+  bookWords,
+  activePage,
+  setActivePage,
+  levels,
+  isLoadingWords,
+}) => {
   return (
     <div className={globalThis.globalStyles.bookWords}>
       <Words

@@ -8,7 +8,7 @@ import AuthModal from '../auth/AuthModal'
 import BurgerComponent from './burger/BurgerComponent'
 import { userWordsAPI } from '../../services/UsersWordsService'
 
-const Header: React.FC<any> = () => {
+const Header = () => {
   const [isAuthModal, setIsAuthModal] = useState('')
   const [burger, setBurger] = useState(false)
   const [skip, setSkip] = useState(true)
